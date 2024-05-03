@@ -6,13 +6,16 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:20 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/03 12:16:03 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:08:39 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int main(void)
+int main(int ac, char **av, char **env)
 {
+    (void)ac;
+    (void)av;
+    (void)env;
     return (0);
 }
