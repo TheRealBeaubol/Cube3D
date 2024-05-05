@@ -6,11 +6,8 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:20 by lboiteux          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/05/05 20:43:28 by mhervoch         ###   ########.fr       */
-=======
+/*   Updated: 2024/05/05 22:47:20 by mhervoch         ###   ########.fr       */
 /*   Updated: 2024/05/05 20:35:27 by mhervoch         ###   ########.fr       */
->>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +25,7 @@ int	main(int ac, char **av, char **env)
 		&free_and_destroy_exit, &cube);
 	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_KEYDOWN, \
 		&key_hook, &cube);
+	print_map(av, &cube);
 	mlx_loop(cube.mlx_ptr);
 	return (0);
 }
