@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 12:13:20 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/05 19:10:38 by lboiteux         ###   ########.fr       */
+/*   Created: 2024/05/05 19:08:52 by lboiteux          #+#    #+#             */
+/*   Updated: 2024/05/05 19:11:48 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int	main(int ac, char **av, char **env)
+int	key_hook(int keycode, void *cube_void)
 {
-	t_cube	cube;
+	t_cube	*cube;
 
-	(void)ac;
-	(void)av;
-	(void)env;
-	init(&cube);
-	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_WINDOW_EVENT, \
-		&free_and_destroy_exit, &cube);
-	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_KEYDOWN, \
-		&key_hook, &cube);
-	mlx_loop(cube.mlx_ptr);
+	cube = (t_cube *)cube_void;
+	if (keycode == ESCAPE)
+		free_and_destroy(cube);
 	return (0);
 }

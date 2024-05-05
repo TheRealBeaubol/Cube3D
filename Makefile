@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/05/03 15:27:02 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/05/05 19:24:25 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,10 @@ RESET	= \033[0m
 # **************************************************************************** #
 
 #SOURCES
-SRCS	= 		main.c
+SRCS	= 	main.c \
+				exit.c \
+				init.c \
+				hook.c \
 
 SRCS_DIR	:=	srcs
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
@@ -72,7 +75,7 @@ $(LIBFT_NAME):
 		@make -C $(LIBFT_PATH) -j
 
 $(MLX_NAME):
-		@make -C $(MLX_PATH)
+		@make -C $(MLX_PATH) -j
 		
 $(NAME): $(OBJS)
 		$(CC) $(CFLAGS) $(IGLAGS) $(OBJS) $(MLX_NAME) -lSDL2 -lm $(LIBFT_NAME) -o $(NAME) 

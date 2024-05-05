@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 12:13:20 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/05 19:10:38 by lboiteux         ###   ########.fr       */
+/*   Created: 2024/05/05 19:02:33 by lboiteux          #+#    #+#             */
+/*   Updated: 2024/05/05 19:05:09 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int	main(int ac, char **av, char **env)
+void	free_and_destroy(t_cube *cube)
 {
-	t_cube	cube;
+	mlx_destroy_image(cube->mlx_ptr, cube->img);
+	mlx_destroy_window(cube->mlx_ptr, cube->window_ptr);
+	mlx_destroy_display(cube->mlx_ptr);
+	exit (1);
+}
 
-	(void)ac;
-	(void)av;
-	(void)env;
-	init(&cube);
-	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_WINDOW_EVENT, \
-		&free_and_destroy_exit, &cube);
-	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_KEYDOWN, \
-		&key_hook, &cube);
-	mlx_loop(cube.mlx_ptr);
+int	free_and_destroy_exit(int i, void *cube_void)
+{
+	t_cube	*cube;
+
+	cube = (t_cube *)cube_void;
+	if (i == 0)
+		free_and_destroy(cube);
 	return (0);
 }
