@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:20 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/05 20:42:04 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/05/05 20:43:28 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,4 @@ int	main(int ac, char **av, char **env)
 }
 
 //https://lodev.org/cgtutor/raycasting.html
+//https://github.com/vinibiavatti1/RayCastingTutorial/tree/master
