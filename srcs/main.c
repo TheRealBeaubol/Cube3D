@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:20 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/05 19:10:38 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/05 20:42:04 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,5 @@ int	main(int ac, char **av, char **env)
 	mlx_loop(cube.mlx_ptr);
 	return (0);
 }
+
+//https://lodev.org/cgtutor/raycasting.html
