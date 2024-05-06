@@ -6,7 +6,7 @@
 /*   By: mhervoch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/05/05 23:27:05 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/05/06 20:52:17 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_global_pixel(t_cube *cube, int x, int y, int color)
 	}
 }
 
-void	print_view(t_cube *cube, int x, int y)
+/*void	print_view(t_cube *cube, int x, int y)
 {
 	int	posx;
 	int	posy;
@@ -43,14 +43,14 @@ void	print_view(t_cube *cube, int x, int y)
 	posx = x + 500;
 	posy = y + 500;
 
-}
+}*/
 
 void	print_pixel(t_cube *cube, char pixel, int x, int y)
 {
 	if (pixel == '1')
 		print_global_pixel(cube, x, y, 0xFF0000FF);
 	if (pixel == '0')
-		print_global_pixel(cube, x, y, 0xFFFFFFFF);
+		print_global_pixel(cube, x, y, 0xFFFFFFFF);	
 	if (pixel == 'P')
 	{
 		print_global_pixel(cube, x, y, 0xFFFF0000);
@@ -65,12 +65,11 @@ void	print_map(char **map, t_cube *cube)
 	int	x;
 	int	y;
 
-	x = 0;
-	y = 0;
+	y = HEIGHT / 2 - 7 * 50 / 2;
 	i = 0;
 	while (map[i])
 	{
-		x = 0;
+		x = WIDTH / 2 - 7 * 50 / 2;
 		j = 0;
 		while (map[i][j])
 		{
