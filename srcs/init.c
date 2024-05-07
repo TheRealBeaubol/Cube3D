@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/06 21:23:54 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:49:05 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	init(t_cube *cube)
 	if (cube->window_ptr == NULL)
 		free_and_destroy(cube);
 	cube->menu = init_menu(cube);
-	cube->menu->is_in_menu = 0;
+	cube->menu->is_in_menu = 1;
 	cube->menu->play_button_status = 0;
 	cube->menu->options_button_status = 0;
 	cube->menu->exit_button_status = 0;

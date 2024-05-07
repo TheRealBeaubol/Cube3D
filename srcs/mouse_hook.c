@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/06 21:36:53 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/07 16:06:40 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	render_hover_button(t_cube *cube)
 
 void	handle_mouse_in_start_menu(t_cube *cube, int x, int y)
 {
-	if (!cube->menu->is_in_menu)
+	if (cube->menu->is_in_menu)
 	{
 		if (x > 780 && x < 1135 && y > 280 && y < 400)
 			cube->menu->play_button_status = 1;
@@ -46,6 +46,39 @@ void	handle_mouse_in_start_menu(t_cube *cube, int x, int y)
 			cube->menu->exit_button_status = 0;
 		render_hover_button(cube);
 	}
+}
+
+int	mouse_release(int keycode, void *cube_void)
+{
+	t_cube	*cube;
+
+	cube = (t_cube *)cube_void;
+	(void)keycode;
+	return (0);
+}
+
+int	mouse_press(int keycode, void *cube_void)
+{
+	t_cube	*cube;
+
+	cube = (t_cube *)cube_void;
+	if (cube->menu->is_in_menu)
+	{
+		if (cube->menu->play_button_status && keycode)
+		{
+			cube->menu->is_in_menu = 0;
+			mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
+		}
+		if (cube->menu->options_button_status && keycode)
+		{
+			cube->menu->is_in_menu = 0;
+			// mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
+		}
+		if (cube->menu->exit_button_status && keycode)
+			free_and_destroy(cube);
+	}
+	return (0);
+
 }
 
 int	mouse_move(void *cube_void)
