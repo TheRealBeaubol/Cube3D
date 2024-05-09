@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/07 16:06:40 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:56:28 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ void	handle_mouse_in_start_menu(t_cube *cube, int x, int y)
 
 int	mouse_release(int keycode, void *cube_void)
 {
-	t_cube	*cube;
-
-	cube = (t_cube *)cube_void;
+	(void)cube_void;
 	(void)keycode;
 	return (0);
 }
@@ -72,7 +70,7 @@ int	mouse_press(int keycode, void *cube_void)
 		if (cube->menu->options_button_status && keycode)
 		{
 			cube->menu->is_in_menu = 0;
-			// mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
+			mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
 		}
 		if (cube->menu->exit_button_status && keycode)
 			free_and_destroy(cube);
