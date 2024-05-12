@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/05/06 21:15:29 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/05/09 18:06:25 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,8 @@ SRCS	= 	main.c \
 				exit.c \
 				init.c \
 				hook.c \
-				mouse_hook.c
+				mouse_hook.c \
+				settings.c \
 
 SRCS_DIR	:=	srcs
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
