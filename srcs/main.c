@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:20 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/07 15:46:35 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:30:26 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	(void)env;
+	if (WIDTH != 1920 || HEIGHT != 1080)
+	{
+		ft_printf("Error\nResolution must be 1920x1080\n");
+		exit(1);
+	}
 	init(&cube);
 	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_WINDOW_EVENT, \
 		&free_and_destroy_exit, &cube);

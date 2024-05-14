@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/12 23:20:43 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:21:10 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ typedef struct s_settings_menu
 	void	*back_button;
 	void	*back_button_hover;
 	int		back_button_status;
+	void	*video_settings_menu;
+	void	*keybinds_menu;
+	void	*music_and_sounds_menu;
+	int		settings_menu_height;
+	int		settings_menu_width;
 	int		button_height;
 	int		button_width;
 	int		is_in_settings_menu;

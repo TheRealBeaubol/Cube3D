@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/12 23:42:04 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:08:01 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	render_hover_button(t_cube *cube)
 		else
 			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->video_settings_button, (WIDTH - cube->menu->settings_menu->button_width) / 2, 70);
 		if (cube->menu->settings_menu->music_and_sounds_button_status)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->music_and_sounds_button_hover, ((WIDTH - cube->menu->settings_menu->button_width) / 2) +  cube->menu->settings_menu->button_width * 1.25, 70);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->music_and_sounds_button_hover, ((WIDTH - cube->menu->settings_menu->button_width) / 2) + cube->menu->settings_menu->button_width * 1.25, 70);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->music_and_sounds_button, ((WIDTH - cube->menu->settings_menu->button_width) / 2) +  cube->menu->settings_menu->button_width * 1.25, 70);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->music_and_sounds_button, ((WIDTH - cube->menu->settings_menu->button_width) / 2) + cube->menu->settings_menu->button_width * 1.25, 70);
 	}
 }
 
@@ -113,14 +113,13 @@ int	mouse_press(int keycode, void *cube_void)
 	if (cube->menu->settings_menu->is_in_settings_menu)
 	{
 		if (cube->menu->settings_menu->keybinds_button_status && keycode)
-			ft_printf("keybinds\n");
+			open_keybinds_menu(cube);
 		if (cube->menu->settings_menu->video_settings_button_status && keycode)
-			ft_printf("video settings\n");
+			open_video_settings_menu(cube);
 		if (cube->menu->settings_menu->music_and_sounds_button_status && keycode)
-			ft_printf("music and sounds\n");
+			open_music_and_sounds_menu(cube);
 	}
 	return (0);
-
 }
 
 int	mouse_move(void *cube_void)

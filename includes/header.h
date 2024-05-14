@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:43 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/09 18:06:09 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:32:40 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,8 @@ int     mouse_move(void *cube_void);
 int	    mouse_press(int key, void *cube_void);
 int	    mouse_release(int keycode, void *cube_void);
 void	open_settings(t_cube *cube);
+void	open_video_settings_menu(t_cube *cube);
+void	open_keybinds_menu(t_cube *cube);
+void	open_music_and_sounds_menu(t_cube *cube);
 
 #endif

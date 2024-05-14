@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:33 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/12 23:30:45 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:15:39 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	free_and_destroy(t_cube *cube)
 	mlx_destroy_image(cube->mlx_ptr, cube->menu->settings_menu->video_settings_button_hover);
 	mlx_destroy_image(cube->mlx_ptr, cube->menu->settings_menu->music_and_sounds_button);
 	mlx_destroy_image(cube->mlx_ptr, cube->menu->settings_menu->music_and_sounds_button_hover);
+	mlx_destroy_image(cube->mlx_ptr, cube->menu->settings_menu->keybinds_menu);
+	mlx_destroy_image(cube->mlx_ptr, cube->menu->settings_menu->video_settings_menu);
+	mlx_destroy_image(cube->mlx_ptr, cube->menu->settings_menu->music_and_sounds_menu);
 	mlx_destroy_image(cube->mlx_ptr, cube->img);
 	mlx_destroy_window(cube->mlx_ptr, cube->window_ptr);
 	mlx_destroy_display(cube->mlx_ptr);
