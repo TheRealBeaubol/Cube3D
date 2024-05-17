@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/05/09 18:06:25 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/05/17 21:34:34 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,13 +89,18 @@ clean:
 		$(RM) $(OBJS_DIR)
 
 fclean: clean
+		@printf "  $(COLOR_3)└──> 🗑️    $(COLOR_4)$(NAME) binary $(COLOR_5)has been deleted$(RESET)\n\n"	
 		$(RM) $(NAME)
-		@printf "  $(COLOR_3)└──> 🗑️    $(COLOR_4)$(NAME) binary $(COLOR_5)has been deleted$(RESET)\n\n"
 		@make fclean -C $(LIBFT_PATH) --no-print-directory -j
 		@make fclean -C $(MLX_PATH) --no-print-directory -j
 
-
-
 re:	fclean all
+
+runfclean: clean
+	@printf "  $(COLOR_3)└──> 🗑️    $(COLOR_4)$(NAME) binary $(COLOR_5)has been deleted$(RESET)\n\n"	
+	$(RM) $(NAME)
+
+run: runfclean $(NAME)
+		@./$(NAME)
 
 .PHONY:	re fclean all clean
