@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/18 00:30:35 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/18 02:20:51 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,78 +14,140 @@
 
 void	render_hover_button(t_cube *cube)
 {
+	void	*keys_image;
+
 	if (cube->menu->is_in_menu)
 	{
 		if (cube->menu->play_button_status)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->play_button_hover, (WIDTH - cube->menu->button_width) / 2, ((HEIGHT - cube->menu->button_height) / 2) - 200);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->play_button_hover, (WIDTH - cube->menu->button_width) / 2, \
+	((HEIGHT - cube->menu->button_height) / 2) - 200);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->play_button, (WIDTH - cube->menu->button_width) / 2, ((HEIGHT - cube->menu->button_height) / 2) - 200);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->play_button, (WIDTH - cube->menu->button_width) / 2, \
+	((HEIGHT - cube->menu->button_height) / 2) - 200);
 		if (cube->menu->settings_button_status)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_button_hover, (WIDTH - cube->menu->button_width) / 2, ((HEIGHT - cube->menu->button_height) / 2));
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_button_hover, (WIDTH - cube->menu->button_width) / 2, \
+	((HEIGHT - cube->menu->button_height) / 2));
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_button, (WIDTH - cube->menu->button_width) / 2, ((HEIGHT - cube->menu->button_height) / 2));
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_button, (WIDTH - cube->menu->button_width) / 2, \
+	((HEIGHT - cube->menu->button_height) / 2));
 		if (cube->menu->exit_button_status)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->exit_button_hover, (WIDTH - cube->menu->button_width) / 2, ((HEIGHT - cube->menu->button_height) / 2) + 200);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->exit_button_hover, (WIDTH - cube->menu->button_width) / 2, \
+	((HEIGHT - cube->menu->button_height) / 2) + 200);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->exit_button, (WIDTH - cube->menu->button_width) / 2, ((HEIGHT - cube->menu->button_height) / 2) + 200);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->exit_button, (WIDTH - cube->menu->button_width) / 2, \
+	((HEIGHT - cube->menu->button_height) / 2) + 200);
 	}
 	if (cube->menu->settings_menu->is_in_settings_menu)
 	{
 		if (cube->menu->settings_menu->keybinds_button_status)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_button_hover, ((WIDTH - cube->menu->settings_menu->button_width) / 2) - cube->menu->settings_menu->button_width * 1.25, 70);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_button_hover, ((WIDTH - \
+cube->menu->settings_menu->button_width) / 2) - \
+cube->menu->settings_menu->button_width * 1.25, 70);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_button, ((WIDTH - cube->menu->settings_menu->button_width) / 2) - cube->menu->settings_menu->button_width * 1.25, 70);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_button, ((WIDTH - \
+cube->menu->settings_menu->button_width) / 2) - \
+cube->menu->settings_menu->button_width * 1.25, 70);
 		if (cube->menu->settings_menu->video_settings_button_status)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->video_settings_button_hover, (WIDTH - cube->menu->settings_menu->button_width) / 2, 70);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->video_settings_button_hover, (WIDTH - \
+cube->menu->settings_menu->button_width) / 2, 70);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->video_settings_button, (WIDTH - cube->menu->settings_menu->button_width) / 2, 70);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->video_settings_button, (WIDTH - \
+cube->menu->settings_menu->button_width) / 2, 70);
 		if (cube->menu->settings_menu->music_and_sounds_button_status)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->music_and_sounds_button_hover, ((WIDTH - cube->menu->settings_menu->button_width) / 2) + cube->menu->settings_menu->button_width * 1.25, 70);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->music_and_sounds_button_hover, ((WIDTH - \
+cube->menu->settings_menu->button_width) / 2) + \
+cube->menu->settings_menu->button_width * 1.25, 70);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->music_and_sounds_button, ((WIDTH - cube->menu->settings_menu->button_width) / 2) + cube->menu->settings_menu->button_width * 1.25, 70);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->music_and_sounds_button, ((WIDTH - \
+cube->menu->settings_menu->button_width) / 2) + \
+cube->menu->settings_menu->button_width * 1.25, 70);
 	}
 	if (cube->menu->settings_menu->is_in_keybinds_menu)
 	{
 		if (cube->menu->settings_menu->keybinds_define_button_status == 1)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button_hover, 671, 392);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button_hover, 671, 392);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button, 671, 392);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button, 671, 392);
 		if (cube->menu->settings_menu->keybinds_define_button_status == 2)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button_hover, 671, 461);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button_hover, 671, 461);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button, 671, 461);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button, 671, 461);
 		if (cube->menu->settings_menu->keybinds_define_button_status == 3)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button_hover, 671, 530);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button_hover, 671, 530);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button, 671, 530);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button, 671, 530);
 		if (cube->menu->settings_menu->keybinds_define_button_status == 4)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button_hover, 671, 599);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button_hover, 671, 599);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button, 671, 599);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button, 671, 599);
 		if (cube->menu->settings_menu->keybinds_define_button_status == 5)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button_hover, 671, 668);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button_hover, 671, 668);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button, 671, 668);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button, 671, 668);
 		if (cube->menu->settings_menu->keybinds_define_button_status == 6)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button_hover, 1037, 395);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button_hover, 1037, 395);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button, 1037, 395);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button, 1037, 395);
 		if (cube->menu->settings_menu->keybinds_define_button_status == 7)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button_hover, 1037, 464);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button_hover, 1037, 464);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button, 1037, 464);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button, 1037, 464);
 		if (cube->menu->settings_menu->keybinds_define_button_status == 8)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button_hover, 1037, 533);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button_hover, 1037, 533);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button, 1037, 533);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button, 1037, 533);
 		if (cube->menu->settings_menu->keybinds_define_button_status == 9)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button_hover, 1037, 602);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button_hover, 1037, 602);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button, 1037, 602);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button, 1037, 602);
 		if (cube->menu->settings_menu->keybinds_define_button_status == 10)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button_hover, 1037, 671);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button_hover, 1037, 671);
 		else
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->menu->settings_menu->keybinds_define_button, 1037, 671);
+			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+cube->menu->settings_menu->keybinds_define_button, 1037, 671);
+		keys_image = get_key_images(cube, cube->player_settings->move_forward);
+		mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+keys_image, 671, 392);
+		keys_image = get_key_images(cube, cube->player_settings->move_backward);
+		mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+keys_image, 671, 461);
+		keys_image = get_key_images(cube, cube->player_settings->move_left);
+		mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+keys_image, 671, 530);
+		keys_image = get_key_images(cube, cube->player_settings->move_right);
+		mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
+keys_image, 671, 599);
 	}
 }
 
@@ -93,15 +155,21 @@ void	handle_mouse_in_start_menu(t_cube *cube, int x, int y)
 {
 	if (cube->menu->is_in_menu)
 	{
-		cube->menu->play_button_status = (x > 780 && x < 1135 && y > 280 && y < 400);
-		cube->menu->settings_button_status = (x > 780 && x < 1135 && y > 480 && y < 600);
-		cube->menu->exit_button_status = (x > 780 && x < 1135 && y > 680 && y < 800);
+		cube->menu->play_button_status = (x > 780 && x < 1135 && \
+y > 280 && y < 400);
+		cube->menu->settings_button_status = (x > 780 && x < 1135 && \
+y > 480 && y < 600);
+		cube->menu->exit_button_status = (x > 780 && x < 1135 && \
+y > 680 && y < 800);
 	}
 	if (cube->menu->settings_menu->is_in_settings_menu)
 	{
-		cube->menu->settings_menu->keybinds_button_status = (x > 300 && x < 620 && y > 75 && y < 190);
-		cube->menu->settings_menu->video_settings_button_status = (x > 800 && x < 1120 && y > 75 && y < 190);
-		cube->menu->settings_menu->music_and_sounds_button_status = (x > 1300 && x < 1620 && y > 75 && y < 190);
+		cube->menu->settings_menu->keybinds_button_status = (\
+x > 300 && x < 620 && y > 75 && y < 190);
+		cube->menu->settings_menu->video_settings_button_status = (\
+x > 800 && x < 1120 && y > 75 && y < 190);
+		cube->menu->settings_menu->music_and_sounds_button_status = (\
+x > 1300 && x < 1620 && y > 75 && y < 190);
 	}
 	if (cube->menu->settings_menu->is_in_keybinds_menu)
 	{
@@ -127,8 +195,9 @@ void	handle_mouse_in_start_menu(t_cube *cube, int x, int y)
 			cube->menu->settings_menu->keybinds_define_button_status = 10;
 		else
 			cube->menu->settings_menu->keybinds_define_button_status = 0;
-		if (!cube->menu->settings_menu->keybinds_define_button_status)
-			cube->menu->settings_menu->keybind_menu_indice = cube->menu->settings_menu->keybinds_define_button_status;
+		if (cube->menu->settings_menu->keybinds_define_button_status)
+			cube->menu->settings_menu->keybind_menu_indice = \
+cube->menu->settings_menu->keybinds_define_button_status;
 	}
 	render_hover_button(cube);
 }
@@ -140,116 +209,152 @@ int	mouse_release(int keycode, void *cube_void)
 	return (0);
 }
 
-int	mouse_press(int keycode, void *cube_void)
+int	mouse_press(int key, void *cube_void)
 {
 	t_cube	*cube;
 
 	cube = (t_cube *)cube_void;
 	if (cube->menu->is_in_menu)
 	{
-		if (cube->menu->play_button_status && keycode)
+		if (cube->menu->play_button_status && key)
 		{
 			cube->menu->is_in_menu = 0;
 			mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
 		}
-		if (cube->menu->settings_button_status && keycode)
+		if (cube->menu->settings_button_status && key)
 		{
 			cube->menu->is_in_menu = 0;
 			cube->menu->settings_menu->is_in_settings_menu = 1;
 			open_settings(cube);
 		}
-		if (cube->menu->exit_button_status && keycode)
+		if (cube->menu->exit_button_status && key)
 			free_and_destroy(cube);
 	}
 	if (cube->menu->settings_menu->is_in_settings_menu)
 	{
-		if (cube->menu->settings_menu->keybinds_button_status && keycode)
+		if (cube->menu->settings_menu->keybinds_button_status && key)
 			open_keybinds_menu(cube);
-		if (cube->menu->settings_menu->video_settings_button_status && keycode)
+		if (cube->menu->settings_menu->video_settings_button_status && key)
 			open_video_settings_menu(cube);
-		if (cube->menu->settings_menu->music_and_sounds_button_status && keycode)
+		if (cube->menu->settings_menu->music_and_sounds_button_status && key)
 			open_music_and_sounds_menu(cube);
-		if (cube->menu->settings_menu->keybinds_define_button_status && keycode)
+		if (cube->menu->settings_menu->keybinds_define_button_status && key)
 			cube->menu->settings_menu->waiting_for_key = 1;
 	}
 	return (0);
 }
 
-void	get_key_images(t_cube *cube)
+void	*get_key_images(t_cube *cube, int key)
 {
-	if (cube->menu->settings_menu->key == KEY_A)
+	if (key == KEY_A)
 		return (cube->menu->settings_menu->keys_images->key_a);
-	if (cube->menu->settings_menu->key == KEY_B)
+	if (key == KEY_B)
 		return (cube->menu->settings_menu->keys_images->key_b);
-	if (cube->menu->settings_menu->key == KEY_C)
+	if (key == KEY_C)
 		return (cube->menu->settings_menu->keys_images->key_c);
-	if (cube->menu->settings_menu->key == KEY_D)
+	if (key == KEY_D)
 		return (cube->menu->settings_menu->keys_images->key_d);
-	if (cube->menu->settings_menu->key == KEY_E)
+	if (key == KEY_E)
 		return (cube->menu->settings_menu->keys_images->key_e);
-	if (cube->menu->settings_menu->key == KEY_F)
+	if (key == KEY_F)
 		return (cube->menu->settings_menu->keys_images->key_f);
-	if (cube->menu->settings_menu->key == KEY_G)
+	if (key == KEY_G)
 		return (cube->menu->settings_menu->keys_images->key_g);
-	if (cube->menu->settings_menu->key == KEY_H)
+	if (key == KEY_H)
 		return (cube->menu->settings_menu->keys_images->key_h);
-	if (cube->menu->settings_menu->key == KEY_I)
+	if (key == KEY_I)
 		return (cube->menu->settings_menu->keys_images->key_i);
-	if (cube->menu->settings_menu->key == KEY_J)
+	if (key == KEY_J)
 		return (cube->menu->settings_menu->keys_images->key_j);
-	if (cube->menu->settings_menu->key == KEY_K)
+	if (key == KEY_K)
 		return (cube->menu->settings_menu->keys_images->key_k);
-	if (cube->menu->settings_menu->key == KEY_L)
+	if (key == KEY_L)
 		return (cube->menu->settings_menu->keys_images->key_l);
-	if (cube->menu->settings_menu->key == KEY_M)
+	if (key == KEY_M)
 		return (cube->menu->settings_menu->keys_images->key_m);
-	if (cube->menu->settings_menu->key == KEY_N)
+	if (key == KEY_N)
 		return (cube->menu->settings_menu->keys_images->key_n);
-	if (cube->menu->settings_menu->key == KEY_O)
+	if (key == KEY_O)
 		return (cube->menu->settings_menu->keys_images->key_o);
-	if (cube->menu->settings_menu->key == KEY_P)
+	if (key == KEY_P)
 		return (cube->menu->settings_menu->keys_images->key_p);
-	if (cube->menu->settings_menu->key == KEY_Q)
+	if (key == KEY_Q)
 		return (cube->menu->settings_menu->keys_images->key_q);
-	if (cube->menu->settings_menu->key == KEY_R)
+	if (key == KEY_R)
 		return (cube->menu->settings_menu->keys_images->key_r);
-	if (cube->menu->settings_menu->key == KEY_S)
+	if (key == KEY_S)
 		return (cube->menu->settings_menu->keys_images->key_s);
-	if (cube->menu->settings_menu->key == KEY_T)
+	if (key == KEY_T)
 		return (cube->menu->settings_menu->keys_images->key_t);
-	if (cube->menu->settings_menu->key == KEY_U)
+	if (key == KEY_U)
 		return (cube->menu->settings_menu->keys_images->key_u);
-	if (cube->menu->settings_menu->key == KEY_V)
+	if (key == KEY_V)
 		return (cube->menu->settings_menu->keys_images->key_v);
-	if (cube->menu->settings_menu->key == KEY_W)
+	if (key == KEY_W)
 		return (cube->menu->settings_menu->keys_images->key_w);
-	if (cube->menu->settings_menu->key == KEY_X)
+	if (key == KEY_X)
 		return (cube->menu->settings_menu->keys_images->key_x);
-	if (cube->menu->settings_menu->key == KEY_Y)
+	if (key == KEY_Y)
 		return (cube->menu->settings_menu->keys_images->key_y);
-	if (cube->menu->settings_menu->key == KEY_Z)
+	if (key == KEY_Z)
 		return (cube->menu->settings_menu->keys_images->key_z);
-	if (cube->menu->settings_menu->key == KEY_0)
+	if (key == KEY_0)
 		return (cube->menu->settings_menu->keys_images->key_0);
-	if (cube->menu->settings_menu->key == KEY_1)
+	if (key == KEY_1)
 		return (cube->menu->settings_menu->keys_images->key_1);
-	if (cube->menu->settings_menu->key == KEY_2)
+	if (key == KEY_2)
 		return (cube->menu->settings_menu->keys_images->key_2);
-	if (cube->menu->settings_menu->key == KEY_3)
+	if (key == KEY_3)
 		return (cube->menu->settings_menu->keys_images->key_3);
-	if (cube->menu->settings_menu->key == KEY_4)
+	if (key == KEY_4)
 		return (cube->menu->settings_menu->keys_images->key_4);
-	if (cube->menu->settings_menu->key == KEY_5)
+	if (key == KEY_5)
 		return (cube->menu->settings_menu->keys_images->key_5);
-	if (cube->menu->settings_menu->key == KEY_6)
+	if (key == KEY_6)
 		return (cube->menu->settings_menu->keys_images->key_6);
-	if (cube->menu->settings_menu->key == KEY_7)
+	if (key == KEY_7)
 		return (cube->menu->settings_menu->keys_images->key_7);
-	if (cube->menu->settings_menu->key == KEY_8)
+	if (key == KEY_8)
 		return (cube->menu->settings_menu->keys_images->key_8);
-	if (cube->menu->settings_menu->key == KEY_9)
+	if (key == KEY_9)
 		return (cube->menu->settings_menu->keys_images->key_9);
-	
+	if (key == SPACE)
+		return (cube->menu->settings_menu->keys_images->key_space);
+	if (key == SHIFT)
+		return (cube->menu->settings_menu->keys_images->key_shift);
+	if (key == KEYPAD_0)
+		return (cube->menu->settings_menu->keys_images->key_num_0);
+	if (key == KEYPAD_1)
+		return (cube->menu->settings_menu->keys_images->key_num_1);
+	if (key == KEYPAD_2)
+		return (cube->menu->settings_menu->keys_images->key_num_2);
+	if (key == KEYPAD_3)
+		return (cube->menu->settings_menu->keys_images->key_num_3);
+	if (key == KEYPAD_4)
+		return (cube->menu->settings_menu->keys_images->key_num_4);
+	if (key == KEYPAD_5)
+		return (cube->menu->settings_menu->keys_images->key_num_5);
+	if (key == KEYPAD_6)
+		return (cube->menu->settings_menu->keys_images->key_num_6);
+	if (key == KEYPAD_7)
+		return (cube->menu->settings_menu->keys_images->key_num_7);
+	if (key == KEYPAD_8)
+		return (cube->menu->settings_menu->keys_images->key_num_8);
+	if (key == KEYPAD_9)
+		return (cube->menu->settings_menu->keys_images->key_num_9);
+	if (key == KEYPAD_DIV)
+		return (cube->menu->settings_menu->keys_images->key_num_div);
+	if (key == KEYPAD_MULT)
+		return (cube->menu->settings_menu->keys_images->key_num_mult);
+	if (key == KEYPAD_MINUS)
+		return (cube->menu->settings_menu->keys_images->key_num_minus);
+	if (key == KEYPAD_PLUS)
+		return (cube->menu->settings_menu->keys_images->key_num_plus);
+	if (key == CTRL)
+		return (cube->menu->settings_menu->keys_images->key_ctrl);
+	if (key == TAB)
+		return (cube->menu->settings_menu->keys_images->key_tab);
+	return (NULL);
 }
 
 int	mouse_move(void *cube_void)
@@ -257,15 +362,8 @@ int	mouse_move(void *cube_void)
 	t_cube	*cube;
 	int		x;
 	int		y;
-	void	*key_image;
 
 	cube = (t_cube *)cube_void;
-	if (cube->menu->settings_menu->waiting_for_print)
-	{
-		key_image = get_key_images(cube);
-		if (cube->menu->settings_menu->keybind_menu_indice == 1)
-			mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, , 671, 392);
-	}
 	mlx_mouse_get_pos(cube->mlx_ptr, &x, &y);
 	handle_mouse_in_start_menu(cube, x, y);
 	return (0);

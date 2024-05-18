@@ -6,11 +6,24 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:08:52 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/18 00:07:34 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/18 01:15:30 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+void	edit_player_settings(t_cube *cube)
+{
+	if (cube->menu->settings_menu->keybind_menu_indice == 1)
+		cube->player_settings->move_forward = cube->menu->settings_menu->key;
+	else if (cube->menu->settings_menu->keybind_menu_indice == 2)
+		cube->player_settings->move_backward = cube->menu->settings_menu->key;
+	else if (cube->menu->settings_menu->keybind_menu_indice == 3)
+		cube->player_settings->move_left = cube->menu->settings_menu->key;
+	else if (cube->menu->settings_menu->keybind_menu_indice == 4)
+		cube->player_settings->move_right = cube->menu->settings_menu->key;
+	cube->menu->settings_menu->keybind_menu_indice = 0;
+}
 
 int	key_hook(int keycode, void *cube_void)
 {
@@ -24,7 +37,8 @@ int	key_hook(int keycode, void *cube_void)
 keycode == 224 || keycode == 225)
 		{
 			cube->menu->settings_menu->key = keycode;
-			cube->menu->settings_menu->waiting_for_print = 1;
+			edit_player_settings(cube);
+			open_settings(cube);
 			cube->menu->settings_menu->waiting_for_key = 0;
 		}
 		else

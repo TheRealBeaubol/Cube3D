@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/05/17 21:34:34 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/05/18 02:01:05 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,8 +49,11 @@ RESET	= \033[0m
 
 #SOURCES
 SRCS	= 	main.c \
-				exit.c \
-				init.c \
+				exit/exit.c \
+				exit/destroy_images.c \
+				init/init.c \
+				init/init_images.c \
+				init/init_images_bis.c \
 				hook.c \
 				mouse_hook.c \
 				settings.c \

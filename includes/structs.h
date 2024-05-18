@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/18 00:08:54 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/18 02:18:18 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ typedef struct s_settings_menu
 	void			*keybinds_define_button_hover;
 	int				keybinds_define_button_status;
 	int				waiting_for_key;
-	int				waiting_for_print;
 	int				key;
 	int				is_in_keybinds_menu;
 	int				is_in_settings_menu;
