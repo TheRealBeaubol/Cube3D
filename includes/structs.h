@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/18 02:18:18 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:20:00 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ typedef struct s_cube
 	void				*img;
 	t_menu				*menu;
 	t_player_settings	*player_settings;
+	char				*map;
 }	t_cube;
 
 #endif

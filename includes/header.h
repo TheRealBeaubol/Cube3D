@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:43 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/18 02:00:55 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:17:10 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ void	        open_video_settings_menu(t_cube *cube);
 void	        open_keybinds_menu(t_cube *cube);
 void	        open_music_and_sounds_menu(t_cube *cube);
 void	        *get_key_images(t_cube *cube, int key);
+void			print_map(char **map, t_cube *cube);
+char			**parsing(char *file);
 
 #endif
