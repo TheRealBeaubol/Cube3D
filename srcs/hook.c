@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:08:52 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/18 01:15:30 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:02:53 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ int	key_hook(int keycode, void *cube_void)
 	t_cube	*cube;
 
 	cube = (t_cube *)cube_void;
+	if (cube->is_in_game)
+	{
+		if (keycode == cube->player_settings->move_forward)
+			cube->player_settings->dir_y -= 10;
+		else if (keycode == cube->player_settings->move_backward)
+			cube->player_settings->dir_y += 10;
+		else if (keycode == cube->player_settings->move_left)
+			cube->player_settings->dir_x -= 10;
+		else if (keycode == cube->player_settings->move_right)
+			cube->player_settings->dir_x += 10;
+		print_map(parsing(cube->map), cube);
+	}
 	if (cube->menu->settings_menu->waiting_for_key)
 	{
 		if ((keycode >= 4 && keycode <= 39) || keycode == 43 || keycode == \

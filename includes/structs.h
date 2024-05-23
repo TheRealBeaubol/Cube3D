@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/23 15:43:43 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:58:15 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ typedef struct s_player_settings
 	int	move_right;
 	int	pos_x;
 	int	pos_y;
+	int	dir_x;
+	int	dir_y;
 }	t_player_settings;
 
 typedef struct s_cube

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhervoch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/05/23 15:55:59 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:00:20 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	print_player(t_cube *cube, int x, int y, int color)
 	int	px;
 	int	py;
 	
-	cube->player_settings->pos_x = x + ((50 - 10) / 2);
-	cube->player_settings->pos_y = y + ((50 - 10) / 2);
+	cube->player_settings->pos_x = x + ((50 - 10) / 2) + cube->player_settings->dir_x;
+	cube->player_settings->pos_y = y + ((50 - 10) / 2) + cube->player_settings->dir_y;
 	px = cube->player_settings->pos_x + 10;
 	py = cube->player_settings->pos_y + 10;
 	ft_printf("x: %d, y: %d\n", x, y);
