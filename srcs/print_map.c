@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/05/23 16:00:20 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:53:46 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,21 @@ void	print_global_pixel(t_cube *cube, int x, int y, int color)
 {
 	int	dx;
 	int	dy;
+	int	px;
+	int	py;
 
+	px = cube->player_settings->pos_x;
+	py = cube->player_settings->pos_y;
 	dx = 0;
 	while (dx < 50)
 	{
 		dy = 0;
 		while (dy < 50)
 		{
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x + dx, y + dy, color);
+			if (dx > px - x && dx < px + 10 - x && dy > py - y && dy < py - y + 10)
+				mlx_set_image_pixel(cube->mlx_ptr, cube->img, x + dx, y + dy, 0xFFFF0000);
+			else
+				mlx_set_image_pixel(cube->mlx_ptr, cube->img, x + dx, y + dy, color);
 			dy++;
 		}
 		dx++;
@@ -42,12 +49,13 @@ void	print_player(t_cube *cube, int x, int y, int color)
 	int	px;
 	int	py;
 	
+	ft_printf("sgrgsg");
+	cube->start_x = x;
+	cube->start_y = y;
 	cube->player_settings->pos_x = x + ((50 - 10) / 2) + cube->player_settings->dir_x;
 	cube->player_settings->pos_y = y + ((50 - 10) / 2) + cube->player_settings->dir_y;
-	px = cube->player_settings->pos_x + 10;
-	py = cube->player_settings->pos_y + 10;
-	ft_printf("x: %d, y: %d\n", x, y);
-	ft_printf("px: %d, py: %d\n", px, py);
+	px = cube->player_settings->pos_x;
+	py = cube->player_settings->pos_y;
 	dx = 0;
 	while (dx < 50)
 	{
@@ -55,9 +63,9 @@ void	print_player(t_cube *cube, int x, int y, int color)
 		while (dy < 50)
 		{
 			if (dx > px - x && dx < px + 10 - x && dy > py - y && dy < py - y + 10)
-				mlx_set_image_pixel(cube->mlx_ptr, cube->img, x + dx, y + dy, color);
+				mlx_set_image_pixel(cube->mlx_ptr, cube->img, x + dx, y + dy, 0xFFFF0000);
 			else
-				mlx_set_image_pixel(cube->mlx_ptr, cube->img, x + dx, y + dy, 0xFFFFFFFF);
+				mlx_set_image_pixel(cube->mlx_ptr, cube->img, x + dx, y + dy, color);
 			dy++;
 		}
 		dx++;
@@ -76,15 +84,22 @@ void	print_player(t_cube *cube, int x, int y, int color)
 
 void	print_pixel(t_cube *cube, char pixel, int x, int y)
 {
+	static int	b = 1;
+
+	cube->player_settings->pos_x += cube->player_settings->dir_x;
+	cube->player_settings->pos_y += cube->player_settings->dir_y;
 	if (pixel == '1')
 		print_global_pixel(cube, x, y, 0xFF0000FF);
-	if (pixel == '0')
+	else if (pixel == '0')
 		print_global_pixel(cube, x, y, 0xFFFFFFFF);	
-	if (pixel == 'P')
+	else if (pixel == 'P' && b)
 	{
-		print_player(cube, x, y, 0xFFFF0000);
+		b = 0;
+		print_player(cube, x, y, 0xFFFFFFFF);
 		//print_view(cube, dx + x, dy + y);
 	}
+	else
+		print_global_pixel(cube, x, y, 0xFFFFFFFF);	
 }
 
 void	print_map(char **map, t_cube *cube)
