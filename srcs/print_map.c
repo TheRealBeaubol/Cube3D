@@ -6,7 +6,7 @@
 /*   By: mhervoch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/05/23 15:33:29 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:55:59 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,22 @@ void	print_player(t_cube *cube, int x, int y, int color)
 {
 	int	dx;
 	int	dy;
-
+	int	px;
+	int	py;
+	
+	cube->player_settings->pos_x = x + ((50 - 10) / 2);
+	cube->player_settings->pos_y = y + ((50 - 10) / 2);
+	px = cube->player_settings->pos_x + 10;
+	py = cube->player_settings->pos_y + 10;
+	ft_printf("x: %d, y: %d\n", x, y);
+	ft_printf("px: %d, py: %d\n", px, py);
 	dx = 0;
 	while (dx < 50)
 	{
 		dy = 0;
 		while (dy < 50)
 		{
-			if (dx > 20 && dx < 30 && dy > 20 && dy < 30)
+			if (dx > px - x && dx < px + 10 - x && dy > py - y && dy < py - y + 10)
 				mlx_set_image_pixel(cube->mlx_ptr, cube->img, x + dx, y + dy, color);
 			else
 				mlx_set_image_pixel(cube->mlx_ptr, cube->img, x + dx, y + dy, 0xFFFFFFFF);
