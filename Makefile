@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/05/23 15:17:35 by mhervoch         ###   ########.fr        #
+#    Updated: 2024/05/23 15:37:26 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,6 @@ runfclean: clean
 	$(RM) $(NAME)
 
 run: runfclean $(NAME)
-		@./$(NAME)
+		@./$(NAME) map.txt
 
 .PHONY:	re fclean all clean
