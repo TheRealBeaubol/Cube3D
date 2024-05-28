@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/05/06 20:50:08 by mhervoch         ###   ########.fr        #
+#    Updated: 2024/05/23 15:37:26 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,11 +49,16 @@ RESET	= \033[0m
 
 #SOURCES
 SRCS	= 	main.c \
-				exit.c \
-				init.c \
+				exit/exit.c \
+				exit/destroy_images.c \
+				init/init.c \
+				init/init_images.c \
+				init/init_images_bis.c \
 				hook.c \
-				print_map.c \
+				mouse_hook.c \
+				settings.c \
 				parsing.c \
+				print_map.c \
 
 SRCS_DIR	:=	srcs
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
@@ -89,13 +94,18 @@ clean:
 		$(RM) $(OBJS_DIR)
 
 fclean: clean
+		@printf "  $(COLOR_3)└──> 🗑️    $(COLOR_4)$(NAME) binary $(COLOR_5)has been deleted$(RESET)\n\n"	
 		$(RM) $(NAME)
-		@printf "  $(COLOR_3)└──> 🗑️    $(COLOR_4)$(NAME) binary $(COLOR_5)has been deleted$(RESET)\n\n"
 		@make fclean -C $(LIBFT_PATH) --no-print-directory -j
 		@make fclean -C $(MLX_PATH) --no-print-directory -j
 
-
-
 re:	fclean all
+
+runfclean: clean
+	@printf "  $(COLOR_3)└──> 🗑️    $(COLOR_4)$(NAME) binary $(COLOR_5)has been deleted$(RESET)\n\n"	
+	$(RM) $(NAME)
+
+run: runfclean $(NAME)
+		@./$(NAME) map.txt
 
 .PHONY:	re fclean all clean

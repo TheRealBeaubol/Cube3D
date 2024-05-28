@@ -6,8 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:20 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/06 20:45:03 by mhervoch         ###   ########.fr       */
-/*   Updated: 2024/05/05 20:35:27 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:19:37 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +19,22 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	(void)env;
+	cube.map = av[1];
+	if (WIDTH != 1920 || HEIGHT != 1080)
+	{
+		ft_printf("Error\nResolution must be 1920x1080\n");
+		exit(1);
+	}
 	init(&cube);
 	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_WINDOW_EVENT, \
 		&free_and_destroy_exit, &cube);
 	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_KEYDOWN, \
 		&key_hook, &cube);
-	print_map(parsing(av[1]), &cube);
+	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_MOUSEDOWN, \
+		&mouse_press, &cube);
+	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_MOUSEUP, \
+		&mouse_release, &cube);
+	mlx_loop_hook((&cube)->mlx_ptr, &mouse_move, &cube);
 	mlx_loop(cube.mlx_ptr);
 	return (0);
 }
-
-//https://lodev.org/cgtutor/raycasting.html
-//https://github.com/vinibiavatti1/RayCastingTutorial/tree/master

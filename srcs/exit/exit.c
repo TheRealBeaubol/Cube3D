@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:33 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/05 22:26:06 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/05/18 02:23:39 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 void	free_and_destroy(t_cube *cube)
 {
+	destroy_menu(cube);
+	free(cube->menu->settings_menu->keys_images);
+	free(cube->menu->settings_menu);
+	free(cube->menu);
+	free(cube->player_settings);
 	mlx_destroy_image(cube->mlx_ptr, cube->img);
 	mlx_destroy_window(cube->mlx_ptr, cube->window_ptr);
 	mlx_destroy_display(cube->mlx_ptr);
-	exit (1);
+	exit (0);
 }
 
 int	free_and_destroy_exit(int i, void *cube_void)
