@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/05/28 16:28:16 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/05/28 17:23:28 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,11 @@ int	is_in_wall(t_cube *cube, char **map)
 	y = 0;
 	while (x < 10)
 	{
-		j = (cube->player_settings->pos_x - WIDTH / 2 + 50 * 7 / 2) / 50;
+		j = (cube->player_settings->pos_x + x - (WIDTH - 350) / 2) / 50;
 		y = 0;
 		while (y < 10)
 		{
-			i = (cube->player_settings->pos_y - HEIGHT / 2 + 50 * 7 / 2) / 50;
-			//ft_printf("case: %c\n", map[i][j]);
+			i = (cube->player_settings->pos_y + y - (HEIGHT - 350) / 2) / 50;
 			if (map[i][j] == '1')
 				return (1);
 			y++;
@@ -67,23 +66,27 @@ void	print_player(t_cube *cube, int color, char **map)
 	int	px;
 	int	py;
 	
-	px = cube->player_settings->pos_x;
-	py = cube->player_settings->pos_y;
 	cube->player_settings->pos_x += cube->player_settings->dir_x;
 	cube->player_settings->pos_y += cube->player_settings->dir_y;
-	if (!is_in_wall(cube, map))
+	px = cube->player_settings->pos_x;
+	py = cube->player_settings->pos_y;
+	if (is_in_wall(cube, map))
 	{
-		cube->player_settings->dir_y = 0;
-		cube->player_settings->dir_x = 0;
+		cube->player_settings->pos_x -= cube->player_settings->dir_x;
+		cube->player_settings->pos_y -= cube->player_settings->dir_y;
+		px -= cube->player_settings->dir_x;
+		py -= cube->player_settings->dir_y;
 	}
-	ft_printf("dir_x: %d, dir_y: %d\n", cube->player_settings->dir_x, cube->player_settings->dir_y);
 	dx = 0;
 	while (dx < 10)
 	{
 		dy = 0;
 		while (dy < 10)
 		{
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, px + dx - cube->player_settings->dir_x * 5, py + dy - cube->player_settings->dir_y * 5 , color);
+			// if (dx == 0 || dx == 9 || dy == 0 || dy == 9)
+			// 	mlx_set_image_pixel(cube->mlx_ptr, cube->img, px + dx, py + dy, 0xFFFFFFFF);
+			// else
+				mlx_set_image_pixel(cube->mlx_ptr, cube->img, px + dx, py + dy, color);
 			dy++;
 		}
 		dx++;
@@ -119,6 +122,7 @@ void	print_pixel(t_cube *cube, char pixel, int x, int y)
 	else if (pixel == 'P' && b)
 	{
 		b = 0;
+		print_global_pixel(cube, x, y, 0xFFFFFFFF);		
 		set_player(cube, x, y);
 		//print_view(cube, dx + x, dy + y);
 	}
@@ -139,7 +143,7 @@ void	print_map(char **map, t_cube *cube)
 	{
 		x = WIDTH / 2 - 7 * 50 / 2;
 		j = 0;
-		while (map[i][j])
+		while (map[i][j + 1])
 		{
 
 			print_pixel(cube, map[i][j], x, y);
