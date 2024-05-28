@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:08:52 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/23 16:23:14 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:24:24 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ int	key_hook(int keycode, void *cube_void)
 	{
 		if (keycode == cube->player_settings->move_forward)
 			cube->player_settings->dir_y -= 2;
-		if (keycode == cube->player_settings->move_backward)
+		else if (keycode == cube->player_settings->move_backward)
 			cube->player_settings->dir_y += 2;
-		if (keycode == cube->player_settings->move_left)
+		else if (keycode == cube->player_settings->move_left)
 			cube->player_settings->dir_x -= 2;
-		if (keycode == cube->player_settings->move_right)
+		else if (keycode == cube->player_settings->move_right)
 			cube->player_settings->dir_x += 2;
+		mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
 		print_map(parsing(cube->map), cube);
 	}
 	if (cube->menu->settings_menu->waiting_for_key)
