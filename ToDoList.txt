@@ -7,7 +7,7 @@
 
     Subject :
 
-✅ Window management : Change Window / Minimize / Pressing ESC or clicking on red cross to close the window
+❌ Window management : Change Window / Minimize / Pressing ESC or clicking on red cross to close the window
 ❌ Display a different wall texture that vary depending on which side the wall is facing (North, South, East, West)
 ❌ Your program must be able to set the floor and ceiling colors to two different ones
 ❌ The program displays the image in a window and respects the following rules:
