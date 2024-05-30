@@ -6,19 +6,17 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/05 19:03:36 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:23:43 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	init(t_cube *cube)
+t_map	*init_map(t_map *map_data)
 {
-	cube->mlx_ptr = mlx_init();
-	if (cube->mlx_ptr == NULL)
-		exit (1);
-	cube->img = mlx_new_image(cube->mlx_ptr, WIDTH, HEIGHT);
-	cube->window_ptr = mlx_new_window(cube->mlx_ptr, WIDTH, HEIGHT, "Cube3D");
-	if (cube->window_ptr == NULL)
-		free_and_destroy(cube);
+	map_data->size_x = 7;
+	map_data->size_y = 7;
+	map_data->size_case = 50;
+	map_data->player_size = 10;
+	return (map_data);
 }

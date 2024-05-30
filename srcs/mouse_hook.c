@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/23 15:38:41 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:06:33 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,7 @@ int	mouse_press(int key, void *cube_void)
 			cube->menu->is_in_menu = 0;
 			cube->is_in_game = 1;
 			mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
-			print_map(parsing(cube->map), cube);
+			print_map(cube->map_data->map, cube);
 		}
 		if (cube->menu->settings_button_status && key)
 		{

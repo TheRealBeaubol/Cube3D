@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/05/23 15:37:26 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/05/30 15:23:52 by mhervoch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRCS	= 	main.c \
 				init/init_images.c \
 				init/init_images_bis.c \
 				hook.c \
+				init.c \
 				mouse_hook.c \
 				settings.c \
 				parsing.c \

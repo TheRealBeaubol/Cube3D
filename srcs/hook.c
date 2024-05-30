@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:08:52 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/28 16:55:54 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:04:05 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ keycode == cube->player_settings->move_right)
 			else if (keycode == cube->player_settings->move_right)
 				cube->player_settings->dir_x += 2;
 			mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
-			print_map(parsing(cube->map), cube);
+			print_map(cube->map_data->map, cube);
 		}
 	}
 	if (cube->menu->settings_menu->waiting_for_key)
