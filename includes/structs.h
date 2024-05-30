@@ -6,14 +6,14 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/30 15:44:45 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:54:50 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef	struct s_keys_images
+typedef struct s_keys_images
 {
 	void	*key_a;
 	void	*key_b;
@@ -70,7 +70,6 @@ typedef	struct s_keys_images
 	void	*key_ctrl;
 	void	*key_tab;
 }	t_keys_images;
-
 
 typedef struct s_settings_menu
 {
