@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:59:02 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/30 14:02:31 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:45:06 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	manage_player_moves(t_cube *cube, int keycode)
 	else if (keycode == cube->player_settings->move_right)
 		cube->player_settings->dir_x += 2;
 	mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
-	print_map(parsing(cube->map), cube);
+	print_map(cube->map->map, cube);
 }
 
 void	handle_game_hook(t_cube *cube, int keycode)

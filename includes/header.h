@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:43 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/30 15:22:51 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:46:55 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	        destroy_keys_images(t_cube *cube, t_keys_images *img);
 void	        destroy_settings_menu(t_cube *cube);
 void	        destroy_menu(t_cube *cube);
 
+t_map   	    *init_map(char *map_name);
 void	        render_key_images(t_cube *cube);
 void	        render_hover_button_in_keybind_menu_part_one(t_cube *cube);
 void	        render_hover_button_in_keybind_menu_part_two(t_cube *cube);

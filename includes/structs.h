@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/23 16:49:28 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:44:45 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,15 @@ typedef struct s_settings_menu
 	t_keys_images	*keys_images;
 }	t_settings_menu;
 
+typedef struct s_ray
+{
+	int	dirx;
+	int	diry;
+	int	ray_nb;
+	int	planex;
+	int	planey;
+}	t_ray;
+
 typedef struct s_menu
 {
 	void			*play_button;
@@ -124,15 +133,25 @@ typedef struct s_menu
 
 typedef struct s_player_settings
 {
-	int	move_forward;
-	int	move_backward;
-	int	move_left;
-	int	move_right;
-	int	pos_x;
-	int	pos_y;
-	int	dir_x;
-	int	dir_y;
+	int		move_forward;
+	int		move_backward;
+	int		move_left;
+	int		move_right;
+	int		pos_x;
+	int		pos_y;
+	int		dir_x;
+	int		dir_y;
+	t_ray	ray;
 }	t_player_settings;
+
+typedef struct s_map
+{
+	char	**map;
+	int		size_x;
+	int		size_y;
+	int		size_case;
+	int		player_size;
+}	t_map;
 
 typedef struct s_cube
 {
@@ -141,8 +160,9 @@ typedef struct s_cube
 	void				*img;
 	t_menu				*menu;
 	t_player_settings	*player_settings;
+	t_map				*map;
 	int					is_in_game;
-	char				*map;
+	char				*map_name;
 	int					start_x;
 	int					start_y;
 }	t_cube;
