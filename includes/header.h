@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:43 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/23 15:17:10 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:22:51 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,13 @@ void	        destroy_keys_images(t_cube *cube, t_keys_images *img);
 void	        destroy_settings_menu(t_cube *cube);
 void	        destroy_menu(t_cube *cube);
 
-
-
+void	        render_key_images(t_cube *cube);
+void	        render_hover_button_in_keybind_menu_part_one(t_cube *cube);
+void	        render_hover_button_in_keybind_menu_part_two(t_cube *cube);
+void	        render_hover_button_in_keybind_menu_part_three(t_cube *cube);
+void	        render_hover_button(t_cube *cube);
+void        	handle_game_hook(t_cube *cube, int keycode);
+void        	handle_settings_hook(t_cube *cube, int keycode);
 int		        key_hook(int keycode, void *cube_void);
 void	        init(t_cube *cube);
 int             mouse_move(void *cube_void);

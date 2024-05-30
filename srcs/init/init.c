@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/23 16:01:10 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:07:07 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,6 @@ void	init(t_cube *cube)
 	cube->menu = init_menu(cube);
 	cube->is_in_game = 0;
 	cube->player_settings = init_player_settings();
-	cube->menu->is_in_menu = 1;
-	cube->menu->play_button_status = 0;
-	cube->menu->settings_button_status = 0;
-	cube->menu->exit_button_status = 0;
 	init_settings_file(cube);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
 cube->menu->start_background, 0, 0);

@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/05/23 15:37:26 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/05/30 15:20:34 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,8 +54,14 @@ SRCS	= 	main.c \
 				init/init.c \
 				init/init_images.c \
 				init/init_images_bis.c \
-				hook.c \
-				mouse_hook.c \
+				hook/key_hook/hook.c \
+				hook/key_hook/game_hook.c \
+				hook/key_hook/settings_hook.c \
+				hook/mouse_hook/mouse_hook.c \
+				hook/mouse_hook/get_key_images.c \
+				hook/mouse_hook/mouse_click.c \
+				hook/mouse_hook/render_hover_button.c \
+				hook/mouse_hook/render_hover_button_in_keybind_menu.c \
 				settings.c \
 				parsing.c \
 				print_map.c \
