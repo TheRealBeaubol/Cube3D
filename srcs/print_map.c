@@ -6,8 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/05/30 15:19:07 by mhervoch         ###   ########.fr       */
-/*   Updated: 2024/05/28 17:23:28 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:52:56 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +22,10 @@ void	print_global_pixel(t_cube *cube, int x, int y, int color)
 	int	dy;
 
 	dx = 0;
-	while (dx < cube->map_data->size_case)
+	while (dx < cube->map->size_case)
 	{
 		dy = 0;
-		while (dy < cube->map_data->size_case)
+		while (dy < cube->map->size_case)
 		{
 			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x + dx, y + dy, color);
 			dy++;
@@ -44,15 +43,15 @@ int	is_in_wall(t_cube *cube)
 
 	x = 0;
 	y = 0;
-	while (x < cube->map_data->player_size)
+	while (x < cube->map->player_size)
 	{
 		j = (cube->player_settings->pos_x + x - WIDTH / 2 + 50 * 7 / 2) / 50;
 		y = 0;
-		while (y < cube->map_data->player_size)
+		while (y < cube->map->player_size)
 		{
-			i = (cube->player_settings->pos_y + y - (HEIGHT - cube->map_data->size_case * cube->map_data->size_y) / 2) / 50;
-			j = (cube->player_settings->pos_x + x - (WIDTH - cube->map_data->size_case * cube->map_data->size_x) / 2) / 50;
-			if (cube->map_data->map[i][j] == '1')
+			i = (cube->player_settings->pos_y + y - (HEIGHT - cube->map->size_case * cube->map->size_y) / 2) / 50;
+			j = (cube->player_settings->pos_x + x - (WIDTH - cube->map->size_case * cube->map->size_x) / 2) / 50;
+			if (cube->map->map[i][j] == '1')
 				return (1);
 			y++;
 		}
@@ -79,17 +78,12 @@ void	print_player(t_cube *cube, int color)
 		px -= cube->player_settings->dir_x;
 		py -= cube->player_settings->dir_y;
 	}
-	dx = 1;
-	dx = 0;
-	while (dx < cube->map_data->player_size)
+	dx = -1;
+	while (++dx < cube->map->player_size)
 	{
-		dy = 0;
-		while (dy < cube->map_data->player_size)
-		{
+		dy = -1;
+		while (++dy < cube->map->player_size)
 			mlx_set_image_pixel(cube->mlx_ptr, cube->img, px + dx, py + dy, color);
-			dy++;
-		}
-		dx++;
 	}
 	cube->player_settings->dir_x = 0;
 	cube->player_settings->dir_y = 0;
@@ -147,15 +141,14 @@ void	print_map(char **map, t_cube *cube)
 	int	x;
 	int	y;
 
-	y = HEIGHT / 2 - cube->map_data->size_y * cube->map_data->size_case / 2;
+	y = HEIGHT / 2 - cube->map->size_y * cube->map->size_case / 2;
 	i = 0;
-	while (cube->map_data->map[i])
+	while (cube->map->map[i])
 	{
-		x = WIDTH / 2 - cube->map_data->size_x * cube->map_data->size_case / 2;
+		x = WIDTH / 2 - cube->map->size_x * cube->map->size_case / 2;
 		j = 0;
-		while (cube->map_data->map[i][j + 1])
+		while (cube->map->map[i][j + 1])
 		{
-
 			print_pixel(cube, map[i][j], x, y);
 			x += 50;
 			j++;

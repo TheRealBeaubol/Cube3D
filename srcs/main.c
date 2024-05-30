@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:20 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/30 15:01:58 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:44:30 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,16 @@
 int	main(int ac, char **av, char **env)
 {
 	t_cube	cube;
-	t_map	map;
 
 	(void)ac;
 	(void)av;
 	(void)env;
-	cube.map = av[1];
-	map.map = parsing(cube.map);
-	cube.map_data = init_map(&map);
 	if (WIDTH != 1920 || HEIGHT != 1080)
 	{
 		ft_printf("Error\nResolution must be 1920x1080\n");
 		exit(1);
 	}
+	cube.map_name = av[1];
 	init(&cube);
 	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_WINDOW_EVENT, \
 		&free_and_destroy_exit, &cube);

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 02:00:13 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/18 02:02:11 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:07:46 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ t_menu	*init_menu(t_cube *cube)
 	t_menu	*menu;
 
 	menu = ft_calloc(1, sizeof(t_menu));
+	menu->is_in_menu = 1;
+	menu->play_button_status = 0;
+	menu->settings_button_status = 0;
+	menu->exit_button_status = 0;
 	menu->start_background = mlx_png_file_to_image(cube->mlx_ptr, \
 		"images/start_background.png", NULL, NULL);
 	menu->play_button = mlx_png_file_to_image(cube->mlx_ptr, \

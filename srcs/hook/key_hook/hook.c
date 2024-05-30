@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/05 19:02:33 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/05 19:05:09 by lboiteux         ###   ########.fr       */
+/*   Created: 2024/05/05 19:08:52 by lboiteux          #+#    #+#             */
+/*   Updated: 2024/05/30 14:14:04 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	free_and_destroy(t_cube *cube)
-{
-	mlx_destroy_image(cube->mlx_ptr, cube->img);
-	mlx_destroy_window(cube->mlx_ptr, cube->window_ptr);
-	mlx_destroy_display(cube->mlx_ptr);
-	exit (1);
-}
-
-int	free_and_destroy_exit(int i, void *cube_void)
+int	key_hook(int keycode, void *cube_void)
 {
 	t_cube	*cube;
 
 	cube = (t_cube *)cube_void;
-	if (i == 0)
+	if (cube->is_in_game)
+		handle_game_hook(cube, keycode);
+	if (cube->menu->settings_menu->waiting_for_key)
+		handle_settings_hook(cube, keycode);
+	if (keycode == ESCAPE)
 		free_and_destroy(cube);
 	return (0);
 }
