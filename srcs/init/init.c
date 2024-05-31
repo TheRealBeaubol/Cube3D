@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/23 16:01:10 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:45:36 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,19 @@ t_player_settings	*init_player_settings(void)
  someone edited the file -> set error message and redefine the settings.txt file.
 */
 
+t_map	*init_map(char	*map_name)
+{
+	t_map	*map;
+
+	map = ft_calloc(1, sizeof(t_map));
+	map->map = parsing(map_name);
+	map->size_x = 7;
+	map->size_y = 7;
+	map->size_case = 50;
+	map->player_size = 10;
+	return (map);
+}
+
 void	init(t_cube *cube)
 {
 	cube->mlx_ptr = mlx_init();
@@ -56,12 +69,9 @@ void	init(t_cube *cube)
 	if (cube->window_ptr == NULL)
 		free_and_destroy(cube);
 	cube->menu = init_menu(cube);
+	cube->map = init_map(cube->map_name);
 	cube->is_in_game = 0;
 	cube->player_settings = init_player_settings();
-	cube->menu->is_in_menu = 1;
-	cube->menu->play_button_status = 0;
-	cube->menu->settings_button_status = 0;
-	cube->menu->exit_button_status = 0;
 	init_settings_file(cube);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
 cube->menu->start_background, 0, 0);
