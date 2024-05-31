@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/30 15:45:36 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:00:30 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,6 @@ t_player_settings	*init_player_settings(void)
  settings.txt file check if the int value is coherent. If not because 
  someone edited the file -> set error message and redefine the settings.txt file.
 */
-
-t_map	*init_map(char	*map_name)
-{
-	t_map	*map;
-
-	map = ft_calloc(1, sizeof(t_map));
-	map->map = parsing(map_name);
-	map->size_x = 7;
-	map->size_y = 7;
-	map->size_case = 50;
-	map->player_size = 10;
-	return (map);
-}
 
 void	init(t_cube *cube)
 {

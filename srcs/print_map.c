@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/05/30 15:52:56 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:43:08 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	is_in_wall(t_cube *cube)
 	y = 0;
 	while (x < cube->map->player_size)
 	{
-		j = (cube->player_settings->pos_x + x - WIDTH / 2 + 50 * 7 / 2) / 50;
+		j = (cube->player_settings->pos_x + x - WIDTH / 2 + cube->map->size_case * 7 / 2) / cube->map->size_case;
 		y = 0;
 		while (y < cube->map->player_size)
 		{
-			i = (cube->player_settings->pos_y + y - (HEIGHT - cube->map->size_case * cube->map->size_y) / 2) / 50;
-			j = (cube->player_settings->pos_x + x - (WIDTH - cube->map->size_case * cube->map->size_x) / 2) / 50;
+			i = (cube->player_settings->pos_y + y - (HEIGHT - cube->map->size_case * cube->map->height) / 2) / cube->map->size_case;
+			j = (cube->player_settings->pos_x + x - (WIDTH - cube->map->size_case * cube->map->width) / 2) / cube->map->size_case;
 			if (cube->map->map[i][j] == '1')
 				return (1);
 			y++;
@@ -141,19 +141,19 @@ void	print_map(char **map, t_cube *cube)
 	int	x;
 	int	y;
 
-	y = HEIGHT / 2 - cube->map->size_y * cube->map->size_case / 2;
+	y = HEIGHT / 2 - cube->map->height * cube->map->size_case / 2;
 	i = 0;
 	while (cube->map->map[i])
 	{
-		x = WIDTH / 2 - cube->map->size_x * cube->map->size_case / 2;
+		x = WIDTH / 2 - cube->map->width * cube->map->size_case / 2;
 		j = 0;
-		while (cube->map->map[i][j + 1])
+		while (cube->map->map[i][j])
 		{
 			print_pixel(cube, map[i][j], x, y);
-			x += 50;
+			x += cube->map->size_case;
 			j++;
 		}
-		y += 50;
+		y += cube->map->size_case;
 		i++;
 	}
 	print_player(cube, 0xFFFF0000);

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/30 15:54:50 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:08:30 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ typedef struct s_player_settings
 typedef struct s_map
 {
 	char	**map;
-	int		size_x;
-	int		size_y;
+	int		height;
+	int		width;
 	int		size_case;
 	int		player_size;
 }	t_map;
