@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:00:32 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/31 17:43:30 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/02 21:13:16 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_map	*init_map(char	*map_name)
 		return (NULL);
 	}
 	map->width = get_width(map->map);
-	map->size_case = 20;
-	map->player_size = 4;
+	map->size_case = 50;
+	map->player_size = map->size_case / 5;
 	return (map);
 }

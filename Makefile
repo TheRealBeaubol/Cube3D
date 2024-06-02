@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/05/31 16:45:54 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/06/02 22:48:16 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,10 @@ SRCS	= 	main.c \
 				init/init_map.c \
 				init/init_images.c \
 				init/init_images_bis.c \
+				settings_file/get_key_from_line.c \
+				settings_file/get_line_from_key.c \
+				settings_file/edit_file.c \
+				settings_file/utils.c \
 				hook/key_hook/hook.c \
 				hook/key_hook/game_hook.c \
 				hook/key_hook/settings_hook.c \
@@ -66,6 +70,7 @@ SRCS	= 	main.c \
 				parsing/parsing.c \
 				settings.c \
 				print_map.c \
+				raycasting.c \
 
 SRCS_DIR	:=	srcs
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
