@@ -6,18 +6,19 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:11:15 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/04 11:51:02 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:32:46 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-t_ray   **feed_ray_tab(t_player_settings *player)
+/*t_ray   **feed_ray_tab(t_player_settings *player)
 {
     t_ray   **ray;
     int i;
 	
 	player->fov = 80;
+	player->looking_angle = 90;
     ray = ft_calloc(player->fov, sizeof(t_ray *));
     if (!ray)
         return (NULL);
@@ -43,27 +44,27 @@ t_ray   **feed_ray_tab(t_player_settings *player)
         }
 	}
 	return (ray);
-}
+}*/
 
 
-/*void	print_pixel_low(t_cube *cube, int is_inverted)
+void	print_pixel_low(t_cube *cube, int is_inverted)
 {
 	if (is_inverted == 1)
 		mlx_set_image_pixel(cube->mlx_ptr, cube->img, cube->plotline->x, \
-			cube->plotline->y, 0xFFFFFFFF);
+			cube->plotline->y, 0xFFFF0000);
 	else
 		mlx_set_image_pixel(cube->mlx_ptr, cube->img, cube->plotline->x, \
-			cube->plotline->y, 0xFFFFFFFF);
+			cube->plotline->y, 0xFFFF0000);
 }
 
 void	print_pixel_high(t_cube *cube, int is_inverted)
 {
 	if (is_inverted == 1)
 		mlx_set_image_pixel(cube->mlx_ptr, cube->img, cube->plotline->x, \
-			cube->plotline->y, 0xFFFFFFFF);
+			cube->plotline->y, 0xFFFF0000);
 	else
 		mlx_set_image_pixel(cube->mlx_ptr, cube->img, cube->plotline->x, \
-			cube->plotline->y, 0xFFFFFFFF);
+			cube->plotline->y, 0xFFFF0000);
 }
 
 void	plotline_low(t_cube *cube, t_point point1, t_point point2, int is_inverted)
@@ -149,4 +150,4 @@ void	plotline(t_cube *cube, t_point point2, t_point point1)
 			plotline_high(cube, point2, point1, is_inverted);
 		}
 	}
-}*/
+}

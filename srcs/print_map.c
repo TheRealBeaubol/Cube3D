@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/04 11:47:13 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:51:07 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	is_in_wall(t_cube *cube)
 		y = 0;
 		while (y < cube->map->player_size)
 		{
-			i = (cube->player_settings->pos_y + y - (HEIGHT - cube->map->size_case * cube->map->height) / 2) / cube->map->size_case;
-			j = (cube->player_settings->pos_x + x - (WIDTH - cube->map->size_case * cube->map->width) / 2) / cube->map->size_case;
+			i = (cube->player_settings->pos.y + y - (HEIGHT - cube->map->size_case * cube->map->height) / 2) / cube->map->size_case;
+			j = (cube->player_settings->pos.x + x - (WIDTH - cube->map->size_case * cube->map->width) / 2) / cube->map->size_case;
 			if (cube->map->map[i][j] == '1')
 				return (1);
 			y++;
@@ -59,6 +59,18 @@ int	is_in_wall(t_cube *cube)
 	return (0);
 }
 
+void	print_ray(t_cube *cube)
+{
+	cube->player_settings->ray = ft_calloc(1, sizeof(t_ray));
+	cube->player_settings->ray->coor.x = cube->player_settings->pos.x + cube->player_settings->dir_x * 5;
+	cube->player_settings->ray->coor.y = cube->player_settings->pos.y + cube->player_settings->dir_y * 5;
+	cube->player_settings->pos.x += cube->map->player_size / 2;
+	cube->player_settings->pos.y += cube->map->player_size / 2;
+	plotline(cube, cube->player_settings->ray->coor, cube->player_settings->pos);	
+	cube->player_settings->pos.x -= cube->map->player_size / 2;
+	cube->player_settings->pos.y -= cube->map->player_size / 2;
+}
+
 void	print_player(t_cube *cube, int color)
 {
 	int	dx;
@@ -66,14 +78,12 @@ void	print_player(t_cube *cube, int color)
 	int	px;
 	int	py;
 
-	cube->player_settings->pos_x += cube->player_settings->dir_x;
-	cube->player_settings->pos_y += cube->player_settings->dir_y;
-	px = cube->player_settings->pos_x;
-	py = cube->player_settings->pos_y;
+	px = cube->player_settings->pos.x;
+	py = cube->player_settings->pos.y;
 	if (is_in_wall(cube))
 	{
-		cube->player_settings->pos_x -= cube->player_settings->dir_x;
-		cube->player_settings->pos_y -= cube->player_settings->dir_y;
+		cube->player_settings->pos.x -= cube->player_settings->dir_x;
+		cube->player_settings->pos.y -= cube->player_settings->dir_y;
 		px -= cube->player_settings->dir_x;
 		py -= cube->player_settings->dir_y;
 	}
@@ -84,14 +94,13 @@ void	print_player(t_cube *cube, int color)
 		while (++dy < cube->map->player_size)
 			mlx_set_image_pixel(cube->mlx_ptr, cube->img, px + dx, py + dy, color);
 	}
-	cube->player_settings->dir_x = 0;
-	cube->player_settings->dir_y = 0;
+	print_ray(cube);
 }
 
 void	set_player(t_cube *cube, int x, int y)
 {
-	cube->player_settings->pos_x = x + 20;
-	cube->player_settings->pos_y = y + 20;
+	cube->player_settings->pos.x = x + 20;
+	cube->player_settings->pos.y = y + 20;
 }
 
 /*void	print_ray(t_cube *cube, int x, int y)
@@ -105,6 +114,7 @@ void	print_view(t_cube *cube, int x, int y)
 	
 	plane = 0;
 	cube->player_settings->ray->dirX = 200;
+	
 	cube->player_settings->ray->dirY = 200;
 	i = -1;
 	while (++i < cube->player_settings->ray_nb)
@@ -123,7 +133,7 @@ void	print_pixel(t_cube *cube, char pixel, int x, int y)
 		print_global_pixel(cube, x, y, 0xFF0000FF);
 	else if (pixel == '0')
 		print_global_pixel(cube, x, y, 0xFFFFFFFF);
-	else if (pixel == 'P' && b)
+	else if (pixel == 'N' && b)
 	{
 		b = 0;
 		print_global_pixel(cube, x, y, 0xFFFFFFFF);
@@ -135,7 +145,7 @@ void	print_pixel(t_cube *cube, char pixel, int x, int y)
 
 void	print_map(char **map, t_cube *cube)
 {
-	int	i;
+		int	i;
 	int	j;
 	int	x;
 	int	y;
