@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/30 15:54:50 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/04 10:23:50 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,11 @@ typedef struct s_settings_menu
 
 typedef struct s_ray
 {
-	int	dirx;
-	int	diry;
-	int	ray_nb;
-	int	planex;
-	int	planey;
+	int		x;
+	int		y;
+	int		angle;
+	float	len;
+	float	wall_height;
 }	t_ray;
 
 typedef struct s_menu
@@ -140,14 +140,16 @@ typedef struct s_player_settings
 	int		pos_y;
 	int		dir_x;
 	int		dir_y;
-	t_ray	ray;
+	int		looking_angle;
+	int		fov;
+	t_ray	**ray;
 }	t_player_settings;
 
 typedef struct s_map
 {
 	char	**map;
-	int		size_x;
-	int		size_y;
+	int		height;
+	int		width;
 	int		size_case;
 	int		player_size;
 }	t_map;

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:42 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/17 22:37:36 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/02 21:36:44 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DEFINE_H
 
 # include "libft.h"
+# include <math.h>
 # include "mlx.h"
 # include "mlx_profile.h"
 
@@ -57,7 +58,7 @@
 # define KEY_8          37
 # define KEY_9          38
 # define KEY_0          39
-# define TAB			43
+# define TAB            43
 # define SPACE          44
 # define ARROW_RIGHT	79
 # define ARROW_LEFT	 	80

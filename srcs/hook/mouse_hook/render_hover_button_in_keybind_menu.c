@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_hover_button_in_settings_menu.c             :+:      :+:    :+:   */
+/*   render_hover_button_in_keybind_menu.c              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:18:17 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/30 15:19:43 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/02 22:18:09 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,5 @@ keys_image, 671, 530);
 	keys_image = get_key_images(cube, cube->player_settings->move_right);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, \
 keys_image, 671, 599);
+	edit_settings_file(cube);
 }
