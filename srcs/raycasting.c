@@ -6,148 +6,141 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:11:15 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/04 10:36:05 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/04 10:49:00 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	is_wall(t_cube *cube, int i)
+t_ray   **feed_ray_tab(t_player_settings *player)
 {
-	int	i;
-	int	j;
-
-	i = (cube->player_settings->ray[i]->y - (HEIGHT - cube->map->size_case * cube->map->height) / 2) / cube->map->size_case;
-	j = (cube->player_settings->pos_x - (WIDTH - cube->map->size_case * cube->map->width) / 2) / cube->map->size_case;
-	if (cube->map->map[i][j] == '1')
-		return (1);
-	return (0);
+    t_ray   **ray;
+    int i;
+	
+	player->fov = 80;
+	player->looking_angle = 90;
+    ray = ft_calloc(player->fov, sizeof(t_ray));
+    if (!ray)
+        return (NULL);
+    i = 0;
+    ray[i]->angle = player->looking_angle;
+    while (++i < player->fov)
+    {
+        if (ray[i - 1]->angle < 90)
+            ray[i]->angle = ray[i - 1]->angle - 1;
+        else
+        {
+            if (player->looking_angle + player->fov / 2 == ray[i - 1]->angle)
+                ray[i]->angle = player->looking_angle - 1;
+            else
+                ray[i]->angle = ray[i - 1]->angle + 1;       
+        }
+	}
+	return (ray);
 }
 
-char	*get_direction(t_cube *cube)
-{
-	int	dirx;
-	int	diry;
 
-	dirx = cube->player_settings->ray[0]->x - cube->player_settings->pos_x;
-	diry = cube->player_settings->ray[0]->y - cube->player_settings->pos_y;
-	if (abs(dirx > abs(diry)))
+/*void	print_pixel_low(t_cube *cube, int is_inverted)
+{
+	if (is_inverted == 1)
+		mlx_set_image_pixel(cube->mlx_ptr, cube->img, cube->plotline->x, \
+			cube->plotline->y, 0xFFFFFFFF);
+	else
+		mlx_set_image_pixel(cube->mlx_ptr, cube->img, cube->plotline->x, \
+			cube->plotline->y, 0xFFFFFFFF);
+}
+
+void	print_pixel_high(t_cube *cube, int is_inverted)
+{
+	if (is_inverted == 1)
+		mlx_set_image_pixel(cube->mlx_ptr, cube->img, cube->plotline->x, \
+			cube->plotline->y, 0xFFFFFFFF);
+	else
+		mlx_set_image_pixel(cube->mlx_ptr, cube->img, cube->plotline->x, \
+			cube->plotline->y, 0xFFFFFFFF);
+}
+
+void	plotline_low(t_cube *cube, t_point point1, t_point point2, int is_inverted)
+{
+	t_plotline	plotline;
+
+	plotline.yi = 1;
+	plotline.dx = point2.x - point1.x;
+	plotline.dy = point2.y - point1.y;
+	if (plotline.dy < 0)
 	{
-		if (dirx > 0)
-			return ("WEST");
+		plotline.yi = -1;
+		plotline.dy *= -1;
+	}
+	plotline.d = (2 * plotline.dy) - plotline.dx;
+	plotline.y = point1.y;
+	plotline.x = point1.x;
+	while (plotline.x <= point2.x)
+	{
+		cube->plotline = &plotline;
+		print_pixel_low(cube, is_inverted);
+		if (plotline.d > 0)
+		{
+			plotline.y += plotline.yi;
+			plotline.d += -2 * plotline.dx;
+		}
+		plotline.d += 2 * plotline.dy;
+		plotline.x++;
+	}
+}
+
+void	plotline_high(t_cube *cube, t_point point1, t_point point2, int is_inverted)
+{
+	t_plotline	plotline;
+
+	plotline.dx = point2.x - point1.x;
+	plotline.dy = point2.y - point1.y;
+	plotline.xi = 1;
+	if (plotline.dx < 0)
+	{
+		plotline.xi = -1;
+		plotline.dx *= -1;
+	}
+	plotline.d = (2 * plotline.dx) - plotline.dy;
+	plotline.x = point1.x;
+	plotline.y = point1.y;
+	while (plotline.y <= point2.y)
+	{
+		cube->plotline = &plotline;
+		print_pixel_high(cube, is_inverted);
+		if (plotline.d > 0)
+		{
+			plotline.x += plotline.xi;
+			plotline.d += -2 * plotline.dy;
+		}
+		plotline.d += 2 * plotline.dx;
+		plotline.y++;
+	}
+}
+
+void	plotline(t_cube *cube, t_point point2, t_point point1)
+{
+    int is_inverted;
+
+    is_inverted = 0;
+	if (abs((int)point2.y - (int)point1.y) < abs((int)point2.x - (int)point1.x))
+	{
+		if ((point2.x - point1.x) > 0)
+			plotline_low(cube, point1, point2, is_inverted);
 		else
-			return ("EAST");
+		{
+			is_inverted = 1;
+			plotline_low(cube, point2, point1, is_inverted);
+		}
 	}
-	else if (abs(dirx <= abs(diry)))
+	else
 	{
-		if (diry > 0)
-			return ("NORTH");
+		if ((point2.y - point1.y) > 0)
+			plotline_high(cube, point1, point2, is_inverted);
 		else
-			return ("SOUTH");
+		{
+	        is_inverted = 1;
+			plotline_high(cube, point2, point1, is_inverted);
+		}
 	}
-}
-
-void	check_ray_north(t_cube *cube, int i)
-{
-	int	ox;
-	int	oy;
-
-	cube->player_settings->ray[i]->y = cube->player_settings->pos_y + cube->map->size_case;
-	cube->player_settings->ray[i]->x = (cube->player_settings->pos_y - cube->player_settings->ray[i]->y) / -tan(cube->player_settings->looking_angle) + cube->player_settings->pos_x;
-	oy = 50;
-	ox = oy * tan(cube->player_settings->looking_angle);
-	while (!is_wall(cube, i))
-	{
-		cube->player_settings->ray[i]->y += oy;
-		cube->player_settings->ray[i]->x += ox;
-	}
-}
-
-void	check_ray_south(t_cube *cube, int i)
-{
-	int	ox;
-	int	oy;
-
-	cube->player_settings->ray[i]->y = cube->player_settings->pos_y - cube->map->size_case;
-	cube->player_settings->ray[i]->x = (cube->player_settings->pos_y - cube->player_settings->ray[i]->y) / -tan(cube->player_settings->looking_angle) + cube->player_settings->pos_x;
-	oy = 50;
-	ox = oy * tan(cube->player_settings->looking_angle);
-	while (!is_wall(cube, i))
-	{
-		cube->player_settings->ray[i]->y += oy;
-		cube->player_settings->ray[i]->x += ox;
-	}
-}
-
-void	check_ray_west(t_cube *cube, int i)
-{
-	int	ox;
-	int	oy;
-
-	cube->player_settings->ray[i]->x = cube->player_settings->pos_x + cube->map->size_case;
-	cube->player_settings->ray[i]->y = (cube->player_settings->pos_x - cube->player_settings->ray[i]->x) / -tan(cube->player_settings->looking_angle) + cube->player_settings->pos_y;
-	oy = 50;
-	ox = oy * tan(cube->player_settings->looking_angle);
-	while (!is_wall(cube, i))
-	{
-		cube->player_settings->ray[i]->y += oy;
-		cube->player_settings->ray[i]->x += ox;
-	}
-}
-
-void	check_ray_east(t_cube *cube, int i)
-{
-	int	ox;
-	int	oy;
-
-	cube->player_settings->ray[i]->x = cube->player_settings->pos_x - cube->map->size_case;
-	cube->player_settings->ray[i]->y = (cube->player_settings->pos_x - cube->player_settings->ray[i]->x) / -tan(cube->player_settings->looking_angle) + cube->player_settings->pos_y;
-	oy = 50;
-	ox = oy * tan(cube->player_settings->looking_angle);
-	while (!is_wall(cube, i))
-	{
-		cube->player_settings->ray[i]->y += oy;
-		cube->player_settings->ray[i]->x += ox;
-	}
-}
-
-void	drawing_wall(t_cube *cube)
-{
-	int	i;
-	int	j;
-	int	begin;
-	int	end;
-
-	i = -1;
-	while (cube->player_settings->ray[++i])
-	{
-		cube->player_settings->ray[i]->len = sqrt(powf(cube->player_settings->ray[i]->x - cube->player_settings->pos_x, 2) + powf(cube->player_settings->ray[i]->y - cube->player_settings->pos_y, 2));
-		
-		cube->player_settings->ray[i]->wall_height = (cube->map->size_case * HEIGHT) / cube->player_settings->ray[i]->len;
-		begin = (HEIGHT / 2) - cube->player_settings->ray[i]->wall_height;
-		end = (HEIGHT / 2) + cube->player_settings->ray[i]->wall_height;
-		j = begin - 1;
-		while(++j < end);
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, j, 0xFFCACAFF);
-	}
-}
-
-void	search_looking(t_cube *cube)
-{
-	int	i;
-
-	i = -1;
-	init_ray(cube);
-	while (cube->player_settings->ray[++i])
-	{
-		if (ft_strncmp(get_direction(cube), "NORTH", 5))
-			check_ray_north(cube, i);
-		if (ft_strncmp(get_direction(cube), "SOUTH", 5))
-			check_ray_south(cube, i);
-		if (ft_strncmp(get_direction(cube), "WEST", 4))
-			check_ray_west(cube, i);
-		if (ft_strncmp(get_direction(cube), "EAST", 4))
-			check_ray_east(cube, i);
-	}
-	drawing_wall(cube);
-}
+}*/
