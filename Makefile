@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/06/02 22:48:16 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/06/04 11:26:44 by mhervoch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRCS	= 	main.c \
 				settings.c \
 				print_map.c \
 				raycasting.c \
+				raycasting_2.c \
 
 SRCS_DIR	:=	srcs
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
@@ -118,6 +119,6 @@ runfclean: clean
 	$(RM) $(NAME)
 
 run: runfclean $(NAME)
-		@./$(NAME) map.txt
+		@./$(NAME) map.cub
 
 .PHONY:	re fclean all clean

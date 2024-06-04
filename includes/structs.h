@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/04 09:31:30 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:36:36 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,11 @@ typedef struct s_settings_menu
 
 typedef struct s_ray
 {
-	int	x;
-	int	y;
-	int	angle;
+	int		x;
+	int		y;
+	double	angle;
+	float	len;
+	float	wall_height;
 }	t_ray;
 
 typedef struct s_menu
@@ -152,26 +154,6 @@ typedef struct s_map
 	int		player_size;
 }	t_map;
 
-typedef struct s_point
-{
-	double	x;
-	double	y;
-	int		z;
-	int		color;
-}	t_point;
-
-typedef struct s_plotline
-{
-	int		is_inverted;
-	int		dx;
-	int		dy;
-	int		yi;
-	int		xi;
-	int		d;
-	double	y;
-	double	x;
-}	t_plotline;
-
 typedef struct s_cube
 {
 	void				*mlx_ptr;
@@ -184,7 +166,6 @@ typedef struct s_cube
 	char				*map_name;
 	int					start_x;
 	int					start_y;
-	t_plotline			*plotline;
 }	t_cube;
 
 #endif

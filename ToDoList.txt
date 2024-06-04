@@ -37,7 +37,7 @@
 
         Bonus :
 
-✅  Add collisions
+❌  Add collisions
 ✅  Add a minimap system
 ❌  Doors which can open and close
 ❌  Animated sprite
