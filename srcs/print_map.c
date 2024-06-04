@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/05/31 17:43:08 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/04 10:25:57 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	is_in_wall(t_cube *cube)
 	y = 0;
 	while (x < cube->map->player_size)
 	{
-		j = (cube->player_settings->pos_x + x - WIDTH / 2 + cube->map->size_case * 7 / 2) / cube->map->size_case;
 		y = 0;
 		while (y < cube->map->player_size)
 		{

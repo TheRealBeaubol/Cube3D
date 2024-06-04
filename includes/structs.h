@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/02 18:13:54 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/04 09:31:30 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,9 @@ typedef struct s_settings_menu
 
 typedef struct s_ray
 {
-	int	dirx;
-	int	diry;
-	int	ray_nb;
-	int	planex;
-	int	planey;
+	int	x;
+	int	y;
+	int	angle;
 }	t_ray;
 
 typedef struct s_menu
@@ -140,7 +138,9 @@ typedef struct s_player_settings
 	int		pos_y;
 	int		dir_x;
 	int		dir_y;
-	t_ray	ray;
+	int		looking_angle;
+	int		fov;
+	t_ray	**ray;
 }	t_player_settings;
 
 typedef struct s_map
@@ -151,6 +151,26 @@ typedef struct s_map
 	int		size_case;
 	int		player_size;
 }	t_map;
+
+typedef struct s_point
+{
+	double	x;
+	double	y;
+	int		z;
+	int		color;
+}	t_point;
+
+typedef struct s_plotline
+{
+	int		is_inverted;
+	int		dx;
+	int		dy;
+	int		yi;
+	int		xi;
+	int		d;
+	double	y;
+	double	x;
+}	t_plotline;
 
 typedef struct s_cube
 {
@@ -164,6 +184,7 @@ typedef struct s_cube
 	char				*map_name;
 	int					start_x;
 	int					start_y;
+	t_plotline			*plotline;
 }	t_cube;
 
 #endif
