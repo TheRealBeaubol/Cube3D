@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/02 22:50:09 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/04 10:46:08 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,7 @@ void			open_music_and_sounds_menu(t_cube *cube);
 void			*get_key_images(t_cube *cube, int key);
 void			print_map(char **map, t_cube *cube);
 char			**parsing(t_map *map, char *file);
+t_ray   		**feed_ray_tab(t_player_settings *player);
+void			search_looking(t_cube *cube);
 
 #endif
