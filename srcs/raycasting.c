@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:11:15 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/04 11:38:26 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:51:02 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_ray   **feed_ray_tab(t_player_settings *player)
     int i;
 	
 	player->fov = 80;
-	player->looking_angle = 90;
     ray = ft_calloc(player->fov, sizeof(t_ray *));
     if (!ray)
         return (NULL);

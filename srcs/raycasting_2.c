@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:11:15 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/04 11:39:03 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:59:40 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@ int	is_wall(t_cube *cube, int n)
 	int	i;
 	int	j;
 
-	i = (cube->player_settings->ray[n]->y - (HEIGHT - cube->map->size_case * cube->map->height) / 2) / cube->map->size_case;
-	j = (cube->player_settings->ray[n]->x - (WIDTH - cube->map->size_case * cube->map->width) / 2) / cube->map->size_case;
+	i = (cube->player_settings->ray[n]->y / cube->map->size_case);
+	j = (cube->player_settings->ray[n]->x / cube->map->size_case);
+	ft_printf("i = %d\n", i);
+	ft_printf("j = %d\n", j);
+	ft_printf("cube->player_settings->ray[n]->y = %d\n", cube->player_settings->ray[n]->y);
+	ft_printf("cube->player_settings->ray[n]->x = %d\n", cube->player_settings->ray[n]->x);
 	if (cube->map->map[i][j] == '1')
 		return (1);
 	return (0);
@@ -45,7 +49,7 @@ char	*get_direction(t_cube *cube)
 		else
 			return ("SOUTH");
 	}
-	return ("CACA");
+	return (NULL);
 }
 
 void	check_ray_north(t_cube *cube, int i)
@@ -55,6 +59,8 @@ void	check_ray_north(t_cube *cube, int i)
 
 	cube->player_settings->ray[i]->y = cube->player_settings->pos_y + cube->map->size_case;
 	cube->player_settings->ray[i]->x = (cube->player_settings->pos_y - cube->player_settings->ray[i]->y) / -tan(cube->player_settings->looking_angle) + cube->player_settings->pos_x;
+	ft_printf("cube->player_settings->ray[i]->y = %d\n", cube->player_settings->ray[i]->y);
+	ft_printf("cube->player_settings->ray[i]->x = %d\n", cube->player_settings->ray[i]->x);
 	oy = 50;
 	ox = oy * tan(cube->player_settings->looking_angle);
 	while (!is_wall(cube, i))
@@ -133,11 +139,40 @@ void	drawing_wall(t_cube *cube)
 	}
 }
 
+void	find_player(t_cube *cube)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (cube->map->map[++i])
+	{
+		j = -1;
+		while (cube->map->map[i][++j])
+		{
+			if (cube->map->map[i][j] == 'N' || cube->map->map[i][j] == 'S' || cube->map->map[i][j] == 'W' || cube->map->map[i][j] == 'E')
+			{
+				cube->player_settings->pos_x = j * cube->map->size_case + cube->map->size_case / 2;
+				cube->player_settings->pos_y = i * cube->map->size_case + cube->map->size_case / 2;
+				if (cube->map->map[i][j] == 'N')
+					cube->player_settings->looking_angle = 90;
+				else if (cube->map->map[i][j] == 'S')
+					cube->player_settings->looking_angle = 180;
+				else if (cube->map->map[i][j] == 'W')
+					cube->player_settings->looking_angle = 270;
+				else if (cube->map->map[i][j] == 'E')
+					cube->player_settings->looking_angle = 0;
+			}
+		}
+	}
+}
+
 void	search_looking(t_cube *cube)
 {
 	int	i;
 
 	i = -1;
+	find_player(cube);
 	cube->player_settings->ray = feed_ray_tab(cube->player_settings);
 	while (cube->player_settings->ray[++i])
 	{
