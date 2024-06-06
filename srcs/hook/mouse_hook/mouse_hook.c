@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/30 14:57:37 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:40:16 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,43 @@ y > 480 && y < 600);
 	cube->menu->exit_button_status = (x > 780 && x < 1135 && \
 y > 680 && y < 800);
 }
+#include <stdio.h>
+void	handle_mouse_in_game(t_cube *cube, int x, int y)
+{
+	static int		x_old = 0;
+	static double	ratio = 0;
+
+		mlx_mouse_hide();
+	if (!x_old)
+		x_old = x;
+	else if (x == 0)
+	{
+		mlx_mouse_move(cube->mlx_ptr, cube->window_ptr, WIDTH / 2, HEIGHT / 2);
+		x_old = 0;
+	}
+	else if (x == WIDTH - 1)
+	{
+		mlx_mouse_move(cube->mlx_ptr, cube->window_ptr, WIDTH / 2, HEIGHT / 2);
+		x_old = WIDTH - 1;
+	}
+	else if (x_old != x)
+	{
+		if (x_old != 0 && x_old != WIDTH - 1)
+			ratio = (double)(x - x_old) / 100;
+		ft_printf("x = %d\n", x);
+		ft_printf("x_old = %d\n", x_old);
+		cube->player_settings->looking_angle += ratio * 0.25;
+		if (cube->player_settings->looking_angle > 2 * PI)
+			cube->player_settings->looking_angle -= 2 * PI;
+		if (cube->player_settings->looking_angle < 0)
+			cube->player_settings->looking_angle += 2 * PI;
+		cube->player_settings->dir_x = cos(cube->player_settings->looking_angle) * 5;
+		cube->player_settings->dir_y = sin(cube->player_settings->looking_angle) * 5;
+		x_old = x;
+	}
+	(void)y;
+	print_map(cube->map->map, cube);
+}
 
 int	mouse_move(void *cube_void)
 {
@@ -75,6 +112,8 @@ int	mouse_move(void *cube_void)
 		handle_mouse_in_settings_menu(cube, x, y);
 	if (cube->menu->settings_menu->is_in_keybinds_menu)
 		handle_mouse_in_keybinds_menu(cube, x, y);
+	if (cube->is_in_game)
+		handle_mouse_in_game(cube, x, y);
 	render_hover_button(cube);
 	return (0);
 }

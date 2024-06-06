@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/06 15:28:41 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:52:22 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	is_in_wall(t_cube *cube)
 }
 
 #include <stdio.h>
+
 t_point	get_hit_pos(t_cube *cube, t_ray *ray)
 {
 	t_point	hit_pos;
@@ -83,29 +84,42 @@ t_point	get_hit_pos(t_cube *cube, t_ray *ray)
 	return (hit_pos);
 }
 
+void	free_ray(t_ray **ray, int size)
+{
+	int	i;
+
+	i = -1;
+	(void) size;
+	if (!ray)
+		return ;
+	while (ray[++i])
+		free(ray[i]);
+	free(ray);
+}
+
 t_ray	**init_ray(t_cube *cube)
 {
 	t_ray	**ray;
 	int		i;
 	
-	ray = ft_calloc(cube->player_settings->fov / WIDTH, sizeof(t_ray));
+	free_ray(cube->player_settings->ray, cube->player_settings->fov + 1);
+	ray = ft_calloc(cube->player_settings->fov + 1, sizeof(t_ray *));
 	if (!ray)
 		return (NULL);
 	i = -1;
-	while (++i < cube->player_settings->fov / WIDTH)
+	while (++i < cube->player_settings->fov)
 	{
 		ray[i] = ft_calloc(1, sizeof(t_ray));
 		if (!ray[i])
 			return (NULL);
 	}
 	i = 0;
-	ft_printf("%d\n", cube->player_settings->looking_angle);
 	ray[0]->angle = cube->player_settings->looking_angle;
 	ray[0]->dir_x = cube->player_settings->dir_x;
 	ray[0]->dir_y = cube->player_settings->dir_y;
 	ray[0]->coor = cube->player_settings->pos;
 	ray[0]->coor = get_hit_pos(cube, ray[0]);
-	while (++i, cube->player_settings->fov / WIDTH)
+	while (ray[++i])
 	{
 		ray[i]->angle = ray[i - 1]->angle + 0.1;
 		if (ray[i]->angle > 2 * PI)
@@ -123,17 +137,13 @@ void	plotray(t_cube *cube)
 	int	i;
 
 	i = -1;
-	while (++i < cube->player_settings->fov / WIDTH)
+	while (++i < cube->player_settings->fov)
 		plotline(cube, cube->player_settings->ray[i]->coor, cube->player_settings->pos);
 }
 
 void	print_ray(t_cube *cube)
 {
-	ft_printf("angle: %d\n", cube->player_settings->looking_angle);
 	cube->player_settings->ray = init_ray(cube);
-	// cube->player_settings->ray->coor.x = cube->player_settings->pos.x + cube->player_settings->dir_x * 50;
-	// cube->player_settings->ray->coor.y = cube->player_settings->pos.y + cube->player_settings->dir_y * 50;
-	printf("dir x = %f, dir y = %f\n", cube->player_settings->dir_x, cube->player_settings->dir_y);
 	cube->player_settings->pos.x += cube->map->player_size / 2;
 	cube->player_settings->pos.y += cube->map->player_size / 2;
 	plotray(cube);
@@ -152,10 +162,34 @@ void	print_player(t_cube *cube, int color)
 	py = cube->player_settings->pos.y;
 	if (is_in_wall(cube))
 	{
-		cube->player_settings->pos.x -= cube->player_settings->dir_x;
-		cube->player_settings->pos.y -= cube->player_settings->dir_y;
-		px -= cube->player_settings->dir_x;
-		py -= cube->player_settings->dir_y;
+		if (cube->player_settings->move == 1)
+		{
+			cube->player_settings->pos.x += cube->player_settings->dir_x;
+			cube->player_settings->pos.y += cube->player_settings->dir_y;
+			px += cube->player_settings->dir_x;
+			py += cube->player_settings->dir_y;
+		}
+		else if (cube->player_settings->move == 0)
+		{
+			cube->player_settings->pos.x -= cube->player_settings->dir_x;
+			cube->player_settings->pos.y -= cube->player_settings->dir_y;
+			px -= cube->player_settings->dir_x;
+			py -= cube->player_settings->dir_y;
+		}
+		else if (cube->player_settings->move == 2)
+		{
+			cube->player_settings->pos.x -= cube->player_settings->dir_y;
+			cube->player_settings->pos.y += cube->player_settings->dir_x;
+			px -= cube->player_settings->dir_y;
+			py += cube->player_settings->dir_x;
+		}
+		else if (cube->player_settings->move == 3)
+		{
+			cube->player_settings->pos.x += cube->player_settings->dir_y;
+			cube->player_settings->pos.y -= cube->player_settings->dir_x;
+			px += cube->player_settings->dir_y;
+			py -= cube->player_settings->dir_x;
+		}
 	}
 	dx = -1;
 	while (++dx < cube->map->player_size)

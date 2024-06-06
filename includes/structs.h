@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/06 14:50:57 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:25:54 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ typedef struct s_ray
 	float	angle;
 	double	dir_x;
 	double	dir_y;
-	//float	wall_height;
 }	t_ray;
 
 typedef struct s_menu
@@ -147,6 +146,14 @@ typedef struct s_menu
 	t_settings_menu	*settings_menu;
 }	t_menu;
 
+typedef enum e_move
+{
+	FORWARD,
+	BACKWARD,
+	LEFT,
+	RIGHT
+}	e_move;
+
 typedef struct s_player_settings
 {
 	int		move_forward;
@@ -154,6 +161,7 @@ typedef struct s_player_settings
 	int		move_left;
 	int		move_right;
 	t_point	pos;
+	e_move	move;
 	double	dir_x;
 	double	dir_y;
 	float	looking_angle;
