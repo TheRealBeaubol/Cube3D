@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/04 14:51:07 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:36:30 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,36 @@ int	is_in_wall(t_cube *cube)
 	return (0);
 }
 
+#include <stdio.h>
+t_point	get_hit_pos(t_cube *cube)
+{
+	t_point	hit_pos;
+	int		x;
+	int		y;
+
+	hit_pos.x = cube->player_settings->pos.x;
+	hit_pos.y = cube->player_settings->pos.y;
+	x = (hit_pos.x - (WIDTH - cube->map->size_case * cube->map->width) / 2) / cube->map->size_case;
+	y = (hit_pos.y - (HEIGHT - cube->map->size_case * cube->map->height) / 2) / cube->map->size_case;
+	while (cube->map->map[y][x] != '1')
+	{
+		x = (hit_pos.x - (WIDTH - cube->map->size_case * cube->map->width) / 2) / cube->map->size_case;
+		y = (hit_pos.y - (HEIGHT - cube->map->size_case * cube->map->height) / 2) / cube->map->size_case;
+		if (cube->map->map[y][x] != '1')
+		{
+			hit_pos.x += cube->player_settings->dir_x;
+			hit_pos.y += cube->player_settings->dir_y;
+		}
+	}
+	return (hit_pos);
+}
 void	print_ray(t_cube *cube)
 {
 	cube->player_settings->ray = ft_calloc(1, sizeof(t_ray));
-	cube->player_settings->ray->coor.x = cube->player_settings->pos.x + cube->player_settings->dir_x * 5;
-	cube->player_settings->ray->coor.y = cube->player_settings->pos.y + cube->player_settings->dir_y * 5;
+	// cube->player_settings->ray->coor.x = cube->player_settings->pos.x + cube->player_settings->dir_x * 50;
+	// cube->player_settings->ray->coor.y = cube->player_settings->pos.y + cube->player_settings->dir_y * 50;
+	printf("dir x = %f, dir y = %f\n", cube->player_settings->dir_x, cube->player_settings->dir_y);
+	cube->player_settings->ray->coor = get_hit_pos(cube);
 	cube->player_settings->pos.x += cube->map->player_size / 2;
 	cube->player_settings->pos.y += cube->map->player_size / 2;
 	plotline(cube, cube->player_settings->ray->coor, cube->player_settings->pos);	

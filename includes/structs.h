@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/04 14:31:26 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/06 12:09:56 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,8 @@ typedef struct s_player_settings
 	int		move_left;
 	int		move_right;
 	t_point	pos;
-	float	dir_x;
-	float	dir_y;
+	double	dir_x;
+	double	dir_y;
 	float	looking_angle;
 	int		fov;
 	t_ray	*ray;
