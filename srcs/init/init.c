@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/06 15:22:55 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:43:15 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ t_player_settings	*init_player_settings(void)
 	init_player_binds(settings);
 	settings->dir_x = 1;
 	settings->dir_y = 0;
+	settings->fov = 8;
 	settings->looking_angle = PI / 2;
+	settings->ray = NULL;
 	return (settings);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/06 15:26:08 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:52:22 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,15 @@ int	is_in_wall(t_cube *cube)
 }
 
 #include <stdio.h>
-t_point	get_hit_pos(t_cube *cube)
+
+t_point	get_hit_pos(t_cube *cube, t_ray *ray)
 {
 	t_point	hit_pos;
 	int		x;
 	int		y;
 
-	hit_pos.x = cube->player_settings->pos.x;
-	hit_pos.y = cube->player_settings->pos.y;
+	hit_pos.x = ray->coor.x;
+	hit_pos.y = ray->coor.y;
 	x = (hit_pos.x - (WIDTH - cube->map->size_case * cube->map->width) / 2) / cube->map->size_case;
 	y = (hit_pos.y - (HEIGHT - cube->map->size_case * cube->map->height) / 2) / cube->map->size_case;
 	while (cube->map->map[y][x] != '1')
@@ -76,20 +77,76 @@ t_point	get_hit_pos(t_cube *cube)
 		y = (hit_pos.y - (HEIGHT - cube->map->size_case * cube->map->height) / 2) / cube->map->size_case;
 		if (cube->map->map[y][x] != '1')
 		{
-			hit_pos.x += cube->player_settings->dir_x;
-			hit_pos.y += cube->player_settings->dir_y;
+			hit_pos.x += ray->dir_x;
+			hit_pos.y += ray->dir_y;
 		}
 	}
 	return (hit_pos);
 }
+
+void	free_ray(t_ray **ray, int size)
+{
+	int	i;
+
+	i = -1;
+	(void) size;
+	if (!ray)
+		return ;
+	while (ray[++i])
+		free(ray[i]);
+	free(ray);
+}
+
+t_ray	**init_ray(t_cube *cube)
+{
+	t_ray	**ray;
+	int		i;
+	
+	free_ray(cube->player_settings->ray, cube->player_settings->fov + 1);
+	ray = ft_calloc(cube->player_settings->fov + 1, sizeof(t_ray *));
+	if (!ray)
+		return (NULL);
+	i = -1;
+	while (++i < cube->player_settings->fov)
+	{
+		ray[i] = ft_calloc(1, sizeof(t_ray));
+		if (!ray[i])
+			return (NULL);
+	}
+	i = 0;
+	ray[0]->angle = cube->player_settings->looking_angle;
+	ray[0]->dir_x = cube->player_settings->dir_x;
+	ray[0]->dir_y = cube->player_settings->dir_y;
+	ray[0]->coor = cube->player_settings->pos;
+	ray[0]->coor = get_hit_pos(cube, ray[0]);
+	while (ray[++i])
+	{
+		ray[i]->angle = ray[i - 1]->angle + 0.1;
+		if (ray[i]->angle > 2 * PI)
+			ray[i]->angle -= 2 * PI;
+		ray[i]->dir_x = cos(ray[i - 1]->angle) * 5;
+		ray[i]->dir_y = sin(ray[i - 1]->angle) * 5;
+		ray[i]->coor = cube->player_settings->pos;
+		ray[i]->coor = get_hit_pos(cube, ray[i]);
+	}
+	return (ray);
+}
+
+void	plotray(t_cube *cube)
+{
+	int	i;
+
+	i = -1;
+	while (++i < cube->player_settings->fov)
+		plotline(cube, cube->player_settings->ray[i]->coor, cube->player_settings->pos);
+}
+
 void	print_ray(t_cube *cube)
 {
-	cube->player_settings->ray = ft_calloc(1, sizeof(t_ray));
-	printf("CACA cube->player_settings->looking_angle = %f\n", cube->player_settings->looking_angle);
-	cube->player_settings->ray->coor = get_hit_pos(cube);
+	cube->player_settings->ray = init_ray(cube);
 	cube->player_settings->pos.x += cube->map->player_size / 2;
 	cube->player_settings->pos.y += cube->map->player_size / 2;
-	plotline(cube, cube->player_settings->ray->coor, cube->player_settings->pos);	
+	plotray(cube);
 	cube->player_settings->pos.x -= cube->map->player_size / 2;
 	cube->player_settings->pos.y -= cube->map->player_size / 2;
 }
