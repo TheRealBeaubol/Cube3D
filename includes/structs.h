@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/04 14:31:26 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:50:57 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,9 @@ typedef struct s_plotline
 typedef struct s_ray
 {
 	t_point	coor;
-	//double	angle;
-	//float	len;
+	float	angle;
+	double	dir_x;
+	double	dir_y;
 	//float	wall_height;
 }	t_ray;
 
@@ -153,11 +154,11 @@ typedef struct s_player_settings
 	int		move_left;
 	int		move_right;
 	t_point	pos;
-	float	dir_x;
-	float	dir_y;
+	double	dir_x;
+	double	dir_y;
 	float	looking_angle;
 	int		fov;
-	t_ray	*ray;
+	t_ray	**ray;
 }	t_player_settings;
 
 typedef struct s_map
