@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/06 13:36:30 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:26:08 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,7 @@ t_point	get_hit_pos(t_cube *cube)
 void	print_ray(t_cube *cube)
 {
 	cube->player_settings->ray = ft_calloc(1, sizeof(t_ray));
-	// cube->player_settings->ray->coor.x = cube->player_settings->pos.x + cube->player_settings->dir_x * 50;
-	// cube->player_settings->ray->coor.y = cube->player_settings->pos.y + cube->player_settings->dir_y * 50;
-	printf("dir x = %f, dir y = %f\n", cube->player_settings->dir_x, cube->player_settings->dir_y);
+	printf("CACA cube->player_settings->looking_angle = %f\n", cube->player_settings->looking_angle);
 	cube->player_settings->ray->coor = get_hit_pos(cube);
 	cube->player_settings->pos.x += cube->map->player_size / 2;
 	cube->player_settings->pos.y += cube->map->player_size / 2;
@@ -107,10 +105,34 @@ void	print_player(t_cube *cube, int color)
 	py = cube->player_settings->pos.y;
 	if (is_in_wall(cube))
 	{
-		cube->player_settings->pos.x -= cube->player_settings->dir_x;
-		cube->player_settings->pos.y -= cube->player_settings->dir_y;
-		px -= cube->player_settings->dir_x;
-		py -= cube->player_settings->dir_y;
+		if (cube->player_settings->move == 1)
+		{
+			cube->player_settings->pos.x += cube->player_settings->dir_x;
+			cube->player_settings->pos.y += cube->player_settings->dir_y;
+			px += cube->player_settings->dir_x;
+			py += cube->player_settings->dir_y;
+		}
+		else if (cube->player_settings->move == 0)
+		{
+			cube->player_settings->pos.x -= cube->player_settings->dir_x;
+			cube->player_settings->pos.y -= cube->player_settings->dir_y;
+			px -= cube->player_settings->dir_x;
+			py -= cube->player_settings->dir_y;
+		}
+		else if (cube->player_settings->move == 2)
+		{
+			cube->player_settings->pos.x -= cube->player_settings->dir_y;
+			cube->player_settings->pos.y += cube->player_settings->dir_x;
+			px -= cube->player_settings->dir_y;
+			py += cube->player_settings->dir_x;
+		}
+		else if (cube->player_settings->move == 3)
+		{
+			cube->player_settings->pos.x += cube->player_settings->dir_y;
+			cube->player_settings->pos.y -= cube->player_settings->dir_x;
+			px += cube->player_settings->dir_y;
+			py -= cube->player_settings->dir_x;
+		}
 	}
 	dx = -1;
 	while (++dx < cube->map->player_size)
