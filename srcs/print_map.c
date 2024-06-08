@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/06 16:52:22 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/08 17:08:35 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,38 +96,44 @@ void	free_ray(t_ray **ray, int size)
 		free(ray[i]);
 	free(ray);
 }
-
+#include <stdio.h>
 t_ray	**init_ray(t_cube *cube)
 {
 	t_ray	**ray;
 	int		i;
 	
-	free_ray(cube->player_settings->ray, cube->player_settings->fov + 1);
-	ray = ft_calloc(cube->player_settings->fov + 1, sizeof(t_ray *));
+	free_ray(cube->player_settings->ray, WIDTH + 1);
+	ray = ft_calloc(WIDTH + 1, sizeof(t_ray *));
 	if (!ray)
 		return (NULL);
 	i = -1;
-	while (++i < cube->player_settings->fov)
+	while (++i < WIDTH)
 	{
 		ray[i] = ft_calloc(1, sizeof(t_ray));
 		if (!ray[i])
 			return (NULL);
 	}
-	i = 0;
-	ray[0]->angle = cube->player_settings->looking_angle;
-	ray[0]->dir_x = cube->player_settings->dir_x;
-	ray[0]->dir_y = cube->player_settings->dir_y;
-	ray[0]->coor = cube->player_settings->pos;
-	ray[0]->coor = get_hit_pos(cube, ray[0]);
-	while (ray[++i])
+	i = -1;
+	while (++i < WIDTH)
 	{
-		ray[i]->angle = ray[i - 1]->angle + 0.1;
+		if (!i)
+			ray[0]->angle = cube->player_settings->looking_angle;
+		else if (i == WIDTH / 2)
+			ray[i]->angle = cube->player_settings->looking_angle - 0.1;
+		else if (i > WIDTH / 2)
+			ray[i]->angle = ray[i - 1]->angle - 0.1;
+		else
+			ray[i]->angle = ray[i - 1]->angle + 0.1;
 		if (ray[i]->angle > 2 * PI)
 			ray[i]->angle -= 2 * PI;
-		ray[i]->dir_x = cos(ray[i - 1]->angle) * 5;
-		ray[i]->dir_y = sin(ray[i - 1]->angle) * 5;
+		if (ray[i]->angle < 0)
+			ray[i]->angle += 2 * PI;
+		ray[i]->dir_x = cos(ray[i]->angle);
+		ray[i]->dir_y = sin(ray[i]->angle);
 		ray[i]->coor = cube->player_settings->pos;
 		ray[i]->coor = get_hit_pos(cube, ray[i]);
+		ray[i]->distance = sqrt(pow(cube->player_settings->pos.x - ray[i]->coor.x, 2) + pow(cube->player_settings->pos.y - ray[i]->coor.y, 2));
+		printf("ray[%d]->distance : %f\n", i, ray[i]->distance);
 	}
 	return (ray);
 }
@@ -149,6 +155,30 @@ void	print_ray(t_cube *cube)
 	plotray(cube);
 	cube->player_settings->pos.x -= cube->map->player_size / 2;
 	cube->player_settings->pos.y -= cube->map->player_size / 2;
+}
+
+void	draw_wall(t_cube *cube)
+{
+	int	x;
+	int	y;
+	int	start;
+	int	end;
+	
+	x = -1;
+	while (++x < WIDTH)
+	{
+		ft_printf("x : %d\n", x);
+		cube->player_settings->ray[x]->wall_height = (cube->map->size_case * 100) / cube->player_settings->ray[x]->distance;
+		start = 100 / 2 - cube->player_settings->ray[x]->wall_height / 2;
+		end = 100 / 2 + cube->player_settings->ray[x]->wall_height / 2;
+		y = start - 1;
+		while (++y < end)
+		{
+			// ft_printf("y : %d\n", y);
+			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF00FF00);
+			// ft_printf("y : %d\n", y);
+		}
+	}
 }
 
 void	print_player(t_cube *cube, int color)
@@ -199,6 +229,7 @@ void	print_player(t_cube *cube, int color)
 			mlx_set_image_pixel(cube->mlx_ptr, cube->img, px + dx, py + dy, color);
 	}
 	print_ray(cube);
+	draw_wall(cube);
 }
 
 void	set_player(t_cube *cube, int x, int y)

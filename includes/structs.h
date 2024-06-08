@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/06 16:25:54 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:49:45 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ typedef struct s_plotline
 typedef struct s_ray
 {
 	t_point	coor;
+	double	distance;
+	double	wall_height;
 	float	angle;
 	double	dir_x;
 	double	dir_y;

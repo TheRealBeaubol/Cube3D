@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/06 15:40:16 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:49:37 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void	handle_mouse_in_game(t_cube *cube, int x, int y)
 	{
 		if (x_old != 0 && x_old != WIDTH - 1)
 			ratio = (double)(x - x_old) / 100;
-		ft_printf("x = %d\n", x);
-		ft_printf("x_old = %d\n", x_old);
 		cube->player_settings->looking_angle += ratio * 0.25;
 		if (cube->player_settings->looking_angle > 2 * PI)
 			cube->player_settings->looking_angle -= 2 * PI;
