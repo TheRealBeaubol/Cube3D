@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/30 15:54:50 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:49:45 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,31 @@ typedef struct s_settings_menu
 	t_keys_images	*keys_images;
 }	t_settings_menu;
 
+typedef struct s_point
+{
+    double    x;
+    double    y;
+}    t_point;
+
+typedef struct s_plotline
+{
+    int        dx;
+    int        dy;
+    int        yi;
+    int        xi;
+    int        d;
+    double    y;
+    double    x;
+}    t_plotline;
+
 typedef struct s_ray
 {
-	int	dirx;
-	int	diry;
-	int	ray_nb;
-	int	planex;
-	int	planey;
+	t_point	coor;
+	double	distance;
+	double	wall_height;
+	float	angle;
+	double	dir_x;
+	double	dir_y;
 }	t_ray;
 
 typedef struct s_menu
@@ -130,24 +148,34 @@ typedef struct s_menu
 	t_settings_menu	*settings_menu;
 }	t_menu;
 
+typedef enum e_move
+{
+	FORWARD,
+	BACKWARD,
+	LEFT,
+	RIGHT
+}	e_move;
+
 typedef struct s_player_settings
 {
 	int		move_forward;
 	int		move_backward;
 	int		move_left;
 	int		move_right;
-	int		pos_x;
-	int		pos_y;
-	int		dir_x;
-	int		dir_y;
-	t_ray	ray;
+	t_point	pos;
+	e_move	move;
+	double	dir_x;
+	double	dir_y;
+	float	looking_angle;
+	int		fov;
+	t_ray	**ray;
 }	t_player_settings;
 
 typedef struct s_map
 {
 	char	**map;
-	int		size_x;
-	int		size_y;
+	int		height;
+	int		width;
 	int		size_case;
 	int		player_size;
 }	t_map;
@@ -160,6 +188,7 @@ typedef struct s_cube
 	t_menu				*menu;
 	t_player_settings	*player_settings;
 	t_map				*map;
+	t_plotline			*plotline;
 	int					is_in_game;
 	char				*map_name;
 	int					start_x;

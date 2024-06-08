@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/05/30 15:20:34 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/06/04 11:26:44 by mhervoch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,13 @@ SRCS	= 	main.c \
 				exit/exit.c \
 				exit/destroy_images.c \
 				init/init.c \
+				init/init_map.c \
 				init/init_images.c \
 				init/init_images_bis.c \
+				settings_file/get_key_from_line.c \
+				settings_file/get_line_from_key.c \
+				settings_file/edit_file.c \
+				settings_file/utils.c \
 				hook/key_hook/hook.c \
 				hook/key_hook/game_hook.c \
 				hook/key_hook/settings_hook.c \
@@ -62,9 +67,11 @@ SRCS	= 	main.c \
 				hook/mouse_hook/mouse_click.c \
 				hook/mouse_hook/render_hover_button.c \
 				hook/mouse_hook/render_hover_button_in_keybind_menu.c \
+				parsing/parsing.c \
 				settings.c \
-				parsing.c \
 				print_map.c \
+				raycasting.c \
+				raycasting_2.c \
 
 SRCS_DIR	:=	srcs
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
@@ -112,6 +119,6 @@ runfclean: clean
 	$(RM) $(NAME)
 
 run: runfclean $(NAME)
-		@./$(NAME) map.txt
+		@./$(NAME) map.cub
 
 .PHONY:	re fclean all clean
