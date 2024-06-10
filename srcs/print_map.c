@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/08 17:08:35 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/08 18:51:14 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ t_point	get_hit_pos(t_cube *cube, t_ray *ray)
 		{
 			hit_pos.x += ray->dir_x;
 			hit_pos.y += ray->dir_y;
+			// printf("ray->dir_x : %f\n", ray->dir_x);
+			// printf("ray->dir_y : %f\n", ray->dir_y);
 		}
 	}
 	return (hit_pos);
@@ -96,6 +98,7 @@ void	free_ray(t_ray **ray, int size)
 		free(ray[i]);
 	free(ray);
 }
+
 #include <stdio.h>
 t_ray	**init_ray(t_cube *cube)
 {
@@ -128,12 +131,14 @@ t_ray	**init_ray(t_cube *cube)
 			ray[i]->angle -= 2 * PI;
 		if (ray[i]->angle < 0)
 			ray[i]->angle += 2 * PI;
-		ray[i]->dir_x = cos(ray[i]->angle);
-		ray[i]->dir_y = sin(ray[i]->angle);
+		// printf("ray[%d]->angle : %f\n", i, ray[i]->angle);
+		ray[i]->dir_x = cos(cube->player_settings->looking_angle + atan((i - WIDTH / 2) / ((WIDTH / 2) / tan(cube->player_settings->fov * PI / 360))));
+		ray[i]->dir_y = sin(cube->player_settings->looking_angle + atan((i - WIDTH / 2) / ((WIDTH / 2) / tan(cube->player_settings->fov * PI / 360))));
 		ray[i]->coor = cube->player_settings->pos;
 		ray[i]->coor = get_hit_pos(cube, ray[i]);
 		ray[i]->distance = sqrt(pow(cube->player_settings->pos.x - ray[i]->coor.x, 2) + pow(cube->player_settings->pos.y - ray[i]->coor.y, 2));
-		printf("ray[%d]->distance : %f\n", i, ray[i]->distance);
+		// printf("ray[%d]->distance : %f\n", i, ray[i]->distance);
+		// add_wall(cube, i, ray[i]);
 	}
 	return (ray);
 }
@@ -167,15 +172,15 @@ void	draw_wall(t_cube *cube)
 	x = -1;
 	while (++x < WIDTH)
 	{
-		ft_printf("x : %d\n", x);
-		cube->player_settings->ray[x]->wall_height = (cube->map->size_case * 100) / cube->player_settings->ray[x]->distance;
-		start = 100 / 2 - cube->player_settings->ray[x]->wall_height / 2;
-		end = 100 / 2 + cube->player_settings->ray[x]->wall_height / 2;
+		cube->player_settings->ray[x]->wall_height = (cube->map->size_case * HEIGHT) / cube->player_settings->ray[x]->distance;
+		// printf("cube->player_settings->ray[%d]->wall_height : %f\n", x, cube->player_settings->ray[x]->wall_height);
+		start = HEIGHT / 2 - cube->player_settings->ray[x]->wall_height / 2;
+		end = HEIGHT / 2 + cube->player_settings->ray[x]->wall_height / 2;
 		y = start - 1;
 		while (++y < end)
 		{
 			// ft_printf("y : %d\n", y);
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF00FF00);
+			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFFFFFF00);
 			// ft_printf("y : %d\n", y);
 		}
 	}
@@ -278,6 +283,34 @@ void	print_pixel(t_cube *cube, char pixel, int x, int y)
 		print_global_pixel(cube, x, y, 0xFFFFFFFF);
 }
 
+void	draw_background(t_cube *cube)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT / 2)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFFFF0000);
+			x++;
+		}
+		y++;
+	}
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF00FF00);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	print_map(char **map, t_cube *cube)
 {
 		int	i;
@@ -285,6 +318,7 @@ void	print_map(char **map, t_cube *cube)
 	int	x;
 	int	y;
 
+	draw_background(cube);
 	y = HEIGHT / 2 - cube->map->height * cube->map->size_case / 2;
 	i = 0;
 	while (cube->map->map[i])

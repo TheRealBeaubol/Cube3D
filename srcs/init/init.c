@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/08 15:49:56 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/08 18:37:04 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,9 @@ void	init(t_cube *cube)
 		ft_dprintf(2, "Error\nWho the fuck chmod a required file ?\n");
 		free_and_destroy(cube);
 	}
-	start_cube(cube);
+	// start_cube(cube);
+	cube->menu->is_in_menu = 0;
+	cube->is_in_game = 1;
+	mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
+	print_map(cube->map->map, cube);
 }
