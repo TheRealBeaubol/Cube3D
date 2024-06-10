@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   application.inl                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maldavid <kbz_8.dev@akel-engine.com>       +#+  +:+       +#+        */
+/*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 21:49:46 by maldavid          #+#    #+#             */
-/*   Updated: 2023/04/02 14:56:27 by maldavid         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:06:38 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ namespace mlx::core
 	{
 		MLX_PROFILE_FUNCTION();
 		CHECK_WINDOW_PTR(win);
-		CHECK_IMAGE_PTR(img, return);
+		// CHECK_IMAGE_PTR(img, return);
 		Texture* texture = static_cast<Texture*>(img);
 		if(!texture->isInit())
 			core::error::report(e_kind::error, "trying to put a texture that has been destroyed");
@@ -166,7 +166,7 @@ namespace mlx::core
 	int Application::getTexturePixel(void* img, int x, int y)
 	{
 		MLX_PROFILE_FUNCTION();
-		CHECK_IMAGE_PTR(img, return 0);
+		// CHECK_IMAGE_PTR(img, return 0);
 		Texture* texture = static_cast<Texture*>(img);
 		if(!texture->isInit())
 		{
@@ -179,7 +179,7 @@ namespace mlx::core
 	void Application::setTexturePixel(void* img, int x, int y, std::uint32_t color)
 	{
 		MLX_PROFILE_FUNCTION();
-		CHECK_IMAGE_PTR(img, return);
+		// CHECK_IMAGE_PTR(img, return);
 		Texture* texture = static_cast<Texture*>(img);
 		if(!texture->isInit())
 			core::error::report(e_kind::error, "trying to set a pixel on texture that has been destroyed");

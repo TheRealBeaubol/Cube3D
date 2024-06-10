@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/06 16:25:54 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:48:17 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ typedef struct s_settings_menu
 
 typedef struct s_point
 {
-    double    x;
-    double    y;
+    float    x;
+    float    y;
 }    t_point;
 
 typedef struct s_plotline
@@ -116,16 +116,37 @@ typedef struct s_plotline
     int        yi;
     int        xi;
     int        d;
-    double    y;
-    double    x;
+    float    y;
+    float    x;
 }    t_plotline;
+
+typedef enum e_direction
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}	e_direction;
 
 typedef struct s_ray
 {
-	t_point	coor;
-	float	angle;
-	double	dir_x;
-	double	dir_y;
+	e_direction	direction;
+	float		lenght;
+	float		wall_height;
+	float		ray_dir_x;
+	float		ray_dir_y;
+	float		camera_x;
+	float		delta_dist_x;
+	float		delta_dist_y;
+	float		side_dist_x;
+	float		side_dist_y;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	int			side;
+	int			hit_wall;
+
 }	t_ray;
 
 typedef struct s_menu
@@ -161,9 +182,10 @@ typedef struct s_player_settings
 	int		move_left;
 	int		move_right;
 	t_point	pos;
+	t_point	plane;
 	e_move	move;
-	double	dir_x;
-	double	dir_y;
+	float	dir_x;
+	float	dir_y;
 	float	looking_angle;
 	int		fov;
 	t_ray	**ray;
@@ -183,6 +205,7 @@ typedef struct s_cube
 	void				*mlx_ptr;
 	void				*window_ptr;
 	void				*img;
+	void				*minimap_img;
 	t_menu				*menu;
 	t_player_settings	*player_settings;
 	t_map				*map;

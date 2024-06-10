@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/06 15:40:16 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:30:35 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ y > 680 && y < 800);
 void	handle_mouse_in_game(t_cube *cube, int x, int y)
 {
 	static int		x_old = 0;
-	static double	ratio = 0;
+	static float	ratio = 0;
 
 		mlx_mouse_hide();
 	if (!x_old)
@@ -82,9 +82,7 @@ void	handle_mouse_in_game(t_cube *cube, int x, int y)
 	else if (x_old != x)
 	{
 		if (x_old != 0 && x_old != WIDTH - 1)
-			ratio = (double)(x - x_old) / 100;
-		ft_printf("x = %d\n", x);
-		ft_printf("x_old = %d\n", x_old);
+			ratio = (float)(x - x_old) / 100;
 		cube->player_settings->looking_angle += ratio * 0.25;
 		if (cube->player_settings->looking_angle > 2 * PI)
 			cube->player_settings->looking_angle -= 2 * PI;
@@ -95,7 +93,33 @@ void	handle_mouse_in_game(t_cube *cube, int x, int y)
 		x_old = x;
 	}
 	(void)y;
-	print_map(cube->map->map, cube);
+	render_cube(cube);
+}
+
+void	fps_counter(void)
+{
+	static clock_t	last_time = 0;
+	static clock_t	last_avg_time = 0;
+	static int		frame_count = 0;
+	static float	fps_sum = 0.0;
+	clock_t			current_time;
+	float			fps;
+	float			avg_fps;
+
+	current_time = clock();
+	fps = CLOCKS_PER_SEC / (float)(current_time - last_time);
+	last_time = current_time;
+	fps_sum += fps;
+	frame_count++;
+	if ((current_time - last_avg_time) >= CLOCKS_PER_SEC * 10)
+	{
+		avg_fps = fps_sum / frame_count;
+		printf("\033[1;31mAverage FPS (10s): %.2f\033[0m\n", avg_fps);
+		fps_sum = 0.0;
+		frame_count = 0;
+		last_avg_time = current_time;
+	}
+	printf("FPS: %.2f\n", fps);
 }
 
 int	mouse_move(void *cube_void)
@@ -115,5 +139,6 @@ int	mouse_move(void *cube_void)
 	if (cube->is_in_game)
 		handle_mouse_in_game(cube, x, y);
 	render_hover_button(cube);
+	fps_counter();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:28:47 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/05/28 17:21:20 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:48:46 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,6 @@ void	print_map_stock(char **map)
 		i++;
 	}
 }
-
-/*void	ft_free_tab(void **tab)
-{
-	void	**tmp;
-
-	if (!tab)
-		return ;
-	tmp = tab;
-	while (*tmp)
-		free(*(tmp++));
-	free(tab);
-}*/
 
 char	**parsing(char *file)
 {
