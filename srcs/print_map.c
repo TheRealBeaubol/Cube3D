@@ -6,15 +6,11 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/08 17:08:35 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:55:04 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-/*void	print_wall(t_cube *cube, char pixel, int x, int y)
-{	
-}*/
 
 void	print_global_pixel(t_cube *cube, int x, int y, int color)
 {
@@ -27,7 +23,7 @@ void	print_global_pixel(t_cube *cube, int x, int y, int color)
 		dy = 0;
 		while (dy < cube->map->size_case)
 		{
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x + dx, y + dy, color);
+			mlx_set_image_pixel(cube->mlx_ptr, cube->minimap_img, x + dx, y + dy, color);
 			dy++;
 		}
 		dx++;
@@ -48,8 +44,8 @@ int	is_in_wall(t_cube *cube)
 		y = 0;
 		while (y < cube->map->player_size)
 		{
-			i = (cube->player_settings->pos.y + y - (HEIGHT - cube->map->size_case * cube->map->height) / 2) / cube->map->size_case;
-			j = (cube->player_settings->pos.x + x - (WIDTH - cube->map->size_case * cube->map->width) / 2) / cube->map->size_case;
+			i = (cube->player_settings->pos.y + y) / cube->map->size_case;
+			j = (cube->player_settings->pos.x + x - (WIDTH - cube->map->size_case * cube->map->width)) / cube->map->size_case;
 			if (cube->map->map[i][j] == '1')
 				return (1);
 			y++;
@@ -69,12 +65,12 @@ t_point	get_hit_pos(t_cube *cube, t_ray *ray)
 
 	hit_pos.x = ray->coor.x;
 	hit_pos.y = ray->coor.y;
-	x = (hit_pos.x - (WIDTH - cube->map->size_case * cube->map->width) / 2) / cube->map->size_case;
-	y = (hit_pos.y - (HEIGHT - cube->map->size_case * cube->map->height) / 2) / cube->map->size_case;
+	x = (hit_pos.x - (WIDTH - cube->map->size_case * cube->map->width)) / cube->map->size_case;
+	y = hit_pos.y / cube->map->size_case;
 	while (cube->map->map[y][x] != '1')
 	{
-		x = (hit_pos.x - (WIDTH - cube->map->size_case * cube->map->width) / 2) / cube->map->size_case;
-		y = (hit_pos.y - (HEIGHT - cube->map->size_case * cube->map->height) / 2) / cube->map->size_case;
+		x = (hit_pos.x - (WIDTH - cube->map->size_case * cube->map->width)) / cube->map->size_case;
+		y = hit_pos.y / cube->map->size_case;
 		if (cube->map->map[y][x] != '1')
 		{
 			hit_pos.x += ray->dir_x;
@@ -96,7 +92,14 @@ void	free_ray(t_ray **ray, int size)
 		free(ray[i]);
 	free(ray);
 }
-#include <stdio.h>
+
+int	get_direction(t_player_settings *player_settings, t_ray *ray)
+{
+	(void)player_settings;
+	(void)ray;
+	return (0);
+}
+
 t_ray	**init_ray(t_cube *cube)
 {
 	t_ray	**ray;
@@ -119,21 +122,21 @@ t_ray	**init_ray(t_cube *cube)
 		if (!i)
 			ray[0]->angle = cube->player_settings->looking_angle;
 		else if (i == WIDTH / 2)
-			ray[i]->angle = cube->player_settings->looking_angle - 0.1;
+			ray[i]->angle = cube->player_settings->looking_angle - 0.2;
 		else if (i > WIDTH / 2)
-			ray[i]->angle = ray[i - 1]->angle - 0.1;
+			ray[i]->angle = ray[i - 1]->angle - 0.2;
 		else
-			ray[i]->angle = ray[i - 1]->angle + 0.1;
+			ray[i]->angle = ray[i - 1]->angle + 0.2;
 		if (ray[i]->angle > 2 * PI)
 			ray[i]->angle -= 2 * PI;
 		if (ray[i]->angle < 0)
 			ray[i]->angle += 2 * PI;
-		ray[i]->dir_x = cos(ray[i]->angle);
-		ray[i]->dir_y = sin(ray[i]->angle);
+		ray[i]->dir_x = cos(cube->player_settings->looking_angle + atan((i - WIDTH / 2) / ((WIDTH / 2) / tan(cube->player_settings->fov * PI / 360))));
+		ray[i]->dir_y = sin(cube->player_settings->looking_angle + atan((i - WIDTH / 2) / ((WIDTH / 2) / tan(cube->player_settings->fov * PI / 360))));
 		ray[i]->coor = cube->player_settings->pos;
 		ray[i]->coor = get_hit_pos(cube, ray[i]);
+		ray[i]->direction = get_direction(cube->player_settings, ray[i]);
 		ray[i]->distance = sqrt(pow(cube->player_settings->pos.x - ray[i]->coor.x, 2) + pow(cube->player_settings->pos.y - ray[i]->coor.y, 2));
-		printf("ray[%d]->distance : %f\n", i, ray[i]->distance);
 	}
 	return (ray);
 }
@@ -143,7 +146,7 @@ void	plotray(t_cube *cube)
 	int	i;
 
 	i = -1;
-	while (++i < cube->player_settings->fov)
+	while (++i < WIDTH)
 		plotline(cube, cube->player_settings->ray[i]->coor, cube->player_settings->pos);
 }
 
@@ -163,20 +166,24 @@ void	draw_wall(t_cube *cube)
 	int	y;
 	int	start;
 	int	end;
-	
+
 	x = -1;
 	while (++x < WIDTH)
 	{
-		ft_printf("x : %d\n", x);
-		cube->player_settings->ray[x]->wall_height = (cube->map->size_case * 100) / cube->player_settings->ray[x]->distance;
-		start = 100 / 2 - cube->player_settings->ray[x]->wall_height / 2;
-		end = 100 / 2 + cube->player_settings->ray[x]->wall_height / 2;
+		cube->player_settings->ray[x]->wall_height = (cube->map->size_case * HEIGHT) / cube->player_settings->ray[x]->distance;
+		start = HEIGHT / 2 - cube->player_settings->ray[x]->wall_height / 2;
+		end = HEIGHT / 2 + cube->player_settings->ray[x]->wall_height / 2;
 		y = start - 1;
 		while (++y < end)
 		{
-			// ft_printf("y : %d\n", y);
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF00FF00);
-			// ft_printf("y : %d\n", y);
+			if (cube->player_settings->ray[x]->direction == WEST)
+				mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFFFFFF00);
+			else if (cube->player_settings->ray[x]->direction == NORTH)
+				mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF00FF00);
+			else if (cube->player_settings->ray[x]->direction == EAST)
+				mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF0000FF);
+			else if (cube->player_settings->ray[x]->direction == SOUTH)
+				mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFFFF00FF);
 		}
 	}
 }
@@ -226,7 +233,7 @@ void	print_player(t_cube *cube, int color)
 	{
 		dy = -1;
 		while (++dy < cube->map->player_size)
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, px + dx, py + dy, color);
+			mlx_set_image_pixel(cube->mlx_ptr, cube->minimap_img, px + dx, py + dy, color);
 	}
 	print_ray(cube);
 	draw_wall(cube);
@@ -237,28 +244,6 @@ void	set_player(t_cube *cube, int x, int y)
 	cube->player_settings->pos.x = x + 20;
 	cube->player_settings->pos.y = y + 20;
 }
-
-/*void	print_ray(t_cube *cube, int x, int y)
-{
-	
-}
-
-void	print_view(t_cube *cube, int x, int y)
-{
-	int	i;
-	
-	plane = 0;
-	cube->player_settings->ray->dirX = 200;
-	
-	cube->player_settings->ray->dirY = 200;
-	i = -1;
-	while (++i < cube->player_settings->ray_nb)
-	{
-		print_ray(cube, x, y);
-		cube->player_settings->ray->planeX += 10;
-		cube->player_settings->ray->planeY += 10;
-	}
-}*/
 
 void	print_pixel(t_cube *cube, char pixel, int x, int y)
 {
@@ -278,18 +263,48 @@ void	print_pixel(t_cube *cube, char pixel, int x, int y)
 		print_global_pixel(cube, x, y, 0xFFFFFFFF);
 }
 
+void	draw_background(t_cube *cube)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT / 2)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF33EBFF);
+			x++;
+		}
+		y++;
+	}
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF7D9E7C);
+			x++;
+		}
+		y++;
+	}
+}
+
+
 void	print_map(char **map, t_cube *cube)
 {
-		int	i;
+	int	i;
 	int	j;
 	int	x;
 	int	y;
 
-	y = HEIGHT / 2 - cube->map->height * cube->map->size_case / 2;
+	draw_background(cube);
+	y = 0;
 	i = 0;
 	while (cube->map->map[i])
 	{
-		x = WIDTH / 2 - cube->map->width * cube->map->size_case / 2;
+		x = WIDTH - cube->map->width * cube->map->size_case;
 		j = 0;
 		while (cube->map->map[i][j])
 		{
@@ -302,4 +317,5 @@ void	print_map(char **map, t_cube *cube)
 	}
 	print_player(cube, 0xFFFF0000);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->img, 0, 0);
+	mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->minimap_img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/08 15:49:56 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:46:47 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	init_mlx(t_cube *cube)
 	if (cube->mlx_ptr == NULL)
 		exit (1);
 	cube->img = mlx_new_image(cube->mlx_ptr, WIDTH, HEIGHT);
+	cube->minimap_img = mlx_new_image(cube->mlx_ptr, WIDTH, HEIGHT);
 	cube->window_ptr = mlx_new_window(cube->mlx_ptr, WIDTH, HEIGHT, "Cube3D");
 	if (cube->window_ptr == NULL)
 		free_and_destroy(cube);
@@ -88,4 +89,8 @@ void	init(t_cube *cube)
 		free_and_destroy(cube);
 	}
 	start_cube(cube);
+	// cube->menu->is_in_menu = 0;
+	// cube->is_in_game = 1;
+	// mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
+	// print_map(cube->map->map, cube);
 }

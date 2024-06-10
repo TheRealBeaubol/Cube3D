@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/08 15:49:45 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:45:32 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,23 @@ typedef struct s_plotline
     double    x;
 }    t_plotline;
 
+typedef enum e_direction
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}	e_direction;
+
 typedef struct s_ray
 {
-	t_point	coor;
-	double	distance;
-	double	wall_height;
-	float	angle;
-	double	dir_x;
-	double	dir_y;
+	e_direction	direction;
+	t_point		coor;
+	double		distance;
+	double		wall_height;
+	float		angle;
+	double		dir_x;
+	double		dir_y;
 }	t_ray;
 
 typedef struct s_menu
@@ -185,6 +194,7 @@ typedef struct s_cube
 	void				*mlx_ptr;
 	void				*window_ptr;
 	void				*img;
+	void				*minimap_img;
 	t_menu				*menu;
 	t_player_settings	*player_settings;
 	t_map				*map;

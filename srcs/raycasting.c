@@ -6,64 +6,30 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:11:15 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/04 14:32:46 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:24:14 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-/*t_ray   **feed_ray_tab(t_player_settings *player)
-{
-    t_ray   **ray;
-    int i;
-	
-	player->fov = 80;
-	player->looking_angle = 90;
-    ray = ft_calloc(player->fov, sizeof(t_ray *));
-    if (!ray)
-        return (NULL);
-    i = -1;
-	while (++i < player->fov)
-	{
-		ray[i] = ft_calloc(1, sizeof(t_ray));
-		if (!ray[i])
-			return (NULL);
-	}
-	i = 0;
-    ray[i]->angle = player->looking_angle;
-    while (++i < player->fov)
-    {
-        if (ray[i - 1]->angle < 90)
-            ray[i]->angle = ray[i - 1]->angle - 1;
-        else
-        {
-            if (player->looking_angle + player->fov / 2 == ray[i - 1]->angle)
-                ray[i]->angle = player->looking_angle - 1;
-            else
-                ray[i]->angle = ray[i - 1]->angle + 1;       
-        }
-	}
-	return (ray);
-}*/
-
 
 void	print_pixel_low(t_cube *cube, int is_inverted)
 {
 	if (is_inverted == 1)
-		mlx_set_image_pixel(cube->mlx_ptr, cube->img, cube->plotline->x, \
+		mlx_set_image_pixel(cube->mlx_ptr, cube->minimap_img, cube->plotline->x, \
 			cube->plotline->y, 0xFFFF0000);
 	else
-		mlx_set_image_pixel(cube->mlx_ptr, cube->img, cube->plotline->x, \
+		mlx_set_image_pixel(cube->mlx_ptr, cube->minimap_img, cube->plotline->x, \
 			cube->plotline->y, 0xFFFF0000);
 }
 
 void	print_pixel_high(t_cube *cube, int is_inverted)
 {
 	if (is_inverted == 1)
-		mlx_set_image_pixel(cube->mlx_ptr, cube->img, cube->plotline->x, \
+		mlx_set_image_pixel(cube->mlx_ptr, cube->minimap_img, cube->plotline->x, \
 			cube->plotline->y, 0xFFFF0000);
 	else
-		mlx_set_image_pixel(cube->mlx_ptr, cube->img, cube->plotline->x, \
+		mlx_set_image_pixel(cube->mlx_ptr, cube->minimap_img, cube->plotline->x, \
 			cube->plotline->y, 0xFFFF0000);
 }
 
