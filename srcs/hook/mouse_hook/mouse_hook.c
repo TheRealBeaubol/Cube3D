@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/08 18:43:06 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:30:35 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ y > 680 && y < 800);
 void	handle_mouse_in_game(t_cube *cube, int x, int y)
 {
 	static int		x_old = 0;
-	static double	ratio = 0;
+	static float	ratio = 0;
 
 		mlx_mouse_hide();
 	if (!x_old)
@@ -82,7 +82,7 @@ void	handle_mouse_in_game(t_cube *cube, int x, int y)
 	else if (x_old != x)
 	{
 		if (x_old != 0 && x_old != WIDTH - 1)
-			ratio = (double)(x - x_old) / 100;
+			ratio = (float)(x - x_old) / 100;
 		cube->player_settings->looking_angle += ratio * 0.25;
 		if (cube->player_settings->looking_angle > 2 * PI)
 			cube->player_settings->looking_angle -= 2 * PI;
@@ -93,7 +93,7 @@ void	handle_mouse_in_game(t_cube *cube, int x, int y)
 		x_old = x;
 	}
 	(void)y;
-	print_map(cube->map->map, cube);
+	render_cube(cube);
 }
 
 void	fps_counter(void)
@@ -101,13 +101,13 @@ void	fps_counter(void)
 	static clock_t	last_time = 0;
 	static clock_t	last_avg_time = 0;
 	static int		frame_count = 0;
-	static double	fps_sum = 0.0;
+	static float	fps_sum = 0.0;
 	clock_t			current_time;
-	double			fps;
-	double			avg_fps;
+	float			fps;
+	float			avg_fps;
 
 	current_time = clock();
-	fps = CLOCKS_PER_SEC / (double)(current_time - last_time);
+	fps = CLOCKS_PER_SEC / (float)(current_time - last_time);
 	last_time = current_time;
 	fps_sum += fps;
 	frame_count++;

@@ -6,114 +6,104 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:11:15 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/10 15:24:14 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:46:13 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-
-void	print_pixel_low(t_cube *cube, int is_inverted)
+#include <stdio.h>
+void	init_ray(t_player_settings *player_settings, t_ray *ray, int i, int size_case)
 {
-	if (is_inverted == 1)
-		mlx_set_image_pixel(cube->mlx_ptr, cube->minimap_img, cube->plotline->x, \
-			cube->plotline->y, 0xFFFF0000);
+	ray->camera_x = 2 * i / (float)WIDTH - 1;
+	ray->ray_dir_x = player_settings->dir_x + player_settings->plane.x * ray->camera_x;
+	ray->ray_dir_y = player_settings->dir_y + player_settings->plane.y * ray->camera_x;
+	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
+	ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+	ray->map_x = player_settings->pos.x / size_case;
+	ray->map_y = player_settings->pos.y / size_case;
+	ray->hit_wall = 0;
+}
+
+void	calculate_step_and_init_sidedist(t_ray *ray, t_player_settings *player_settings)
+{
+	if (ray->ray_dir_x < 0)
+	{
+		ray->step_x = -1;
+		ray->side_dist_x = (player_settings->pos.x - ray->map_x) * ray->delta_dist_x;
+	}
 	else
-		mlx_set_image_pixel(cube->mlx_ptr, cube->minimap_img, cube->plotline->x, \
-			cube->plotline->y, 0xFFFF0000);
-}
-
-void	print_pixel_high(t_cube *cube, int is_inverted)
-{
-	if (is_inverted == 1)
-		mlx_set_image_pixel(cube->mlx_ptr, cube->minimap_img, cube->plotline->x, \
-			cube->plotline->y, 0xFFFF0000);
+	{
+		ray->step_x = 1;
+		ray->side_dist_x = (ray->map_x + 1.0 - player_settings->pos.x) * ray->delta_dist_x;
+	}
+	if (ray->ray_dir_y < 0)
+	{
+		ray->step_y = -1;
+		ray->side_dist_y = (player_settings->pos.y - ray->map_y) * ray->delta_dist_y;
+	}
 	else
-		mlx_set_image_pixel(cube->mlx_ptr, cube->minimap_img, cube->plotline->x, \
-			cube->plotline->y, 0xFFFF0000);
+	{
+		ray->step_y = 1;
+		ray->side_dist_y = (ray->map_y + 1.0 - player_settings->pos.y) * ray->delta_dist_y;
+	}
 }
 
-void	plotline_low(t_cube *cube, t_point point1, t_point point2, int is_inverted)
+void	perform_dda(t_ray *ray, t_map *map, t_player_settings *player_settings)
 {
-	t_plotline	plotline;
-
-	plotline.yi = 1;
-	plotline.dx = point2.x - point1.x;
-	plotline.dy = point2.y - point1.y;
-	if (plotline.dy < 0)
+	while (ray->hit_wall == 0)
 	{
-		plotline.yi = -1;
-		plotline.dy *= -1;
-	}
-	plotline.d = (2 * plotline.dy) - plotline.dx;
-	plotline.y = point1.y;
-	plotline.x = point1.x;
-	while (plotline.x <= point2.x)
-	{
-		cube->plotline = &plotline;
-		print_pixel_low(cube, is_inverted);
-		if (plotline.d > 0)
+		if (ray->side_dist_x < ray->side_dist_y)
 		{
-			plotline.y += plotline.yi;
-			plotline.d += -2 * plotline.dx;
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
+			if (ray->ray_dir_x < 0)
+				ray->direction = WEST;
+			else
+				ray->direction = EAST;
+			ray->side = 0;
 		}
-		plotline.d += 2 * plotline.dy;
-		plotline.x++;
-	}
-}
-
-void	plotline_high(t_cube *cube, t_point point1, t_point point2, int is_inverted)
-{
-	t_plotline	plotline;
-
-	plotline.dx = point2.x - point1.x;
-	plotline.dy = point2.y - point1.y;
-	plotline.xi = 1;
-	if (plotline.dx < 0)
-	{
-		plotline.xi = -1;
-		plotline.dx *= -1;
-	}
-	plotline.d = (2 * plotline.dx) - plotline.dy;
-	plotline.x = point1.x;
-	plotline.y = point1.y;
-	while (plotline.y <= point2.y)
-	{
-		cube->plotline = &plotline;
-		print_pixel_high(cube, is_inverted);
-		if (plotline.d > 0)
-		{
-			plotline.x += plotline.xi;
-			plotline.d += -2 * plotline.dy;
-		}
-		plotline.d += 2 * plotline.dx;
-		plotline.y++;
-	}
-}
-
-void	plotline(t_cube *cube, t_point point2, t_point point1)
-{
-    int is_inverted;
-
-    is_inverted = 0;
-	if (abs((int)point2.y - (int)point1.y) < abs((int)point2.x - (int)point1.x))
-	{
-		if ((point2.x - point1.x) > 0)
-			plotline_low(cube, point1, point2, is_inverted);
 		else
 		{
-			is_inverted = 1;
-			plotline_low(cube, point2, point1, is_inverted);
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
+			if (ray->ray_dir_y < 0)
+				ray->direction = NORTH;
+			else
+				ray->direction = SOUTH;
+			ray->side = 1;
 		}
+		if (map->map[ray->map_y][ray->map_x] == '1')
+			ray->hit_wall = 1;
 	}
+	printf("map_x = %d, map_y = %d\n", ray->map_x, ray->map_y);
+	printf("pos_x = %f, pos_y = %f\n", player_settings->pos.x, player_settings->pos.y);
+	printf("ray_dir_x = %f, ray_dir_y = %f\n", ray->ray_dir_x, ray->ray_dir_y);
+	printf("step_x = %d, step_y = %d\n", ray->step_x, ray->step_y);
+	if (ray->side == 0)
+		ray->lenght = (ray->map_x - player_settings->pos.x + (1 - ray->step_x) / 2) / ray->ray_dir_x;
 	else
-	{
-		if ((point2.y - point1.y) > 0)
-			plotline_high(cube, point1, point2, is_inverted);
-		else
-		{
-	        is_inverted = 1;
-			plotline_high(cube, point2, point1, is_inverted);
-		}
-	}
+		ray->lenght = (ray->map_y - player_settings->pos.y + (1 - ray->step_y) / 2) / ray->ray_dir_y;
+	printf("lenght = %f\n", ray->lenght);
 }
+
+void	do_rays(t_cube *cube, t_ray *ray, int i)
+{
+	int	start;
+	int	end;
+
+	init_ray(cube->player_settings, ray, i, cube->map->size_case);
+	calculate_step_and_init_sidedist(ray, cube->player_settings);
+	perform_dda(ray, cube->map, cube->player_settings);
+	ray->wall_height = (int)(HEIGHT / ray->lenght);
+	start = -ray->wall_height / 2 + HEIGHT / 2;
+	if (start < 0)
+		start = 0;
+	end = ray->wall_height / 2 + HEIGHT / 2;
+	if (end >= HEIGHT)
+		end = HEIGHT - 1;
+	start -= 1;
+	ft_printf("start = %d, end = %d\n", start, end);
+	while (++start < end)
+		mlx_pixel_put(cube->mlx_ptr, cube->window_ptr, i, start, 0xFFFF0000);
+}
+

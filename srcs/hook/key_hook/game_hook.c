@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:59:02 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/06 15:43:30 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:55:44 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,26 @@ static void	manage_player_moves(t_cube *cube, int keycode)
 {
 	if (keycode == cube->player_settings->move_forward)
 	{
-		cube->player_settings->pos.x += cube->player_settings->dir_x;
-		cube->player_settings->pos.y += cube->player_settings->dir_y;
+		if (cube->map->map[(int)(cube->player_settings->pos.y + \
+cube->player_settings->dir_y) / cube->map->size_case]\
+[(int)(cube->player_settings->pos.x + cube->player_settings->dir_x) / \
+cube->map->size_case] != '1')
+		{
+			cube->player_settings->pos.x += cube->player_settings->dir_x;
+			cube->player_settings->pos.y += cube->player_settings->dir_y;
+		}
 		cube->player_settings->move = 0;
 	}
 	if (keycode == cube->player_settings->move_backward)
 	{
-		cube->player_settings->pos.x -= cube->player_settings->dir_x;
-		cube->player_settings->pos.y -= cube->player_settings->dir_y;
+		if (cube->map->map[(int)(cube->player_settings->pos.y - \
+cube->player_settings->dir_y) / cube->map->size_case]\
+[(int)(cube->player_settings->pos.x - cube->player_settings->dir_x) / \
+cube->map->size_case] != '1')
+		{
+			cube->player_settings->pos.x -= cube->player_settings->dir_x;
+			cube->player_settings->pos.y -= cube->player_settings->dir_y;
+		}
 		cube->player_settings->move = 1;
 	}
 	if (keycode == cube->player_settings->move_left)
@@ -55,7 +67,7 @@ static void	manage_player_moves(t_cube *cube, int keycode)
 		cube->player_settings->dir_y = sin(cube->player_settings->looking_angle) * 5;
 	}
 	mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
-	print_map(cube->map->map, cube);
+	render_cube(cube);
 }
 
 void	handle_game_hook(t_cube *cube, int keycode)

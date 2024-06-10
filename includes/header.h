@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/04 14:16:09 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:09:51 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,9 @@ void			open_video_settings_menu(t_cube *cube);
 void			open_keybinds_menu(t_cube *cube);
 void			open_music_and_sounds_menu(t_cube *cube);
 void			*get_key_images(t_cube *cube, int key);
-void			print_map(char **map, t_cube *cube);
+void			render_cube(t_cube *cube);
 char			**parsing(t_map *map, char *file);
-t_ray   		**feed_ray_tab(t_player_settings *player);
-void			search_looking(t_cube *cube);
 void			plotline(t_cube *cube, t_point point2, t_point point1);
+void	        do_rays(t_cube *cube, t_ray *ray, int i);
 
 #endif
