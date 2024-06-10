@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/10 18:51:06 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/10 19:00:12 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,37 +64,6 @@ void	print_player(t_cube *cube, int color)
 
 	px = cube->player_settings->pos.x;
 	py = cube->player_settings->pos.y;
-	if (is_in_wall(cube))
-	{
-		if (cube->player_settings->move == 1)
-		{
-			cube->player_settings->pos.x += cube->player_settings->dir_x;
-			cube->player_settings->pos.y += cube->player_settings->dir_y;
-			px += cube->player_settings->dir_x;
-			py += cube->player_settings->dir_y;
-		}
-		else if (cube->player_settings->move == 0)
-		{
-			cube->player_settings->pos.x -= cube->player_settings->dir_x;
-			cube->player_settings->pos.y -= cube->player_settings->dir_y;
-			px -= cube->player_settings->dir_x;
-			py -= cube->player_settings->dir_y;
-		}
-		else if (cube->player_settings->move == 2)
-		{
-			cube->player_settings->pos.x -= cube->player_settings->dir_y;
-			cube->player_settings->pos.y += cube->player_settings->dir_x;
-			px -= cube->player_settings->dir_y;
-			py += cube->player_settings->dir_x;
-		}
-		else if (cube->player_settings->move == 3)
-		{
-			cube->player_settings->pos.x += cube->player_settings->dir_y;
-			cube->player_settings->pos.y -= cube->player_settings->dir_x;
-			px += cube->player_settings->dir_y;
-			py -= cube->player_settings->dir_x;
-		}
-	}
 	dx = -1;
 	while (++dx < cube->map->player_size)
 	{
@@ -150,8 +119,8 @@ void	print_map(t_cube *cube)
 		{
 			if (cube->map->map[i][j] == 'N' && b == 1)
 			{
-				cube->player_settings->pos.x = i;
-				cube->player_settings->pos.y = j;
+				cube->player_settings->pos.x = j;
+				cube->player_settings->pos.y = i;
 				b = 0;
 			}
 			else if (cube->map->map[i][j] == '1')

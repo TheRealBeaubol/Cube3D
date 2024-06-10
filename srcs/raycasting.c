@@ -6,21 +6,21 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:11:15 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/10 18:46:13 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/10 19:02:53 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 #include <stdio.h>
-void	init_ray(t_player_settings *player_settings, t_ray *ray, int i, int size_case)
+void	init_ray(t_player_settings *player_settings, t_ray *ray, int i)
 {
 	ray->camera_x = 2 * i / (float)WIDTH - 1;
 	ray->ray_dir_x = player_settings->dir_x + player_settings->plane.x * ray->camera_x;
 	ray->ray_dir_y = player_settings->dir_y + player_settings->plane.y * ray->camera_x;
 	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
 	ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
-	ray->map_x = player_settings->pos.x / size_case;
-	ray->map_y = player_settings->pos.y / size_case;
+	ray->map_x = player_settings->pos.x;
+	ray->map_y = player_settings->pos.y;
 	ray->hit_wall = 0;
 }
 
@@ -91,7 +91,7 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 	int	start;
 	int	end;
 
-	init_ray(cube->player_settings, ray, i, cube->map->size_case);
+	init_ray(cube->player_settings, ray, i);
 	calculate_step_and_init_sidedist(ray, cube->player_settings);
 	perform_dda(ray, cube->map, cube->player_settings);
 	ray->wall_height = (int)(HEIGHT / ray->lenght);
