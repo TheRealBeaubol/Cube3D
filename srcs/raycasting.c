@@ -6,19 +6,15 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:11:15 by lboiteux          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/10 19:04:40 by mhervoch         ###   ########.fr       */
-=======
-/*   Updated: 2024/06/10 19:02:53 by lboiteux         ###   ########.fr       */
->>>>>>> 752e3647c2d97e645c596c1d40393ed6366c94ef
+/*   Updated: 2024/06/11 14:06:14 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "header.h"
 #include <stdio.h>
 void	init_ray(t_player_settings *player_settings, t_ray *ray, int i)
 {
-	(void) size_case;
 	ray->camera_x = 2 * i / (float)WIDTH - 1;
 	ray->ray_dir_x = player_settings->dir_x + player_settings->plane.x * ray->camera_x;
 	ray->ray_dir_y = player_settings->dir_y + player_settings->plane.y * ray->camera_x;
@@ -80,15 +76,10 @@ void	perform_dda(t_ray *ray, t_map *map, t_player_settings *player_settings)
 		if (map->map[ray->map_y][ray->map_x] == '1')
 			ray->hit_wall = 1;
 	}
-	printf("map_x = %d, map_y = %d\n", ray->map_x, ray->map_y);
-	printf("pos_x = %f, pos_y = %f\n", player_settings->pos.x, player_settings->pos.y);
-	printf("ray_dir_x = %f, ray_dir_y = %f\n", ray->ray_dir_x, ray->ray_dir_y);
-	printf("step_x = %d, step_y = %d\n", ray->step_x, ray->step_y);
 	if (ray->side == 0)
 		ray->lenght = (ray->map_x - player_settings->pos.x + (1 - ray->step_x) / 2) / ray->ray_dir_x;
 	else
 		ray->lenght = (ray->map_y - player_settings->pos.y + (1 - ray->step_y) / 2) / ray->ray_dir_y;
-	printf("lenght = %f\n", ray->lenght);
 }
 
 void	do_rays(t_cube *cube, t_ray *ray, int i)
@@ -107,8 +98,16 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 	if (end >= HEIGHT)
 		end = HEIGHT - 1;
 	start -= 1;
-	ft_printf("start = %d, end = %d\n", start, end);
 	while (++start < end)
-		mlx_pixel_put(cube->mlx_ptr, cube->window_ptr, i, start, 0xFFFF0000);
+	{
+		if (ray->direction == NORTH)
+			mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFF00FF00);
+		else if (ray->direction == SOUTH)
+			mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFFFF0000);
+		else if (ray->direction == WEST)
+			mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFF0000FF);
+		else if (ray->direction == EAST)
+			mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFFFFFF00);
+	}
 }
 
