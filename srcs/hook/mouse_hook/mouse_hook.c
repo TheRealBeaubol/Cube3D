@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/10 17:30:35 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/11 13:41:54 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ y > 680 && y < 800);
 void	handle_mouse_in_game(t_cube *cube, int x, int y)
 {
 	static int		x_old = 0;
-	static float	ratio = 0;
 
 		mlx_mouse_hide();
 	if (!x_old)
@@ -79,17 +78,24 @@ void	handle_mouse_in_game(t_cube *cube, int x, int y)
 		mlx_mouse_move(cube->mlx_ptr, cube->window_ptr, WIDTH / 2, HEIGHT / 2);
 		x_old = WIDTH - 1;
 	}
-	else if (x_old != x)
+	else if (x_old > x)
 	{
-		if (x_old != 0 && x_old != WIDTH - 1)
-			ratio = (float)(x - x_old) / 100;
-		cube->player_settings->looking_angle += ratio * 0.25;
-		if (cube->player_settings->looking_angle > 2 * PI)
-			cube->player_settings->looking_angle -= 2 * PI;
-		if (cube->player_settings->looking_angle < 0)
-			cube->player_settings->looking_angle += 2 * PI;
-		cube->player_settings->dir_x = cos(cube->player_settings->looking_angle) * 5;
-		cube->player_settings->dir_y = sin(cube->player_settings->looking_angle) * 5;
+		double old_dir_x = cube->player_settings->dir_x;
+		cube->player_settings->dir_x = cube->player_settings->dir_x * cos(-0.1) - cube->player_settings->dir_y * sin(-0.1);
+		cube->player_settings->dir_y = old_dir_x * sin(-0.1) + cube->player_settings->dir_y * cos(-0.1);
+		double old_plane_x = cube->player_settings->plane.x;
+		cube->player_settings->plane.x = cube->player_settings->plane.x * cos(-0.1) - cube->player_settings->plane.y * sin(-0.1);
+		cube->player_settings->plane.y = old_plane_x * sin(-0.1) + cube->player_settings->plane.y * cos(-0.1);
+		x_old = x;
+	}
+	else if (x_old < x)
+	{
+		double old_dir_x = cube->player_settings->dir_x;
+		cube->player_settings->dir_x = cube->player_settings->dir_x * cos(0.1) - cube->player_settings->dir_y * sin(0.1);
+		cube->player_settings->dir_y = old_dir_x * sin(0.1) + cube->player_settings->dir_y * cos(0.1);
+		double old_plane_x = cube->player_settings->plane.x;
+		cube->player_settings->plane.x = cube->player_settings->plane.x * cos(0.1) - cube->player_settings->plane.y * sin(0.1);
+		cube->player_settings->plane.y = old_plane_x * sin(0.1) + cube->player_settings->plane.y * cos(0.1);
 		x_old = x;
 	}
 	(void)y;

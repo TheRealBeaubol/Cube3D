@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/10 19:00:12 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/11 16:51:51 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	print_player(t_cube *cube, int color)
 	int	px;
 	int	py;
 
-	px = cube->player_settings->pos.x;
-	py = cube->player_settings->pos.y;
+	px = WIDTH - (cube->map->width * cube->map->size_case) + cube->player_settings->pos.x * cube->map->size_case;
+	py = cube->player_settings->pos.y * cube->map->size_case;
 	dx = -1;
 	while (++dx < cube->map->player_size)
 	{

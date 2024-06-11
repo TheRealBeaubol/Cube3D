@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:59:02 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/10 18:55:44 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/11 17:41:34 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,57 +14,69 @@
 
 static void	manage_player_moves(t_cube *cube, int keycode)
 {
+	double	old_dir_x;
+	double	old_plane_x;
+	double	movespeed;
+	double	rotspeed;
+	
+	movespeed = 0.04;
+	rotspeed = 2747483640;
+	#include <stdio.h>
 	if (keycode == cube->player_settings->move_forward)
 	{
-		if (cube->map->map[(int)(cube->player_settings->pos.y + \
-cube->player_settings->dir_y) / cube->map->size_case]\
-[(int)(cube->player_settings->pos.x + cube->player_settings->dir_x) / \
-cube->map->size_case] != '1')
-		{
-			cube->player_settings->pos.x += cube->player_settings->dir_x;
-			cube->player_settings->pos.y += cube->player_settings->dir_y;
-		}
-		cube->player_settings->move = 0;
+		//printf("cube->player_settings->pos.x = %f\n", cube->player_settings->pos.x);
+		//printf("cube->player_settings->pos.y = %f\n", cube->player_settings->pos.y);
+		//printf("cube->player_settings->dir_x = %f\n", cube->player_settings->dir_x);
+		//printf("cube->player_settings->dir_x = %f\n", cube->player_settings->dir_x / cube->map->size_case);
+		//printf("map x: %d\n",(int)(cube->player_settings->pos.x + cube->player_settings->dir_x / cube->map->size_case * movespeed));
+		//printf("map y: %d\n",(int)(cube->player_settings->pos.y + cube->player_settings->dir_y / cube->map->size_case * movespeed));
+		//printf("map x y: %c\n",cube->map->map[(int)(cube->player_settings->pos.y + cube->player_settings->dir_y / cube->map->size_case * movespeed)][(int)(cube->player_settings->pos.x + cube->player_settings->dir_x / cube->map->size_case * movespeed)]);
+
+		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x + cube->player_settings->dir_x / cube->map->size_case * movespeed)] != '1')
+			cube->player_settings->pos.x += cube->player_settings->dir_x * movespeed;
+		if (cube->map->map[(int)(cube->player_settings->pos.y + cube->player_settings->dir_y / cube->map->size_case * movespeed)][(int)cube->player_settings->pos.x] != '1')
+			cube->player_settings->pos.y += cube->player_settings->dir_y * movespeed;
 	}
 	if (keycode == cube->player_settings->move_backward)
 	{
-		if (cube->map->map[(int)(cube->player_settings->pos.y - \
-cube->player_settings->dir_y) / cube->map->size_case]\
-[(int)(cube->player_settings->pos.x - cube->player_settings->dir_x) / \
-cube->map->size_case] != '1')
-		{
-			cube->player_settings->pos.x -= cube->player_settings->dir_x;
-			cube->player_settings->pos.y -= cube->player_settings->dir_y;
-		}
-		cube->player_settings->move = 1;
+		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x - cube->player_settings->dir_x / cube->map->size_case * movespeed)] != '1')
+			cube->player_settings->pos.x -= cube->player_settings->dir_x * movespeed;
+		if (cube->map->map[(int)(cube->player_settings->pos.y - cube->player_settings->dir_y / cube->map->size_case * movespeed)][(int)cube->player_settings->pos.x] != '1')
+			cube->player_settings->pos.y -= cube->player_settings->dir_y * movespeed;
 	}
 	if (keycode == cube->player_settings->move_left)
 	{
-		cube->player_settings->pos.x += cube->player_settings->dir_y;
-		cube->player_settings->pos.y -= cube->player_settings->dir_x;
+		if (cube->map->map[(int)(cube->player_settings->pos.y + cube->player_settings->dir_x / cube->map->size_case * movespeed)][(int)cube->player_settings->pos.x] != '1')
+			cube->player_settings->pos.y -= cube->player_settings->dir_x * movespeed;
+		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x - cube->player_settings->dir_y / cube->map->size_case * movespeed)] != '1')
+			cube->player_settings->pos.x += cube->player_settings->dir_y * movespeed;
 		cube->player_settings->move = 2;
 	}
 	if (keycode == cube->player_settings->move_right)
 	{
-		cube->player_settings->pos.x -= cube->player_settings->dir_y;
-		cube->player_settings->pos.y += cube->player_settings->dir_x;
+		if (cube->map->map[(int)(cube->player_settings->pos.y - cube->player_settings->dir_x / cube->map->size_case * movespeed)][(int)cube->player_settings->pos.x] != '1')
+			cube->player_settings->pos.y += cube->player_settings->dir_x * movespeed;
+		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x + cube->player_settings->dir_y / cube->map->size_case * movespeed)] != '1')
+			cube->player_settings->pos.x -= cube->player_settings->dir_y * movespeed;
 		cube->player_settings->move = 3;
-	}
-	if (keycode == ARROW_RIGHT)
-	{
-		cube->player_settings->looking_angle += 0.1;
-		if (cube->player_settings->looking_angle > 2 * PI)
-			cube->player_settings->looking_angle -= 2 * PI;
-		cube->player_settings->dir_x = cos(cube->player_settings->looking_angle) * 5;
-		cube->player_settings->dir_y = sin(cube->player_settings->looking_angle) * 5;
 	}
 	if (keycode == ARROW_LEFT)
 	{
-		cube->player_settings->looking_angle -= 0.1;
-		if (cube->player_settings->looking_angle < 0)
-			cube->player_settings->looking_angle += 2 * PI;
-		cube->player_settings->dir_x = cos(cube->player_settings->looking_angle) * 5;
-		cube->player_settings->dir_y = sin(cube->player_settings->looking_angle) * 5;
+		old_dir_x = cube->player_settings->dir_x;
+		cube->player_settings->dir_x = cube->player_settings->dir_x * cos(-rotspeed) - cube->player_settings->dir_y * sin(-rotspeed);
+		cube->player_settings->dir_y = old_dir_x * sin(-rotspeed) + cube->player_settings->dir_y * cos(-rotspeed);
+		old_plane_x = cube->player_settings->plane.x;
+		cube->player_settings->plane.x = cube->player_settings->plane.x * cos(-rotspeed) - cube->player_settings->plane.y * sin(-rotspeed);
+		cube->player_settings->plane.y = old_plane_x * sin(-rotspeed) + cube->player_settings->plane.y * cos(-rotspeed);
+	}
+	if (keycode == ARROW_RIGHT)
+	{
+		old_dir_x = cube->player_settings->dir_x;
+		cube->player_settings->dir_x = cube->player_settings->dir_x * cos(rotspeed) - cube->player_settings->dir_y * sin(rotspeed);
+		cube->player_settings->dir_y = old_dir_x * sin(rotspeed) + cube->player_settings->dir_y * cos(rotspeed);
+		old_plane_x = cube->player_settings->plane.x;
+		cube->player_settings->plane.x = cube->player_settings->plane.x * cos(rotspeed) - cube->player_settings->plane.y * sin(rotspeed);
+		cube->player_settings->plane.y = old_plane_x * sin(rotspeed) + cube->player_settings->plane.y * cos(rotspeed);
 	}
 	mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
 	render_cube(cube);
