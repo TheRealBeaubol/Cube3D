@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/11 16:51:51 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:10:12 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	print_player(t_cube *cube, int color)
 	int	px;
 	int	py;
 
-	px = WIDTH - (cube->map->width * cube->map->size_case) + cube->player_settings->pos.x * cube->map->size_case;
-	py = cube->player_settings->pos.y * cube->map->size_case;
+	px = WIDTH - (2.5 * cube->map->size_case);
+	py = (2.5 * cube->map->size_case);
 	dx = -1;
 	while (++dx < cube->map->player_size)
 	{
@@ -101,37 +101,44 @@ void	draw_background(t_cube *cube)
 	}
 }
 
+int	is_player(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+
 void	print_map(t_cube *cube)
 {
 	int			i;
 	int			j;
+	int			save_i;
+	int			save_j;
 	int			x;
 	int			y;
-	static int	b = 1;
 
+	i = (int)cube->player_settings->pos.y;
+	j = (int)cube->player_settings->pos.x;
+	i -= 2;
+	j -= 2;
+	save_i = i + 5;
+	save_j = j + 5;
 	y = 0;
-	i = 0;
-	while (cube->map->map[i])
+	while (i < save_i)
 	{
-		x = WIDTH - cube->map->width * cube->map->size_case;
-		j = 0;
-		while (cube->map->map[i][j])
+		x = WIDTH - (5 * cube->map->size_case);
+		j = save_j - 5;
+		while (j < save_j)
 		{
-			if (cube->map->map[i][j] == 'N' && b == 1)
-			{
-				cube->player_settings->pos.x = j;
-				cube->player_settings->pos.y = i;
-				b = 0;
-			}
+			if (i < 0 || j < 0 || i >= cube->map->height || j >= cube->map->width)
+				print_global_pixel(cube, x, y, 0x00000000);
 			else if (cube->map->map[i][j] == '1')
 				print_global_pixel(cube, x, y, 0xFF0000FF);
 			else if (cube->map->map[i][j] == '0')
 				print_global_pixel(cube, x, y, 0xFFFFFFFF);
 			else
-				print_global_pixel(cube, x, y, 0xFFFFFFFF);
+				print_global_pixel(cube, x, y, 0x00000000);
 			x += cube->map->size_case;
 			j++;
-		}
+		}		
 		y += cube->map->size_case;
 		i++;
 	}
