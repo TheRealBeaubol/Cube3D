@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/12 13:10:12 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/13 20:41:19 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,13 @@ void	draw_background(t_cube *cube)
 	int	y;
 
 	y = 0;
+	#include <stdio.h>
 	while (y < HEIGHT / 2)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF33EBFF);
+			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF000000 + cube->map->ceiling_color);
 			x++;
 		}
 		y++;
@@ -94,7 +95,7 @@ void	draw_background(t_cube *cube)
 		x = 0;
 		while (x < WIDTH)
 		{
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF7D9E7C);
+			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF000000 + cube->map->floor_color);
 			x++;
 		}
 		y++;

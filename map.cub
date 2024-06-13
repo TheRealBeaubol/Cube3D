@@ -3,8 +3,8 @@ SO ./wall_2.png
 WE ./wall_3.png
 EA ./wall_4.png
 
-F
-C
+F 125,158,124
+C 51,235,255
 
 11111111
 1N001001

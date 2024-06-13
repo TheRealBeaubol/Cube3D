@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:19:57 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/13 15:30:36 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/13 20:01:14 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,81 @@ void	get_wall_texture(t_cube *cube, t_map *map, int fd)
 	}
 }
 
+int	check_colors(char **colors)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (colors[++i])
+	{
+		j = -1;
+		while (colors[i][++j])
+		{
+			if (!ft_isdigit(colors[i][j]) || ft_strlen(colors[i]) > 3)
+			{
+				ft_printf("colors[%d] = %s\n", i, colors[i]);
+				ft_printf("ft_strlen(colors[%d]) = %d\n", i, ft_strlen(colors[i]));
+				ft_dprintf(2, "Error\n4Color is not valid\n");
+				return (0);
+			}
+		}
+	}
+	return (1);
+
+}
+
+unsigned long	convert_rgb_to_hexa(char **colors)
+{
+	int				r;
+	int				g;
+	int				b;
+	unsigned long	color;
+
+	if (!check_colors(colors))
+		return (0);
+	r = ft_atoi(colors[0]);
+	g = ft_atoi(colors[1]);
+	b = ft_atoi(colors[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	{
+		ft_dprintf(2, "Error\n1Color is not valid\n");
+		ft_free_tab(colors);
+		return (0);
+	}
+	color = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+	ft_free_tab(colors);
+	return (color);
+}
+
+void	get_colors(t_map *map, int fd)
+{
+	char			**colors;
+	char			*str;
+	unsigned long	color;
+
+	str = get_next_line(fd, 0);
+	if (!str || (str[0] != 'C' && str[0] != 'F') || str[1] != ' ')
+	{
+		ft_dprintf(2, "Error\n2Color is not valid\n");
+		free(str);
+	}
+	colors = ft_str_split(str + 2, "\n,");
+	if (!colors || ft_tablen(colors) != 3)
+	{
+		ft_printf("%d\n", ft_tablen(colors));
+		ft_dprintf(2, "Error\n3Color is not valid\n");
+		ft_free_tab(colors);
+		free(str);
+	}
+	color = convert_rgb_to_hexa(colors);
+	if (str[0] == 'C')
+		map->ceiling_color = color;
+	if (str[0] == 'F')
+		map->floor_color = color;
+	free(str);
+}
+
 char	**read_map(t_cube *cube, t_map *map, char *file)
 {
 	int		i;
@@ -126,6 +201,8 @@ char	**read_map(t_cube *cube, t_map *map, char *file)
 	}
 	tab = ft_calloc(map->height + 1, sizeof(char *));
 	get_wall_texture(cube, map, fd);
+	get_colors(map, fd);
+	get_colors(map, fd);
 	i = -1;
 	while (++i < 3)
 	{
