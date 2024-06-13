@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/12 11:34:01 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/13 14:30:51 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	init(t_cube *cube)
 {
 	init_mlx(cube);
 	cube->menu = init_menu(cube);
-	cube->map = init_map(cube->map_name);
+	cube->map = init_map(cube, cube->map_name);
 	cube->is_in_game = 0;
 	init_settings_file(cube);
 	cube->player_settings = init_player_settings();

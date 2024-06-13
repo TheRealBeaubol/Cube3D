@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:19:57 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/31 17:36:12 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/13 15:30:36 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,69 @@ char	**format_tab(char **tab, int height)
 	return (new_tab);
 }
 
-char	**read_map(t_map *map, char *file)
+int	is_wall_texture(char *str)
+{
+	int	len;
+
+	len = ft_strlen(str);
+	if (str[len - 1] != 'g' || str[len - 2] != 'n' || str[len - 3] != 'p' || str[len - 4] != '.')
+		return (-1);
+	if (str[0] == 'W' && str[1] == 'E')
+		return (0);
+	if (str[0] == 'N' && str[1] == 'O')
+		return (1);
+	if (str[0] == 'S' && str[1] == 'O')
+		return (2);
+	if (str[0] == 'E' && str[1] == 'A')
+		return (3);
+	return (-1);
+}
+
+void	get_wall_texture(t_cube *cube, t_map *map, int fd)
+{
+	char	*str;
+	int		i;
+	char	*texture_path;
+
+	i = 0;
+	str = get_next_line(fd, 0);
+	map->west_texture = NULL;
+	map->north_texture = NULL;
+	map->south_texture = NULL;
+	map->east_texture = NULL;
+	while (i < 4)
+	{
+		if (str && ft_strlen(str) > 7 && is_wall_texture(str))
+		{
+			texture_path = ft_strdup(str + 2);
+			if (is_wall_texture(str) == 0)
+				map->west_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+			if (is_wall_texture(str) == 1)
+				map->north_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+			if (is_wall_texture(str) == 2)
+				map->south_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+			if (is_wall_texture(str) == 3)
+				map->east_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+		}
+		else
+		{
+			ft_dprintf(2, "Error\nTexture path is not valid\n");
+			free(str);
+			return ;
+		}
+		free(texture_path);
+		free(str);
+		i++;
+		str = get_next_line(fd, 0);
+	}
+	if (!(map->west_texture && map->north_texture && map->south_texture && map->east_texture))
+	{
+		ft_dprintf(2, "Error\nTexture path is not valid or one texture is missing\n");
+		return ;
+	}
+}
+
+char	**read_map(t_cube *cube, t_map *map, char *file)
 {
 	int		i;
 	int		fd;
@@ -62,8 +124,14 @@ char	**read_map(t_map *map, char *file)
 		ft_putstr_fd("Error\n", 2);
 		return (NULL);
 	}
-	map->height = get_height(file);
 	tab = ft_calloc(map->height + 1, sizeof(char *));
+	get_wall_texture(cube, map, fd);
+	i = -1;
+	while (++i < 3)
+	{
+		tab[0] = get_next_line(fd, 0);
+		free(tab[0]);
+	}
 	i = 0;
 	tab[i] = get_next_line(fd, 0);
 	if (!tab[i])
@@ -79,14 +147,14 @@ char	**read_map(t_map *map, char *file)
 	return (tab);
 }
 
-char	**parsing(t_map *map, char *file)
+void	parsing(t_cube *cube, t_map *map, char *file)
 {
 	char	**tab;
 
-	tab = read_map(map, file);
+	tab = read_map(cube, map, file);
 	if (!tab)
-		return (NULL);
+		return ;
 	tab = format_tab(tab, map->height);
 	print_tab(tab);
-	return (tab);
+	map->map = tab;
 }

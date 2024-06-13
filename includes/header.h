@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/12 11:34:38 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/13 15:04:53 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int				get_key_from_line_part_three(char *line);
 int				get_key_from_line_part_four(char *line);
 int				get_key_from_line_part_five(char *line);
 int				get_height(char *file);
-t_map			*init_map(char *map_name);
+t_map			*init_map(t_cube *cube, char *map_name);
 void			render_key_images(t_cube *cube);
 void			render_hover_button_in_keybind_menu_part_one(t_cube *cube);
 void			render_hover_button_in_keybind_menu_part_two(t_cube *cube);
@@ -74,7 +74,7 @@ void			open_keybinds_menu(t_cube *cube);
 void			open_music_and_sounds_menu(t_cube *cube);
 void			*get_key_images(t_cube *cube, int key);
 void			render_cube(t_cube *cube);
-char			**parsing(t_map *map, char *file);
+void			parsing(t_cube *cube, t_map *map, char *file);
 void			plotline(t_cube *cube, t_point point2, t_point point1);
 void	        do_rays(t_cube *cube, t_ray *ray, int i);
 

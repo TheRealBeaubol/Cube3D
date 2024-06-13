@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/10 17:48:17 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/13 14:01:50 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,12 @@ typedef struct s_player_settings
 typedef struct s_map
 {
 	char	**map;
+	void	*north_texture;
+	void	*south_texture;
+	void	*east_texture;
+	void	*west_texture;
+	unsigned long	ceiling_color;
+	unsigned long	floor_color;
 	int		height;
 	int		width;
 	int		size_case;

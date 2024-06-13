@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/11 13:41:54 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/13 15:08:43 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,6 @@ int	mouse_move(void *cube_void)
 	if (cube->is_in_game)
 		handle_mouse_in_game(cube, x, y);
 	render_hover_button(cube);
-	fps_counter();
+	// fps_counter();
 	return (0);
 }

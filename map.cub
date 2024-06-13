@@ -1,3 +1,11 @@
+NO ./wall_1.png
+SO ./wall_2.png
+WE ./wall_3.png
+EA ./wall_4.png
+
+F
+C
+
 11111111
 1N001001
 10001001
