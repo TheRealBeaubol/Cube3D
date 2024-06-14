@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/06/11 13:04:03 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/06/14 21:07:40 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME	=	cub3D
 # **************************************************************************** #
 
 CC						=	@cc
-CFLAGS					=	-Wall -Wextra -Werror -g
+CFLAGS					=	-Wall -Wextra -Werror -pg
 MK						=	@mkdir -p
 FILE					=	$(shell ls -lR srcs/ | grep -F .c | wc -l)
 PROJ_CMP				=	1

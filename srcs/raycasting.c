@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:11:15 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/14 13:44:42 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 21:06:52 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,3 +111,26 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 	}
 }
 
+void	texture_calculation(t_cube *cube, t_ray *ray)
+{
+	int	tex_num;
+	int	tex_x;
+
+	// mlx_get_image_pixel(cube->mlx_ptr, cube->map->north_texture, cube->texture[x][y], x, y, &ray->color);
+	tex_num = cube->map->map[ray->map_y][ray->map_x] - 1;
+	if (ray->side == 0)
+		ray->wall_x = \
+cube->player_settings->pos.y + ray->lenght * ray->ray_dir_y;
+	else
+		ray->wall_x = \
+cube->player_settings->pos.x + ray->lenght * ray->ray_dir_x;
+	if (ray->wall_x < 0)
+		ray->wall_x += 1;
+	if (ray->wall_x >= 1)
+		ray->wall_x -= 1;
+	tex_x = (int)(ray->wall_x * (double)64);
+	if (ray->side == 0 && ray->ray_dir_x > 0)
+		tex_x = 64 - tex_x - 1;
+	if (ray->side == 1 && ray->ray_dir_y < 0)
+		tex_x = 64 - tex_x - 1;
+}

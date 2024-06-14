@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/14 13:44:33 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 21:29:01 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	draw_background(t_cube *cube)
 		x = 0;
 		while (x < WIDTH)
 		{
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF000000 + cube->map->ceiling_color);
+			mlx_set_image_pixel(cube->mlx_ptr, cube->background, x, y, 0xFF000000 + cube->map->ceiling_color);
 			x++;
 		}
 		y++;
@@ -94,7 +94,7 @@ void	draw_background(t_cube *cube)
 		x = 0;
 		while (x < WIDTH)
 		{
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF000000 + cube->map->floor_color);
+			mlx_set_image_pixel(cube->mlx_ptr, cube->background, x, y, 0xFF000000 + cube->map->floor_color);
 			x++;
 		}
 		y++;
@@ -138,9 +138,27 @@ void	print_map(t_cube *cube)
 				print_global_pixel(cube, x, y, 0x00000000);
 			x += cube->map->size_case;
 			j++;
-		}		
+		}
 		y += cube->map->size_case;
 		i++;
+	}
+}
+
+void	clear_window(void *mlx_ptr, void *window_ptr)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			mlx_set_image_pixel(mlx_ptr, window_ptr, x, y, 0x00000000);
+			x++;
+		}
+		y++;
 	}
 }
 
@@ -149,7 +167,7 @@ void	render_cube(t_cube *cube)
 	int	i;
 
 	i = -1;
-	draw_background(cube);
+	clear_window(cube->mlx_ptr, cube->img);
 	print_map(cube);
 	print_player(cube, 0xFFFF0000);
 	cube->player_settings->ray = ft_calloc(WIDTH + 1, sizeof(t_ray *));
@@ -158,6 +176,7 @@ void	render_cube(t_cube *cube)
 	i = -1;
 	while (++i < WIDTH)
 		do_rays(cube, cube->player_settings->ray[i], i);
+	mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->background, 0, 0);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->img, 0, 0);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->minimap_img, 0, 0);
 }

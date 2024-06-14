@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/14 13:45:35 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 21:21:35 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	handle_mouse_in_game(t_cube *cube, int x, int y)
 		x_old = x;
 	}
 	(void)y;
+	mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
 	render_cube(cube);
 }
 
@@ -146,6 +147,6 @@ int	mouse_move(void *cube_void)
 	if (cube->is_in_game)
 		handle_mouse_in_game(cube, x, y);
 	render_hover_button(cube);
-	// fps_counter();
+	fps_counter();
 	return (0);
 }

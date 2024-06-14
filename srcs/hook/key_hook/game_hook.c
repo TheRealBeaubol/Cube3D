@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:59:02 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/14 13:44:45 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 20:54:02 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,41 +21,33 @@ static void	manage_player_moves(t_cube *cube, int keycode)
 	
 	movespeed = 0.04;
 	rotspeed = 2747483640;
-	if (keycode == cube->player_settings->move_forward)
+if (keycode == cube->player_settings->move_forward)
 	{
-		//printf("cube->player_settings->pos.x = %f\n", cube->player_settings->pos.x);
-		//printf("cube->player_settings->pos.y = %f\n", cube->player_settings->pos.y);
-		//printf("cube->player_settings->dir_x = %f\n", cube->player_settings->dir_x);
-		//printf("cube->player_settings->dir_x = %f\n", cube->player_settings->dir_x / cube->map->size_case);
-		//printf("map x: %d\n",(int)(cube->player_settings->pos.x + cube->player_settings->dir_x / cube->map->size_case * movespeed));
-		//printf("map y: %d\n",(int)(cube->player_settings->pos.y + cube->player_settings->dir_y / cube->map->size_case * movespeed));
-		//printf("map x y: %c\n",cube->map->map[(int)(cube->player_settings->pos.y + cube->player_settings->dir_y / cube->map->size_case * movespeed)][(int)(cube->player_settings->pos.x + cube->player_settings->dir_x / cube->map->size_case * movespeed)]);
-
-		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x + cube->player_settings->dir_x / cube->map->size_case * movespeed)] != '1')
+		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x + cube->player_settings->dir_x /*/ cube->map->size_case*/ * movespeed)] != '1')
 			cube->player_settings->pos.x += cube->player_settings->dir_x * movespeed;
-		if (cube->map->map[(int)(cube->player_settings->pos.y + cube->player_settings->dir_y / cube->map->size_case * movespeed)][(int)cube->player_settings->pos.x] != '1')
+		if (cube->map->map[(int)(cube->player_settings->pos.y + cube->player_settings->dir_y /*/ cube->map->size_case*/ * movespeed)][(int)cube->player_settings->pos.x] != '1')
 			cube->player_settings->pos.y += cube->player_settings->dir_y * movespeed;
 	}
 	if (keycode == cube->player_settings->move_backward)
 	{
-		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x - cube->player_settings->dir_x / cube->map->size_case * movespeed)] != '1')
+		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x - cube->player_settings->dir_x /*/ cube->map->size_case*/ * movespeed)] != '1')
 			cube->player_settings->pos.x -= cube->player_settings->dir_x * movespeed;
-		if (cube->map->map[(int)(cube->player_settings->pos.y - cube->player_settings->dir_y / cube->map->size_case * movespeed)][(int)cube->player_settings->pos.x] != '1')
+		if (cube->map->map[(int)(cube->player_settings->pos.y - cube->player_settings->dir_y /*/ cube->map->size_case*/ * movespeed)][(int)cube->player_settings->pos.x] != '1')
 			cube->player_settings->pos.y -= cube->player_settings->dir_y * movespeed;
 	}
 	if (keycode == cube->player_settings->move_left)
 	{
-		if (cube->map->map[(int)(cube->player_settings->pos.y + cube->player_settings->dir_x / cube->map->size_case * movespeed)][(int)cube->player_settings->pos.x] != '1')
+		if (cube->map->map[(int)(cube->player_settings->pos.y - cube->player_settings->dir_x /*/ cube->map->size_case*/ * movespeed)][(int)cube->player_settings->pos.x] != '1')
 			cube->player_settings->pos.y -= cube->player_settings->dir_x * movespeed;
-		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x - cube->player_settings->dir_y / cube->map->size_case * movespeed)] != '1')
+		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x + cube->player_settings->dir_y /*/ cube->map->size_case*/ * movespeed)] != '1')
 			cube->player_settings->pos.x += cube->player_settings->dir_y * movespeed;
 		cube->player_settings->move = 2;
 	}
 	if (keycode == cube->player_settings->move_right)
 	{
-		if (cube->map->map[(int)(cube->player_settings->pos.y - cube->player_settings->dir_x / cube->map->size_case * movespeed)][(int)cube->player_settings->pos.x] != '1')
+		if (cube->map->map[(int)(cube->player_settings->pos.y + cube->player_settings->dir_x /*/ cube->map->size_case*/ * movespeed)][(int)cube->player_settings->pos.x] != '1')
 			cube->player_settings->pos.y += cube->player_settings->dir_x * movespeed;
-		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x + cube->player_settings->dir_y / cube->map->size_case * movespeed)] != '1')
+		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x - cube->player_settings->dir_y /*/ cube->map->size_case*/ * movespeed)] != '1')
 			cube->player_settings->pos.x -= cube->player_settings->dir_y * movespeed;
 		cube->player_settings->move = 3;
 	}

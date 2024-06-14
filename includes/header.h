@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/13 15:04:53 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 21:15:15 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ void			render_cube(t_cube *cube);
 void			parsing(t_cube *cube, t_map *map, char *file);
 void			plotline(t_cube *cube, t_point point2, t_point point1);
 void	        do_rays(t_cube *cube, t_ray *ray, int i);
+void	        draw_background(t_cube *cube);
 
 #endif

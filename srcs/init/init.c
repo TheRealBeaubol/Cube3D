@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/14 13:52:47 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 21:26:08 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,6 @@ t_player_settings	*init_player_settings(void)
 	return (settings);
 }
 
-/*
- Set the default settings here. Do a fonction to edit the settings with only
- a putstr and a string like up there, just put int value. When reading the
- settings.txt file check if the int value is coherent. If not because 
- someone edited the file -> set error message and redefine the settings.txt file.
-*/
-
 void	init_mlx(t_cube *cube)
 {
 	cube->mlx_ptr = mlx_init();
@@ -57,6 +50,7 @@ void	init_mlx(t_cube *cube)
 		exit (1);
 	cube->img = mlx_new_image(cube->mlx_ptr, WIDTH, HEIGHT);
 	cube->minimap_img = mlx_new_image(cube->mlx_ptr, WIDTH, HEIGHT);
+	cube->background = mlx_new_image(cube->mlx_ptr, WIDTH, HEIGHT);
 	cube->window_ptr = mlx_new_window(cube->mlx_ptr, WIDTH, HEIGHT, "Cube3D");
 	if (cube->window_ptr == NULL)
 		free_and_destroy(cube);
@@ -115,5 +109,6 @@ void	init(t_cube *cube)
 		free_and_destroy(cube);
 	}
 	init_player(cube);
+	draw_background(cube);
 	start_cube(cube);
 }
