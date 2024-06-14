@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:59:02 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/11 17:41:34 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/14 13:44:45 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	manage_player_moves(t_cube *cube, int keycode)
 	
 	movespeed = 0.04;
 	rotspeed = 2747483640;
-	#include <stdio.h>
 	if (keycode == cube->player_settings->move_forward)
 	{
 		//printf("cube->player_settings->pos.x = %f\n", cube->player_settings->pos.x);

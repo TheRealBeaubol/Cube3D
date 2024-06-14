@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:19:57 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/13 20:01:14 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:05:20 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,16 @@ int	is_wall_texture(char *str)
 	int	len;
 
 	len = ft_strlen(str);
-	if (str[len - 1] != 'g' || str[len - 2] != 'n' || str[len - 3] != 'p' || str[len - 4] != '.')
+	if (str[len - 2] != 'g' || str[len - 3] != 'n' || str[len - 4] != 'p' || str[len - 5] != '.')
 		return (-1);
 	if (str[0] == 'W' && str[1] == 'E')
-		return (0);
-	if (str[0] == 'N' && str[1] == 'O')
 		return (1);
-	if (str[0] == 'S' && str[1] == 'O')
+	if (str[0] == 'N' && str[1] == 'O')
 		return (2);
-	if (str[0] == 'E' && str[1] == 'A')
+	if (str[0] == 'S' && str[1] == 'O')
 		return (3);
+	if (str[0] == 'E' && str[1] == 'A')
+		return (4);
 	return (-1);
 }
 
@@ -84,14 +84,15 @@ void	get_wall_texture(t_cube *cube, t_map *map, int fd)
 	{
 		if (str && ft_strlen(str) > 7 && is_wall_texture(str))
 		{
-			texture_path = ft_strdup(str + 2);
-			if (is_wall_texture(str) == 0)
-				map->west_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+			texture_path = ft_strdup(str + 3);
+			texture_path[ft_strlen(texture_path) - 1] = '\0';
 			if (is_wall_texture(str) == 1)
-				map->north_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+				map->west_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
 			if (is_wall_texture(str) == 2)
-				map->south_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+				map->north_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
 			if (is_wall_texture(str) == 3)
+				map->south_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+			if (is_wall_texture(str) == 4)
 				map->east_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
 		}
 		else
@@ -105,7 +106,7 @@ void	get_wall_texture(t_cube *cube, t_map *map, int fd)
 		i++;
 		str = get_next_line(fd, 0);
 	}
-	if (!(map->west_texture && map->north_texture && map->south_texture && map->east_texture))
+	if (!map->west_texture || !map->north_texture || !map->south_texture || !map->east_texture)
 	{
 		ft_dprintf(2, "Error\nTexture path is not valid or one texture is missing\n");
 		return ;
@@ -124,10 +125,8 @@ int	check_colors(char **colors)
 		while (colors[i][++j])
 		{
 			if (!ft_isdigit(colors[i][j]) || ft_strlen(colors[i]) > 3)
-			{
-				ft_printf("colors[%d] = %s\n", i, colors[i]);
-				ft_printf("ft_strlen(colors[%d]) = %d\n", i, ft_strlen(colors[i]));
-				ft_dprintf(2, "Error\n4Color is not valid\n");
+			{	
+				ft_dprintf(2, "Error\nColor is not valid\n");
 				return (0);
 			}
 		}
@@ -154,7 +153,8 @@ unsigned long	convert_rgb_to_hexa(char **colors)
 		ft_free_tab(colors);
 		return (0);
 	}
-	color = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+	color = 0xFF000000;
+	color += ((r & 0xFF) << 16 | (g & 0xFF) << 8 | (b & 0xFF));
 	ft_free_tab(colors);
 	return (color);
 }
@@ -204,11 +204,8 @@ char	**read_map(t_cube *cube, t_map *map, char *file)
 	get_colors(map, fd);
 	get_colors(map, fd);
 	i = -1;
-	while (++i < 3)
-	{
-		tab[0] = get_next_line(fd, 0);
-		free(tab[0]);
-	}
+	tab[0] = get_next_line(fd, 0);
+	free(tab[0]);
 	i = 0;
 	tab[i] = get_next_line(fd, 0);
 	if (!tab[i])

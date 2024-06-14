@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/13 15:08:43 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 13:45:35 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ y > 480 && y < 600);
 	cube->menu->exit_button_status = (x > 780 && x < 1135 && \
 y > 680 && y < 800);
 }
-#include <stdio.h>
+
 void	handle_mouse_in_game(t_cube *cube, int x, int y)
 {
 	static int		x_old = 0;
@@ -102,6 +102,7 @@ void	handle_mouse_in_game(t_cube *cube, int x, int y)
 	render_cube(cube);
 }
 
+#include <stdio.h>
 void	fps_counter(void)
 {
 	static clock_t	last_time = 0;

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:00:32 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/13 15:28:17 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:05:55 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ t_map	*init_map(t_cube *cube, char	*map_name)
 	if (!map)
 		ft_printf("Error\n");
 	map->height = get_height(map_name);
-	ft_printf("height = %d\n", map->height);
 	parsing(cube, map, map_name);
 	if (!map->map)
 	{
@@ -64,7 +63,6 @@ t_map	*init_map(t_cube *cube, char	*map_name)
 		return (NULL);
 	}
 	map->width = get_width(map->map);
-	ft_printf("width = %d\n", map->width);
 	map->size_case = 50;
 	map->player_size = map->size_case / 5;
 	return (map);

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/13 14:30:51 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 13:52:47 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ void	init_player(t_cube *cube)
 		j = 0;
 		while (cube->map->map[i][j])
 		{
-			if (is_player(cube->map->map[i][j]))
+			if (!is_player(cube->map->map[i][j]))
 			{
-				cube->player_settings->pos.x = j;
-				cube->player_settings->pos.y = i;
+				cube->player_settings->pos.x = i;
+				cube->player_settings->pos.y = j;
 				cube->map->map[i][j] = '0';
 				return ;
 			}
@@ -111,13 +111,9 @@ void	init(t_cube *cube)
 	cube->player_settings = init_player_settings();
 	if (!cube->menu || !cube->map || !cube->player_settings)
 	{
-		ft_dprintf(2, "Error\nWho the fuck chmod a required file ?\n");
+		ft_dprintf(2, "Error\nFile cannot be open or the file is missing\n");
 		free_and_destroy(cube);
 	}
 	init_player(cube);
 	start_cube(cube);
-	// cube->menu->is_in_menu = 0;
-	// cube->is_in_game = 1;
-	// mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
-	// render_cube(cube);
 }

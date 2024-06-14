@@ -6,13 +6,13 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:11:15 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/11 14:06:14 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 13:44:42 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "header.h"
-#include <stdio.h>
+
 void	init_ray(t_player_settings *player_settings, t_ray *ray, int i)
 {
 	ray->camera_x = 2 * i / (float)WIDTH - 1;

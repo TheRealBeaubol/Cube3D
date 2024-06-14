@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/13 20:41:19 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 13:44:33 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	draw_background(t_cube *cube)
 	int	y;
 
 	y = 0;
-	#include <stdio.h>
 	while (y < HEIGHT / 2)
 	{
 		x = 0;
@@ -104,7 +103,7 @@ void	draw_background(t_cube *cube)
 
 int	is_player(char c)
 {
-	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+	return (c != 'N' && c != 'S' && c != 'E' && c != 'W');
 }
 
 void	print_map(t_cube *cube)
