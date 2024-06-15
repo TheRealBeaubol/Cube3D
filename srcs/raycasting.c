@@ -6,13 +6,13 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:11:15 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/11 14:06:14 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/15 18:46:41 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "header.h"
-#include <stdio.h>
+
 void	init_ray(t_player_settings *player_settings, t_ray *ray, int i)
 {
 	ray->camera_x = 2 * i / (float)WIDTH - 1;
@@ -51,6 +51,7 @@ void	calculate_step_and_init_sidedist(t_ray *ray, t_player_settings *player_sett
 
 void	perform_dda(t_ray *ray, t_map *map, t_player_settings *player_settings)
 {
+	#include <stdio.h>
 	while (ray->hit_wall == 0)
 	{
 		if (ray->side_dist_x < ray->side_dist_y)
@@ -75,6 +76,20 @@ void	perform_dda(t_ray *ray, t_map *map, t_player_settings *player_settings)
 		}
 		if (map->map[ray->map_y][ray->map_x] == '1')
 			ray->hit_wall = 1;
+		//printf("map x: %d\n", ray->map_x);
+		//printf("map y: %d\n", ray->map_y);
+
+		if (map->map[ray->map_y][ray->map_x] == 'P')
+		{
+			printf("map_case: %c\n", map->map[ray->map_y][ray->map_x]);
+			printf("diff x: %f\n", fabs(ray->map_x - player_settings->pos.x));
+			printf("diff y: %f\n", fabs(ray->map_y - player_settings->pos.y));
+		}
+		if (map->map[ray->map_y][ray->map_x] == 'P' && (fabs(ray->map_x - player_settings->pos.x) > 2 || fabs(ray->map_y - player_settings->pos.y) > 2))
+		{
+			printf("JE SUIS LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+			ray->hit_wall = 2;
+		}
 	}
 	if (ray->side == 0)
 		ray->lenght = (ray->map_x - player_settings->pos.x + (1 - ray->step_x) / 2) / ray->ray_dir_x;
@@ -86,10 +101,12 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 {
 	int	start;
 	int	end;
-
+	
+	#include <stdio.h>
 	init_ray(cube->player_settings, ray, i);
 	calculate_step_and_init_sidedist(ray, cube->player_settings);
 	perform_dda(ray, cube->map, cube->player_settings);
+	printf("NAZI\n");
 	ray->wall_height = (int)(HEIGHT / ray->lenght);
 	start = -ray->wall_height / 2 + HEIGHT / 2;
 	if (start < 0)
@@ -100,14 +117,42 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 	start -= 1;
 	while (++start < end)
 	{
-		if (ray->direction == NORTH)
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFF00FF00);
-		else if (ray->direction == SOUTH)
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFFFF0000);
-		else if (ray->direction == WEST)
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFF0000FF);
-		else if (ray->direction == EAST)
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFFFFFF00);
+		if (ray->hit_wall == 2)
+			mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFFFFFFFF);
+		else
+		{
+			if (ray->direction == NORTH)
+				mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFF00FF00);
+			else if (ray->direction == SOUTH)
+				mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFFFF0000);
+			else if (ray->direction == WEST)
+				mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFF0000FF);
+			else if (ray->direction == EAST)
+				mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFFFFFF00);
+		}
 	}
 }
 
+void	texture_calculation(t_cube *cube, t_ray *ray)
+{
+	int	tex_num;
+	int	tex_x;
+
+	// mlx_get_image_pixel(cube->mlx_ptr, cube->map->north_texture, cube->texture[x][y], x, y, &ray->color);
+	tex_num = cube->map->map[ray->map_y][ray->map_x] - 1;
+	if (ray->side == 0)
+		ray->wall_x = \
+cube->player_settings->pos.y + ray->lenght * ray->ray_dir_y;
+	else
+		ray->wall_x = \
+cube->player_settings->pos.x + ray->lenght * ray->ray_dir_x;
+	if (ray->wall_x < 0)
+		ray->wall_x += 1;
+	if (ray->wall_x >= 1)
+		ray->wall_x -= 1;
+	tex_x = (int)(ray->wall_x * (double)64);
+	if (ray->side == 0 && ray->ray_dir_x > 0)
+		tex_x = 64 - tex_x - 1;
+	if (ray->side == 1 && ray->ray_dir_y < 0)
+		tex_x = 64 - tex_x - 1;
+}

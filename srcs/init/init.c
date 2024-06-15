@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/11 13:48:24 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/15 17:21:32 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,6 @@ t_player_settings	*init_player_settings(void)
 	return (settings);
 }
 
-/*
- Set the default settings here. Do a fonction to edit the settings with only
- a putstr and a string like up there, just put int value. When reading the
- settings.txt file check if the int value is coherent. If not because 
- someone edited the file -> set error message and redefine the settings.txt file.
-*/
-
 void	init_mlx(t_cube *cube)
 {
 	cube->mlx_ptr = mlx_init();
@@ -57,6 +50,7 @@ void	init_mlx(t_cube *cube)
 		exit (1);
 	cube->img = mlx_new_image(cube->mlx_ptr, WIDTH, HEIGHT);
 	cube->minimap_img = mlx_new_image(cube->mlx_ptr, WIDTH, HEIGHT);
+	cube->background = mlx_new_image(cube->mlx_ptr, WIDTH, HEIGHT);
 	cube->window_ptr = mlx_new_window(cube->mlx_ptr, WIDTH, HEIGHT, "Cube3D");
 	if (cube->window_ptr == NULL)
 		free_and_destroy(cube);
@@ -77,22 +71,44 @@ cube->menu->exit_button, (WIDTH - cube->menu->button_width) / 2, ((HEIGHT - \
 cube->menu->button_height) / 2) + 200);
 }
 
+void	init_player(t_cube *cube)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (cube->map->map[i])
+	{
+		j = 0;
+		while (cube->map->map[i][j])
+		{
+			if (!is_player(cube->map->map[i][j]))
+			{
+				cube->player_settings->pos.x = i + 0.5;
+				cube->player_settings->pos.y = j + 0.5;
+				cube->map->map[i][j] = '0';
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 void	init(t_cube *cube)
 {
 	init_mlx(cube);
 	cube->menu = init_menu(cube);
-	cube->map = init_map(cube->map_name);
+	cube->map = init_map(cube, cube->map_name);
 	cube->is_in_game = 0;
 	init_settings_file(cube);
 	cube->player_settings = init_player_settings();
 	if (!cube->menu || !cube->map || !cube->player_settings)
 	{
-		ft_dprintf(2, "Error\nWho the fuck chmod a required file ?\n");
+		ft_dprintf(2, "Error\nFile cannot be open or the file is missing\n");
 		free_and_destroy(cube);
 	}
+	init_player(cube);
+	draw_background(cube);
 	start_cube(cube);
-	// cube->menu->is_in_menu = 0;
-	// cube->is_in_game = 1;
-	// mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
-	// render_cube(cube);
 }

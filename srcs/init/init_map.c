@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:00:32 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/02 21:13:16 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:05:55 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,20 @@ int	get_height(char *file)
 		i++;
 	}
 	close(fd);
-	return (i);
+	if (i > 8)
+		return (i - 8);
+	return (-1);
 }
 
-t_map	*init_map(char	*map_name)
+t_map	*init_map(t_cube *cube, char	*map_name)
 {
 	t_map	*map;
 
 	map = ft_calloc(1, sizeof(t_map));
-	map->map = parsing(map, map_name);
+	if (!map)
+		ft_printf("Error\n");
+	map->height = get_height(map_name);
+	parsing(cube, map, map_name);
 	if (!map->map)
 	{
 		free(map);

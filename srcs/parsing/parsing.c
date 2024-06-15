@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:19:57 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/31 17:36:12 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:05:20 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,144 @@ char	**format_tab(char **tab, int height)
 	return (new_tab);
 }
 
-char	**read_map(t_map *map, char *file)
+int	is_wall_texture(char *str)
+{
+	int	len;
+
+	len = ft_strlen(str);
+	if (str[len - 2] != 'g' || str[len - 3] != 'n' || str[len - 4] != 'p' || str[len - 5] != '.')
+		return (-1);
+	if (str[0] == 'W' && str[1] == 'E')
+		return (1);
+	if (str[0] == 'N' && str[1] == 'O')
+		return (2);
+	if (str[0] == 'S' && str[1] == 'O')
+		return (3);
+	if (str[0] == 'E' && str[1] == 'A')
+		return (4);
+	return (-1);
+}
+
+void	get_wall_texture(t_cube *cube, t_map *map, int fd)
+{
+	char	*str;
+	int		i;
+	char	*texture_path;
+
+	i = 0;
+	str = get_next_line(fd, 0);
+	map->west_texture = NULL;
+	map->north_texture = NULL;
+	map->south_texture = NULL;
+	map->east_texture = NULL;
+	while (i < 4)
+	{
+		if (str && ft_strlen(str) > 7 && is_wall_texture(str))
+		{
+			texture_path = ft_strdup(str + 3);
+			texture_path[ft_strlen(texture_path) - 1] = '\0';
+			if (is_wall_texture(str) == 1)
+				map->west_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+			if (is_wall_texture(str) == 2)
+				map->north_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+			if (is_wall_texture(str) == 3)
+				map->south_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+			if (is_wall_texture(str) == 4)
+				map->east_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+		}
+		else
+		{
+			ft_dprintf(2, "Error\nTexture path is not valid\n");
+			free(str);
+			return ;
+		}
+		free(texture_path);
+		free(str);
+		i++;
+		str = get_next_line(fd, 0);
+	}
+	if (!map->west_texture || !map->north_texture || !map->south_texture || !map->east_texture)
+	{
+		ft_dprintf(2, "Error\nTexture path is not valid or one texture is missing\n");
+		return ;
+	}
+}
+
+int	check_colors(char **colors)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (colors[++i])
+	{
+		j = -1;
+		while (colors[i][++j])
+		{
+			if (!ft_isdigit(colors[i][j]) || ft_strlen(colors[i]) > 3)
+			{	
+				ft_dprintf(2, "Error\nColor is not valid\n");
+				return (0);
+			}
+		}
+	}
+	return (1);
+
+}
+
+unsigned long	convert_rgb_to_hexa(char **colors)
+{
+	int				r;
+	int				g;
+	int				b;
+	unsigned long	color;
+
+	if (!check_colors(colors))
+		return (0);
+	r = ft_atoi(colors[0]);
+	g = ft_atoi(colors[1]);
+	b = ft_atoi(colors[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	{
+		ft_dprintf(2, "Error\n1Color is not valid\n");
+		ft_free_tab(colors);
+		return (0);
+	}
+	color = 0xFF000000;
+	color += ((r & 0xFF) << 16 | (g & 0xFF) << 8 | (b & 0xFF));
+	ft_free_tab(colors);
+	return (color);
+}
+
+void	get_colors(t_map *map, int fd)
+{
+	char			**colors;
+	char			*str;
+	unsigned long	color;
+
+	str = get_next_line(fd, 0);
+	if (!str || (str[0] != 'C' && str[0] != 'F') || str[1] != ' ')
+	{
+		ft_dprintf(2, "Error\n2Color is not valid\n");
+		free(str);
+	}
+	colors = ft_str_split(str + 2, "\n,");
+	if (!colors || ft_tablen(colors) != 3)
+	{
+		ft_printf("%d\n", ft_tablen(colors));
+		ft_dprintf(2, "Error\n3Color is not valid\n");
+		ft_free_tab(colors);
+		free(str);
+	}
+	color = convert_rgb_to_hexa(colors);
+	if (str[0] == 'C')
+		map->ceiling_color = color;
+	if (str[0] == 'F')
+		map->floor_color = color;
+	free(str);
+}
+
+char	**read_map(t_cube *cube, t_map *map, char *file)
 {
 	int		i;
 	int		fd;
@@ -62,8 +199,13 @@ char	**read_map(t_map *map, char *file)
 		ft_putstr_fd("Error\n", 2);
 		return (NULL);
 	}
-	map->height = get_height(file);
 	tab = ft_calloc(map->height + 1, sizeof(char *));
+	get_wall_texture(cube, map, fd);
+	get_colors(map, fd);
+	get_colors(map, fd);
+	i = -1;
+	tab[0] = get_next_line(fd, 0);
+	free(tab[0]);
 	i = 0;
 	tab[i] = get_next_line(fd, 0);
 	if (!tab[i])
@@ -79,14 +221,14 @@ char	**read_map(t_map *map, char *file)
 	return (tab);
 }
 
-char	**parsing(t_map *map, char *file)
+void	parsing(t_cube *cube, t_map *map, char *file)
 {
 	char	**tab;
 
-	tab = read_map(map, file);
+	tab = read_map(cube, map, file);
 	if (!tab)
-		return (NULL);
+		return ;
 	tab = format_tab(tab, map->height);
 	print_tab(tab);
-	return (tab);
+	map->map = tab;
 }

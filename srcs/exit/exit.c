@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:33 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/10 15:44:00 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 21:28:25 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,16 @@
 void	free_and_destroy(t_cube *cube)
 {
 	destroy_menu(cube);
+	mlx_destroy_image(cube->mlx_ptr, cube->map->north_texture);
+	mlx_destroy_image(cube->mlx_ptr, cube->map->south_texture);
+	mlx_destroy_image(cube->mlx_ptr, cube->map->west_texture);
+	mlx_destroy_image(cube->mlx_ptr, cube->map->east_texture);
 	free(cube->menu->settings_menu->keys_images);
 	free(cube->menu->settings_menu);
 	free(cube->menu);
 	free(cube->player_settings);
 	mlx_destroy_image(cube->mlx_ptr, cube->minimap_img);
+	mlx_destroy_image(cube->mlx_ptr, cube->background);
 	mlx_destroy_image(cube->mlx_ptr, cube->img);
 	mlx_destroy_window(cube->mlx_ptr, cube->window_ptr);
 	mlx_destroy_display(cube->mlx_ptr);

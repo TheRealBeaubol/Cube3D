@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/11 17:57:39 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/15 18:54:18 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,11 @@ y > 480 && y < 600);
 	cube->menu->exit_button_status = (x > 780 && x < 1135 && \
 y > 680 && y < 800);
 }
-#include <stdio.h>
+
 void	handle_mouse_in_game(t_cube *cube, int x, int y)
 {
 	static int		x_old = 0;
-	double			rotspeed;
-	
-	rotspeed = 0.07;
+
 		mlx_mouse_hide();
 	if (!x_old)
 		x_old = x;
@@ -83,27 +81,29 @@ void	handle_mouse_in_game(t_cube *cube, int x, int y)
 	else if (x_old > x)
 	{
 		double old_dir_x = cube->player_settings->dir_x;
-		cube->player_settings->dir_x = cube->player_settings->dir_x * cos(-rotspeed) - cube->player_settings->dir_y * sin(-rotspeed);
-		cube->player_settings->dir_y = old_dir_x * sin(-rotspeed) + cube->player_settings->dir_y * cos(-rotspeed);
+		cube->player_settings->dir_x = cube->player_settings->dir_x * cos(-0.1) - cube->player_settings->dir_y * sin(-0.1);
+		cube->player_settings->dir_y = old_dir_x * sin(-0.1) + cube->player_settings->dir_y * cos(-0.1);
 		double old_plane_x = cube->player_settings->plane.x;
-		cube->player_settings->plane.x = cube->player_settings->plane.x * cos(-rotspeed) - cube->player_settings->plane.y * sin(-rotspeed);
-		cube->player_settings->plane.y = old_plane_x * sin(-rotspeed) + cube->player_settings->plane.y * cos(-rotspeed);
+		cube->player_settings->plane.x = cube->player_settings->plane.x * cos(-0.1) - cube->player_settings->plane.y * sin(-0.1);
+		cube->player_settings->plane.y = old_plane_x * sin(-0.1) + cube->player_settings->plane.y * cos(-0.1);
 		x_old = x;
 	}
 	else if (x_old < x)
 	{
 		double old_dir_x = cube->player_settings->dir_x;
-		cube->player_settings->dir_x = cube->player_settings->dir_x * cos(rotspeed) - cube->player_settings->dir_y * sin(rotspeed);
-		cube->player_settings->dir_y = old_dir_x * sin(rotspeed) + cube->player_settings->dir_y * cos(rotspeed);
+		cube->player_settings->dir_x = cube->player_settings->dir_x * cos(0.1) - cube->player_settings->dir_y * sin(0.1);
+		cube->player_settings->dir_y = old_dir_x * sin(0.1) + cube->player_settings->dir_y * cos(0.1);
 		double old_plane_x = cube->player_settings->plane.x;
-		cube->player_settings->plane.x = cube->player_settings->plane.x * cos(rotspeed) - cube->player_settings->plane.y * sin(rotspeed);
-		cube->player_settings->plane.y = old_plane_x * sin(rotspeed) + cube->player_settings->plane.y * cos(rotspeed);
+		cube->player_settings->plane.x = cube->player_settings->plane.x * cos(0.1) - cube->player_settings->plane.y * sin(0.1);
+		cube->player_settings->plane.y = old_plane_x * sin(0.1) + cube->player_settings->plane.y * cos(0.1);
 		x_old = x;
 	}
 	(void)y;
+	mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
 	render_cube(cube);
 }
 
+#include <stdio.h>
 void	fps_counter(void)
 {
 	static clock_t	last_time = 0;

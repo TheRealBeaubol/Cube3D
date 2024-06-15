@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:47:23 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/10 17:30:30 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/15 17:55:18 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void	handle_mouse_press_in_menu(t_cube *cube, int key)
 	{
 		cube->menu->is_in_menu = 0;
 		cube->is_in_game = 1;
-		mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
+		#include <stdio.h>
 		render_cube(cube);
+		printf("PIPIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\n");
 	}
 	if (cube->menu->settings_button_status && key)
 	{

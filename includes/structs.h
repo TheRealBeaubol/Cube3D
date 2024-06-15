@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/10 17:48:17 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/14 21:13:15 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ typedef struct s_ray
 	int			map_y;
 	int			step_x;
 	int			step_y;
+	double		wall_x;
 	int			side;
 	int			hit_wall;
 
@@ -194,6 +195,12 @@ typedef struct s_player_settings
 typedef struct s_map
 {
 	char	**map;
+	void	*north_texture;
+	void	*south_texture;
+	void	*east_texture;
+	void	*west_texture;
+	unsigned long	ceiling_color;
+	unsigned long	floor_color;
 	int		height;
 	int		width;
 	int		size_case;
@@ -205,6 +212,7 @@ typedef struct s_cube
 	void				*mlx_ptr;
 	void				*window_ptr;
 	void				*img;
+	void				*background;
 	void				*minimap_img;
 	t_menu				*menu;
 	t_player_settings	*player_settings;

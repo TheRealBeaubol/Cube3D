@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/11 16:51:51 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/15 18:07:33 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	print_player(t_cube *cube, int color)
 	int	px;
 	int	py;
 
-	px = WIDTH - (cube->map->width * cube->map->size_case) + cube->player_settings->pos.x * cube->map->size_case;
-	py = cube->player_settings->pos.y * cube->map->size_case;
+	px = WIDTH - (2.5 * cube->map->size_case);
+	py = (2.5 * cube->map->size_case);
 	dx = -1;
 	while (++dx < cube->map->player_size)
 	{
@@ -84,7 +84,7 @@ void	draw_background(t_cube *cube)
 		x = 0;
 		while (x < WIDTH)
 		{
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF33EBFF);
+			mlx_set_image_pixel(cube->mlx_ptr, cube->background, x, y, 0xFF000000 + cube->map->ceiling_color);
 			x++;
 		}
 		y++;
@@ -94,41 +94,50 @@ void	draw_background(t_cube *cube)
 		x = 0;
 		while (x < WIDTH)
 		{
-			mlx_set_image_pixel(cube->mlx_ptr, cube->img, x, y, 0xFF7D9E7C);
+			mlx_set_image_pixel(cube->mlx_ptr, cube->background, x, y, 0xFF000000 + cube->map->floor_color);
 			x++;
 		}
 		y++;
 	}
 }
 
+int	is_player(char c)
+{
+	return (c != 'N' && c != 'S' && c != 'E' && c != 'W');
+}
+
 void	print_map(t_cube *cube)
 {
 	int			i;
 	int			j;
+	int			save_i;
+	int			save_j;
 	int			x;
 	int			y;
-	static int	b = 1;
 
+	i = (int)cube->player_settings->pos.y;
+	j = (int)cube->player_settings->pos.x;
+	i -= 2;
+	j -= 2;
+	save_i = i + 5;
+	save_j = j + 5;
 	y = 0;
-	i = 0;
-	while (cube->map->map[i])
+	while (i < save_i)
 	{
-		x = WIDTH - cube->map->width * cube->map->size_case;
-		j = 0;
-		while (cube->map->map[i][j])
+		x = WIDTH - (5 * cube->map->size_case);
+		j = save_j - 5;
+		while (j < save_j)
 		{
-			if (cube->map->map[i][j] == 'N' && b == 1)
-			{
-				cube->player_settings->pos.x = j;
-				cube->player_settings->pos.y = i;
-				b = 0;
-			}
+			if (i < 0 || j < 0 || i >= cube->map->height || j >= cube->map->width)
+				print_global_pixel(cube, x, y, 0x00000000);
 			else if (cube->map->map[i][j] == '1')
 				print_global_pixel(cube, x, y, 0xFF0000FF);
 			else if (cube->map->map[i][j] == '0')
 				print_global_pixel(cube, x, y, 0xFFFFFFFF);
+			else if (cube->map->map[i][j] == 'P')
+				print_global_pixel(cube, x, y, 0xFF00FF00);
 			else
-				print_global_pixel(cube, x, y, 0xFFFFFFFF);
+				print_global_pixel(cube, x, y, 0x00000000);
 			x += cube->map->size_case;
 			j++;
 		}
@@ -137,12 +146,31 @@ void	print_map(t_cube *cube)
 	}
 }
 
+void	clear_window(void *mlx_ptr, void *window_ptr)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			mlx_set_image_pixel(mlx_ptr, window_ptr, x, y, 0x00000000);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	render_cube(t_cube *cube)
 {
 	int	i;
-
+	
+	#include <stdio.h>
 	i = -1;
-	draw_background(cube);
+	clear_window(cube->mlx_ptr, cube->img);
 	print_map(cube);
 	print_player(cube, 0xFFFF0000);
 	cube->player_settings->ray = ft_calloc(WIDTH + 1, sizeof(t_ray *));
@@ -151,6 +179,8 @@ void	render_cube(t_cube *cube)
 	i = -1;
 	while (++i < WIDTH)
 		do_rays(cube, cube->player_settings->ray[i], i);
+	printf("ICIIIIIIIIIIIII\n");
+	mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->background, 0, 0);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->img, 0, 0);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->window_ptr, cube->minimap_img, 0, 0);
 }
