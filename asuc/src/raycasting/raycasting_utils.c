@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:34:29 by asuc              #+#    #+#             */
-/*   Updated: 2024/06/17 17:02:42 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:30:50 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ inline void	init_ray(t_ray *ray, t_player *player, float camera_x)
 	ray->pos = player->pos;
 	ray->dir.x = player->dir.x + player->plane.x * camera_x;
 	ray->dir.y = player->dir.y + player->plane.y * camera_x;
+	// if (x % 10 == 0)
+	// {
+	// 	printf("[%d] ", x);
+	// 	printf("ray->dir.x = %f	|	", ray->dir.x);
+	// 	printf("ray->dir.y = %f\n", ray->dir.y);
+	// }
 	// printf("player->dir.x = %f\n", player->dir.x);
 	// printf("player->dir.y = %f\n", player->dir.y);
 	// printf("player->plane.x = %f\n", player->plane.x);
@@ -88,7 +94,9 @@ inline void	calculate_wall_x_and_tex_x(t_ray *ray, t_ray_params *params)
 	else
 		params->wall_x = ray->pos.x + ray->perp_wall_dist * ray->dir.x;
 	params->wall_x -= floor(params->wall_x);
+	printf("params->tex_x = %d\n", params->tex_x);
 	params->tex_x = (int)(params->wall_x * (float)params->texture_width);
+	printf("params->tex_x = %d\n", params->tex_x);
 	if ((ray->side == 0 && ray->dir.x > 0) || (ray->side == 1
 			&& ray->dir.y < 0))
 		params->tex_x = params->texture_width - params->tex_x - 1;

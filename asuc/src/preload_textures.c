@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:42:33 by asuc              #+#    #+#             */
-/*   Updated: 2024/06/17 15:29:52 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/17 18:37:50 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	preload_texture(t_data *data, t_image wall_img, int **texture)
 {
 	*texture = malloc(wall_img.width * wall_img.height * sizeof(int));
 	load_texture_data(data->mlx.mlx, wall_img, *texture);
-	printf("texture = %d\n", texture[0][0]);
 }
 
 void	preload_textures(t_data *data)

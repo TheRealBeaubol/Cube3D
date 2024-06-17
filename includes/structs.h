@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/17 15:40:43 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:40:22 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef enum e_direction
 typedef struct s_ray
 {
 	e_direction	direction;
+	t_point		pos;
 	float		lenght;
 	int			wall_height;
 	float		ray_dir_x;

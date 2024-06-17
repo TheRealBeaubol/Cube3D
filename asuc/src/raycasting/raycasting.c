@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:01:19 by bgoron            #+#    #+#             */
-/*   Updated: 2024/06/17 17:06:30 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:38:00 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ static inline void	draw_texture(t_data *data, int x, t_ray_params *params)
 	int	color;
 
 	i = params->draw_start;
+	// printf("params->tex_pos = %f\n", params->tex_pos);
 	params->tex_pos = (params->draw_start - WIN_HEIGHT / 2 + params->line_height
 			/ 2) * params->step;
-	if (params->ray.side != 0 && params->ray.dir.y <= 0)
-		printf("%d\n", params->draw_start);
+	// printf("params->tex_pos = %f\n", params->tex_pos);
 	while (i < params->draw_end)
 	{
 		tex_y = ((int)params->tex_pos & (params->texture_height
@@ -62,6 +62,29 @@ static inline void	cast_ray(t_data *data, int x)
 	calculate_wall_x_and_tex_x(&params.ray, &params);
 	params.step = 1.0 * params.texture_height
 		/ params.line_height;
+	if (params.ray.side != 0 && params.ray.dir.y <= 0 && x % 10 == 0)
+	{
+		printf("[%d] %d ---> %d |\n", x, params.draw_start, params.draw_end);
+		// printf("ray.pos.x = %f	|	", params.ray.pos.x);
+		// printf("ray.pos.y = %f\n", params.ray.pos.y);
+		// printf("ray.dir.x = %f	|	", params.ray.dir.x);
+		// printf("ray.dir.y = %f\n", params.ray.dir.y);
+		// printf("ray.map_x = %d	|	", params.ray.map_x);
+		// printf("ray.map_y = %d\n", params.ray.map_y);
+		// printf("plane.x = %f	|	", data->player.plane.x);
+		// printf("plane.y = %f\n", data->player.plane.y);
+		// printf("step_x = %d	|	", params.ray.step_x);
+		// printf("step_y = %d\n", params.ray.step_y);
+		// printf("side_dist_x = %f	|	", params.ray.side_dist_x);
+		// printf("side_dist_y = %f\n", params.ray.side_dist_y);
+		// printf("delta_dist_x = %f	|	", params.ray.delta_dist_x);
+		// printf("delta_dist_y = %f\n", params.ray.delta_dist_y);
+		// printf("perp_wall_dist = %f\n", params.ray.perp_wall_dist);
+		// printf("line_height = %d\n", params.line_height);
+		// printf("side = %d\n", params.ray.side);
+		// printf("tex_x = %d\n", params.tex_x);
+		// printf("tex_pos = %f\n", params.tex_pos);
+	}
 	draw_texture(data, x, &params);
 }
 
