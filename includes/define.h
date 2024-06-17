@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:42 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/08 18:44:00 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:28:11 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "mlx_profile.h"
 
 # define HEIGHT			1080
-# define WIDTH			1920
+# define WIDTH			1700
 # define PI 			3.1415926536
 # define ESCAPE         41
 # define KEY_A          4

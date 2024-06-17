@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/15 18:51:56 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/16 15:04:02 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	print_player(t_cube *cube, int color)
 	int	px;
 	int	py;
 
-	px = WIDTH - (2.5 * cube->map->size_case);
-	py = (2.5 * cube->map->size_case);
+	px = WIDTH - (2 * cube->map->size_case);
+	py = (2 * cube->map->size_case);
 	dx = -1;
 	while (++dx < cube->map->player_size)
 	{
@@ -134,6 +134,8 @@ void	print_map(t_cube *cube)
 				print_global_pixel(cube, x, y, 0xFF0000FF);
 			else if (cube->map->map[i][j] == '0')
 				print_global_pixel(cube, x, y, 0xFFFFFFFF);
+			else if (cube->map->map[i][j] == 'P')
+				print_global_pixel(cube, x, y, 0xFF00FF00);
 			else
 				print_global_pixel(cube, x, y, 0x00000000);
 			x += cube->map->size_case;
@@ -165,7 +167,7 @@ void	clear_window(void *mlx_ptr, void *window_ptr)
 void	render_cube(t_cube *cube)
 {
 	int	i;
-
+	
 	i = -1;
 	clear_window(cube->mlx_ptr, cube->img);
 	print_map(cube);

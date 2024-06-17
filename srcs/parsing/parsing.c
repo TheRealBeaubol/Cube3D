@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:19:57 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/14 14:05:20 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/16 20:08:14 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,6 @@ void	get_wall_texture(t_cube *cube, t_map *map, int fd)
 
 	i = 0;
 	str = get_next_line(fd, 0);
-	map->west_texture = NULL;
-	map->north_texture = NULL;
-	map->south_texture = NULL;
-	map->east_texture = NULL;
 	while (i < 4)
 	{
 		if (str && ft_strlen(str) > 7 && is_wall_texture(str))
@@ -87,13 +83,13 @@ void	get_wall_texture(t_cube *cube, t_map *map, int fd)
 			texture_path = ft_strdup(str + 3);
 			texture_path[ft_strlen(texture_path) - 1] = '\0';
 			if (is_wall_texture(str) == 1)
-				map->west_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+				map->we_texture.texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, &map->we_texture.width, &map->we_texture.height);
 			if (is_wall_texture(str) == 2)
-				map->north_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+				map->no_texture.texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, &map->no_texture.width, &map->no_texture.height);
 			if (is_wall_texture(str) == 3)
-				map->south_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+				map->so_texture.texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, &map->so_texture.width, &map->so_texture.height);
 			if (is_wall_texture(str) == 4)
-				map->east_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
+				map->ea_texture.texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, &map->ea_texture.width, &map->ea_texture.height);
 		}
 		else
 		{
@@ -106,7 +102,7 @@ void	get_wall_texture(t_cube *cube, t_map *map, int fd)
 		i++;
 		str = get_next_line(fd, 0);
 	}
-	if (!map->west_texture || !map->north_texture || !map->south_texture || !map->east_texture)
+	if (!map->we_texture.texture || !map->no_texture.texture || !map->so_texture.texture || !map->ea_texture.texture)
 	{
 		ft_dprintf(2, "Error\nTexture path is not valid or one texture is missing\n");
 		return ;

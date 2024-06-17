@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/06/14 21:07:40 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/06/15 17:33:24 by mhervoch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,5 +120,8 @@ runfclean: clean
 
 run: runfclean $(NAME)
 		@./$(NAME) map.cub
+
+run2: runfclean $(NAME)
+		@./$(NAME) map2.cub
 
 .PHONY:	re fclean all clean

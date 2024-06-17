@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:20 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/02 22:28:01 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:28:20 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_args(int ac, char **av)
 {
-	if (WIDTH != 1920 || HEIGHT != 1080)
+	if (WIDTH != 1700 || HEIGHT != 1080)
 	{
 		ft_printf("Error\nResolution must be 1920x1080\n");
 		exit(1);

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:59:02 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/14 20:54:02 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:14:31 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	manage_player_moves(t_cube *cube, int keycode)
 	double	old_dir_x;
 	double	old_plane_x;
 	double	movespeed;
-	double	rotspeed;
+	float	rotspeed;
 	
-	movespeed = 0.04;
-	rotspeed = 2747483640;
+	movespeed = 0.05;
+	rotspeed = 0.5;
 if (keycode == cube->player_settings->move_forward)
 	{
 		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x + cube->player_settings->dir_x /*/ cube->map->size_case*/ * movespeed)] != '1')
@@ -41,7 +41,6 @@ if (keycode == cube->player_settings->move_forward)
 			cube->player_settings->pos.y -= cube->player_settings->dir_x * movespeed;
 		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x + cube->player_settings->dir_y /*/ cube->map->size_case*/ * movespeed)] != '1')
 			cube->player_settings->pos.x += cube->player_settings->dir_y * movespeed;
-		cube->player_settings->move = 2;
 	}
 	if (keycode == cube->player_settings->move_right)
 	{
@@ -49,7 +48,6 @@ if (keycode == cube->player_settings->move_forward)
 			cube->player_settings->pos.y += cube->player_settings->dir_x * movespeed;
 		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x - cube->player_settings->dir_y /*/ cube->map->size_case*/ * movespeed)] != '1')
 			cube->player_settings->pos.x -= cube->player_settings->dir_y * movespeed;
-		cube->player_settings->move = 3;
 	}
 	if (keycode == ARROW_LEFT)
 	{

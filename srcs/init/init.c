@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/14 21:26:08 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:21:03 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ t_player_settings	*init_player_settings(void)
 
 	settings = ft_calloc(1, sizeof(t_player_settings));
 	init_player_binds(settings);
-	settings->dir_x = 1;
-	settings->dir_y = 0;
-	settings->plane.x = 0;
-	settings->plane.y = 0.66;
+	settings->dir_x = 0;
+	settings->dir_y = -1;
+	settings->plane.x = -0.66;
+	settings->plane.y = 0;
 	settings->fov = 8;
 	settings->looking_angle = PI / 2;
 	settings->ray = NULL;
@@ -84,8 +84,8 @@ void	init_player(t_cube *cube)
 		{
 			if (!is_player(cube->map->map[i][j]))
 			{
-				cube->player_settings->pos.x = i;
-				cube->player_settings->pos.y = j;
+				cube->player_settings->pos.x = i + 0.5;
+				cube->player_settings->pos.y = j + 0.5;
 				cube->map->map[i][j] = '0';
 				return ;
 			}
@@ -95,6 +95,39 @@ void	init_player(t_cube *cube)
 	}
 }
 
+void	map_wall_image(void *mlx, t_image img, int *texture)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < img.width)
+	{
+		x = 0;
+		while (x < img.height)
+		{
+			texture[y * img.width + x] = \
+mlx_get_image_pixel(mlx, img.texture, x, y);
+			x++;
+		}
+		y++;
+	}
+}
+
+#include <stdio.h>
+void	init_textures(t_cube *cube, t_image img, int **texture)
+{
+	*texture = malloc(img.height * img.width * sizeof(int));
+	map_wall_image(cube->mlx_ptr, img, *texture);
+	printf("texture = %d\n", texture[0][0]);
+}
+void	preload_texture(t_cube *cube)
+{
+	init_textures(cube, cube->map->no_texture, &cube->map->north_texture);
+	init_textures(cube, cube->map->so_texture, &cube->map->south_texture);
+	init_textures(cube, cube->map->we_texture, &cube->map->west_texture);
+	init_textures(cube, cube->map->ea_texture, &cube->map->east_texture);
+}
 void	init(t_cube *cube)
 {
 	init_mlx(cube);
@@ -109,6 +142,7 @@ void	init(t_cube *cube)
 		free_and_destroy(cube);
 	}
 	init_player(cube);
+	preload_texture(cube);
 	draw_background(cube);
 	start_cube(cube);
 }

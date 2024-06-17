@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/15 18:37:31 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/17 15:40:43 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ typedef struct s_ray
 {
 	e_direction	direction;
 	float		lenght;
-	float		wall_height;
+	int			wall_height;
 	float		ray_dir_x;
 	float		ray_dir_y;
 	float		camera_x;
@@ -142,9 +142,12 @@ typedef struct s_ray
 	float		side_dist_y;
 	int			map_x;
 	int			map_y;
+	float		step;
+	float		tex_pos;
+	int			tex_x;
+	int			tex_y;
 	int			step_x;
 	int			step_y;
-	double		wall_x;
 	int			side;
 	int			hit_wall;
 
@@ -192,15 +195,29 @@ typedef struct s_player_settings
 	t_ray	**ray;
 }	t_player_settings;
 
+typedef struct s_image
+{
+	void	*texture;
+	int		width;
+	int		height;
+}	t_image;
+
 typedef struct s_map
 {
 	char	**map;
-	void	*north_texture;
-	void	*south_texture;
-	void	*east_texture;
-	void	*west_texture;
+	t_image	no_texture;
+	t_image	so_texture;
+	t_image	we_texture;
+	t_image	ea_texture;
+	int		*actual_texture;
+	int		*north_texture;
+	int		*south_texture;
+	int		*east_texture;
+	int		*west_texture;
 	unsigned long	ceiling_color;
 	unsigned long	floor_color;
+	int		texture_width;
+	int		texture_height;
 	int		height;
 	int		width;
 	int		size_case;
