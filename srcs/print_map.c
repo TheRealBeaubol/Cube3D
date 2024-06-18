@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/17 18:10:35 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:11:40 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,31 +28,6 @@ void	print_global_pixel(t_cube *cube, int x, int y, int color)
 		}
 		dx++;
 	}
-}
-
-int	is_in_wall(t_cube *cube)
-{
-	int	x;
-	int	y;
-	int	i;
-	int	j;
-
-	x = 0;
-	y = 0;
-	while (x < cube->map->player_size)
-	{
-		y = 0;
-		while (y < cube->map->player_size)
-		{
-			i = (cube->player_settings->pos.y + y) / cube->map->size_case;
-			j = (cube->player_settings->pos.x + x - (WIDTH - cube->map->size_case * cube->map->width)) / cube->map->size_case;
-			if (cube->map->map[i][j] == '1')
-				return (1);
-			y++;
-		}
-		x++;
-	}
-	return (0);
 }
 
 void	print_player(t_cube *cube, int color)

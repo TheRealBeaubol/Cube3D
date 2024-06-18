@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/17 19:48:20 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/18 13:34:26 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	handle_mouse_in_game(t_cube *cube, int x, int y)
 		mlx_mouse_move(cube->mlx_ptr, cube->window_ptr, WIDTH / 2, HEIGHT / 2);
 		x_old = WIDTH - 1;
 	}
-	else if (x_old < x)
+	else if (x_old > x)
 	{
 		float old_dir_x = cube->player_settings->dir_x;
 		cube->player_settings->dir_x = cube->player_settings->dir_x * cos(-0.1) - cube->player_settings->dir_y * sin(-0.1);
@@ -88,7 +88,7 @@ void	handle_mouse_in_game(t_cube *cube, int x, int y)
 		cube->player_settings->plane.y = old_plane_x * sin(-0.1) + cube->player_settings->plane.y * cos(-0.1);
 		x_old = x;
 	}
-	else if (x_old > x)
+	else if (x_old < x)
 	{
 		float old_dir_x = cube->player_settings->dir_x;
 		cube->player_settings->dir_x = cube->player_settings->dir_x * cos(0.1) - cube->player_settings->dir_y * sin(0.1);
