@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:11:15 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/18 14:36:02 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:32:02 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ void	init_ray(t_player_settings *player_settings, t_ray *ray, int i)
 	ray->ray_dir_x = player_settings->dir_x + player_settings->plane.x * ray->camera_x;
 	ray->ray_dir_y = player_settings->dir_y + player_settings->plane.y * ray->camera_x;
 	ray->pos = player_settings->pos;
-	// printf("plane.x = %f\n", player_settings->plane.x);
-	// printf("plane.y = %f\n", player_settings->plane.y);
-	// printf("camera_x = %f\n", ray->camera_x);
 	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
 	ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 	ray->map_x = (int)ray->pos.x;
@@ -162,28 +159,5 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 	if (end >= HEIGHT)
 		end = HEIGHT - 1;
 	texture_calculation(cube, ray);
-	if (ray->direction == NORTH && i % 10 == 0)
-	{
-		printf("[%d] %d ---> %d |\n", i, start, end);
-		printf("pos.x = %f	|	", ray->pos.x);
-		printf("pos.y = %f\n", ray->pos.y);
-		printf("ray_dir_x = %f	|	", ray->ray_dir_x);
-		printf("ray_dir_y = %f\n", ray->ray_dir_y);
-		printf("map.x = %d		|	", ray->map_x);
-		printf("map.y = %d\n", ray->map_y);
-		printf("step_x = %d		|	", ray->step_x);
-		printf("step_y = %d\n", ray->step_y);
-		printf("plane.x = %f	|	", cube->player_settings->plane.x);
-		printf("plane.y = %f\n", cube->player_settings->plane.y);
-		printf("side_dist_x = %f	|	", ray->side_dist_x);
-		printf("side_dist_y = %f\n", ray->side_dist_y);
-		printf("delta_dist_x = %f	|	", ray->delta_dist_x);
-		printf("delta_dist_y = %f\n", ray->delta_dist_y);
-		printf("lenght = %f\n", ray->lenght);
-		printf("wall_height = %d\n", ray->wall_height);
-		printf("tex_x = %d\n", ray->tex_x);
-		printf("side = %d\n", ray->side);
-		printf("tex_pos = %f\n", ray->tex_pos);
-	}
 	draw_wall(i, cube, ray, start, end);
 }

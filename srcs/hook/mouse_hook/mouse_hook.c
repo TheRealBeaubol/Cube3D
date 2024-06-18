@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:57:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/18 13:34:26 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:20:19 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	handle_mouse_in_game(t_cube *cube, int x, int y)
 {
 	static int		x_old = 0;
 
-		mlx_mouse_hide();
+	mlx_mouse_hide();
 	if (!x_old)
 		x_old = x;
 	else if (x == 0)
@@ -130,6 +130,63 @@ void	fps_counter(void)
 	// printf("FPS: %.2f\n", fps);
 }
 
+void	move(t_cube *cube)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+	double	movespeed;
+	float	rotspeed;
+
+	movespeed = 0.05;
+	rotspeed = 0.5;
+	if (cube->player_settings->key_tab[cube->player_settings->move_forward])
+	{
+		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x + cube->player_settings->dir_x /*/ cube->map->size_case*/ * movespeed)] != '1')
+			cube->player_settings->pos.x += cube->player_settings->dir_x * movespeed;
+		if (cube->map->map[(int)(cube->player_settings->pos.y + cube->player_settings->dir_y /*/ cube->map->size_case*/ * movespeed)][(int)cube->player_settings->pos.x] != '1')
+			cube->player_settings->pos.y += cube->player_settings->dir_y * movespeed;
+	}
+	if (cube->player_settings->key_tab[cube->player_settings->move_backward])
+	{
+		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x - cube->player_settings->dir_x /*/ cube->map->size_case*/ * movespeed)] != '1')
+			cube->player_settings->pos.x -= cube->player_settings->dir_x * movespeed;
+		if (cube->map->map[(int)(cube->player_settings->pos.y - cube->player_settings->dir_y /*/ cube->map->size_case*/ * movespeed)][(int)cube->player_settings->pos.x] != '1')
+			cube->player_settings->pos.y -= cube->player_settings->dir_y * movespeed;
+	}
+	if (cube->player_settings->key_tab[cube->player_settings->move_left])
+	{
+		if (cube->map->map[(int)(cube->player_settings->pos.y - cube->player_settings->dir_x /*/ cube->map->size_case*/ * movespeed)][(int)cube->player_settings->pos.x] != '1')
+			cube->player_settings->pos.y -= cube->player_settings->dir_x * movespeed;
+		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x + cube->player_settings->dir_y /*/ cube->map->size_case*/ * movespeed)] != '1')
+			cube->player_settings->pos.x += cube->player_settings->dir_y * movespeed;
+	}
+	if (cube->player_settings->key_tab[cube->player_settings->move_right])
+	{
+		if (cube->map->map[(int)(cube->player_settings->pos.y + cube->player_settings->dir_x /*/ cube->map->size_case*/ * movespeed)][(int)cube->player_settings->pos.x] != '1')
+			cube->player_settings->pos.y += cube->player_settings->dir_x * movespeed;
+		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x - cube->player_settings->dir_y /*/ cube->map->size_case*/ * movespeed)] != '1')
+			cube->player_settings->pos.x -= cube->player_settings->dir_y * movespeed;
+	}
+	if (cube->player_settings->key_tab[ARROW_LEFT])
+	{
+		old_dir_x = cube->player_settings->dir_x;
+		cube->player_settings->dir_x = cube->player_settings->dir_x * cos(-rotspeed) - cube->player_settings->dir_y * sin(-rotspeed);
+		cube->player_settings->dir_y = old_dir_x * sin(-rotspeed) + cube->player_settings->dir_y * cos(-rotspeed);
+		old_plane_x = cube->player_settings->plane.x;
+		cube->player_settings->plane.x = cube->player_settings->plane.x * cos(-rotspeed) - cube->player_settings->plane.y * sin(-rotspeed);
+		cube->player_settings->plane.y = old_plane_x * sin(-rotspeed) + cube->player_settings->plane.y * cos(-rotspeed);
+	}
+	if (cube->player_settings->key_tab[ARROW_RIGHT])
+	{
+		old_dir_x = cube->player_settings->dir_x;
+		cube->player_settings->dir_x = cube->player_settings->dir_x * cos(rotspeed) - cube->player_settings->dir_y * sin(rotspeed);
+		cube->player_settings->dir_y = old_dir_x * sin(rotspeed) + cube->player_settings->dir_y * cos(rotspeed);
+		old_plane_x = cube->player_settings->plane.x;
+		cube->player_settings->plane.x = cube->player_settings->plane.x * cos(rotspeed) - cube->player_settings->plane.y * sin(rotspeed);
+		cube->player_settings->plane.y = old_plane_x * sin(rotspeed) + cube->player_settings->plane.y * cos(rotspeed);
+	}	
+}
+
 int	mouse_move(void *cube_void)
 {
 	t_cube	*cube;
@@ -145,7 +202,10 @@ int	mouse_move(void *cube_void)
 	if (cube->menu->settings_menu->is_in_keybinds_menu)
 		handle_mouse_in_keybinds_menu(cube, x, y);
 	if (cube->is_in_game)
+	{
+		move(cube);
 		handle_mouse_in_game(cube, x, y);
+	}
 	render_hover_button(cube);
 	fps_counter();
 	return (0);

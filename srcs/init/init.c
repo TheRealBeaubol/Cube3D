@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/17 19:00:34 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:17:08 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ t_player_settings	*init_player_settings(void)
 	init_player_binds(settings);
 	settings->dir_x = 0;
 	settings->dir_y = -1;
-	settings->plane.x = -0.66;
+	settings->plane.x = 0.66;
 	settings->plane.y = 0;
 	settings->fov = 8;
 	settings->looking_angle = PI / 2;
 	settings->ray = NULL;
+	ft_bzero(settings->key_tab, 256);
 	return (settings);
 }
 

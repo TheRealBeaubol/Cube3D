@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:20 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/17 18:12:40 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:51:19 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	main(int ac, char **av)
 		&free_and_destroy_exit, &cube);
 	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_KEYDOWN, \
 		&key_hook, &cube);
+	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_KEYUP, \
+		&key_release, &cube);
 	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_MOUSEDOWN, \
 		&mouse_press, &cube);
 	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_MOUSEUP, \

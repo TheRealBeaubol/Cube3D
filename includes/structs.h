@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/17 19:40:22 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:16:43 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ typedef struct s_player_settings
 	int		move_backward;
 	int		move_left;
 	int		move_right;
+	int		key_tab[256];
 	t_point	pos;
 	t_point	plane;
 	e_move	move;

@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/06/15 17:33:24 by mhervoch         ###   ########.fr        #
+#    Updated: 2024/06/18 19:05:42 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,6 @@ SRCS	= 	main.c \
 				settings_file/edit_file.c \
 				settings_file/utils.c \
 				hook/key_hook/hook.c \
-				hook/key_hook/game_hook.c \
 				hook/key_hook/settings_hook.c \
 				hook/mouse_hook/mouse_hook.c \
 				hook/mouse_hook/get_key_images.c \

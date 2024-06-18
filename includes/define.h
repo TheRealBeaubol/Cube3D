@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:42 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/17 18:12:34 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:57:41 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include <math.h>
 # include <time.h>
+# include <SDL2/SDL_scancode.h>
 # include "mlx.h"
 # include "mlx_profile.h"
 
