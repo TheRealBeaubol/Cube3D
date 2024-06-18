@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/15 17:21:32 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:28:05 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,10 @@ void	init_player(t_cube *cube)
 	}
 }
 
-void	init(t_cube *cube)
+void	init(t_cube *cube, int mlx_bool)
 {
-	init_mlx(cube);
+	if (!mlx_bool)
+		init_mlx(cube);
 	cube->menu = init_menu(cube);
 	cube->map = init_map(cube, cube->map_name);
 	cube->is_in_game = 0;
@@ -110,5 +111,6 @@ void	init(t_cube *cube)
 	}
 	init_player(cube);
 	draw_background(cube);
-	start_cube(cube);
+	if (!mlx_bool)
+		start_cube(cube);
 }

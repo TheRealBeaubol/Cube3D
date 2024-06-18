@@ -6,10 +6,9 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:11:15 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/15 18:46:41 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:31:06 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "header.h"
 
@@ -79,17 +78,16 @@ void	perform_dda(t_ray *ray, t_map *map, t_player_settings *player_settings)
 		//printf("map x: %d\n", ray->map_x);
 		//printf("map y: %d\n", ray->map_y);
 
-		if (map->map[ray->map_y][ray->map_x] == 'P')
+		/*if (map->map[ray->map_y][ray->map_x] == 'P')
 		{
 			printf("map_case: %c\n", map->map[ray->map_y][ray->map_x]);
 			printf("diff x: %f\n", fabs(ray->map_x - player_settings->pos.x));
 			printf("diff y: %f\n", fabs(ray->map_y - player_settings->pos.y));
-		}
-		if (map->map[ray->map_y][ray->map_x] == 'P' && (fabs(ray->map_x - player_settings->pos.x) > 2 || fabs(ray->map_y - player_settings->pos.y) > 2))
-		{
-			printf("JE SUIS LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+		}*/
+		if (map->map[ray->map_y][ray->map_x] == 'D' && (fabs(ray->map_x - player_settings->pos.x) > 2 || fabs(ray->map_y - player_settings->pos.y) > 2))
 			ray->hit_wall = 2;
-		}
+		if (map->map[ray->map_y][ray->map_x] == 'P')
+			ray->hit_wall = 3;
 	}
 	if (ray->side == 0)
 		ray->lenght = (ray->map_x - player_settings->pos.x + (1 - ray->step_x) / 2) / ray->ray_dir_x;
@@ -102,11 +100,9 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 	int	start;
 	int	end;
 	
-	#include <stdio.h>
 	init_ray(cube->player_settings, ray, i);
 	calculate_step_and_init_sidedist(ray, cube->player_settings);
 	perform_dda(ray, cube->map, cube->player_settings);
-	printf("NAZI\n");
 	ray->wall_height = (int)(HEIGHT / ray->lenght);
 	start = -ray->wall_height / 2 + HEIGHT / 2;
 	if (start < 0)
@@ -117,7 +113,9 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 	start -= 1;
 	while (++start < end)
 	{
-		if (ray->hit_wall == 2)
+		if (ray->hit_wall == 3)
+			mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFF000000);
+		else if (ray->hit_wall == 2)
 			mlx_set_image_pixel(cube->mlx_ptr, cube->img, i, start, 0xFFFFFFFF);
 		else
 		{
@@ -135,11 +133,11 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 
 void	texture_calculation(t_cube *cube, t_ray *ray)
 {
-	int	tex_num;
+//	int	tex_num;
 	int	tex_x;
 
 	// mlx_get_image_pixel(cube->mlx_ptr, cube->map->north_texture, cube->texture[x][y], x, y, &ray->color);
-	tex_num = cube->map->map[ray->map_y][ray->map_x] - 1;
+	//tex_num = cube->map->map[ray->map_y][ray->map_x] - 1;
 	if (ray->side == 0)
 		ray->wall_x = \
 cube->player_settings->pos.y + ray->lenght * ray->ray_dir_y;

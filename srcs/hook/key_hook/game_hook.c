@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:59:02 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/15 17:23:15 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:44:54 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ if (keycode == cube->player_settings->move_forward)
 		cube->player_settings->plane.x = cube->player_settings->plane.x * cos(rotspeed) - cube->player_settings->plane.y * sin(rotspeed);
 		cube->player_settings->plane.y = old_plane_x * sin(rotspeed) + cube->player_settings->plane.y * cos(rotspeed);
 	}
+	check_and_do_portal(cube);
 	mlx_clear_window(cube->mlx_ptr, cube->window_ptr);
 	render_cube(cube);
 }

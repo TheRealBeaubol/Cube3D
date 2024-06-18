@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/14 21:15:15 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:26:21 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void			render_hover_button(t_cube *cube);
 void			handle_game_hook(t_cube *cube, int keycode);
 void			handle_settings_hook(t_cube *cube, int keycode);
 int				key_hook(int keycode, void *cube_void);
-void			init(t_cube *cube);
+void			init(t_cube *cube, int mlx_bool);
 int				mouse_move(void *cube_void);
 int				mouse_press(int key, void *cube_void);
 int				mouse_release(int keycode, void *cube_void);
@@ -78,5 +78,6 @@ void			parsing(t_cube *cube, t_map *map, char *file);
 void			plotline(t_cube *cube, t_point point2, t_point point1);
 void	        do_rays(t_cube *cube, t_ray *ray, int i);
 void	        draw_background(t_cube *cube);
+void			check_and_do_portal(t_cube *cube);
 
 #endif

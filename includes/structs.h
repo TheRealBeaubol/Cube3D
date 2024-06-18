@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/14 21:13:15 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/17 18:47:13 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,17 @@ typedef struct s_map
 	int		player_size;
 }	t_map;
 
+typedef enum e_npc
+{
+	ENN,
+	ALL,
+}	e_npc;
+
+typedef struct	s_npc
+{
+	e_npc	type;
+}	t_npc;
+
 typedef struct s_cube
 {
 	void				*mlx_ptr;
@@ -217,6 +228,7 @@ typedef struct s_cube
 	t_menu				*menu;
 	t_player_settings	*player_settings;
 	t_map				*map;
+	t_npc				*npc;
 	t_plotline			*plotline;
 	int					is_in_game;
 	char				*map_name;

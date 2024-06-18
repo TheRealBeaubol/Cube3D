@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/06/15 17:33:24 by mhervoch         ###   ########.fr        #
+#    Updated: 2024/06/18 16:45:16 by mhervoch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRCS	= 	main.c \
 				settings.c \
 				print_map.c \
 				raycasting.c \
+				door.c \
 				plotline.c
 
 SRCS_DIR	:=	srcs
