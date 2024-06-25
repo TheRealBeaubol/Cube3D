@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/17 18:47:13 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/25 15:48:27 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,21 @@ typedef struct s_player_settings
 	t_ray	**ray;
 }	t_player_settings;
 
+typedef enum	e_portal_type
+{
+	PORTAL,
+	UNI,
+	DOUBLE,
+}	e_portal_type;
+
+typedef struct e_portal
+{
+	e_portal_type	type;
+	t_point	pos;
+	t_point	out;
+}	t_portal;
+
+
 typedef struct s_map
 {
 	char	**map;
@@ -205,6 +220,8 @@ typedef struct s_map
 	int		width;
 	int		size_case;
 	int		player_size;
+	t_portal	**portal;
+	int			cpt_portal;
 }	t_map;
 
 typedef enum e_npc

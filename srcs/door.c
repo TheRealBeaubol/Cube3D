@@ -6,7 +6,7 @@
 /*   By: mhervoch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:23:25 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/18 17:25:22 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:36:52 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,51 @@ t_point	get_portal_pos(t_cube *cube)
 	return (pos);
 }
 
-int	check_portal(t_point point, t_cube *cube)
+int	check_portal(t_cube *cube)
 {
-	if (cube->player_settings->pos.x  < point.x + 1 && cube->player_settings->pos.x  > point.x && cube->player_settings->pos.y  < point.y + 1 && cube->player_settings->pos.y  > point.y)
-		return (1);
-	return (0);
+	int	i;
+	
+	i = -1;
+	while (++i < cube->map->cpt_portal)
+	{
+		if (cube->player_settings->pos.x  < cube->map->portal[i]->pos.x + 1 && cube->player_settings->pos.x  > cube->map->portal[i]->pos.x && cube->player_settings->pos.y  < cube->map->portal[i]->pos.y + 1 && cube->player_settings->pos.y  > cube->map->portal[i]->pos.y)
+			return (i);
+	}
+	return (-1);
+}
+
+void	print_portal_struct(t_cube *cube)
+{
+	int	i;
+
+	i = -1;
+	while (++i < cube->map->cpt_portal)
+	{
+		printf("indice: %d, type: %d, posx: %f, posy: %f, outx: %f, outy: %f\n", i, cube->map->portal[i]->type, cube->map->portal[i]->pos.x, cube->map->portal[i]->pos.y, cube->map->portal[i]->out.x, cube->map->portal[i]->out.y);
+	}
 }
 
 void	check_and_do_portal(t_cube *cube)
 {
-	t_point	pos_portal;
+	int	type;
+	print_portal_struct(cube);
+	//t_point	pos_portal;
 	
-	pos_portal = get_portal_pos(cube);
-	printf("player.x: %f | portal.x: %f\nplayer.y: %f | portal.y: %f\n", cube->player_settings->pos.x, pos_portal.x, cube->player_settings->pos.y, pos_portal.y);
-	if (check_portal(pos_portal, cube))
+	//pos_portal = get_portal_pos(cube);
+	//printf("player.x: %f | portal.x: %f\nplayer.y: %f | portal.y: %f\n", cube->player_settings->pos.x, pos_portal.x, cube->player_settings->pos.y, pos_portal.y);
+	type = check_portal(cube);
+	if (type < 0)
+		return ;
+	printf("type: %d\n", cube->map->portal[type]->type);
+	if (cube->map->portal[type]->type == 0)
 	{
 		cube->map_name = "map_test.cub";
 		init(cube, 1);
+	}
+	else if (cube->map->portal[type]->type == 1 || cube->map->portal[type]->type == 2)
+	{
+		printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+		cube->player_settings->pos.x = cube->map->portal[type]->out.x;
+		cube->player_settings->pos.y = cube->map->portal[type]->out.y;
 	}
 }

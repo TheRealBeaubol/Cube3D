@@ -6,11 +6,12 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:02:00 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/18 17:28:05 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:27:28 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+#include <stdio.h>
 
 void	init_settings_file(t_cube *cube)
 {
@@ -98,10 +99,13 @@ void	init_player(t_cube *cube)
 void	init(t_cube *cube, int mlx_bool)
 {
 	if (!mlx_bool)
+	{
 		init_mlx(cube);
-	cube->menu = init_menu(cube);
+		cube->menu = init_menu(cube);
+		cube->is_in_game = 0;
+	}
 	cube->map = init_map(cube, cube->map_name);
-	cube->is_in_game = 0;
+	init_portal(cube);
 	init_settings_file(cube);
 	cube->player_settings = init_player_settings();
 	if (!cube->menu || !cube->map || !cube->player_settings)

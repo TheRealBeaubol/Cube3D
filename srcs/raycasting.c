@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:11:15 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/17 19:31:06 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/25 15:56:59 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	perform_dda(t_ray *ray, t_map *map, t_player_settings *player_settings)
 		}*/
 		if (map->map[ray->map_y][ray->map_x] == 'D' && (fabs(ray->map_x - player_settings->pos.x) > 2 || fabs(ray->map_y - player_settings->pos.y) > 2))
 			ray->hit_wall = 2;
-		if (map->map[ray->map_y][ray->map_x] == 'P')
+		if (map->map[ray->map_y][ray->map_x] == 'P' || map->map[ray->map_y][ray->map_x] == 'S' || map->map[ray->map_y][ray->map_x] == 'W')
 			ray->hit_wall = 3;
 	}
 	if (ray->side == 0)

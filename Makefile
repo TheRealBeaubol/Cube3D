@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/06/18 16:45:16 by mhervoch         ###   ########.fr        #
+#    Updated: 2024/06/24 15:36:34 by mhervoch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS	= 	main.c \
 				exit/exit.c \
 				exit/destroy_images.c \
 				init/init.c \
+				init/init_portal.c \
 				init/init_map.c \
 				init/init_images.c \
 				init/init_images_bis.c \

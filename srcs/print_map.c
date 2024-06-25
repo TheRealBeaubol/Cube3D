@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:33:56 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/17 19:24:41 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:38:15 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,11 +132,11 @@ void	print_map(t_cube *cube)
 				print_global_pixel(cube, x, y, 0x00000000);
 			else if (cube->map->map[i][j] == '1')
 				print_global_pixel(cube, x, y, 0xFF0000FF);
-			else if (cube->map->map[i][j] == '0')
+			else if (cube->map->map[i][j] == '0' || cube->map->map[i][j] == 'E')
 				print_global_pixel(cube, x, y, 0xFFFFFFFF);
 			else if (cube->map->map[i][j] == 'D')
 				print_global_pixel(cube, x, y, 0xFF00FF00);
-			else if (cube->map->map[i][j] == 'P')
+			else if (cube->map->map[i][j] == 'P' || cube->map->map[i][j] == 'S' || cube->map->map[i][j] == 'W')
 				print_global_pixel(cube, x, y, 0xFF000000);
 			else
 				print_global_pixel(cube, x, y, 0x00000000);
@@ -171,6 +171,7 @@ void	render_cube(t_cube *cube)
 	int	i;
 	
 	i = -1;
+	#include <stdio.h>
 	clear_window(cube->mlx_ptr, cube->img);
 	print_map(cube);
 	print_player(cube, 0xFFFF0000);
