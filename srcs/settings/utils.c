@@ -1,55 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 20:28:47 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/05/28 17:21:20 by lboiteux         ###   ########.fr       */
+/*   Created: 2024/06/19 13:32:33 by lboiteux          #+#    #+#             */
+/*   Updated: 2024/06/19 16:14:46 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	print_map_stock(char **map)
+int	get_key_from_line(char *line, t_key_map *key_map)
 {
 	int	i;
 
 	i = 0;
-	while (map[i])
+	line[ft_strlen(line) - 1] = '\0';
+	while (*line != '=')
+		line++;
+	line += 2;
+	while (i <= 256)
 	{
-		ft_printf("%s\n", map[i]);
+		if (!ft_strcmp(key_map[i].key_name, line))
+			return (key_map[i].key_value);
 		i++;
 	}
+	return (-1);
 }
 
-/*void	ft_free_tab(void **tab)
+char	*get_line_from_key(int key, t_key_map *key_map)
 {
-	void	**tmp;
-
-	if (!tab)
-		return ;
-	tmp = tab;
-	while (*tmp)
-		free(*(tmp++));
-	free(tab);
-}*/
-
-char	**parsing(char *file)
-{
-	int		i;
-	int		fd;
-	char	**map;
+	int	i;
 
 	i = 0;
-	fd = open(file, O_RDONLY);
-	map = malloc(sizeof(char *) * 8);
-	while (i < 7)
+	while (i <= 256)
 	{
-		map[i] = get_next_line(fd, 0);
+		if (key_map[i].key_value == key)
+			return (ft_strdup(key_map[i].key_name));
 		i++;
 	}
-	map[i] = 0;
-	return (map);
+	return (NULL);
 }

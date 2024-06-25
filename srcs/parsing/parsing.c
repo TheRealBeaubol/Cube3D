@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/31 16:19:57 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/05/31 17:36:12 by lboiteux         ###   ########.fr       */
+/*   Created: 2024/06/18 22:44:40 by lboiteux          #+#    #+#             */
+/*   Updated: 2024/06/24 22:28:51 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**format_tab(char **tab, int height)
 	int		j;
 	char	**new_tab;
 
-	new_tab = ft_calloc(height + 1, sizeof(char *));
+	new_tab = ft_calloc(height + 2, sizeof(char *));
 	i = -1;
 	while (tab[++i])
 	{
@@ -50,43 +50,60 @@ char	**format_tab(char **tab, int height)
 	return (new_tab);
 }
 
-char	**read_map(t_map *map, char *file)
+char	**read_map(t_map *map, int fd)
 {
 	int		i;
-	int		fd;
 	char	**tab;
 
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (NULL);
-	}
-	map->height = get_height(file);
-	tab = ft_calloc(map->height + 1, sizeof(char *));
+	i = 0;
+	get_wall_texture(map, fd);
+	get_colors(map, fd);
+	get_colors(map, fd);
+	tab = ft_calloc(map->height + 2, sizeof(char *));
+	if (!tab)
+		printf_and_exit("Error\n", fd);
+	tab[0] = get_next_line(fd, 0);
+	free(tab[0]);
 	i = 0;
 	tab[i] = get_next_line(fd, 0);
-	if (!tab[i])
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (NULL);
-	}
-	while (tab[i])
-	{
-		i++;
+	while (tab[i++])
 		tab[i] = get_next_line(fd, 0);
-	}
+	if (i <= 2)
+		ft_free_tab(tab);
+	if (i <= 2)
+		printf_and_exit("Error\n", fd);
 	return (tab);
 }
 
-char	**parsing(t_map *map, char *file)
+void	get_map_data(t_map *map, char *map_name)
 {
 	char	**tab;
+	int		fd;
 
-	tab = read_map(map, file);
+	fd = open(map_name, O_RDONLY);
+	if (fd == -1)
+		printf_and_exit("Error\n", fd);
+	tab = read_map(map, fd);
 	if (!tab)
-		return (NULL);
+		printf_and_exit("Error\n", fd);
+	close(fd);
 	tab = format_tab(tab, map->height);
 	print_tab(tab);
-	return (tab);
+	map->map = tab;
+}
+
+int	parsing(t_cube *cube)
+{
+	t_map	map;
+
+	map.height = get_height(cube->map_name);
+	if (map.height <= 2)
+	{
+		ft_printf(HEIGHT_ERROR);
+		exit(EXIT_FAILURE);
+	}
+	get_map_data(&map, cube->map_name);
+	map.width = get_width(map.map);
+	cube->map = map;
+	return (0);
 }

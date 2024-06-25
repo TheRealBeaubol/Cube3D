@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_map.c                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/31 15:00:32 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/02 21:13:16 by lboiteux         ###   ########.fr       */
+/*   Created: 2024/06/18 22:47:40 by lboiteux          #+#    #+#             */
+/*   Updated: 2024/06/18 23:59:47 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	get_height(char *file)
 	int		fd;
 
 	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (-1);
 	i = 0;
 	str = get_next_line(fd, 0);
 	while (str)
@@ -43,22 +45,8 @@ int	get_height(char *file)
 		i++;
 	}
 	close(fd);
-	return (i);
-}
-
-t_map	*init_map(char	*map_name)
-{
-	t_map	*map;
-
-	map = ft_calloc(1, sizeof(t_map));
-	map->map = parsing(map, map_name);
-	if (!map->map)
-	{
-		free(map);
-		return (NULL);
-	}
-	map->width = get_width(map->map);
-	map->size_case = 50;
-	map->player_size = map->size_case / 5;
-	return (map);
+	free(str);
+	if (i > 8)
+		return (i - 8);
+	return (-1);
 }
