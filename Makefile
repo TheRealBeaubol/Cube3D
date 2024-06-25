@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/06/18 19:05:42 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/06/24 15:02:16 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME	=	cub3D
 # **************************************************************************** #
 
 CC						=	@cc
-CFLAGS					=	-Wall -Wextra -Werror -pg
+CFLAGS					=	-Wall -Wextra -Werror
 MK						=	@mkdir -p
 FILE					=	$(shell ls -lR srcs/ | grep -F .c | wc -l)
 PROJ_CMP				=	1
@@ -49,28 +49,24 @@ RESET	= \033[0m
 
 #SOURCES
 SRCS	= 	main.c \
-				exit/exit.c \
-				exit/destroy_images.c \
-				init/init.c \
-				init/init_map.c \
-				init/init_images.c \
-				init/init_images_bis.c \
-				settings_file/get_key_from_line.c \
-				settings_file/get_line_from_key.c \
-				settings_file/edit_file.c \
-				settings_file/utils.c \
-				hook/key_hook/hook.c \
-				hook/key_hook/settings_hook.c \
-				hook/mouse_hook/mouse_hook.c \
-				hook/mouse_hook/get_key_images.c \
-				hook/mouse_hook/mouse_click.c \
-				hook/mouse_hook/render_hover_button.c \
-				hook/mouse_hook/render_hover_button_in_keybind_menu.c \
+				to_sort.c \
+				hooks/hook.c \
+				hooks/mouse_press.c \
+				pre-game/settings_menu.c \
+				exit/utils.c \
+				parsing/colors.c \
+				parsing/utils.c \
+				parsing/wall_texture.c \
 				parsing/parsing.c \
-				settings.c \
-				print_map.c \
-				raycasting.c \
-				plotline.c
+				init/init_settings.c \
+				init/init_game.c \
+				init/utils.c \
+				init/preload_textures.c \
+				settings/edit_file.c \
+				settings/utils.c \
+				init/init_image.c \
+				game/game.c \
+				game/raycasting.c \
 
 SRCS_DIR	:=	srcs
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
