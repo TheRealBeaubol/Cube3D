@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/06/24 15:02:16 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/06/25 12:49:18 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,9 @@ SRCS	= 	main.c \
 				to_sort.c \
 				hooks/hook.c \
 				hooks/mouse_press.c \
+				hooks/mouse_move.c \
+				hooks/key_press.c \
+				hooks/render_images.c \
 				pre-game/settings_menu.c \
 				exit/utils.c \
 				parsing/colors.c \
@@ -67,6 +70,7 @@ SRCS	= 	main.c \
 				init/init_image.c \
 				game/game.c \
 				game/raycasting.c \
+				game/dda_algorithm.c \
 
 SRCS_DIR	:=	srcs
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)

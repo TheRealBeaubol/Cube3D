@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:01:39 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 01:11:09 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/25 12:08:05 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,44 +47,6 @@ void	calculate_step_dir_and_init_sidedist(t_ray *ray)
 		ray->step_dir.y = 1;
 		ray->side_dist.y = (ray->map.y + 1.0 - ray->pos.y) * ray->delta_dist.y;
 	}
-}
-
-void	perform_dda(t_ray *ray, t_map *map)
-{
-	while (ray->hit_wall == 0)
-	{
-		if (ray->side_dist.x < ray->side_dist.y)
-		{
-			ray->side_dist.x += ray->delta_dist.x;
-			ray->map.x += ray->step_dir.x;
-			if (ray->ray_dir.x < 0)
-				ray->direction = EAST;
-			else
-				ray->direction = WEST;
-			ray->side = 0;
-		}
-		else
-		{
-			ray->side_dist.y += ray->delta_dist.y;
-			ray->map.y += ray->step_dir.y;
-			if (ray->ray_dir.y < 0)
-				ray->direction = NORTH;
-			else
-				ray->direction = SOUTH;
-			ray->side = 1;
-		}
-		if (map->map[ray->map.y][ray->map.x] == '1')
-			ray->hit_wall = 1;
-		if (map->map[ray->map.y][ray->map.x] == 'P' && (fabs(ray->map.x - \
-ray->pos.x) > 2 || fabs(ray->map.y - ray->pos.y) > 2))
-			ray->hit_wall = 2;
-	}
-	if (ray->side == 0)
-		ray->lenght = (ray->map.x - ray->pos.x + (1 - \
-ray->step_dir.x) / 2) / ray->ray_dir.x;
-	else
-		ray->lenght = (ray->map.y - ray->pos.y + (1 - \
-ray->step_dir.y) / 2) / ray->ray_dir.y;
 }
 
 void	draw_wall(int i, t_cube *cube, int start, int end)

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/24 15:22:21 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/25 12:48:38 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ void	draw_background(void *mlx_ptr, void *background, unsigned long c_color, \
 /* ************************************ */
 /*                 HOOK                 */
 /* ************************************ */
+void	render_buttons(t_cube *cube);
+int		key_press(int key, void *cube_void);
+void	handle_mouse_in_menu(t_cube *cube, t_int_point pos);
+void	handle_mouse_in_keybinds(t_cube *cube, t_int_point pos);
+void	handle_mouse_in_settings(t_cube *cube, t_int_point pos);
 int		mouse_press(int key, void *cube_void);
 void	hook(t_cube *cube);
 
@@ -72,6 +77,7 @@ void	put_keys_images(t_cube *cube, void *mlx_ptr, void *mlx_win);
 /*                 GAME                 */
 /* ************************************ */
 void    render_cube(t_cube *cube);
+void	perform_dda(t_ray *ray, t_map *map);
 void	do_rays(t_cube *cube, t_ray *ray, int i);
 
 void	check_args(int ac, char **av);
