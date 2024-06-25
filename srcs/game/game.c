@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:41:38 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 01:05:52 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/25 23:54:21 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	print_player(t_cube *cube, int color)
 
 	px = WIDTH - (2 * 50);
 	py = (2 * 50);
-	dx = -1;
-	while (++dx < 20)
+	dx = 13;
+	while (++dx < 37)
 	{
-		dy = -1;
-		while (++dy < 20)
+		dy = 13;
+		while (++dy < 37)
 			mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, px + \
 dx, py + dy, color);
 	}
@@ -58,7 +58,7 @@ void	print_map(t_cube *cube)
 	t_int_point	point;
 
 	i = (int)cube->settings.pos.y - 3;
-	j = (int)cube->settings.pos.x - 2;
+	j = (int)cube->settings.pos.x - 3;
 	save_i = i + 5;
 	save_j = j + 5;
 	point.y = 0;
@@ -96,8 +96,8 @@ void	render_cube(t_cube *cube)
 	i = -1;
 	while (++i < WIDTH)
 		do_rays(cube, cube->settings.ray[i], i);
-	print_map(cube);
-	print_player(cube, 0xFF00FF00);
 	mlx_put_image_to_window(cube->mlx.ptr, cube->mlx.win, \
 cube->mlx.background_img, 0, 0);
+	print_map(cube);
+	print_player(cube, 0xFF00FF00);
 }

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:44:49 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 12:47:49 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/25 23:55:50 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,154 +34,75 @@ int	key_release(int key, void *cube_void)
 
 void	fps_counter(void)
 {
-	static clock_t	last_time = 0;
-	static clock_t	last_avg_time = 0;
-	static int		frame_count = 0;
-	static float	fps_sum = 0.0;
-	clock_t			current_time;
-	float			fps;
-	float			avg_fps;
+	static t_fps_counter	fps_counter = {0, 0, 0, 0};
+	clock_t					current_time;
+	float					fps;
+	float					avg_fps;
 
 	current_time = clock();
-	fps = CLOCKS_PER_SEC / (float)(current_time - last_time);
-	last_time = current_time;
-	fps_sum += fps;
-	frame_count++;
-	if ((current_time - last_avg_time) >= CLOCKS_PER_SEC * 10)
+	fps = CLOCKS_PER_SEC / (float)(current_time - fps_counter.last_time);
+	fps_counter.last_time = current_time;
+	fps_counter.fps_sum += fps;
+	fps_counter.frame_count++;
+	if ((current_time - fps_counter.last_avg_time) >= CLOCKS_PER_SEC * 10)
 	{
-		avg_fps = fps_sum / frame_count;
+		avg_fps = fps_counter.fps_sum / fps_counter.frame_count;
 		printf("\033[1;31mAverage FPS (10s): %.2f\033[0m\n", avg_fps);
-		fps_sum = 0.0;
-		frame_count = 0;
-		last_avg_time = current_time;
+		fps_counter.fps_sum = 0.0;
+		fps_counter.frame_count = 0;
+		fps_counter.last_avg_time = current_time;
 	}
-	printf("FPS: %.2f\n", fps);
+	printf("\033[1;32mFPS: %.2f\033[0m\n", fps);
 }
 
-void	move(t_cube *cube)
+void	rotate(t_cube *cube, float angle)
 {
-	double	old_dir_x;
-	double	old_plane_x;
+	float	old_dir_x;
+	float	old_plane_x;
+
+	old_dir_x = cube->settings.dir.x;
+	cube->settings.dir.x = cube->settings.dir.x * cos(angle) - \
+		cube->settings.dir.y * sin(angle);
+	cube->settings.dir.y = old_dir_x * sin(angle) + \
+		cube->settings.dir.y * cos(angle);
+	old_plane_x = cube->settings.plane.x;
+	cube->settings.plane.x = cube->settings.plane.x * cos(angle) - \
+		cube->settings.plane.y * sin(angle);
+	cube->settings.plane.y = old_plane_x * sin(angle) + \
+		cube->settings.plane.y * cos(angle);
+}
+
+void	handle_key_in_game(t_cube *cube)
+{
 	double	movespeed;
 	float	rotspeed;
 
-	movespeed = 0.05;
-	rotspeed = 0.1;
+	movespeed = 0.1;
+	rotspeed = 0.05;
 	if (cube->settings.key_tab[cube->settings.move_forward])
-	{
-		if (cube->map.map[(int)cube->settings.pos.y] \
-	[(int)(cube->settings.pos.x + cube->settings.dir.x * movespeed)] != '1')
-			cube->settings.pos.x += cube->settings.dir.x * movespeed;
-		if (cube->map.map[(int)(cube->settings.pos.y + \
-	cube->settings.dir.y * movespeed)][(int)cube->settings.pos.x] != '1')
-			cube->settings.pos.y += cube->settings.dir.y * movespeed;
-	}
+		move_forward(cube, movespeed);
 	if (cube->settings.key_tab[cube->settings.move_backward])
-	{
-		if (cube->map.map[(int)cube->settings.pos.y] \
-	[(int)(cube->settings.pos.x - cube->settings.dir.x * movespeed)] != '1')
-			cube->settings.pos.x -= cube->settings.dir.x * movespeed;
-		if (cube->map.map[(int)(cube->settings.pos.y - \
-	cube->settings.dir.y * movespeed)][(int)cube->settings.pos.x] != '1')
-			cube->settings.pos.y -= cube->settings.dir.y * movespeed;
-	}
+		move_backward(cube, movespeed);
 	if (cube->settings.key_tab[cube->settings.move_left])
-	{
-		if (cube->map.map[(int)(cube->settings.pos.y + \
-	cube->settings.dir.x * movespeed)][(int)cube->settings.pos.x] != '1')
-			cube->settings.pos.y -= cube->settings.dir.x * movespeed;
-		if (cube->map.map[(int)cube->settings.pos.y] \
-	[(int)(cube->settings.pos.x - cube->settings.dir.y * movespeed)] != '1')
-			cube->settings.pos.x += cube->settings.dir.y * movespeed;
-	}
+		move_left(cube, movespeed);
 	if (cube->settings.key_tab[cube->settings.move_right])
-	{
-		if (cube->map.map[(int)(cube->settings.pos.y - \
-	cube->settings.dir.x * movespeed)][(int)cube->settings.pos.x] != '1')
-			cube->settings.pos.y += cube->settings.dir.x * movespeed;
-		if (cube->map.map[(int)cube->settings.pos.y] \
-	[(int)(cube->settings.pos.x + cube->settings.dir.y * movespeed)] != '1')
-			cube->settings.pos.x -= cube->settings.dir.y * movespeed;
-	}
-	if (cube->settings.key_tab[SDL_SCANCODE_LEFT])
-	{
-		old_dir_x = cube->settings.dir.x;
-		cube->settings.dir.x = cube->settings.dir.x * cos(-rotspeed) - \
-	cube->settings.dir.y * sin(-rotspeed);
-		cube->settings.dir.y = old_dir_x * sin(-rotspeed) + \
-	cube->settings.dir.y * cos(-rotspeed);
-		old_plane_x = cube->settings.plane.x;
-		cube->settings.plane.x = cube->settings.plane.x * \
-	cos(-rotspeed) - cube->settings.plane.y * sin(-rotspeed);
-		cube->settings.plane.y = old_plane_x * sin(-rotspeed) + \
-	cube->settings.plane.y * cos(-rotspeed);
-	}
-	if (cube->settings.key_tab[SDL_SCANCODE_RIGHT])
-	{
-		old_dir_x = cube->settings.dir.x;
-		cube->settings.dir.x = cube->settings.dir.x * cos(rotspeed) - \
-	cube->settings.dir.y * sin(rotspeed);
-		cube->settings.dir.y = old_dir_x * sin(rotspeed) + \
-	cube->settings.dir.y * cos(rotspeed);
-		old_plane_x = cube->settings.plane.x;
-		cube->settings.plane.x = cube->settings.plane.x * \
-	cos(rotspeed) - cube->settings.plane.y * sin(rotspeed);
-		cube->settings.plane.y = old_plane_x * sin(rotspeed) + \
-	cube->settings.plane.y * cos(rotspeed);
-	}
+		move_right(cube, movespeed);
+	if (cube->settings.key_tab[SDL_SCANCODE_LEFT] == 1)
+		rotate(cube, -rotspeed);
+	if (cube->settings.key_tab[SDL_SCANCODE_RIGHT] == 1)
+		rotate(cube, rotspeed);
 }
 
 void	handle_mouse_in_game(t_cube *cube, t_int_point pos)
 {
-	static int		x_old = 0;
-	float			old_dir_x;
-	float			old_plane_x;
 	float			rotate_speed;
+	t_point			point;
 
-	rotate_speed = 0.1;
+	rotate_speed = 0.005;
 	mlx_mouse_hide();
-	if (!x_old)
-		x_old = pos.x;
-	else if (pos.x == 0)
-	{
-		mlx_mouse_move(cube->mlx.ptr, cube->mlx.win, WIDTH / 2, HEIGHT / 2);
-		x_old = 0;
-	}
-	else if (pos.x == WIDTH - 1)
-	{
-		mlx_mouse_move(cube->mlx.ptr, cube->mlx.win, WIDTH / 2, HEIGHT / 2);
-		x_old = WIDTH - 1;
-	}
-	else if (x_old > pos.x)
-	{
-		old_dir_x = cube->settings.dir.x;
-		cube->settings.dir.x = cube->settings.dir.x * \
-	cos(-rotate_speed) - cube->settings.dir.y * sin(-rotate_speed);
-		cube->settings.dir.y = old_dir_x * sin(-rotate_speed) + \
-	cube->settings.dir.y * cos(-rotate_speed);
-		old_plane_x = cube->settings.plane.x;
-		cube->settings.plane.x = cube->settings.plane.x * \
-	cos(-rotate_speed) - cube->settings.plane.y * sin(-rotate_speed);
-		cube->settings.plane.y = old_plane_x * sin(-rotate_speed) + \
-	cube->settings.plane.y * cos(-rotate_speed);
-		x_old = pos.x;
-	}
-	else if (x_old < pos.x)
-	{
-		old_dir_x = cube->settings.dir.x;
-		cube->settings.dir.x = cube->settings.dir.x * \
-	cos(rotate_speed) - cube->settings.dir.y * sin(rotate_speed);
-		cube->settings.dir.y = old_dir_x * sin(rotate_speed) + \
-	cube->settings.dir.y * cos(rotate_speed);
-		old_plane_x = cube->settings.plane.x;
-		cube->settings.plane.x = cube->settings.plane.x * \
-	cos(rotate_speed) - cube->settings.plane.y * sin(rotate_speed);
-		cube->settings.plane.y = old_plane_x * sin(rotate_speed) + \
-	cube->settings.plane.y * cos(rotate_speed);
-		x_old = pos.x;
-	}
-	mlx_clear_window(cube->mlx.ptr, cube->mlx.win);
-	render_cube(cube);
+	point.x = (pos.x - WIDTH / 2) * rotate_speed;
+	rotate(cube, point.x);
+	mlx_mouse_move(cube->mlx.ptr, cube->mlx.win, WIDTH / 2, HEIGHT / 2);
 }
 
 int	loop_hook(void *cube_void)
@@ -201,8 +122,10 @@ int	loop_hook(void *cube_void)
 		render_buttons(cube);
 	if (cube->is_in_game)
 	{
-		move(cube);
+		handle_key_in_game(cube);
 		handle_mouse_in_game(cube, pos);
+		mlx_clear_window(cube->mlx.ptr, cube->mlx.win);
+		render_cube(cube);
 	}
 	fps_counter();
 	return (0);

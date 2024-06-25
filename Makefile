@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/06/25 12:49:18 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/06/25 22:51:37 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,8 +54,10 @@ SRCS	= 	main.c \
 				hooks/mouse_press.c \
 				hooks/mouse_move.c \
 				hooks/key_press.c \
-				hooks/render_images.c \
-				pre-game/settings_menu.c \
+				hooks/move.c \
+				hooks/render/render_images.c \
+				hooks/render/utils.c \
+				hooks/render/open_menu.c \
 				exit/utils.c \
 				parsing/colors.c \
 				parsing/utils.c \

@@ -6,12 +6,20 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/24 15:25:09 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/25 22:55:36 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef struct s_fps_counter
+{
+	clock_t	last_time;
+	clock_t	last_avg_time;
+	int		frame_count;
+	float	fps_sum;
+}	t_fps_counter;
 
 typedef struct s_settings_menu_images
 {

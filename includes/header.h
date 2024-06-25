@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 12:48:38 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/25 22:50:30 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,12 @@ void	handle_mouse_in_menu(t_cube *cube, t_int_point pos);
 void	handle_mouse_in_keybinds(t_cube *cube, t_int_point pos);
 void	handle_mouse_in_settings(t_cube *cube, t_int_point pos);
 int		mouse_press(int key, void *cube_void);
+void	put_keys_images(t_cube *cube, void *mlx_ptr, void *mlx_win);
 void	hook(t_cube *cube);
+void	move_forward(t_cube *cube, double movespeed);
+void	move_backward(t_cube *cube, double movespeed);
+void	move_right(t_cube *cube, double movespeed);
+void	move_left(t_cube *cube, double movespeed);
 
 /* ************************************ */
 /*               PRE-GAME               */

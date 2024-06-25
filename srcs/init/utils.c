@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:20:58 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/24 21:57:43 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/25 21:32:08 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	draw_background(void *mlx_ptr, void *background, unsigned long c_color, \
 			mlx_set_image_pixel(mlx_ptr, background, x, y, \
 0xFF000000 + c_color);
 	}
+	y--;
 	while (++y < HEIGHT)
 	{
 		x = -1;
