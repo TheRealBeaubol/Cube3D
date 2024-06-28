@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:50:45 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 01:01:39 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/28 21:34:26 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,27 @@ unsigned long	convert_rgb_to_hexa(char **colors)
 	return (color);
 }
 
-void	get_colors(t_map *map, int fd)
+int	get_number_of_spaces(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ')
+		i++;
+	return (i);
+}
+
+void	get_colors(t_map *map, char *str)
 {
 	char			**colors;
-	char			*str;
 	unsigned long	color;
 
-	str = get_next_line(fd, 0);
 	if (!str || (str[0] != 'C' && str[0] != 'F') || str[1] != ' ')
+	{
 		free(str);
-	colors = ft_str_split(str + 2, "\n,");
+		return ;
+	}
+	colors = ft_str_split(str + get_number_of_spaces(str + 1) + 1, "\n,");
 	if (!colors || ft_tablen(colors) != 3)
 	{
 		ft_free_tab(colors);
@@ -77,5 +88,4 @@ void	get_colors(t_map *map, int fd)
 		map->ceiling_color = color;
 	if (str[0] == 'F')
 		map->floor_color = color;
-	free(str);
 }

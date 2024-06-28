@@ -6,11 +6,23 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:47:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/18 23:59:47 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/28 23:02:32 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+void	print_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		ft_printf("%s\n", tab[i]);
+		i++;
+	}
+}
 
 int	get_width(char **map)
 {
@@ -36,9 +48,16 @@ int	get_height(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (-1);
-	i = 0;
 	str = get_next_line(fd, 0);
-	while (str)
+	while (str && ((str[0] == 'W' && str[1] == 'E') || (str[0] == 'N' && \
+str[1] == 'O') || (str[0] == 'S' && str[1] == 'O') || (str[0] == 'E' && \
+str[1] == 'A') || str[0] == 'C' || str[0] == 'F' || str[0] == '\n'))
+	{
+		free(str);
+		str = get_next_line(fd, 0);
+	}
+	i = 1;
+	while (str && str[0] != '\n')
 	{
 		free(str);
 		str = get_next_line(fd, 0);
@@ -46,7 +65,5 @@ int	get_height(char *file)
 	}
 	close(fd);
 	free(str);
-	if (i > 8)
-		return (i - 8);
-	return (-1);
+	return (i);
 }

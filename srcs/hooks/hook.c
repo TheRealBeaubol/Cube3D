@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:44:49 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 23:55:50 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/27 21:45:23 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	fps_counter(void)
 		fps_counter.frame_count = 0;
 		fps_counter.last_avg_time = current_time;
 	}
-	printf("\033[1;32mFPS: %.2f\033[0m\n", fps);
+	// printf("\033[1;32mFPS: %.2f\033[0m\n", fps);
 }
 
 void	rotate(t_cube *cube, float angle)

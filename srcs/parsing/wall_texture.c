@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:50:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 01:00:22 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/28 23:02:50 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	get_wall_texture_path(char *str, t_map *map)
 {
 	char	*texture_path;
 
-	texture_path = ft_strdup(str + 3);
+	texture_path = ft_strdup(str + get_number_of_spaces(str + 2) + 2);
 	texture_path[ft_strlen(texture_path) - 1] = '\0';
 	if (is_wall_texture(str) == 1)
 		map->texture_paths[0] = ft_strdup(texture_path);
@@ -45,33 +45,4 @@ void	get_wall_texture_path(char *str, t_map *map)
 		map->texture_paths[2] = ft_strdup(texture_path);
 	if (is_wall_texture(str) == 4)
 		map->texture_paths[3] = ft_strdup(texture_path);
-}
-
-void	get_wall_texture(t_map *map, int fd)
-{
-	char	*str;
-	int		i;
-
-	i = -1;
-	map->texture_paths = ft_calloc(5, sizeof(char *));
-	str = get_next_line(fd, 0);
-	while (++i < 4)
-	{
-		if (str && ft_strlen(str) > 7 && is_wall_texture(str))
-			get_wall_texture_path(str, map);
-		else
-		{
-			get_next_line(fd, 1);
-			break ;
-		}
-		free(str);
-		str = get_next_line(fd, 0);
-	}
-	free(str);
-	if (!map->texture_paths[0] || !map->texture_paths[1] || \
-!map->texture_paths[2] || !map->texture_paths[3])
-	{
-		ft_dprintf(2, ERROR_PATH);
-		return ;
-	}
 }

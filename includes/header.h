@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 22:50:30 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/28 21:33:08 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void	free_init_and_exit(t_cube *cube, char *str, int i);
 int		parsing(t_cube *cube);
 int		get_width(char **map);
 int		get_height(char *file);
-void	get_wall_texture(t_map *map, int fd);
-void	get_colors(t_map *map, int fd);
+void	get_wall_texture_path(char *str, t_map *map);
+void	get_colors(t_map *map, char *str);
+int		get_number_of_spaces(char *str);
 
 /* ************************************ */
 /*               SETTINGS               */
@@ -87,4 +88,5 @@ void	do_rays(t_cube *cube, t_ray *ray, int i);
 
 void	check_args(int ac, char **av);
 
+void	print_tab(char **tab);
 #endif
