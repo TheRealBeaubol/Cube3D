@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:47:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/28 23:02:32 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/29 12:44:20 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,56 @@ str[1] == 'A') || str[0] == 'C' || str[0] == 'F' || str[0] == '\n'))
 	close(fd);
 	free(str);
 	return (i);
+}
+
+void	init_spawn(t_player_settings *settings, char c)
+{
+	if (c == 'N' || c == 'S')
+	{
+		settings->dir.x = 0;
+		settings->dir.y = 1;
+		settings->plane.x = 0.66;
+		settings->plane.y = 0;
+	}
+	if (c == 'N')
+		settings->dir.y *= -1;
+	if (c == 'S')
+		settings->plane.x *= -1;
+	if (c == 'E' || c == 'W')
+	{
+		settings->dir.x = 1;
+		settings->dir.y = 0;
+		settings->plane.x = 0;
+		settings->plane.y = 0.66;
+	}
+	if (c == 'W')
+	{
+		settings->dir.x *= -1;
+		settings->plane.y *= -1;
+	}
+}
+
+void	get_player_pos(t_cube *cube)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (cube->map.map[i])
+	{
+		j = 0;
+		while (cube->map.map[i][j])
+		{
+			if (!is_player(cube->map.map[i][j]))
+			{
+				cube->settings.pos.x = i + 0.5;
+				cube->settings.pos.y = j + 0.5;
+				init_spawn(&cube->settings, cube->map.map[i][j]);
+				cube->map.map[i][j] = '0';
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/06/25 22:51:37 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/06/29 12:42:42 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRCS	= 	main.c \
 				exit/utils.c \
 				parsing/colors.c \
 				parsing/utils.c \
+				parsing/check_closed_map.c \
 				parsing/wall_texture.c \
 				parsing/parsing.c \
 				init/init_settings.c \

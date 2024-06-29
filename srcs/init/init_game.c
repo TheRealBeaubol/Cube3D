@@ -6,64 +6,11 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 00:05:36 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/28 22:47:11 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/29 12:18:03 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-void	init_spawn(t_cube *cube, char c)
-{
-	if (c == 'N' || c == 'S')
-	{
-		cube->settings.dir.x = 0;
-		cube->settings.dir.y = 1;
-		cube->settings.plane.x = 0.66;
-		cube->settings.plane.y = 0;
-	}
-	if (c == 'N')
-		cube->settings.dir.y *= -1;
-	if (c == 'S')
-		cube->settings.plane.x *= -1;
-	if (c == 'E' || c == 'W')
-	{
-		cube->settings.dir.x = 1;
-		cube->settings.dir.y = 0;
-		cube->settings.plane.x = 0;
-		cube->settings.plane.y = 0.66;
-	}
-	if (c == 'W')
-	{
-		cube->settings.dir.x *= -1;
-		cube->settings.plane.y *= -1;
-	}
-}
-
-
-void	init_player(t_cube *cube)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (cube->map.map[i])
-	{
-		j = 0;
-		while (cube->map.map[i][j])
-		{
-			if (!is_player(cube->map.map[i][j]))
-			{
-				cube->settings.pos.x = i + 0.5;
-				cube->settings.pos.y = j + 0.5;
-				init_spawn(cube, cube->map.map[i][j]);
-				cube->map.map[i][j] = '0';
-				return ;
-			}
-			j++;
-		}
-		i++;
-	}
-}
 
 void	init_mlx(t_cube *cube)
 {
@@ -104,7 +51,6 @@ void	init(t_cube *cube)
 	init_key_map(cube);
 	init_player_binds(&cube->settings);
 	ft_bzero(cube->settings.key_tab, 256);
-	init_player(cube);
 	init_mlx(cube);
 	preload_textures(cube);
 	init_images(cube->mlx.ptr, &cube->menu);

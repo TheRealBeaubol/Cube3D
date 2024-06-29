@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/28 21:33:08 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/06/29 12:42:07 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		get_height(char *file);
 void	get_wall_texture_path(char *str, t_map *map);
 void	get_colors(t_map *map, char *str);
 int		get_number_of_spaces(char *str);
+int		check_closed_map(char **map);
+void	get_player_pos(t_cube *cube);
 
 /* ************************************ */
 /*               SETTINGS               */
