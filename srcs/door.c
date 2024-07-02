@@ -6,7 +6,7 @@
 /*   By: mhervoch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:23:25 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/06/25 16:36:52 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:40:39 by mhervoch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,21 @@ void	print_portal_struct(t_cube *cube)
 	}
 }
 
+void	set_new_player_pos(t_cube *cube)
+{
+	while (cube->map->map[(int)(cube->player_settings->pos.y)][(int)cube->player_settings->pos.x] == 'W' || cube->map->map[(int)(cube->player_settings->pos.y)][(int)cube->player_settings->pos.x] == 'E')
+	{
+		if (cube->map->map[(int)(cube->player_settings->pos.y + 0.5)][(int)cube->player_settings->pos.x] != '1')
+			cube->player_settings->pos.y += 0.5;
+		else if (cube->map->map[(int)(cube->player_settings->pos.y - 0.5)][(int)cube->player_settings->pos.x] != '1')
+			cube->player_settings->pos.y -= 0.5;
+		if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x + 0.5)] != '1')
+			cube->player_settings->pos.x += 0.5;
+		else if (cube->map->map[(int)cube->player_settings->pos.y][(int)(cube->player_settings->pos.x - 0.5)] != '1')
+			cube->player_settings->pos.x -= 0.5;
+	}
+}
+
 void	check_and_do_portal(t_cube *cube)
 {
 	int	type;
@@ -84,5 +99,6 @@ void	check_and_do_portal(t_cube *cube)
 		printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 		cube->player_settings->pos.x = cube->map->portal[type]->out.x;
 		cube->player_settings->pos.y = cube->map->portal[type]->out.y;
+		set_new_player_pos(cube);
 	}
 }
