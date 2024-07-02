@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 00:05:36 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/29 12:18:03 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:19:47 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,14 @@ cube->menu.exit_button.img, (WIDTH - cube->menu.exit_button.width) / \
 
 void	init(t_cube *cube)
 {
-	init_settings_file();
-	init_key_map(cube);
-	init_player_binds(&cube->settings);
-	ft_bzero(cube->settings.key_tab, 256);
-	init_mlx(cube);
+	// if (!mlx_bool)
+	// {
+		init_settings_file();
+		init_key_map(cube);
+		init_player_binds(&cube->settings);
+		ft_bzero(cube->settings.key_tab, 256);
+		init_mlx(cube);
+	// }
 	preload_textures(cube);
 	init_images(cube->mlx.ptr, &cube->menu);
 	start_game(cube, cube->mlx.ptr, cube->mlx.win);

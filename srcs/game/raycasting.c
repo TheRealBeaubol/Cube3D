@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:01:39 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 23:40:42 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:01:34 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,18 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 
 	init_ray(&cube->settings, ray, i);
 	calculate_step_dir_and_init_sidedist(ray);
-	perform_dda(ray, &cube->map);
-	if (ray->direction == NORTH)
+	perform_dda(ray, &cube->map, &cube->settings);
+	if (ray->hit_wall == 3)
 		cube->map.actual_texture = cube->map.no_texture;
-	if (ray->direction == SOUTH)
+	else if (ray->hit_wall == 2)
+		cube->map.actual_texture = cube->map.no_texture;
+	else if (ray->direction == NORTH)
+		cube->map.actual_texture = cube->map.no_texture;
+	else if (ray->direction == SOUTH)
 		cube->map.actual_texture = cube->map.so_texture;
-	if (ray->direction == EAST)
+	else if (ray->direction == EAST)
 		cube->map.actual_texture = cube->map.ea_texture;
-	if (ray->direction == WEST)
+	else if (ray->direction == WEST)
 		cube->map.actual_texture = cube->map.we_texture;
 	ray->wall_height = (int)(HEIGHT / ray->lenght);
 	start = -ray->wall_height / 2 + HEIGHT / 2;

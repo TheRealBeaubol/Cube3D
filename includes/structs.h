@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 22:55:36 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:22:51 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,20 @@ typedef enum e_direction
 	EAST,
 	WEST
 }	e_direction;
+
+typedef enum	e_portal_type
+{
+	PORTAL,
+	UNI,
+	DOUBLE,
+}	e_portal_type;
+
+typedef struct e_portal
+{
+	e_portal_type	type;
+	t_point	pos;
+	t_point	out;
+}	t_portal;
 
 typedef struct s_ray
 {
@@ -156,6 +170,8 @@ typedef struct s_map
 	t_image	we_texture;
 	t_image	ea_texture;
 	t_image	actual_texture;
+	t_portal	**portal;
+	int		cpt_portal;
 }	t_map;
 
 typedef	struct s_mlx

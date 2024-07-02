@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/29 12:42:07 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:00:44 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,13 @@ void	put_keys_images(t_cube *cube, void *mlx_ptr, void *mlx_win);
 /*                 GAME                 */
 /* ************************************ */
 void    render_cube(t_cube *cube);
-void	perform_dda(t_ray *ray, t_map *map);
+void	perform_dda(t_ray *ray, t_map *map, t_player_settings *settings);
 void	do_rays(t_cube *cube, t_ray *ray, int i);
 
 void	check_args(int ac, char **av);
 
 void	print_tab(char **tab);
+
+void	check_and_do_portal(t_cube *cube);
+
 #endif

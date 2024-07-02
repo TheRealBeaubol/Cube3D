@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/06/29 12:42:42 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/07/02 16:59:04 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,8 @@ SRCS	= 	main.c \
 				game/game.c \
 				game/raycasting.c \
 				game/dda_algorithm.c \
+				door/door.c \
+				door/init_portal.c \
 
 SRCS_DIR	:=	srcs
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
