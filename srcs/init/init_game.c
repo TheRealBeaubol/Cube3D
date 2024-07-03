@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 00:05:36 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/02 17:19:47 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/03 18:47:45 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	init(t_cube *cube)
 		init_settings_file();
 		init_key_map(cube);
 		init_player_binds(&cube->settings);
+		init_portal(cube);
 		ft_bzero(cube->settings.key_tab, 256);
 		init_mlx(cube);
 	// }

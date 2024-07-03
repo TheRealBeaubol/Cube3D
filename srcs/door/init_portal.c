@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 17:14:11 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/07/02 17:24:41 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:01:13 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	count_portal(t_cube *cube)
 	int	j;
 	
 	j = -1;
-	while (++j < cube->map.height)
+	while (cube->map.map[++j])
 	{
 		i = -1;
-		while (++i < cube->map.width)
+		while (cube->map.map[j][++i])
 		{
 			if (cube->map.map[j][i] == 'P' || cube->map.map[j][i] == 'V' || cube->map.map[j][i] == 'M')
 				cube->map.cpt_portal++;
@@ -31,15 +31,14 @@ int	count_portal(t_cube *cube)
 	return (cube->map.cpt_portal);
 }
 
-void	set_type(t_cube *cube, int i, int j, int ind)
+void	set_type(t_cube *cube, int i, int j, t_portal *portal)
 {
 	if (cube->map.map[j][i] == 'P')
-		cube->map.portal[ind]->type = 0;
+		portal->type = 0;
 	if (cube->map.map[j][i] == 'V')
-		cube->map.portal[ind]->type = 1;
+		portal->type = 1;
 	if (cube->map.map[j][i] == 'M')
-		cube->map.portal[ind]->type = 2;
-	//printf("portal type: %d\n", cube->map.portal[ind]->type);
+		portal->type = 2;
 }
 
 t_point	search_uni(t_cube *cube)
@@ -49,10 +48,10 @@ t_point	search_uni(t_cube *cube)
 	int		j;
 
 	j = -1;
-	while (++j < cube->map.height)
+	while (cube->map.map[++j])
 	{
 		i = -1;
-		while (++i < cube->map.width)
+		while (cube->map.map[j][++i])
 		{
 			if (cube->map.map[j][i] == 'O')
 			{
@@ -71,10 +70,10 @@ t_point	search_double(t_cube *cube, int ind)
 	int		j;
 
 	j = -1;
-	while (++j < cube->map.height)
+	while (cube->map.map[++j])
 	{
 		i = -1;
-		while (++i < cube->map.width)
+		while (cube->map.map[j][++i])
 		{
 			if (cube->map.map[j][i] == 'M' && i != cube->map.portal[ind]->pos.x && j != cube->map.portal[ind]->pos.y)
 			{
@@ -101,22 +100,23 @@ void	init_portal(t_cube *cube)
 	int	ind;
 
 	ind = 0;
+	cube->map.cpt_portal = 0;
 	count_portal(cube);
-	cube->map.portal = calloc(cube->map.cpt_portal, sizeof(t_portal *));
+	cube->map.portal = calloc(cube->map.cpt_portal + 1, sizeof(t_portal *));
 	i = -1;
 	while (++i < cube->map.cpt_portal)
 		cube->map.portal[i] = ft_calloc(1, sizeof(t_portal));
 	j = -1;
-	while (++j < cube->map.height)
+	while (cube->map.map[++j])
 	{
 		i = -1;
-		while (++i < cube->map.width)
+		while (cube->map.map[j][++i])
 		{
 			if (cube->map.map[j][i] == 'P' || cube->map.map[j][i] == 'M' || cube->map.map[j][i] == 'V')
 			{
 				cube->map.portal[ind]->pos.x = i;
 				cube->map.portal[ind]->pos.y = j;
-				set_type(cube, i, j, ind);
+				set_type(cube, i, j, cube->map.portal[ind]);
 				if (cube->map.map[j][i] != 'P')
 					search_exit(cube, i, j, ind);
 				else

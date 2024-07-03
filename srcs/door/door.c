@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:23:25 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/07/02 17:25:39 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/03 18:37:53 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	check_and_do_portal(t_cube *cube)
 	//t_point	pos_portal;
 	
 	//pos_portal = get_portal_pos(cube);
+	// printf("caca\n");
 	type = check_portal(cube);
 	if (type < 0)
 		return ;
