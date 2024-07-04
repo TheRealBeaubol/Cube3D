@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/03 18:47:36 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/04 19:40:46 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void    init(t_cube *cube);
 void    init_images(void *mlx_ptr, t_menu *menu);
 int     is_player(char c);
 void	preload_textures(t_cube *cube);
-void	draw_background(void *mlx_ptr, void *background, unsigned long c_color, \
-	unsigned long f_color);
+void	draw_background(t_cube *cube);
 
 /* ************************************ */
 /*                 HOOK                 */
@@ -94,5 +93,6 @@ void	print_tab(char **tab);
 
 void	check_and_do_portal(t_cube *cube);
 void	init_portal(t_cube *cube);
+void	draw_first_background(t_cube *cube);
 
 #endif

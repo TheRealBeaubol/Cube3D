@@ -6,34 +6,69 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:20:58 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 21:32:08 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/04 19:40:27 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	draw_background(void *mlx_ptr, void *background, unsigned long c_color, \
-	unsigned long f_color)
+void	draw_first_background(t_cube *cube)
 {
 	int	x;
 	int	y;
 
-	y = -1;
-	while (++y < HEIGHT / 2)
+	x = -1;
+	while (++x < WIDTH)
 	{
-		x = -1;
-		while (++x < WIDTH)
-			mlx_set_image_pixel(mlx_ptr, background, x, y, \
-0xFF000000 + c_color);
+			y = -1;
+			while (++y < HEIGHT)
+			{
+				if (y < HEIGHT / 2)
+					mlx_set_image_pixel(cube->mlx.ptr, cube->mlx.background_img, x, y, cube->map.ceiling_color);
+				else
+					mlx_set_image_pixel(cube->mlx.ptr, cube->mlx.background_img, x, y, cube->map.floor_color);
+			}
 	}
-	y--;
-	while (++y < HEIGHT)
+}
+
+void	draw_on_image(t_cube *cube, unsigned long color, float pos_y, int start_y)
+{
+	int		pos_x;
+
+	while (++pos_y <= start_y)
 	{
-		x = -1;
-		while (++x < WIDTH)
-			mlx_set_image_pixel(mlx_ptr, background, x, y, \
-0xFF000000 + f_color);
+		pos_x = -1;
+		while (++pos_x < WIDTH)
+		{
+			if (pos_y < HEIGHT && pos_y >= 0 && pos_x < WIDTH && pos_x >= 0)
+				mlx_set_image_pixel(cube->mlx.ptr, cube->mlx.background_img, pos_x, pos_y, color);
+		}
 	}
+}
+
+void	draw_background(t_cube *cube)
+{
+	int			pitch_shift;
+	int			start_y;
+	float		pos_y;
+	static int	prev_pitch_shift = 0;
+
+	pitch_shift = (int)(cube->settings.pitch * HEIGHT / 2);;
+	if (pitch_shift > prev_pitch_shift)
+	{
+		start_y = HEIGHT / 2 - prev_pitch_shift;
+		pos_y  = HEIGHT / 2 - pitch_shift;
+	}
+	else
+	{
+		start_y = HEIGHT / 2 - pitch_shift;
+		pos_y = HEIGHT / 2 - prev_pitch_shift;
+	}
+	if (pitch_shift > prev_pitch_shift)
+		draw_on_image(cube, cube->map.floor_color, pos_y - 1, start_y);
+	else
+		draw_on_image(cube, cube->map.ceiling_color, pos_y - 1, start_y);
+	prev_pitch_shift = pitch_shift;
 }
 
 int	is_player(char c)

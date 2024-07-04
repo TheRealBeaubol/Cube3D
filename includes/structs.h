@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/02 17:22:51 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:19:28 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_ray
 	float		tex_pos;
 	int			tex_x;
 	int			wall_height;
+	int			wall_offset;
 	int			side;
 	int			hit_wall;
 
@@ -141,6 +142,7 @@ typedef struct s_player_settings
 	int		move_backward;
 	int		move_left;
 	int		move_right;
+	float	pitch;
 	t_point	pos;
 	t_point	plane;
 	t_point	dir;

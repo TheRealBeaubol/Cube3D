@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 00:05:36 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/03 18:47:45 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/04 19:40:39 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	init_mlx(t_cube *cube)
 	if (cube->mlx.win == NULL)
 		free_init_and_exit (cube, "Error\n", 1);
 	cube->mlx.background_img = mlx_new_image(cube->mlx.ptr, WIDTH, HEIGHT);
-	draw_background(cube->mlx.ptr, cube->mlx.background_img, \
-cube->map.ceiling_color, cube->map.floor_color);
+	draw_first_background(cube);
 }
 
 void	start_game(t_cube *cube, void *mlx_ptr, void *win_ptr)

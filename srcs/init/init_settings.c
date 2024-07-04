@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:40:22 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/28 22:44:26 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:28:53 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_player_binds(t_player_settings *settings)
 	check_settings(settings);
 	free(line);
 	close(fd);
+	settings->pitch = 0;
 }
 
 void	init_settings_file(void)

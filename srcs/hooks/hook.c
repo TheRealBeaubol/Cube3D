@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:44:49 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/03 18:35:22 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:24:35 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,15 @@ void	handle_mouse_in_game(t_cube *cube, t_int_point pos)
 	float			rotate_speed;
 	t_point			point;
 
-	rotate_speed = 0.005;
+	rotate_speed = 0.001;
 	mlx_mouse_hide();
 	point.x = (pos.x - WIDTH / 2) * rotate_speed;
 	rotate(cube, point.x);
+	cube->settings.pitch += (pos.y - HEIGHT / 2) * rotate_speed;
+	if (cube->settings.pitch > 1.0)
+		cube->settings.pitch = 1.0;
+	if (cube->settings.pitch < -1.0)
+		cube->settings.pitch = -1.0;
 	mlx_mouse_move(cube->mlx.ptr, cube->mlx.win, WIDTH / 2, HEIGHT / 2);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:01:39 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/02 17:01:34 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:55:38 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	draw_wall(int i, t_cube *cube, int start, int end)
 	int	tex_y;
 
 	j = start;
-	cube->settings.ray[i]->tex_pos = (start - HEIGHT / 2 + \
+	cube->settings.ray[i]->tex_pos = (start - cube->settings.ray[i]->wall_offset - HEIGHT / 2 + \
 cube->settings.ray[i]->wall_height / 2) * cube->settings.ray[i]->step;
 	while (j < end)
 	{
@@ -106,11 +106,14 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 		cube->map.actual_texture = cube->map.ea_texture;
 	else if (ray->direction == WEST)
 		cube->map.actual_texture = cube->map.we_texture;
+	ray->wall_offset = (int)(-cube->settings.pitch * HEIGHT);
 	ray->wall_height = (int)(HEIGHT / ray->lenght);
-	start = -ray->wall_height / 2 + HEIGHT / 2;
+	start = (int)((HEIGHT - (float)ray->wall_height) / 2 + \
+ray->wall_offset);
 	if (start < 0)
 		start = 0;
-	end = ray->wall_height / 2 + HEIGHT / 2;
+	end = (int)((float)ray->wall_height / 2 + HEIGHT / 2 + \
+(float)ray->wall_offset);
 	if (end >= HEIGHT)
 		end = HEIGHT - 1;
 	texture_calculation(cube, ray);
