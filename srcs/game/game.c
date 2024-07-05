@@ -6,11 +6,18 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:41:38 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/04 19:39:04 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/05 19:57:59 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+int	is_in_circle(int x, int y, int r)
+{
+	if ((x - r) * (x - r) + (y - r) * (y - r) <= r * r)
+		return (1);
+	return (0);
+}
 
 void	print_global_pixel(t_cube *cube, int x, int y, int color)
 {
@@ -23,7 +30,8 @@ void	print_global_pixel(t_cube *cube, int x, int y, int color)
 		dy = 0;
 		while (dy < 50)
 		{
-			mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, x + dx, y + dy, color);
+			if (is_in_circle(x + dx - (WIDTH - 5 * 50) , y + dy, 125))
+				mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, x + dx, y + dy, color);
 			dy++;
 		}
 		dx++;
@@ -96,9 +104,9 @@ void	render_cube(t_cube *cube)
 	i = -1;
 	while (++i < WIDTH)
 		do_rays(cube, cube->settings.ray[i], i);
+	print_map(cube);
+	print_player(cube, 0xFF00FF00);
 	draw_background(cube);
 	mlx_put_image_to_window(cube->mlx.ptr, cube->mlx.win, \
 cube->mlx.background_img, 0, 0);
-	print_map(cube);
-	print_player(cube, 0xFF00FF00);
 }
