@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:41:38 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/05 19:57:59 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:14:32 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_in_circle(int x, int y, int r)
 	return (0);
 }
 
-void	print_global_pixel(t_cube *cube, int x, int y, int color)
+void	print_global_pixel(t_cube *cube, t_int_point point, int color)
 {
 	int	dx;
 	int	dy;
@@ -30,65 +30,69 @@ void	print_global_pixel(t_cube *cube, int x, int y, int color)
 		dy = 0;
 		while (dy < 50)
 		{
-			if (is_in_circle(x + dx - (WIDTH - 5 * 50) , y + dy, 125))
-				mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, x + dx, y + dy, color);
+			if (is_in_circle(point.x + dx - (WIDTH - 5 * 50) , point.y + dy, 125))
+				mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, point.x + dx, point.y + dy, color);
 			dy++;
 		}
 		dx++;
 	}
 }
 
-void	print_player(t_cube *cube, int color)
+void	print_map(t_cube *cube)
 {
-	int	dx;
-	int	dy;
-	int	px;
-	int	py;
+	float			i;
+	float			j;
+	t_int_point	point;
+	t_point		offset;
 
-	px = WIDTH - (2 * 50);
-	py = (2 * 50);
-	dx = 13;
-	while (++dx < 37)
+	offset.x = cube->settings.pos.x - floor(cube->settings.pos.x);
+	offset.y = cube->settings.pos.y - floor(cube->settings.pos.y);
+	point.y = (0 - 50 * offset.y) + 25;
+	i = floor(cube->settings.pos.y) - 2;
+	while (i <= cube->settings.pos.y + 3)
 	{
-		dy = 13;
-		while (++dy < 37)
-			mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, px + \
-dx, py + dy, color);
+		point.x = (WIDTH - (5 * 50) - 50 * offset.x) + 25;
+		j = floor(cube->settings.pos.x) - 2;
+		while (j <= cube->settings.pos.x + 3)
+		{
+			if (i < 0 || j < 0 || i >= cube->map.height - 1 || j >= cube->map.width)
+				print_global_pixel(cube, point, 0xFF111111);
+			else if (cube->map.map[(int)i][(int)j] == '1')
+				print_global_pixel(cube, point, 0xFF0000FF);
+			else if (cube->map.map[(int)i][(int)j] == '0')
+				print_global_pixel(cube, point, 0xFFFFFFFF);
+			else if (cube->map.map[(int)i][(int)j] == 'P')
+				print_global_pixel(cube, point, 0xFF00FF00);
+			else
+				print_global_pixel(cube, point, 0xFF111111);
+			point.x += 50;
+			j += 1.0;
+		}
+		point.y += 50;
+		i += 1.0;
 	}
 }
 
-void	print_map(t_cube *cube)
+static void	draw_circle(int radius, t_int_point center, t_cube *cube, unsigned int color)
 {
-	int			i;
-	int			j;
-	int			save_i;
-	int			save_j;
-	t_int_point	point;
+	t_int_point	p;
+	t_int_point	d;
 
-	i = (int)cube->settings.pos.y - 3;
-	j = (int)cube->settings.pos.x - 3;
-	save_i = i + 5;
-	save_j = j + 5;
-	point.y = 0;
-	while (++i < save_i)
+	d.y = -radius;
+	while (d.y <= radius)
 	{
-		point.x = WIDTH - (5 * 50);
-		j = save_j - 6;
-		while (++j < save_j)
+		d.x = -radius;
+		while (d.x <= radius)
 		{
-			if (i < 0 || j < 0 || i >= cube->map.height || j >= cube->map.width)
-				print_global_pixel(cube, point.x, point.y, 0x00000000);
-			else if (cube->map.map[i][j] == '1')
-				print_global_pixel(cube, point.x, point.y, 0xFF0000FF);
-			else if (cube->map.map[i][j] == '0')
-				print_global_pixel(cube, point.x, point.y, 0xFFFFFFFF);
-			else if (cube->map.map[i][j] == 'P')
-				print_global_pixel(cube, point.x, point.y, 0xFF00FF00);
-			else
-				print_global_pixel(cube, point.x, point.y, 0x00000000);
-			point.x += 50;
+			if (d.x * d.x + d.y * d.y <= radius * radius)
+			{
+				p.x = center.x + d.x;
+				p.y = center.y + d.y;
+				mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, p.x, p.y, color);
+			}
+			d.x++;
 		}
-		point.y += 50;
+		d.y++;
 	}
 }
 
@@ -104,8 +108,9 @@ void	render_cube(t_cube *cube)
 	i = -1;
 	while (++i < WIDTH)
 		do_rays(cube, cube->settings.ray[i], i);
+	draw_circle(125, (t_int_point){WIDTH - 3 * 50 + 25, 2.5 * 50}, cube, 0xFF111111);
 	print_map(cube);
-	print_player(cube, 0xFF00FF00);
+	draw_circle(7, (t_int_point){WIDTH - 3 * 50 + 25, 2.5 * 50}, cube, 0xFF00FF00);
 	draw_background(cube);
 	mlx_put_image_to_window(cube->mlx.ptr, cube->mlx.win, \
 cube->mlx.background_img, 0, 0);
