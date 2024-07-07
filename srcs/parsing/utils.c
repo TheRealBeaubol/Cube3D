@@ -6,22 +6,17 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:47:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/02 17:33:54 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/08 00:06:20 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	print_tab(char **tab)
+int	is_map_token(char c)
 {
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		ft_printf("%s\n", tab[i]);
-		i++;
-	}
+	return (c == '0' || c == '1' || c == '2' || c == 'N' || c == 'S' || \
+	c == 'W' || c == 'E' || c == 'P' || c == 'D' \
+	|| c == 'V' || c == 'M' || c == 'O');
 }
 
 int	get_width(char **map)

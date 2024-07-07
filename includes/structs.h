@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/04 18:19:28 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/07 23:44:07 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ typedef struct s_menu
 	t_settings_menu_images	keybinds_button;
 	t_settings_menu_images	video_settings_button;
 	t_settings_menu_images	music_and_sounds_button;
-	t_settings_menu_images	back_button;
 	t_settings_menu_images	keybinds_define_button;
 	t_settings_menu_images	video_settings_menu;
 	t_settings_menu_images	keybinds_menu;
@@ -180,7 +179,6 @@ typedef	struct s_mlx
 {
 	void	*ptr;
 	void	*win;
-	void	*img;
 	void	*background_img;
 	void	*minimap_img;
 }	t_mlx;

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:31:35 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/20 05:12:25 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/07 23:42:01 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	init_images(void *mlx_ptr, t_menu *menu)
 	init_settings_menu_image(mlx_ptr, &menu->music_and_sounds_button, \
 "images/music_and_sounds_button.png", \
 "images/music_and_sounds_button_hover.png");
-// 	init_settings_menu_image(mlx_ptr, &menu->back_button, 
-// "images/back_button.png", "images/back_button_hover.png");
 	init_settings_menu_image(mlx_ptr, &menu->keybinds_define_button, \
 "images/keybinds_define_button.png", \
 "images/keybinds_define_button_hover.png");

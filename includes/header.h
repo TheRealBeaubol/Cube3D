@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/04 19:40:46 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/08 00:07:40 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	open_video_settings_menu(t_cube *cube);
 void	open_keybinds_menu(t_cube *cube);
 void	open_settings(t_cube *cube);
 void	put_keys_images(t_cube *cube, void *mlx_ptr, void *mlx_win);
+void	*get_key_images(t_cube *cube, int key);
 
 /* ************************************ */
 /*                 GAME                 */
@@ -94,5 +95,6 @@ void	print_tab(char **tab);
 void	check_and_do_portal(t_cube *cube);
 void	init_portal(t_cube *cube);
 void	draw_first_background(t_cube *cube);
+int	    is_map_token(char c);
 
 #endif

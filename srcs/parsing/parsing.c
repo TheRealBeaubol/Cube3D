@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:44:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/02 17:27:07 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/08 00:05:48 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ char	**format_tab(char **tab, int height)
 				new_tab[i][j] = '\0';
 			else if (ft_iswhitespace(tab[i][j]))
 				new_tab[i][j] = '1';
-			else if ((tab[i][j] > 47 && tab[i][j] < 51) || tab[i][j] == 'N' || \
-tab[i][j] == 'S' || tab[i][j] == 'W' || tab[i][j] == 'E' || tab[i][j] == 'P' || \
-tab[i][j] == 'D' || tab[i][j] == 'V' || tab[i][j] == 'M' || tab[i][j] == 'O')
+			else if (is_map_token(tab[i][j]))
 				new_tab[i][j] = tab[i][j];
 			else
 				printf_and_exit("Unrecognized token while parsing map\n", 0);

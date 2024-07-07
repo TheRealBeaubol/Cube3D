@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:20:58 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/05 18:51:53 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/08 00:09:01 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	draw_first_background(t_cube *cube)
 	x = -1;
 	while (++x < WIDTH)
 	{
-			y = -1;
-			while (++y < HEIGHT)
-			{
-				if (y < HEIGHT / 2)
-					mlx_set_image_pixel(cube->mlx.ptr, cube->mlx.background_img, x, y, cube->map.ceiling_color);
-				else
-					mlx_set_image_pixel(cube->mlx.ptr, cube->mlx.background_img, x, y, cube->map.floor_color);
-			}
+		y = -1;
+		while (++y < HEIGHT)
+		{
+			if (y < HEIGHT / 2)
+				mlx_set_image_pixel(cube->mlx.ptr, cube->mlx.background_img, x, y, cube->map.ceiling_color);
+			else
+				mlx_set_image_pixel(cube->mlx.ptr, cube->mlx.background_img, x, y, cube->map.floor_color);
+		}
 	}
 }
 
