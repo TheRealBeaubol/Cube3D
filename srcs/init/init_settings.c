@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:40:22 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/08 23:49:08 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/09 01:26:35 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,24 @@ void	init_player_binds(t_player_settings *settings)
 {
 	int		fd;
 	char	*line;
+	int		i;
 
 	fd = open("/tmp/settings.txt", O_RDWR, 0644);
 	if (fd == -1)
 		return ;
-	line = get_next_line(fd, 0);
-	settings->move_forward = get_key_from_line(line, settings->key_map);
-	free(line);
-	line = get_next_line(fd, 0);
-	settings->move_backward = get_key_from_line(line, settings->key_map);
-	free(line);
-	line = get_next_line(fd, 0);
-	settings->move_left = get_key_from_line(line, settings->key_map);
-	free(line);
-	line = get_next_line(fd, 0);
-	settings->move_right = get_key_from_line(line, settings->key_map);
-	free(line);
-	line = get_next_line(fd, 0);
-	settings->sprint = get_key_from_line(line, settings->key_map);
-	free(line);
-	line = get_next_line(fd, 0);
-	settings->show_map = get_key_from_line(line, settings->key_map);
-	free(line);
-	line = get_next_line(fd, 0);
-	settings->show_fps = get_key_from_line(line, settings->key_map);
+	ft_bzero(settings->keybinds, sizeof(settings->keybinds));
+	i = -1;
+	while (++i < 7)
+	{
+		line = get_next_line(fd, 0);
+		settings->keybinds[i] = get_key_from_line(line, settings->key_map);
+		free(line);
+	}
 	check_settings(settings);
-	free(line);
 	close(fd);
-	settings->move_speed = 0.1;
+	settings->show_fps = 0;
+	settings->show_map = 1;
+	settings->move_speed = 0.05;
 	settings->sensibility = 0.001;
 	settings->pitch = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/09 00:32:22 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/09 01:19:46 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,23 +125,22 @@ typedef struct s_menu
 	t_settings_menu_images	music_and_sounds_menu;
 }	t_menu;
 
-typedef enum e_move
+typedef enum e_keybinds
 {
-	FORWARD,
-	BACKWARD,
-	LEFT,
-	RIGHT
-}	e_move;
+	MOVE_FORWARD,
+	MOVE_BACKWARD,
+	MOVE_LEFT,
+	MOVE_RIGHT,
+	SPRINT,
+	SHOW_MAP,
+	SHOW_FPS
+}	e_keybinds;
 
 typedef struct s_player_settings
 {
 	t_key_map	key_map[64];
 	int		key_tab[256];
-	int		move_forward;
-	int		move_backward;
-	int		move_left;
-	int		move_right;
-	int		sprint;
+	int		keybinds[10];
 	int		show_map;
 	int		show_fps;
 	float	pitch;
@@ -183,7 +182,6 @@ typedef	struct s_mlx
 	void	*ptr;
 	void	*win;
 	void	*background_img;
-	void	*minimap_img;
 }	t_mlx;
 
 

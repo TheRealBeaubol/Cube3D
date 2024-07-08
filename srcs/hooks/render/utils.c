@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 22:49:25 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/08 23:53:25 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/09 00:52:09 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,17 @@ void	*get_key_images(t_cube *cube, int key)
 
 void	put_keys_images(t_cube *cube, void *mlx_ptr, void *mlx_win)
 {
+	const t_int_point	pos[10] = {{671, 392}, {671, 461}, {671, 530}, \
+{671, 599}, {671, 668}, {1037, 395}, {1037, 464}, {1037, 533}, \
+{1037, 602}, {1037, 671}};
 	void	*keys_image;
+	int		i;
 
-
-	keys_image = get_key_images(cube, cube->settings.move_forward);
-	mlx_put_image_to_window(mlx_ptr, mlx_win, \
-keys_image, 671, 392);
-	keys_image = get_key_images(cube, cube->settings.move_backward);
-	mlx_put_image_to_window(mlx_ptr, mlx_win, \
-keys_image, 671, 461);
-	keys_image = get_key_images(cube, cube->settings.move_left);
-	mlx_put_image_to_window(mlx_ptr, mlx_win, \
-keys_image, 671, 530);
-	keys_image = get_key_images(cube, cube->settings.move_right);
-	mlx_put_image_to_window(mlx_ptr, mlx_win, \
-keys_image, 671, 599);
-	keys_image = get_key_images(cube, cube->settings.sprint);
-	mlx_put_image_to_window(mlx_ptr, mlx_win, \
-keys_image, 671, 668);
-	keys_image = get_key_images(cube, cube->settings.show_map);
-	mlx_put_image_to_window(mlx_ptr, mlx_win, \
-keys_image, 1037, 395);
-	keys_image = get_key_images(cube, cube->settings.show_fps);
-	mlx_put_image_to_window(mlx_ptr, mlx_win, \
-keys_image, 1037, 464);
+	i = -1;
+	while (++i < 7)
+	{
+		keys_image = get_key_images(cube, cube->settings.keybinds[i]);
+		mlx_put_image_to_window(mlx_ptr, mlx_win, keys_image, \
+pos[i].x, pos[i].y);
+	}
 }

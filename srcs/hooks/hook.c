@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:44:49 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/08 22:12:42 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/09 01:33:02 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	key_release(int key, void *cube_void)
 	return (0);
 }
 
-void	fps_counter(void)
+void	fps_counter(void *mlx_ptr, void *win_ptr, int	show_fps)
 {
 	static t_fps_counter	fps_counter = {0, 0, 0, 0};
 	clock_t					current_time;
@@ -52,6 +52,11 @@ void	fps_counter(void)
 		fps_counter.frame_count = 0;
 		fps_counter.last_avg_time = current_time;
 	}
+	(void)show_fps;
+	(void)mlx_ptr;
+	(void)win_ptr;
+	// if (show_fps)
+	// 	mlx_string_put(mlx_ptr, win_ptr, 10, 50, 0xFFFF0000, ft_itoa((int)fps));
 	// printf("\033[1;32mFPS: %.2f\033[0m\n", fps);
 }
 
@@ -74,13 +79,20 @@ void	rotate(t_cube *cube, float angle)
 
 void	handle_key_in_game(t_cube *cube)
 {
-	if (cube->settings.key_tab[cube->settings.move_forward])
+	printf("cube->settings.key_tab[SDL_SCANCODE_LCTRL] = %d\n", cube->settings.key_tab[SDL_SCANCODE_LCTRL]);
+	printf("cube->settings.keybinds[4] = %d\n", cube->settings.keybinds[4]);
+	printf("CTRL = %d\n", SDL_SCANCODE_LCTRL);
+	if (cube->settings.key_tab[cube->settings.keybinds[4]])
+		cube->settings.move_speed = 0.3;
+	if (!cube->settings.key_tab[cube->settings.keybinds[4]])
+		cube->settings.move_speed = 0.05;
+	if (cube->settings.key_tab[cube->settings.keybinds[0]])
 		move_forward(cube, cube->settings.move_speed);
-	if (cube->settings.key_tab[cube->settings.move_backward])
+	if (cube->settings.key_tab[cube->settings.keybinds[1]])
 		move_backward(cube, cube->settings.move_speed);
-	if (cube->settings.key_tab[cube->settings.move_left])
+	if (cube->settings.key_tab[cube->settings.keybinds[2]])
 		move_left(cube, cube->settings.move_speed);
-	if (cube->settings.key_tab[cube->settings.move_right])
+	if (cube->settings.key_tab[cube->settings.keybinds[3]])
 		move_right(cube, cube->settings.move_speed);
 	if (cube->settings.key_tab[SDL_SCANCODE_LEFT] == 1)
 		rotate(cube, -cube->settings.sensibility);
@@ -126,7 +138,7 @@ int	loop_hook(void *cube_void)
 		check_and_do_portal(cube);
 		render_cube(cube);
 	}
-	fps_counter();
+	fps_counter(cube->mlx.ptr, cube->mlx.win, cube->settings.show_fps);
 	return (0);
 }
 

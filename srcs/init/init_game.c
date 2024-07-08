@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 00:05:36 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/09 00:22:27 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/09 01:19:42 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_mlx(t_cube *cube)
 		free_init_and_exit (cube, "Error\n", 1);
 	cube->mlx.background_img = mlx_new_image(cube->mlx.ptr, WIDTH, HEIGHT);
 	draw_first_background(cube);
+	mlx_set_font_scale(cube->mlx.ptr, cube->mlx.win, "default", 25.0f);
 }
 
 void	start_game(t_cube *cube, void *mlx_ptr, void *win_ptr)

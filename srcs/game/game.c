@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:41:38 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/08 00:08:39 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/09 01:19:33 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,13 @@ void	render_cube(t_cube *cube)
 	i = -1;
 	while (++i < WIDTH)
 		do_rays(cube, cube->settings.ray[i], i);
-	draw_circle(130, (t_int_point){WIDTH - 3 * 50 + 25, 2.5 * 50}, cube, 0xFF000000);
-	draw_circle(125, (t_int_point){WIDTH - 3 * 50 + 25, 2.5 * 50}, cube, 0xFF111111);
-	print_map(cube);
-	draw_circle(7, (t_int_point){WIDTH - 3 * 50 + 25, 2.5 * 50}, cube, 0xFF00FF00);
+	if (cube->settings.show_map)
+	{
+		draw_circle(130, (t_int_point){WIDTH - 3 * 50 + 25, 2.5 * 50}, cube, 0xFF000000);
+		draw_circle(125, (t_int_point){WIDTH - 3 * 50 + 25, 2.5 * 50}, cube, 0xFF111111);
+		print_map(cube);
+		draw_circle(7, (t_int_point){WIDTH - 3 * 50 + 25, 2.5 * 50}, cube, 0xFF00FF00);
+	}
 	mlx_put_image_to_window(cube->mlx.ptr, cube->mlx.win, \
 cube->mlx.background_img, 0, 0);
 }

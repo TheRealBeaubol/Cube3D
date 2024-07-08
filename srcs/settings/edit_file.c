@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:18:31 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/08 23:47:12 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/09 00:43:43 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,16 @@ static void	reset_settings_file(void)
 
 void	check_settings(t_player_settings *settings)
 {
-	if (settings->move_forward == -1 || settings->move_backward == -1 || \
-		settings->move_left == -1 || settings->move_right == -1 || \
-		settings->sprint == -1 || settings->show_map == -1 || \
-		settings->show_fps == -1)
+	int	i;
+
+	i = -1;
+	while(++i < 7)
 	{
-		reset_settings_file();
-		init_player_binds(settings);
+		if (settings->keybinds[i] == -1)
+		{
+			reset_settings_file();
+			init_player_binds(settings);
+		}
 	}
 }
 
@@ -51,31 +54,20 @@ int	add_bind_to_settings_file(char *print, char *param, int fd)
 
 void	edit_settings_file(t_cube *cube)
 {
+	const char	*settings_text[7] = {"move_forward = ", "move_backward = ", \
+"move_left = ", "move_right = ", "sprint = ", "show_map = ", "show_fps = "};
 	int		fd;
+	int		i;
 
 	fd = open("/tmp/settings.txt", O_RDWR | O_TRUNC, 0644);
 	if (fd == -1)
 		return ;
-	if (!add_bind_to_settings_file("move_forward = ", \
-get_line_from_key(cube->settings.move_forward, cube->settings.key_map), fd))
-		return ;
-	if (!add_bind_to_settings_file("move_backward = ", \
-get_line_from_key(cube->settings.move_backward, cube->settings.key_map), fd))
-		return ;
-	if (!add_bind_to_settings_file("move_left = ", \
-get_line_from_key(cube->settings.move_left, cube->settings.key_map), fd))
-		return ;
-	if (!add_bind_to_settings_file("move_right = ", \
-get_line_from_key(cube->settings.move_right, cube->settings.key_map), fd))
-		return ;
-	if (!add_bind_to_settings_file("sprint = ", \
-get_line_from_key(cube->settings.sprint, cube->settings.key_map), fd))
-		return ;
-	if (!add_bind_to_settings_file("show_map = ", \
-get_line_from_key(cube->settings.show_map, cube->settings.key_map), fd))
-		return ;
-	if (!add_bind_to_settings_file("show_fps = ", \
-get_line_from_key(cube->settings.show_fps, cube->settings.key_map), fd))
-		return ;
+	i = -1;
+	while (++i < 7)
+	{
+		if (!add_bind_to_settings_file((char *)settings_text[i], \
+get_line_from_key(cube->settings.keybinds[i], cube->settings.key_map), fd))
+			return ;
+	}
 	close(fd);
 }

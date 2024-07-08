@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:15:35 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/09 00:29:07 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/09 01:34:45 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 
 void	edit_player_settings(t_cube *cube, int key)
 {
-	if (cube->menu.keybind_menu_indice == 1)
-		cube->settings.move_forward = key;
-	if (cube->menu.keybind_menu_indice == 2)
-		cube->settings.move_backward = key;
-	if (cube->menu.keybind_menu_indice == 3)
-		cube->settings.move_left = key;
-	if (cube->menu.keybind_menu_indice == 4)
-		cube->settings.move_right = key;
-	if (cube->menu.keybind_menu_indice == 5)
-		cube->settings.sprint = key;
-	if (cube->menu.keybind_menu_indice == 6)
-		cube->settings.show_map = key;
-	if (cube->menu.keybind_menu_indice == 7)
-		cube->settings.show_fps = key;
-	printf("cube->menu.keybind_menu_indice = %d\n", cube->menu.keybind_menu_indice);
+	int	i;
+
+	i = -1;
+	while (++i < 7)
+	{
+		if (cube->settings.keybinds[i] == key)
+			return ;
+	}
+	i = -1;
+	while (++i < 7)
+	{
+		if (cube->menu.keybind_menu_indice == i + 1)
+			cube->settings.keybinds[i] = key;
+	}
 }
 
 void	handle_settings_hook(t_cube *cube, int key)
@@ -48,30 +47,37 @@ key == 224 || key == 225)
 void	open_in_game_settings(t_cube *cube, void *mlx_ptr, void *win_ptr)
 {
 	mlx_mouse_show();
+	cube->settings.show_fps = 0;
 	mlx_clear_window(mlx_ptr, win_ptr);
 	start_game(cube, mlx_ptr, win_ptr);
 }
 
 void	handle_game_hook(t_cube *cube, int key)
 {
+	int	i;
+
 	if (key == SDL_SCANCODE_ESCAPE)
 		open_in_game_settings(cube, cube->mlx.ptr, cube->mlx.win);
-	if (key == cube->settings.move_forward || \
-key == cube->settings.move_backward || key == cube->settings.move_left || \
-key == cube->settings.move_right || key == \
-SDL_SCANCODE_LEFT || key == SDL_SCANCODE_RIGHT)
+	i = -1;
+	while (++i < 7)
+	{
+		if (key == cube->settings.keybinds[i])
+			cube->settings.key_tab[key] = 1;
+	}
+	if (key == SDL_SCANCODE_LEFT || key == SDL_SCANCODE_RIGHT)
 		cube->settings.key_tab[key] = 1;
-}
+	if (key == cube->settings.keybinds[5])
+		cube->settings.show_map = !cube->settings.show_map;
+	if (key == cube->settings.keybinds[6])
+		cube->settings.show_fps = !cube->settings.show_fps;
+}	
+
 
 int	key_press(int key, void *cube_void)
 {
 	t_cube	*cube;
 
 	cube = (t_cube *)cube_void;
-	printf("cube->is_in_menu = %d\n", cube->is_in_menu);
-	printf("cube->is_in_game = %d\n", cube->is_in_game);
-	printf("cube->is_in_settings = %d\n", cube->is_in_settings);
-	printf("=====================================\n");
 	if (cube->is_in_menu)
 	{
 		if (key == SDL_SCANCODE_ESCAPE)
