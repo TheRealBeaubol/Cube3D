@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:28:35 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 22:05:09 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/09 00:24:42 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	handle_mouse_in_settings(t_cube *cube, t_int_point pos)
 	cube->menu.video_settings_button.status = \
 	is_hover((t_int_point){800, 75}, (t_int_point){1120, 190}, pos);
 	cube->menu.music_and_sounds_button.status = \
-		is_hover((t_int_point){1300, 75}, (t_int_point){1620, 190}, pos);
+	is_hover((t_int_point){1300, 75}, (t_int_point){1620, 190}, pos);
 }
 
 void	handle_mouse_in_menu(t_cube *cube, t_int_point pos)

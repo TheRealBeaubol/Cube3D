@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/08 00:07:40 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/09 00:29:14 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ void	check_and_do_portal(t_cube *cube);
 void	init_portal(t_cube *cube);
 void	draw_first_background(t_cube *cube);
 int	    is_map_token(char c);
-
+void	start_game(t_cube *cube, void *mlx_ptr, void *win_ptr);
+void	edit_settings_file(t_cube *cube);
 #endif

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:40:22 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/04 18:28:53 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/08 23:49:08 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,20 @@ void	init_player_binds(t_player_settings *settings)
 	free(line);
 	line = get_next_line(fd, 0);
 	settings->move_right = get_key_from_line(line, settings->key_map);
+	free(line);
+	line = get_next_line(fd, 0);
+	settings->sprint = get_key_from_line(line, settings->key_map);
+	free(line);
+	line = get_next_line(fd, 0);
+	settings->show_map = get_key_from_line(line, settings->key_map);
+	free(line);
+	line = get_next_line(fd, 0);
+	settings->show_fps = get_key_from_line(line, settings->key_map);
 	check_settings(settings);
 	free(line);
 	close(fd);
+	settings->move_speed = 0.1;
+	settings->sensibility = 0.001;
 	settings->pitch = 0;
 }
 
@@ -45,8 +56,8 @@ void	init_settings_file(void)
 	if (fd == -1)
 	{
 		fd = open("/tmp/settings.txt", O_CREAT | O_RDWR, 0644);
-		ft_putstr_fd("move_forward = W\nmove_backward = \
-S\nmove_left = A\nmove_right = D\n", fd);
+		ft_putstr_fd("move_forward = W\nmove_backward = S\nmove_left \
+= A\nmove_right = D\nsprint = CTRL\nshow_map = M\nshow_fps = F\n", fd);
 	}
 	close(fd);
 }

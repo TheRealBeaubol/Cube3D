@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 00:05:36 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/08 00:09:14 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/09 00:22:27 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	start_game(t_cube *cube, void *mlx_ptr, void *win_ptr)
 	cube->is_in_game = 0;
 	cube->is_in_settings = 0;
 	cube->menu.waiting_for_key = 0;
-	cube->menu.background = mlx_png_file_to_image(cube->mlx.ptr, \
-"./images/background.png", NULL, NULL);
 	mlx_put_image_to_window(mlx_ptr, win_ptr, cube->menu.background, 0, 0);
 	mlx_put_image_to_window(mlx_ptr, win_ptr, \
 cube->menu.play_button.img, (WIDTH - cube->menu.play_button.width) / \

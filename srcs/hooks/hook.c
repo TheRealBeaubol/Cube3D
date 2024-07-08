@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:44:49 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/05 18:56:57 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/08 22:12:42 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,35 +74,28 @@ void	rotate(t_cube *cube, float angle)
 
 void	handle_key_in_game(t_cube *cube)
 {
-	double	movespeed;
-	float	rotspeed;
-
-	movespeed = 0.1;
-	rotspeed = 0.05;
 	if (cube->settings.key_tab[cube->settings.move_forward])
-		move_forward(cube, movespeed);
+		move_forward(cube, cube->settings.move_speed);
 	if (cube->settings.key_tab[cube->settings.move_backward])
-		move_backward(cube, movespeed);
+		move_backward(cube, cube->settings.move_speed);
 	if (cube->settings.key_tab[cube->settings.move_left])
-		move_left(cube, movespeed);
+		move_left(cube, cube->settings.move_speed);
 	if (cube->settings.key_tab[cube->settings.move_right])
-		move_right(cube, movespeed);
+		move_right(cube, cube->settings.move_speed);
 	if (cube->settings.key_tab[SDL_SCANCODE_LEFT] == 1)
-		rotate(cube, -rotspeed);
+		rotate(cube, -cube->settings.sensibility);
 	if (cube->settings.key_tab[SDL_SCANCODE_RIGHT] == 1)
-		rotate(cube, rotspeed);
+		rotate(cube, cube->settings.sensibility);
 }
 
 void	handle_mouse_in_game(t_cube *cube, t_int_point pos)
 {
-	float			rotate_speed;
 	t_point			point;
 
-	rotate_speed = 0.001;
 	mlx_mouse_hide();
-	point.x = (pos.x - WIDTH / 2) * rotate_speed;
+	point.x = (pos.x - WIDTH / 2) * cube->settings.sensibility;
 	rotate(cube, point.x);
-	cube->settings.pitch += (pos.y - HEIGHT / 2) * rotate_speed;
+	cube->settings.pitch += (pos.y - HEIGHT / 2) * cube->settings.sensibility;
 	if (cube->settings.pitch > 1.0)
 		cube->settings.pitch = 1.0;
 	if (cube->settings.pitch < -1.0)

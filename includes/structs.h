@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/07 23:44:07 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/09 00:32:22 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,12 +141,15 @@ typedef struct s_player_settings
 	int		move_backward;
 	int		move_left;
 	int		move_right;
+	int		sprint;
+	int		show_map;
+	int		show_fps;
 	float	pitch;
+	float	sensibility;
+	float	move_speed;
 	t_point	pos;
 	t_point	plane;
 	t_point	dir;
-	// e_move	move;
-	// float	looking_angle;
 	t_ray	**ray;
 }	t_player_settings;
 

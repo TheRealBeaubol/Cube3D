@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 22:49:25 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 22:50:01 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/08 23:53:25 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	put_keys_images(t_cube *cube, void *mlx_ptr, void *mlx_win)
 {
 	void	*keys_image;
 
+
 	keys_image = get_key_images(cube, cube->settings.move_forward);
 	mlx_put_image_to_window(mlx_ptr, mlx_win, \
 keys_image, 671, 392);
@@ -42,4 +43,13 @@ keys_image, 671, 530);
 	keys_image = get_key_images(cube, cube->settings.move_right);
 	mlx_put_image_to_window(mlx_ptr, mlx_win, \
 keys_image, 671, 599);
+	keys_image = get_key_images(cube, cube->settings.sprint);
+	mlx_put_image_to_window(mlx_ptr, mlx_win, \
+keys_image, 671, 668);
+	keys_image = get_key_images(cube, cube->settings.show_map);
+	mlx_put_image_to_window(mlx_ptr, mlx_win, \
+keys_image, 1037, 395);
+	keys_image = get_key_images(cube, cube->settings.show_fps);
+	mlx_put_image_to_window(mlx_ptr, mlx_win, \
+keys_image, 1037, 464);
 }
