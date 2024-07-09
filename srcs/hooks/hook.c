@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:44:49 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/09 01:33:02 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/10 00:23:04 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,9 @@ void	rotate(t_cube *cube, float angle)
 
 void	handle_key_in_game(t_cube *cube)
 {
-	printf("cube->settings.key_tab[SDL_SCANCODE_LCTRL] = %d\n", cube->settings.key_tab[SDL_SCANCODE_LCTRL]);
-	printf("cube->settings.keybinds[4] = %d\n", cube->settings.keybinds[4]);
-	printf("CTRL = %d\n", SDL_SCANCODE_LCTRL);
-	if (cube->settings.key_tab[cube->settings.keybinds[4]])
-		cube->settings.move_speed = 0.3;
-	if (!cube->settings.key_tab[cube->settings.keybinds[4]])
+	if (cube->settings.key_tab[cube->settings.keybinds[4]]== 1)
+		cube->settings.move_speed = 0.1;
+	else
 		cube->settings.move_speed = 0.05;
 	if (cube->settings.key_tab[cube->settings.keybinds[0]])
 		move_forward(cube, cube->settings.move_speed);

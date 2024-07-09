@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:01:39 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/09 01:19:38 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/10 00:19:59 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,14 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 		cube->map.actual_texture = cube->map.ea_texture;
 	else if (ray->direction == WEST)
 		cube->map.actual_texture = cube->map.we_texture;
-	ray->wall_offset = (int)(-cube->settings.pitch * HEIGHT);
+    ray->wall_offset = (int)((-cube->settings.pitch) * HEIGHT);
 	ray->wall_height = (int)(HEIGHT / ray->lenght);
 	start = (int)((HEIGHT - (float)ray->wall_height) / 2 + \
 ray->wall_offset);
 	if (start < 0)
 		start = 0;
 	end = (int)((float)ray->wall_height / 2 + HEIGHT / 2 + \
-(float)ray->wall_offset);
+ray->wall_offset);
 	if (end >= HEIGHT)
 		end = HEIGHT - 1;
 	texture_calculation(cube, ray);
