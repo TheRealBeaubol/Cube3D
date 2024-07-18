@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:15:35 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/10 00:20:48 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/18 13:25:47 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,13 @@ void	open_in_game_settings(t_cube *cube, void *mlx_ptr, void *win_ptr)
 
 void	handle_game_hook(t_cube *cube, int key)
 {
-	int	i;
-
 	if (key == SDL_SCANCODE_ESCAPE)
 		open_in_game_settings(cube, cube->mlx.ptr, cube->mlx.win);
-	i = -1;
-	while (++i < 7)
-	{
-		if (key == cube->settings.keybinds[i])
-			cube->settings.key_tab[key] = 1;
-	}
 	if (key == SDL_SCANCODE_LEFT || key == SDL_SCANCODE_RIGHT)
 		cube->settings.key_tab[key] = 1;
 	if (key == cube->settings.keybinds[5])
-		cube->settings.show_map = !cube->settings.show_map;
-	if (key == cube->settings.keybinds[6])
-		cube->settings.show_fps = !cube->settings.show_fps;
+		cube->settings.show_map = !cube->settings.show_map;	
+	cube->settings.key_tab[key] = 1;
 }	
 
 

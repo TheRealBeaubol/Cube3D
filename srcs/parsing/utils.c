@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:47:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/18 12:35:30 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/18 13:21:12 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,6 @@ void	get_player_pos(t_cube *cube)
 		}
 		i++;
 	}
+	ft_dprintf(2, "Error\nNo player spawn found\n");
+	free_init_and_exit(cube, 0, 0);
 }

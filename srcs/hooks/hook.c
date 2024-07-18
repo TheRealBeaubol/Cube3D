@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:44:49 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/10 00:23:04 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/18 13:29:31 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,11 @@ void	rotate(t_cube *cube, float angle)
 void	handle_key_in_game(t_cube *cube)
 {
 	if (cube->settings.key_tab[cube->settings.keybinds[4]]== 1)
-		cube->settings.move_speed = 0.1;
+		cube->settings.move_speed = 0.115;
+	else if (cube->settings.key_tab[cube->settings.keybinds[6]] == 1)
+		cube->settings.move_speed = 0.035;
 	else
-		cube->settings.move_speed = 0.05;
+		cube->settings.move_speed = 0.065;
 	if (cube->settings.key_tab[cube->settings.keybinds[0]])
 		move_forward(cube, cube->settings.move_speed);
 	if (cube->settings.key_tab[cube->settings.keybinds[1]])

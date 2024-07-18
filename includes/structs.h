@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/10 00:20:31 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:48:29 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ typedef struct s_map
 	t_image	we_texture;
 	t_image	ea_texture;
 	t_image	actual_texture;
+	t_image portal_texture;
 	t_portal	**portal;
 	int		cpt_portal;
 }	t_map;
@@ -181,6 +182,7 @@ typedef	struct s_mlx
 {
 	void	*ptr;
 	void	*win;
+	t_image	player;
 	void	*background_img;
 }	t_mlx;
 

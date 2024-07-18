@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:17:59 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/20 05:12:36 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:48:50 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,14 @@ cube->map.texture_paths[2]);
 	init_textures(cube->mlx.ptr, &cube->map.ea_texture, \
 cube->map.texture_paths[3]);
 	free(cube->map.texture_paths);
+	cube->mlx.player.image = mlx_png_file_to_image(cube->mlx.ptr, \
+"./images/player3.png", &cube->mlx.player.width, &cube->mlx.player.height);
+	cube->mlx.player.texture = ft_calloc(cube->mlx.player.height * \
+cube->mlx.player.width, sizeof(int));
+	map_wall_image(cube->mlx.ptr, &cube->mlx.player);
+	cube->map.portal_texture.image = mlx_png_file_to_image(cube->mlx.ptr, \
+"./images/portal.png", &cube->map.portal_texture.width, &cube->map.portal_texture.height);
+	cube->map.portal_texture.texture = ft_calloc(cube->map.portal_texture.height * \
+cube->map.portal_texture.width, sizeof(int));
+	map_wall_image(cube->mlx.ptr, &cube->map.portal_texture);
 }
