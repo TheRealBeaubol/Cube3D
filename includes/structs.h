@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/18 15:48:29 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:37:53 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,17 +125,6 @@ typedef struct s_menu
 	t_settings_menu_images	music_and_sounds_menu;
 }	t_menu;
 
-typedef enum e_keybinds
-{
-	MOVE_FORWARD,
-	MOVE_BACKWARD,
-	MOVE_LEFT,
-	MOVE_RIGHT,
-	SPRINT,
-	SHOW_MAP,
-	SHOW_FPS
-}	e_keybinds;
-
 typedef struct s_player_settings
 {
 	t_key_map	key_map[64];
@@ -173,7 +162,11 @@ typedef struct s_map
 	t_image	we_texture;
 	t_image	ea_texture;
 	t_image	actual_texture;
-	t_image portal_texture;
+	t_image portal_texture1;
+	t_image portal_texture2;
+	t_image portal_texture3;
+	t_image portal_texture4;
+	int	portal_animation;
 	t_portal	**portal;
 	int		cpt_portal;
 }	t_map;

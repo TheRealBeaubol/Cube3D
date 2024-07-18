@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:01:39 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/18 15:51:45 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/18 17:00:55 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,19 @@ void	texture_calculation(t_cube *cube, t_ray *ray)
 t_image	get_portal_texture(t_cube *cube, t_image actual_texture)
 {
 	t_image	portal;
+	t_image portal_animation;
 	int	x;
 	int	y;
 
 	y = 0;
+	if (cube->map.portal_animation >= 0 && cube->map.portal_animation < 1500)
+		portal_animation = cube->map.portal_texture1;
+	else if (cube->map.portal_animation >= 1500 && cube->map.portal_animation < 3000)
+		portal_animation = cube->map.portal_texture2;
+	else if (cube->map.portal_animation >= 300 && cube->map.portal_animation < 4500)
+		portal_animation = cube->map.portal_texture3;
+	else if (cube->map.portal_animation >= 4500 && cube->map.portal_animation < 6000)
+		portal_animation = cube->map.portal_texture4;
 	portal.texture = ft_calloc(actual_texture.height * \
 actual_texture.width, sizeof(int));
 	while (y < actual_texture.width)
@@ -100,9 +109,9 @@ actual_texture.width, sizeof(int));
 		x = 0;
 		while (x < actual_texture.height)
 		{
-			if ((x < cube->map.portal_texture.height && y < cube->map.portal_texture.width) && (cube->map.portal_texture.texture[y * cube->map.portal_texture.width + x] != 0))
+			if ((x < portal_animation.height && y < portal_animation.width) && (portal_animation.texture[y * portal_animation.width + x] != 0))
 				portal.texture[y * actual_texture.width + x] = \
-cube->map.portal_texture.texture[y * cube->map.portal_texture.width + x];
+portal_animation.texture[y * portal_animation.width + x];
 			else
 				portal.texture[y * actual_texture.width + x] = \
 actual_texture.texture[y * actual_texture.width + x];
@@ -112,6 +121,10 @@ actual_texture.texture[y * actual_texture.width + x];
 	}
 	portal.height = actual_texture.height;
 	portal.width = actual_texture.width;
+	if (cube->map.portal_animation >= 6000)
+		cube->map.portal_animation = 0;
+	else
+		cube->map.portal_animation++;
 	return (portal);
 }
 
@@ -123,7 +136,14 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 	init_ray(&cube->settings, ray, i);
 	calculate_step_dir_and_init_sidedist(ray);
 	perform_dda(ray, &cube->map, &cube->settings);
-	if (ray->direction == NORTH)
+	cube->map.actual_texture = cube->map.no_texture;
+	if (ray->hit_wall == 3)
+		cube->map.actual_texture = get_portal_texture(cube, \
+		cube->map.actual_texture);
+	else if (ray->hit_wall == 2)
+		cube->map.actual_texture = get_portal_texture(cube, \
+		cube->map.actual_texture);
+	else if (ray->direction == NORTH)
 		cube->map.actual_texture = cube->map.no_texture;
 	else if (ray->direction == SOUTH)
 		cube->map.actual_texture = cube->map.so_texture;
@@ -131,12 +151,6 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 		cube->map.actual_texture = cube->map.ea_texture;
 	else if (ray->direction == WEST)
 		cube->map.actual_texture = cube->map.we_texture;
-	if (ray->hit_wall == 3)
-		cube->map.actual_texture = get_portal_texture(cube, \
-		cube->map.actual_texture);
-	else if (ray->hit_wall == 2)
-		cube->map.actual_texture = get_portal_texture(cube, \
-		cube->map.actual_texture);
     ray->wall_offset = (int)((-cube->settings.pitch) * HEIGHT);
 	ray->wall_height = (int)(HEIGHT / ray->lenght);
 	start = (int)((HEIGHT - (float)ray->wall_height) / 2 + \

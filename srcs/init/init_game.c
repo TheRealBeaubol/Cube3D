@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 00:05:36 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/18 14:14:10 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:28:38 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,29 @@ cube->menu.exit_button.img, (WIDTH - cube->menu.exit_button.width) / \
 2, ((HEIGHT - cube->menu.exit_button.height) / 2) + 200);
 }
 
+void	print_key_tab(t_cube *cube)
+{
+	int	i;
+
+	i = 0;
+	while (i < 256)
+	{
+		printf("cube->settings.key_tab[%d] = %d\n", i, cube->settings.key_tab[i]);
+		i++;
+	}
+}
+
 void	init(t_cube *cube)
 {
+	int	i;
+
 	init_settings_file();
 	init_key_map(cube);
 	init_player_binds(&cube->settings);
 	init_portal(cube);
-	ft_bzero(cube->settings.key_tab, 256);
+	i = -1;
+	while (++i < 256)
+		cube->settings.key_tab[i] = 0;
 	init_mlx(cube);
 	preload_textures(cube);
 	init_images(cube->mlx.ptr, &cube->menu);

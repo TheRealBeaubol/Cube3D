@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:44:49 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/18 13:29:31 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:23:01 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	key_release(int key, void *cube_void)
 	return (0);
 }
 
-void	fps_counter(void *mlx_ptr, void *win_ptr, int	show_fps)
+void	fps_counter(void *mlx_ptr, void *win_ptr, int show_fps)
 {
 	static t_fps_counter	fps_counter = {0, 0, 0, 0};
 	clock_t					current_time;
@@ -75,6 +75,10 @@ void	rotate(t_cube *cube, float angle)
 		cube->settings.plane.y * sin(angle);
 	cube->settings.plane.y = old_plane_x * sin(angle) + \
 		cube->settings.plane.y * cos(angle);
+	// printf("plane.x: %f\n", cube->settings.plane.x);
+	// printf("plane.y: %f\n", cube->settings.plane.y);
+	// printf("dir.x: %f\n", cube->settings.dir.x);
+	// printf("dir.y: %f\n", cube->settings.dir.y);
 }
 
 void	handle_key_in_game(t_cube *cube)
@@ -97,6 +101,8 @@ void	handle_key_in_game(t_cube *cube)
 		rotate(cube, -cube->settings.sensibility);
 	if (cube->settings.key_tab[SDL_SCANCODE_RIGHT] == 1)
 		rotate(cube, cube->settings.sensibility);
+	// printf("cube->settings.key_tab[SDL_SCANCODE_LEFT]: %d\n", cube->settings.key_tab[SDL_SCANCODE_LEFT]);
+	// printf("cube->settings.key_tab[SDL_SCANCODE_RIGHT]: %d\n", cube->settings.key_tab[SDL_SCANCODE_RIGHT]);
 }
 
 void	handle_mouse_in_game(t_cube *cube, t_int_point pos)
