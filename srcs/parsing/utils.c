@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:47:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/08 00:06:20 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/18 12:35:30 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ void	get_player_pos(t_cube *cube)
 		{
 			if (!is_player(cube->map.map[i][j]))
 			{
-				cube->settings.pos.x = i + 0.5;
-				cube->settings.pos.y = j + 0.5;
+				cube->settings.pos.x = j + 0.5;
+				cube->settings.pos.y = i + 0.5;
 				init_spawn(&cube->settings, cube->map.map[i][j]);
 				cube->map.map[i][j] = '0';
 				return ;

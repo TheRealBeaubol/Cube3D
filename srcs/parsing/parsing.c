@@ -6,34 +6,60 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:44:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/08 00:05:48 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/18 12:09:31 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
+int	get_line_width(char *str)
+{
+	int	width;
+
+	width = 0;
+	while (*str && *str != '\n')
+	{
+		width++;
+		if (*str == '\t')
+			width += 3;
+		str++;
+	}
+	return (width);
+}
+
 char	**format_tab(char **tab, int height)
 {
 	int		i;
 	int		j;
+	int		k;
 	char	**new_tab;
 
 	new_tab = ft_calloc(height + 2, sizeof(char *));
 	i = -1;
 	while (tab[++i])
 	{
-		new_tab[i] = ft_calloc(ft_strlen(tab[i]) + 1, sizeof(char));
+		new_tab[i] = ft_calloc(get_line_width(tab[i]) + 1, sizeof(char));
 		j = -1;
+		k = 0;
 		while (tab[i][++j])
 		{
 			if (tab[i][j] == '\n')
-				new_tab[i][j] = '\0';
+				new_tab[i][k] = '\0';
+			else if (tab[i][j] == '\t')
+			{
+				new_tab[i][k] = '1';
+				new_tab[i][k + 1] = '1';
+				new_tab[i][k + 2] = '1';
+				new_tab[i][k + 3] = '1';
+				k += 3;
+			}
 			else if (ft_iswhitespace(tab[i][j]))
-				new_tab[i][j] = '1';
+				new_tab[i][k] = '1';
 			else if (is_map_token(tab[i][j]))
-				new_tab[i][j] = tab[i][j];
+				new_tab[i][k] = tab[i][j];
 			else
 				printf_and_exit("Unrecognized token while parsing map\n", 0);
+			k++;
 		}
 	}
 	ft_free_tab(tab);

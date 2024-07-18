@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 21:22:06 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/02 16:23:49 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/18 11:42:10 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ int	main(int ac, char **av)
 
 	check_args(ac, av);
 	cube.map_name = av[1];
+	printf("\033[1;32mParsing...\033[0m\n");
 	if (parsing(&cube) == -1)
 		return (-1);
+	printf("\033[1;32mInit...\033[0m\n");
 	init(&cube);
 	hook(&cube);
 	return (0);
