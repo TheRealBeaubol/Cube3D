@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:17:59 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/22 15:11:51 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/22 17:29:00 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,7 @@ void	init_textures(t_cube *cube, t_image *img, char *path)
 	map_wall_image(cube, img);
 }
 
-void	init_portal_sprite(t_cube *cube)
-{
-	const char	*paths[4] = {"./images/portal1.png", "./images/portal2.png", \
-"./images/portal3.png", "./images/portal4.png"};
-	char		*path;
-	int			i;
-
-	i = -1;
-	while (++i < 4)
-	{
-		path = (char *)paths[i];
-		init_textures(cube, &cube->mlx.portal[i], path);
-	}
-}
-
-void	init_portal_wall_sprite(t_cube *cube, int **wall, t_image *img)
+int	**init_portal_wall_sprite(t_cube *cube, int **wall, t_image *img)
 {
 	int	i;
 	int	x;
@@ -72,33 +57,21 @@ void	init_portal_wall_sprite(t_cube *cube, int **wall, t_image *img)
 			x = -1;
 			while (++x < img->height)
 			{
-				if ((x < cube->mlx.portal[i].height && y < cube->mlx.portal[i].width) && (cube->mlx.portal[i].texture[y * cube->mlx.portal[i].width + x] != 0))
-					wall[i][y * cube->mlx.portal[i].width + x] = \
-cube->mlx.portal[i].texture[y * cube->mlx.portal[i].width + x];
+				if ((x < cube->mlx.portal[i].height && y < cube->mlx.portal[i].width) && (cube->mlx.portal[i].texture[y * img->width + x] != 0))
+				{
+					wall[i][y * img->width + x] = \
+cube->mlx.portal[i].texture[y * img->width + x];
+				}
 				else
-					wall[i][y * cube->mlx.portal[i].width + x] = \
-img->texture[y * cube->mlx.portal[i].width + x];
+				{
+					wall[i][y * img->width + x] = \
+img->texture[y * img->width + x];
+
+				}
 			}
 		}
 	}
-}
-
-void	print_texture(t_image *img, int *img2)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < img->width)
-	{
-		x = 0;
-		while (x < img->height)
-		{
-			printf("[%d | %d] ", img->texture[y * img->width + x], img2[y * img->width + x]);
-			x++;
-		}
-		y++;
-	}
+	return (wall);
 }
 
 void	preload_textures(t_cube *cube)
@@ -109,10 +82,15 @@ void	preload_textures(t_cube *cube)
 	init_textures(cube, &cube->map.ea_texture, cube->map.texture_paths[3]);
 	ft_free_tab(cube->map.texture_paths);
 	init_textures(cube, &cube->mlx.player, "./images/player3.png");
-	init_portal_sprite(cube);
-	init_portal_wall_sprite(cube, cube->map.no_portal, &cube->map.no_texture);
-	init_portal_wall_sprite(cube, cube->map.so_portal, &cube->map.so_texture);
-	init_portal_wall_sprite(cube, cube->map.ea_portal, &cube->map.ea_texture);
-	init_portal_wall_sprite(cube, cube->map.we_portal, &cube->map.we_texture);
-	print_texture(&cube->map.so_texture, *cube->map.so_portal);
+	cube->map.portal = ft_calloc(4, sizeof(int *));
+	init_textures(cube, &cube->mlx.portal[0], "./images/portal1.png");
+	init_textures(cube, &cube->mlx.portal[1], "./images/portal2.png");
+	init_textures(cube, &cube->mlx.portal[2], "./images/portal3.png");
+	init_textures(cube, &cube->mlx.portal[3], "./images/portal4.png");
+	cube->map.portal_texture = ft_calloc(4, sizeof(int **));
+	cube->map.portal_texture[NORTH] = init_portal_wall_sprite(cube, cube->map.portal_texture[NORTH], &cube->map.no_texture);
+	cube->map.portal_texture[SOUTH] = init_portal_wall_sprite(cube, cube->map.portal_texture[SOUTH], &cube->map.so_texture);
+	cube->map.portal_texture[EAST] = init_portal_wall_sprite(cube, cube->map.portal_texture[EAST], &cube->map.ea_texture);
+	cube->map.portal_texture[WEST] = init_portal_wall_sprite(cube, cube->map.portal_texture[WEST], &cube->map.we_texture);
+	
 }

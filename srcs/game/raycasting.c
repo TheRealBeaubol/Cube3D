@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:01:39 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/22 14:22:08 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/22 17:29:44 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,25 +88,40 @@ void	texture_calculation(t_cube *cube, t_ray *ray)
 
 int	*get_portal_texture(t_cube *cube, e_direction direction)
 {
-	int	**portal[4];
 	static int	time = 0;
 	static int	portal_index = 0;
 
-	printf("Debug 1\n");
-	portal[NORTH] = cube->map.no_portal;
-	portal[SOUTH] = cube->map.so_portal;
-	portal[EAST] = cube->map.ea_portal;
-	portal[WEST] = cube->map.we_portal;
-	if (time >= 50)
+	if (time >= 5000)
 	{
 		portal_index++;
 		time = 0;
 	}
-	if (portal_index > 4)
+	if (portal_index > 3)
 		portal_index = 0;
 	time++;
-	printf("Debug 2\n");
-	return(portal[direction][portal_index]);
+	printf("portal_index = %d\n", portal_index);
+	printf("portal[direction][portal_index] = %p\n", cube->map.portal_texture[direction][portal_index]);
+	printf("time = %d\n", time);
+	return(cube->map.portal_texture[direction][portal_index]);
+}
+
+void	print_texture(int *texture, int width, int height)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < height)
+	{
+		j = 0;
+		while (j < width)
+		{
+			printf( "%d ", texture[i * width + j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 }
 
 void	do_rays(t_cube *cube, t_ray *ray, int i)
@@ -117,7 +132,14 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 	init_ray(&cube->settings, ray, i);
 	calculate_step_dir_and_init_sidedist(ray);
 	perform_dda(ray, &cube->map, &cube->settings);
-	if (ray->direction == NORTH)
+	cube->map.actual_texture.texture = NULL;
+	if (ray->hit_wall == 3 || ray->hit_wall == 2)
+	{
+		cube->map.actual_texture.texture = get_portal_texture(cube, ray->direction);
+		cube->map.actual_texture.width = cube->map.no_texture.width;
+		cube->map.actual_texture.height = cube->map.no_texture.height;
+	}
+	else if (ray->direction == NORTH)
 		cube->map.actual_texture = cube->map.no_texture;
 	else if (ray->direction == SOUTH)
 		cube->map.actual_texture = cube->map.so_texture;
@@ -125,9 +147,7 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 		cube->map.actual_texture = cube->map.ea_texture;
 	else if (ray->direction == WEST)
 		cube->map.actual_texture = cube->map.we_texture;
-	if (ray->hit_wall == 3 || ray->hit_wall == 2)
-		cube->map.actual_texture.texture = get_portal_texture(cube, ray->direction);
-    ray->wall_offset = (int)((-cube->settings.pitch) * HEIGHT);
+	ray->wall_offset = (int)((-cube->settings.pitch) * HEIGHT);
 	ray->wall_height = (int)(HEIGHT / ray->lenght);
 	start = (int)((HEIGHT - (float)ray->wall_height) / 2 + \
 ray->wall_offset);
