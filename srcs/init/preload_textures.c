@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:17:59 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/22 17:29:00 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:08:41 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	**init_portal_wall_sprite(t_cube *cube, int **wall, t_image *img)
 	int	y;
 
 	i = -1;
-	wall = ft_calloc(5, sizeof(int *));
-	while (++i < 4)
+	wall = ft_calloc(13, sizeof(int *));
+	while (++i < 12)
 	{
 		wall[i] = ft_calloc(img->height * img->width, sizeof(int));
 		y = -1;
@@ -81,13 +81,21 @@ void	preload_textures(t_cube *cube)
 	init_textures(cube, &cube->map.we_texture, cube->map.texture_paths[2]);
 	init_textures(cube, &cube->map.ea_texture, cube->map.texture_paths[3]);
 	ft_free_tab(cube->map.texture_paths);
-	init_textures(cube, &cube->mlx.player, "./images/player3.png");
-	cube->map.portal = ft_calloc(4, sizeof(int *));
-	init_textures(cube, &cube->mlx.portal[0], "./images/portal1.png");
-	init_textures(cube, &cube->mlx.portal[1], "./images/portal2.png");
-	init_textures(cube, &cube->mlx.portal[2], "./images/portal3.png");
-	init_textures(cube, &cube->mlx.portal[3], "./images/portal4.png");
-	cube->map.portal_texture = ft_calloc(4, sizeof(int **));
+	init_textures(cube, &cube->mlx.player, "./images/player.png");
+	cube->map.portal = ft_calloc(13, sizeof(int *));
+	init_textures(cube, &cube->mlx.portal[0], "./images/portal_0.png");
+	init_textures(cube, &cube->mlx.portal[1], "./images/portal_1.png");
+	init_textures(cube, &cube->mlx.portal[2], "./images/portal_2.png");
+	init_textures(cube, &cube->mlx.portal[3], "./images/portal_3.png");
+	init_textures(cube, &cube->mlx.portal[4], "./images/portal_4.png");
+	init_textures(cube, &cube->mlx.portal[5], "./images/portal_5.png");
+	init_textures(cube, &cube->mlx.portal[6], "./images/portal_6.png");
+	init_textures(cube, &cube->mlx.portal[7], "./images/portal_7.png");
+	init_textures(cube, &cube->mlx.portal[8], "./images/portal_8.png");
+	init_textures(cube, &cube->mlx.portal[9], "./images/portal_9.png");
+	init_textures(cube, &cube->mlx.portal[10], "./images/portal_10.png");
+	init_textures(cube, &cube->mlx.portal[11], "./images/portal_11.png");
+	cube->map.portal_texture = ft_calloc(13, sizeof(int **));
 	cube->map.portal_texture[NORTH] = init_portal_wall_sprite(cube, cube->map.portal_texture[NORTH], &cube->map.no_texture);
 	cube->map.portal_texture[SOUTH] = init_portal_wall_sprite(cube, cube->map.portal_texture[SOUTH], &cube->map.so_texture);
 	cube->map.portal_texture[EAST] = init_portal_wall_sprite(cube, cube->map.portal_texture[EAST], &cube->map.ea_texture);

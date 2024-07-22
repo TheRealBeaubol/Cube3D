@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:01:39 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/22 17:29:44 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:09:19 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	*get_portal_texture(t_cube *cube, e_direction direction)
 		portal_index++;
 		time = 0;
 	}
-	if (portal_index > 3)
+	if (portal_index > 11)
 		portal_index = 0;
 	time++;
 	printf("portal_index = %d\n", portal_index);
