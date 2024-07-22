@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/18 16:37:53 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/20 19:17:37 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef enum	e_portal_type
 	DOUBLE,
 }	e_portal_type;
 
-typedef struct e_portal
+typedef struct s_portal
 {
 	e_portal_type	type;
 	t_point	pos;
@@ -149,6 +149,12 @@ typedef struct s_image
 	int		height;
 }	t_image;
 
+typedef struct s_img_list
+{
+	t_image				*img;
+	struct s_img_list	*next;
+}	t_img_list;
+
 typedef struct s_map
 {
 	int		height;
@@ -162,10 +168,10 @@ typedef struct s_map
 	t_image	we_texture;
 	t_image	ea_texture;
 	t_image	actual_texture;
-	t_image portal_texture1;
-	t_image portal_texture2;
-	t_image portal_texture3;
-	t_image portal_texture4;
+	int		*no_portal[5];
+	int		*so_portal[5];
+	int		*we_portal[5];
+	int		*ea_portal[5];
 	int	portal_animation;
 	t_portal	**portal;
 	int		cpt_portal;
@@ -176,6 +182,7 @@ typedef	struct s_mlx
 	void	*ptr;
 	void	*win;
 	t_image	player;
+	t_image portal[5];
 	void	*background_img;
 }	t_mlx;
 
@@ -190,8 +197,6 @@ typedef struct s_cube
 	int					is_in_menu;
 	int					is_in_game;
 	int					is_in_settings;
-	// int					start_x;
-	// int					start_y;
 }	t_cube;
 
 #endif

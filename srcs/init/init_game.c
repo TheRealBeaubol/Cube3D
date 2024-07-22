@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 00:05:36 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/18 16:28:38 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/22 14:02:40 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ void	init(t_cube *cube)
 	while (++i < 256)
 		cube->settings.key_tab[i] = 0;
 	init_mlx(cube);
+	printf("\033[1;32mPreloading textures...\033[0m\n");
 	preload_textures(cube);
 	init_images(cube->mlx.ptr, &cube->menu);
+	printf("\033[1;32mStarting game...\033[0m\n");
 	start_game(cube, cube->mlx.ptr, cube->mlx.win);
 }
