@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:17:59 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/22 18:08:41 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:22:45 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ mlx_get_image_pixel(cube->mlx.ptr, img->image, x, y);
 
 void	init_textures(t_cube *cube, t_image *img, char *path)
 {
+	img->width = 0;
+	img->height = 0;
 	img->image = mlx_png_file_to_image(cube->mlx.ptr, path, &img->width, \
 &img->height);
 	img->texture = ft_calloc(img->height * img->width, sizeof(int));
@@ -82,7 +84,7 @@ void	preload_textures(t_cube *cube)
 	init_textures(cube, &cube->map.ea_texture, cube->map.texture_paths[3]);
 	ft_free_tab(cube->map.texture_paths);
 	init_textures(cube, &cube->mlx.player, "./images/player.png");
-	cube->map.portal = ft_calloc(13, sizeof(int *));
+	cube->mlx.portal = ft_calloc(13, sizeof(t_image));
 	init_textures(cube, &cube->mlx.portal[0], "./images/portal_0.png");
 	init_textures(cube, &cube->mlx.portal[1], "./images/portal_1.png");
 	init_textures(cube, &cube->mlx.portal[2], "./images/portal_2.png");
