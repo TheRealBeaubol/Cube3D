@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:50:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/28 23:02:50 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/24 17:41:18 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ void	get_wall_texture_path(char *str, t_map *map)
 		map->texture_paths[2] = ft_strdup(texture_path);
 	if (is_wall_texture(str) == 4)
 		map->texture_paths[3] = ft_strdup(texture_path);
+	free(texture_path);
 }

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 17:14:11 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/07/03 19:01:13 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:16:55 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	count_portal(t_cube *cube)
 {
 	int	i;
 	int	j;
-	
+
 	j = -1;
 	while (cube->map.map[++j])
 	{

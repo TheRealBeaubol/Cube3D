@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:15:35 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/18 16:28:03 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:20:36 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ key == 224 || key == 225)
 void	open_in_game_settings(t_cube *cube, void *mlx_ptr, void *win_ptr)
 {
 	mlx_mouse_show();
-	cube->settings.show_fps = 0;
 	mlx_clear_window(mlx_ptr, win_ptr);
 	start_game(cube, mlx_ptr, win_ptr);
 }
@@ -68,10 +67,7 @@ void	handle_game_hook(t_cube *cube, int key)
 		cube->settings.key_tab[key] = 1;
 	if (key == cube->settings.keybinds[5])
 		cube->settings.show_map = !cube->settings.show_map;
-	if (key == cube->settings.keybinds[6])
-		cube->settings.show_fps = !cube->settings.show_fps;
-}	
-
+}
 
 int	key_press(int key, void *cube_void)
 {

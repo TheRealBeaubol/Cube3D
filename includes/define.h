@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:42 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/06 14:03:34 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/24 18:59:01 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,4 @@
 # define PI 3.1415926536
 # define WIDTH 1920
 # define HEIGHT 1080
-# define HEIGHT_ERROR "Error\n  \n"
-# define ERROR_PATH "Error\nTexture path is not valid or one texture is missing\n"
 #endif

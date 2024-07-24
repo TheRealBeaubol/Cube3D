@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 00:05:36 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/23 15:23:04 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:00:12 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ void	init_mlx(t_cube *cube)
 {
 	cube->mlx.ptr = mlx_init();
 	if (cube->mlx.ptr == NULL)
-		free_init_and_exit (cube, "Error\n", 0);
+		free_init_and_exit (cube, "\033[1;31mError\nmlx pointer initialization \
+failed\n\033[0m", 0);
 	cube->mlx.win = mlx_new_window(cube->mlx.ptr, WIDTH, HEIGHT, "Cube3D");
 	if (cube->mlx.win == NULL)
-		free_init_and_exit (cube, "Error\n", 1);
+		free_init_and_exit (cube, "\033[1;31mError\nmlx window initialization \
+failed\n\033[0m", 1);
 	cube->mlx.background_img = mlx_new_image(cube->mlx.ptr, WIDTH, HEIGHT);
 	draw_first_background(cube);
 }
@@ -42,18 +44,6 @@ cube->menu.exit_button.img, (WIDTH - cube->menu.exit_button.width) / \
 2, ((HEIGHT - cube->menu.exit_button.height) / 2) + 200);
 }
 
-void	print_key_tab(t_cube *cube)
-{
-	int	i;
-
-	i = 0;
-	while (i < 256)
-	{
-		printf("cube->settings.key_tab[%d] = %d\n", i, cube->settings.key_tab[i]);
-		i++;
-	}
-}
-
 void	init(t_cube *cube)
 {
 	int	i;
@@ -61,7 +51,6 @@ void	init(t_cube *cube)
 	init_settings_file();
 	init_key_map(cube);
 	init_player_binds(&cube->settings);
-	init_portal(cube);
 	i = -1;
 	while (++i < 256)
 		cube->settings.key_tab[i] = 0;
@@ -69,6 +58,7 @@ void	init(t_cube *cube)
 	printf("\033[1;32mPreloading textures...\033[0m\n");
 	preload_textures(cube);
 	init_images(cube->mlx.ptr, &cube->menu);
+	init_portal(cube);
 	printf("\033[1;32mStarting game...\033[0m\n");
 	start_game(cube, cube->mlx.ptr, cube->mlx.win);
 }

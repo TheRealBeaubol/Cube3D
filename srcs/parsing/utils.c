@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:47:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/18 13:21:12 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/24 18:21:28 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ str[1] == 'A') || str[0] == 'C' || str[0] == 'F' || str[0] == '\n'))
 		str = get_next_line(fd, 0);
 		i++;
 	}
+	get_next_line(fd, 1);
 	close(fd);
 	free(str);
 	return (i);
@@ -113,6 +114,6 @@ void	get_player_pos(t_cube *cube)
 		}
 		i++;
 	}
-	ft_dprintf(2, "Error\nNo player spawn found\n");
-	free_init_and_exit(cube, 0, 0);
+	ft_dprintf(2, "\033[1;31mError\nNo player spawn found\n\033[0m");
+	free_init_and_exit(cube, NULL, 0);
 }

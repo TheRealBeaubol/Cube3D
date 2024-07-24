@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 12:39:27 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/18 11:59:10 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:15:59 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	check_closed_map(char **map)
 	}
 	if (!remove_change(map))
 	{
-		ft_printf("Error\n");
-		exit(EXIT_FAILURE);
+		printf("\033[1;31mError\nMap is not closed\n\033[0m");
+		return (-1);
 	}
 	return (0);
 }

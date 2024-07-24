@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/22 18:10:47 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:27:06 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ typedef struct s_image_and_keys
 
 typedef struct s_key_map
 {
-    char *key_name;
-    int key_value;
-} t_key_map;
+	char	*key_name;
+	int		key_value;
+}	t_key_map;
 
 typedef struct s_keys
 {
@@ -52,15 +52,15 @@ typedef struct s_keys
 
 typedef struct s_point
 {
-    float    x;
-    float    y;
-}    t_point;
+	float	x;
+	float	y;
+}	t_point;
 
 typedef struct s_int_point
 {
-	int    x;
-	int    y;
-}    t_int_point;
+	int	x;
+	int	y;
+}	t_int_point;
 
 typedef enum e_direction
 {
@@ -68,25 +68,25 @@ typedef enum e_direction
 	SOUTH,
 	EAST,
 	WEST
-}	e_direction;
+}	t_direction;
 
-typedef enum	e_portal_type
+typedef enum e_portal_type
 {
 	PORTAL,
 	UNI,
 	DOUBLE,
-}	e_portal_type;
+}	t_portal_type;
 
 typedef struct s_portal
 {
-	e_portal_type	type;
-	t_point	pos;
-	t_point	out;
+	t_portal_type	type;
+	t_point			pos;
+	t_point			out;
 }	t_portal;
 
 typedef struct s_ray
 {
-	e_direction	direction;
+	t_direction	direction;
 	t_point		pos;
 	t_point		ray_dir;
 	t_point		side_dist;
@@ -128,17 +128,16 @@ typedef struct s_menu
 typedef struct s_player_settings
 {
 	t_key_map	key_map[64];
-	int		key_tab[256];
-	int		keybinds[10];
-	int		show_map;
-	int		show_fps;
-	float	pitch;
-	float	sensibility;
-	float	move_speed;
-	t_point	pos;
-	t_point	plane;
-	t_point	dir;
-	t_ray	**ray;
+	int			key_tab[256];
+	int			keybinds[10];
+	int			show_map;
+	float		pitch;
+	float		sensibility;
+	float		move_speed;
+	t_point		pos;
+	t_point		plane;
+	t_point		dir;
+	t_ray		**ray;
 }	t_player_settings;
 
 typedef struct s_image
@@ -157,32 +156,30 @@ typedef struct s_img_list
 
 typedef struct s_map
 {
-	int		height;
-	int		width;
-	char	**map;
-	char	**texture_paths;
+	int				height;
+	int				width;
+	char			**map;
+	char			**texture_paths;
 	unsigned long	ceiling_color;
 	unsigned long	floor_color;
-	t_image	no_texture;
-	t_image	so_texture;
-	t_image	we_texture;
-	t_image	ea_texture;
-	t_image	actual_texture;
-	int		***portal_texture;
-	int	portal_animation;
-	t_portal	**portal;
-	int		cpt_portal;
+	t_image			no_texture;
+	t_image			so_texture;
+	t_image			we_texture;
+	t_image			ea_texture;
+	t_image			actual_texture;
+	int				***portal_texture;
+	t_portal		**portal;
+	int				cpt_portal;
 }	t_map;
 
-typedef	struct s_mlx
+typedef struct s_mlx
 {
 	void	*ptr;
 	void	*win;
 	t_image	player;
-	t_image *portal;
+	t_image	*portal;
 	void	*background_img;
 }	t_mlx;
-
 
 typedef struct s_cube
 {

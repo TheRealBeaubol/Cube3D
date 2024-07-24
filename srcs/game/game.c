@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:41:38 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/22 17:29:14 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:16:28 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	print_global_pixel(t_cube *cube, t_int_point point, int color)
 	}
 }
 
-void	print_map(t_cube *cube)
+void	draw_map(t_cube *cube)
 {
 	float		i;
 	float		j;
@@ -128,7 +128,6 @@ void	draw_crosshair(t_cube *cube)
 		mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, WIDTH / 2, HEIGHT / 2 - i, 0xFF000000);
 		i++;
 	}
-
 }
 
 void	render_cube(t_cube *cube)
@@ -148,7 +147,7 @@ void	render_cube(t_cube *cube)
 	{
 		draw_circle(130, (t_int_point){WIDTH - 3 * 50 + 25, 2.5 * 50}, cube, 0xFFF69D02);
 		draw_circle(125, (t_int_point){WIDTH - 3 * 50 + 25, 2.5 * 50}, cube, 0xFFC1FF44);
-		print_map(cube);
+		draw_map(cube);
 		print_player(cube);
 	}
 	mlx_put_image_to_window(cube->mlx.ptr, cube->mlx.win, \

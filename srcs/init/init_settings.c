@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:40:22 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/10 00:20:58 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:11:49 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_player_binds(t_player_settings *settings)
 		return ;
 	ft_bzero(settings->keybinds, sizeof(settings->keybinds));
 	i = -1;
-	while (++i < 7)
+	while (++i < 6)
 	{
 		line = get_next_line(fd, 0);
 		settings->keybinds[i] = get_key_from_line(line, settings->key_map);
@@ -31,7 +31,6 @@ void	init_player_binds(t_player_settings *settings)
 	}
 	check_settings(settings);
 	close(fd);
-	settings->show_fps = 0;
 	settings->show_map = 1;
 	settings->move_speed = 0.05;
 	settings->sensibility = 0.001;
@@ -47,7 +46,7 @@ void	init_settings_file(void)
 	{
 		fd = open("/tmp/settings.txt", O_CREAT | O_RDWR, 0644);
 		ft_putstr_fd("move_forward = W\nmove_backward = S\nmove_left \
-= A\nmove_right = D\nsprint = CTRL\nshow_map = M\nshow_fps = F\n", fd);
+= A\nmove_right = D\nsprint = CTRL\nshow_map = M\n", fd);
 	}
 	close(fd);
 }

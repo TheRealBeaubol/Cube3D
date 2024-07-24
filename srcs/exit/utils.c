@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:26:20 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/07 23:55:30 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:19:45 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	destroy_menu_images(t_menu *menu, void *mlx_ptr)
 		&menu->settings_button, &menu->exit_button, &menu->keybinds_button, \
 		&menu->video_settings_button, &menu->music_and_sounds_button, \
 		&menu->keybinds_define_button};
-	int	i;
+	int								i;
 
 	i = -1;
 	while (++i < 54)
@@ -64,8 +64,33 @@ void	destroy_wall_textures(void *mlx_ptr, t_map *map)
 	free(map->ea_texture.texture);
 }
 
+void	free_portal_textures(t_cube *cube)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < 4)
+	{
+		j = -1;
+		while (++j < 12)
+			free(cube->map.portal_texture[i][j]);
+		free(cube->map.portal_texture[i]);
+	}
+	free(cube->map.portal_texture);
+}
+
 void	free_destroy_and_exit(t_cube *cube)
 {
+	int	i;
+
+	i = -1;
+	while (++i < cube->map.cpt_portal)
+		free(cube->map.portal[i]);
+	free(cube->map.portal);
+	free_portal_textures(cube);
+	mlx_destroy_image(cube->mlx.ptr, cube->mlx.player.image);
+	free(cube->mlx.player.texture);
 	destroy_menu_images(&cube->menu, cube->mlx.ptr);
 	destroy_wall_textures(cube->mlx.ptr, &cube->map);
 	ft_free_tab(cube->map.map);

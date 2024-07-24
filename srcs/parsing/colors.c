@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:50:45 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/28 21:34:26 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/24 18:48:43 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_colors(char **colors)
 		{
 			if (!ft_isdigit(colors[i][j]) || ft_strlen(colors[i]) > 3)
 			{
-				ft_dprintf(2, "Error\nColor is not valid\n");
+				ft_free_tab(colors);
 				return (0);
 			}
 		}
@@ -47,7 +47,6 @@ unsigned long	convert_rgb_to_hexa(char **colors)
 	b = ft_atoi(colors[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 	{
-		ft_dprintf(2, "Error\n1Color is not valid\n");
 		ft_free_tab(colors);
 		return (0);
 	}
@@ -67,7 +66,7 @@ int	get_number_of_spaces(char *str)
 	return (i);
 }
 
-void	get_colors(t_map *map, char *str)
+void	get_colors(t_map *map, char *str, int fd)
 {
 	char			**colors;
 	unsigned long	color;
@@ -81,9 +80,10 @@ void	get_colors(t_map *map, char *str)
 	if (!colors || ft_tablen(colors) != 3)
 	{
 		ft_free_tab(colors);
-		free(str);
 	}
 	color = convert_rgb_to_hexa(colors);
+	if (color == 0)
+		exit_and_free_texture_paths(map->texture_paths, str, "\033[1;31mError\nWrong color format\n\033[0m", fd);
 	if (str[0] == 'C')
 		map->ceiling_color = color;
 	if (str[0] == 'F')

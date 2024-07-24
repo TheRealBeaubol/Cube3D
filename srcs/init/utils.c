@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:20:58 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/10 00:21:06 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:21:22 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	draw_background(t_cube *cube)
 	if (pitch_shift > prev_pitch_shift)
 	{
 		start_y = HEIGHT / 2 - prev_pitch_shift;
-		pos_y  = HEIGHT / 2 - pitch_shift;
+		pos_y = HEIGHT / 2 - pitch_shift;
 	}
 	else
 	{
