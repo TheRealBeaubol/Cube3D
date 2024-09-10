@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/24 19:27:06 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/10 17:46:19 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_settings_menu_images
 	int		width_hover;
 	int		height_hover;
 	int		status;
+	int		sound;
 }	t_settings_menu_images;
 
 typedef struct s_image_and_keys
@@ -82,6 +83,8 @@ typedef struct s_portal
 	t_portal_type	type;
 	t_point			pos;
 	t_point			out;
+	t_point			plane;
+	t_point			dir;
 }	t_portal;
 
 typedef struct s_ray
@@ -113,6 +116,7 @@ typedef struct s_menu
 	int						waiting_for_key;
 	int						key;
 	int						keybind_menu_indice;
+	int						*sounds;
 	t_settings_menu_images	play_button;
 	t_settings_menu_images	settings_button;
 	t_settings_menu_images	exit_button;
@@ -129,7 +133,7 @@ typedef struct s_player_settings
 {
 	t_key_map	key_map[64];
 	int			key_tab[256];
-	int			keybinds[10];
+	int			keybinds[8];
 	int			show_map;
 	float		pitch;
 	float		sensibility;

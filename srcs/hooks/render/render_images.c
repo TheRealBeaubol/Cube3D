@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:21:32 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 12:27:11 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/05 18:55:37 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	render_button_in_settings(t_cube *cube)
 
 void	render_button_in_keybinds(t_cube *cube)
 {
-	const t_int_point	pos[10] = {{671, 392}, {671, 461}, {671, 530}, \
-	{671, 599}, {671, 668}, {1037, 395}, {1037, 464}, {1037, 533}, \
-	{1037, 602}, {1037, 671}};
+	const t_int_point	pos[7] = {{671, 461}, {671, 530}, \
+	{671, 599}, {1037, 464}, {1037, 533}, \
+	{1037, 602}, {844, 671}};
 
 	if (cube->menu.keybind_menu_indice)
 		render_hover(cube->mlx.ptr, cube->mlx.win, \

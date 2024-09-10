@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:23:25 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/07/24 19:18:56 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/10 17:56:29 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,6 @@ int	check_portal(t_cube *cube)
 	return (-1);
 }
 
-void	set_new_player_pos(t_cube *cube)
-{
-	while (cube->map.map[(int)(cube->settings.pos.y)][(int)cube->settings.pos.x] == 'W' || cube->map.map[(int)(cube->settings.pos.y)][(int)cube->settings.pos.x] == 'E')
-	{
-		if (cube->map.map[(int)(cube->settings.pos.y + 0.5)][(int)cube->settings.pos.x] != '1')
-			cube->settings.pos.y += 0.5;
-		else if (cube->map.map[(int)(cube->settings.pos.y - 0.5)][(int)cube->settings.pos.x] != '1')
-			cube->settings.pos.y -= 0.5;
-		if (cube->map.map[(int)cube->settings.pos.y][(int)(cube->settings.pos.x + 0.5)] != '1')
-			cube->settings.pos.x += 0.5;
-		else if (cube->map.map[(int)cube->settings.pos.y][(int)(cube->settings.pos.x - 0.5)] != '1')
-			cube->settings.pos.x -= 0.5;
-	}
-}
 
 void	check_and_do_portal(t_cube *cube)
 {
@@ -72,12 +58,17 @@ void	check_and_do_portal(t_cube *cube)
 	type = check_portal(cube);
 	if (type < 0)
 		return ;
-	if (cube->map.portal[type]->type == 0)
-		cube->map_name = "map_test.cub";
 	else if (cube->map.portal[type]->type == 1 || cube->map.portal[type]->type == 2)
 	{
+		printf("=====[%d]=====\n", type);
+		printf("cube->map.portal[type]->type = %d\n", cube->map.portal[type]->type);
+		printf("cube->map.portal[type]->out.x = %f\n", cube->map.portal[type]->out.x);
+		printf("cube->map.portal[type]->out.y = %f\n", cube->map.portal[type]->out.y);
 		cube->settings.pos.x = cube->map.portal[type]->out.x;
 		cube->settings.pos.y = cube->map.portal[type]->out.y;
-		set_new_player_pos(cube);
+		cube->settings.dir.x = cube->map.portal[type]->dir.x;
+		cube->settings.dir.y = cube->map.portal[type]->dir.y;
+		cube->settings.plane.x = cube->map.portal[type]->plane.x;
+		cube->settings.plane.y = cube->map.portal[type]->plane.y;
 	}
 }

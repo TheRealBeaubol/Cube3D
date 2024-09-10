@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:26:20 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/24 19:19:45 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:38:38 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	free_destroy_and_exit(t_cube *cube)
 	free_portal_textures(cube);
 	mlx_destroy_image(cube->mlx.ptr, cube->mlx.player.image);
 	free(cube->mlx.player.texture);
+	free(cube->menu.sounds);
 	destroy_menu_images(&cube->menu, cube->mlx.ptr);
 	destroy_wall_textures(cube->mlx.ptr, &cube->map);
 	ft_free_tab(cube->map.map);

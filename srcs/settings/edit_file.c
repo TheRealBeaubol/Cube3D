@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:18:31 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/24 19:19:23 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/05 20:08:07 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	reset_settings_file(void)
 	fd = open("/tmp/settings.txt", O_RDWR | O_TRUNC, 0644);
 	if (fd == -1)
 		return ;
-	ft_putstr_fd("move_forward = W\nmove_backward = S\nmove_left \
-= A\nmove_right = D\nsprint = CTRL\nshow_map = M\n", fd);
+	ft_putstr_fd("move_forward = W\nmove_backward = S\nsprint = CTRL\nmove_left \
+= A\nmove_right = D\nshow_map = M\nshift = SHIFT\n", fd);
 	close(fd);
 }
 
@@ -54,8 +54,8 @@ int	add_bind_to_settings_file(char *print, char *param, int fd)
 
 void	edit_settings_file(t_cube *cube)
 {
-	const char	*settings_text[6] = {"move_forward = ", "move_backward = ", \
-"move_left = ", "move_right = ", "sprint = ", "show_map = "};
+	const char	*settings_text[7] = {"move_forward = ", "move_backward = ", \
+"sprint = ", "move_left = ", "move_right = ", "show_map = ", "shift = "};
 	int			fd;
 	int			i;
 
@@ -63,7 +63,7 @@ void	edit_settings_file(t_cube *cube)
 	if (fd == -1)
 		return ;
 	i = -1;
-	while (++i < 6)
+	while (++i < 7)
 	{
 		if (!add_bind_to_settings_file((char *)settings_text[i], \
 get_line_from_key(cube->settings.keybinds[i], cube->settings.key_map), fd))

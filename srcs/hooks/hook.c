@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:44:49 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/24 19:20:11 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:49:48 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	rotate(t_cube *cube, float angle)
 
 void	handle_key_in_game(t_cube *cube)
 {
-	if (cube->settings.key_tab[cube->settings.keybinds[4]] == 1)
+	if (cube->settings.key_tab[cube->settings.keybinds[2]] == 1)
 		cube->settings.move_speed = 0.115;
 	else if (cube->settings.key_tab[cube->settings.keybinds[6]] == 1)
 		cube->settings.move_speed = 0.035;
@@ -83,9 +83,9 @@ void	handle_key_in_game(t_cube *cube)
 		move_forward(cube, cube->settings.move_speed);
 	if (cube->settings.key_tab[cube->settings.keybinds[1]])
 		move_backward(cube, cube->settings.move_speed);
-	if (cube->settings.key_tab[cube->settings.keybinds[2]])
-		move_left(cube, cube->settings.move_speed);
 	if (cube->settings.key_tab[cube->settings.keybinds[3]])
+		move_left(cube, cube->settings.move_speed);
+	if (cube->settings.key_tab[cube->settings.keybinds[4]])
 		move_right(cube, cube->settings.move_speed);
 	if (cube->settings.key_tab[SDL_SCANCODE_LEFT] == 1)
 		rotate(cube, -cube->settings.sensibility);
@@ -127,8 +127,8 @@ int	loop_hook(void *cube_void)
 	{
 		handle_key_in_game(cube);
 		handle_mouse_in_game(cube, pos);
-		mlx_clear_window(cube->mlx.ptr, cube->mlx.win);
 		check_and_do_portal(cube);
+		mlx_clear_window(cube->mlx.ptr, cube->mlx.win);
 		render_cube(cube);
 	}
 	fps_counter();

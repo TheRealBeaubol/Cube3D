@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:01:39 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/24 19:16:17 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/10 16:12:42 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	init_ray(t_player_settings *settings, t_ray *ray, int i)
 {
+	// printf("settings->pos.x = %f\n", settings->pos.x);
+	// printf("settings->pos.y = %f\n", settings->pos.y);
 	ray->camera_x = 2 * i / (float)WIDTH - 1;
 	ray->ray_dir.x = settings->dir.x + settings->plane.x * ray->camera_x;
 	ray->ray_dir.y = settings->dir.y + settings->plane.y * ray->camera_x;
@@ -86,12 +88,12 @@ void	texture_calculation(t_cube *cube, t_ray *ray)
 	ray->step = 1.0 * cube->map.actual_texture.height / ray->wall_height;
 }
 
-int	*get_portal_texture(t_cube *cube, e_direction direction)
+int	*get_portal_texture(t_cube *cube, t_direction direction)
 {
 	static int	time = 0;
 	static int	portal_index = 0;
 
-	if (time >= 5000)
+	if (time >= 500)
 	{
 		portal_index++;
 		time = 0;

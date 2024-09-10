@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:47:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/24 18:21:28 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/10 17:47:56 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,30 +64,30 @@ str[1] == 'A') || str[0] == 'C' || str[0] == 'F' || str[0] == '\n'))
 	return (i);
 }
 
-void	init_spawn(t_player_settings *settings, char c)
+void	init_spawn(t_point *dir, t_point *plane, char c)
 {
 	if (c == 'N' || c == 'S')
 	{
-		settings->dir.x = 0;
-		settings->dir.y = 1;
-		settings->plane.x = 0.66;
-		settings->plane.y = 0;
+		dir->x = 0;
+		dir->y = 1;
+		plane->x = 0.66;
+		plane->y = 0;
 	}
 	if (c == 'N')
-		settings->dir.y *= -1;
+		dir->y *= -1;
 	if (c == 'S')
-		settings->plane.x *= -1;
+		plane->x *= -1;
 	if (c == 'E' || c == 'W')
 	{
-		settings->dir.x = 1;
-		settings->dir.y = 0;
-		settings->plane.x = 0;
-		settings->plane.y = 0.66;
+		dir->x = 1;
+		dir->y = 0;
+		plane->x = 0;
+		plane->y = 0.66;
 	}
 	if (c == 'W')
 	{
-		settings->dir.x *= -1;
-		settings->plane.y *= -1;
+		dir->x *= -1;
+		plane->y *= -1;
 	}
 }
 
@@ -106,7 +106,7 @@ void	get_player_pos(t_cube *cube)
 			{
 				cube->settings.pos.x = j + 0.5;
 				cube->settings.pos.y = i + 0.5;
-				init_spawn(&cube->settings, cube->map.map[i][j]);
+				init_spawn(&cube->settings.dir, &cube->settings.plane, cube->map.map[i][j]);
 				cube->map.map[i][j] = '0';
 				return ;
 			}
@@ -114,6 +114,6 @@ void	get_player_pos(t_cube *cube)
 		}
 		i++;
 	}
-	ft_dprintf(2, "\033[1;31mError\nNo player spawn found\n\033[0m");
+	ft_dprintf(2, "\033[1;31m	No player spawn found\n\033[0m");
 	free_init_and_exit(cube, NULL, 0);
 }
