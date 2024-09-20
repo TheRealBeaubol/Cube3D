@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 12:13:20 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/18 17:26:41 by mhervoch         ###   ########.fr       */
+/*   Created: 2024/06/18 21:22:06 by lboiteux          #+#    #+#             */
+/*   Updated: 2024/09/20 19:34:44 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_args(int ac, char **av)
 {
 	if (WIDTH != 1920 || HEIGHT != 1080)
 	{
-		ft_printf("Error\nResolution must be 1920x1080\n");
+		ft_printf("\033[1;31mError\nResolution must be 1920x1080\n\033[0m");
 		exit(1);
 	}
 	if (ac == 2)
@@ -26,33 +26,28 @@ void	check_args(int ac, char **av)
 			av[1][ft_strlen(av[1]) - 3] == 'c' && \
 			av[1][ft_strlen(av[1]) - 4] == '.'))
 		{
-			ft_printf("Error\nMap file must be a .cub file\n");
+			ft_printf("\033[1;31mError\nMap file must be a .cub file\n\033[0m");
 			exit(1);
 		}
 	}
 	else
 	{
-		ft_printf("Error\nUsage: ./cub3D map.cub\n");
+		ft_printf("\033[1;31mError\nUsage: ./cub3D map.cub\n\033[0m");
 		exit(1);
 	}
 }
 
 int	main(int ac, char **av)
 {
-	t_cube	cube;
+	t_cube			cube;
 
 	check_args(ac, av);
 	cube.map_name = av[1];
-	init(&cube, 0);
-	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_WINDOW_EVENT, \
-		&free_and_destroy_exit, &cube);
-	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_KEYDOWN, \
-		&key_hook, &cube);
-	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_MOUSEDOWN, \
-		&mouse_press, &cube);
-	mlx_on_event((&cube)->mlx_ptr, (&cube)->window_ptr, MLX_MOUSEUP, \
-		&mouse_release, &cube);
-	mlx_loop_hook((&cube)->mlx_ptr, &mouse_move, &cube);
-	mlx_loop(cube.mlx_ptr);
+	printf("\033[1;32mParsing...\033[0m\n");
+	if (parsing(&cube) == -1)
+		return (-1);
+	printf("\033[1;32mInitializing...\033[0m\n");
+	init(&cube);
+	hook(&cube);
 	return (0);
 }

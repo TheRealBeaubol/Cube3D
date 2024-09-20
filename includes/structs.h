@@ -6,119 +6,62 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 15:48:27 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/09/20 20:13:28 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct s_keys_images
+typedef struct s_fps_counter
 {
-	void	*key_a;
-	void	*key_b;
-	void	*key_c;
-	void	*key_d;
-	void	*key_e;
-	void	*key_f;
-	void	*key_g;
-	void	*key_h;
-	void	*key_i;
-	void	*key_j;
-	void	*key_k;
-	void	*key_l;
-	void	*key_m;
-	void	*key_n;
-	void	*key_o;
-	void	*key_p;
-	void	*key_q;
-	void	*key_r;
-	void	*key_s;
-	void	*key_t;
-	void	*key_u;
-	void	*key_v;
-	void	*key_w;
-	void	*key_x;
-	void	*key_y;
-	void	*key_z;
-	void	*key_0;
-	void	*key_1;
-	void	*key_2;
-	void	*key_3;
-	void	*key_4;
-	void	*key_5;
-	void	*key_6;
-	void	*key_7;
-	void	*key_8;
-	void	*key_9;
-	void	*key_space;
-	void	*key_shift;
-	void	*key_num_0;
-	void	*key_num_1;
-	void	*key_num_2;
-	void	*key_num_3;
-	void	*key_num_4;
-	void	*key_num_5;
-	void	*key_num_6;
-	void	*key_num_7;
-	void	*key_num_8;
-	void	*key_num_9;
-	void	*key_num_div;
-	void	*key_num_mult;
-	void	*key_num_minus;
-	void	*key_num_plus;
-	void	*key_ctrl;
-	void	*key_tab;
-}	t_keys_images;
+	clock_t	last_time;
+	clock_t	last_avg_time;
+	int		frame_count;
+	float	fps_sum;
+}	t_fps_counter;
 
-typedef struct s_settings_menu
+typedef struct s_settings_menu_images
 {
-	void			*keybinds_button;
-	void			*keybinds_button_hover;
-	int				keybinds_button_status;
-	void			*video_settings_button;
-	void			*video_settings_button_hover;
-	int				video_settings_button_status;
-	void			*music_and_sounds_button;
-	void			*music_and_sounds_button_hover;
-	int				music_and_sounds_button_status;
-	void			*back_button;
-	void			*back_button_hover;
-	int				back_button_status;
-	void			*video_settings_menu;
-	void			*keybinds_menu;
-	void			*music_and_sounds_menu;
-	int				settings_menu_height;
-	int				settings_menu_width;
-	int				button_height;
-	int				button_width;
-	void			*keybinds_define_button;
-	void			*keybinds_define_button_hover;
-	int				keybinds_define_button_status;
-	int				waiting_for_key;
-	int				key;
-	int				is_in_keybinds_menu;
-	int				is_in_settings_menu;
-	int				keybind_menu_indice;
-	t_keys_images	*keys_images;
-}	t_settings_menu;
+	void	*img;
+	int		width;
+	int		height;
+	void	*img_hover;
+	int		width_hover;
+	int		height_hover;
+	int		status;
+	int		sound;
+}	t_settings_menu_images;
+
+typedef struct s_image_and_keys
+{
+	void	*img;
+	int		key;
+}	t_image_and_keys;
+
+typedef struct s_key_map
+{
+	char	*key_name;
+	int		key_value;
+}	t_key_map;
+
+typedef struct s_keys
+{
+	char	*path;
+	void	*img;
+}	t_keys;
 
 typedef struct s_point
 {
-    float    x;
-    float    y;
-}    t_point;
+	float	x;
+	float	y;
+}	t_point;
 
-typedef struct s_plotline
+typedef struct s_int_point
 {
-    int        dx;
-    int        dy;
-    int        yi;
-    int        xi;
-    int        d;
-    float    y;
-    float    x;
-}    t_plotline;
+	int	x;
+	int	y;
+}	t_int_point;
 
 typedef enum e_direction
 {
@@ -126,25 +69,39 @@ typedef enum e_direction
 	SOUTH,
 	EAST,
 	WEST
-}	e_direction;
+}	t_direction;
+
+typedef enum e_portal_type
+{
+	UNI,
+	DOUBLE,
+}	t_portal_type;
+
+typedef struct s_portal
+{
+	t_portal_type	type;
+	t_point			pos;
+	t_point			out;
+	t_point			plane;
+	t_point			dir;
+}	t_portal;
 
 typedef struct s_ray
 {
-	e_direction	direction;
+	t_direction	direction;
+	t_point		pos;
+	t_point		ray_dir;
+	t_point		side_dist;
+	t_point		delta_dist;
+	t_int_point	map;
+	t_int_point	step_dir;
 	float		lenght;
-	float		wall_height;
-	float		ray_dir_x;
-	float		ray_dir_y;
 	float		camera_x;
-	float		delta_dist_x;
-	float		delta_dist_y;
-	float		side_dist_x;
-	float		side_dist_y;
-	int			map_x;
-	int			map_y;
-	int			step_x;
-	int			step_y;
-	double		wall_x;
+	float		step;
+	float		tex_pos;
+	int			tex_x;
+	int			wall_height;
+	int			wall_offset;
 	int			side;
 	int			hit_wall;
 
@@ -152,105 +109,86 @@ typedef struct s_ray
 
 typedef struct s_menu
 {
-	void			*play_button;
-	void			*play_button_hover;
-	int				play_button_status;
-	void			*settings_button;
-	void			*settings_button_hover;
-	int				settings_button_status;
-	void			*exit_button;
-	void			*exit_button_hover;
-	int				exit_button_status;
-	void			*start_background;
-	int				button_height;
-	int				button_width;
-	int				is_in_menu;
-	t_settings_menu	*settings_menu;
+	t_keys					keys[54];
+	t_image_and_keys		keybinds[54];
+	void					*background;
+	int						waiting_for_key;
+	int						key;
+	int						keybind_menu_indice;
+	int						*sounds;
+	t_settings_menu_images	play_button;
+	t_settings_menu_images	settings_button;
+	t_settings_menu_images	exit_button;
+	t_settings_menu_images	keybinds_define_button;
+	t_settings_menu_images	keybinds_menu;
 }	t_menu;
-
-typedef enum e_move
-{
-	FORWARD,
-	BACKWARD,
-	LEFT,
-	RIGHT
-}	e_move;
 
 typedef struct s_player_settings
 {
-	int		move_forward;
-	int		move_backward;
-	int		move_left;
-	int		move_right;
-	t_point	pos;
-	t_point	plane;
-	e_move	move;
-	float	dir_x;
-	float	dir_y;
-	float	looking_angle;
-	int		fov;
-	t_ray	**ray;
+	t_key_map	key_map[64];
+	int			key_tab[256];
+	int			keybinds[8];
+	int			show_map;
+	float		pitch;
+	float		sensibility;
+	float		move_speed;
+	t_point		pos;
+	t_point		plane;
+	t_point		dir;
+	t_ray		**ray;
 }	t_player_settings;
 
-typedef enum	e_portal_type
+typedef struct s_image
 {
-	PORTAL,
-	UNI,
-	DOUBLE,
-}	e_portal_type;
+	int		*texture;
+	void	*image;
+	int		width;
+	int		height;
+}	t_image;
 
-typedef struct e_portal
+typedef struct s_img_list
 {
-	e_portal_type	type;
-	t_point	pos;
-	t_point	out;
-}	t_portal;
-
+	t_image				*img;
+	struct s_img_list	*next;
+}	t_img_list;
 
 typedef struct s_map
 {
-	char	**map;
-	void	*north_texture;
-	void	*south_texture;
-	void	*east_texture;
-	void	*west_texture;
+	int				height;
+	int				width;
+	char			**map;
+	char			**texture_paths;
 	unsigned long	ceiling_color;
 	unsigned long	floor_color;
-	int		height;
-	int		width;
-	int		size_case;
-	int		player_size;
-	t_portal	**portal;
-	int			cpt_portal;
+	t_image			no_texture;
+	t_image			so_texture;
+	t_image			we_texture;
+	t_image			ea_texture;
+	t_image			actual_texture;
+	int				***portal_texture;
+	t_portal		**portal;
+	int				cpt_portal;
 }	t_map;
 
-typedef enum e_npc
+typedef struct s_mlx
 {
-	ENN,
-	ALL,
-}	e_npc;
-
-typedef struct	s_npc
-{
-	e_npc	type;
-}	t_npc;
+	void	*ptr;
+	void	*win;
+	t_image	player;
+	t_image	*portal;
+	void	*background_img;
+}	t_mlx;
 
 typedef struct s_cube
 {
-	void				*mlx_ptr;
-	void				*window_ptr;
-	void				*img;
-	void				*background;
-	void				*minimap_img;
-	t_menu				*menu;
-	t_player_settings	*player_settings;
-	t_map				*map;
-	t_npc				*npc;
-	t_plotline			*plotline;
-	int					is_in_game;
 	char				*map_name;
-	int					start_x;
-	int					start_y;
+	t_map				map;
+	t_player_settings	settings;
+	t_mlx				mlx;
+	t_menu				menu;
+	int					is_in_menu;
+	int					is_in_game;
+	int					is_in_settings;
 }	t_cube;
 
 #endif

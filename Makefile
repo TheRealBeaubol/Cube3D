@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/06/24 15:36:34 by mhervoch         ###   ########.fr        #
+#    Updated: 2024/09/20 20:06:38 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME	=	cub3D
 # **************************************************************************** #
 
 CC						=	@cc
-CFLAGS					=	-Wall -Wextra -Werror -pg
+CFLAGS					=	-Wall -Wextra -Werror
 MK						=	@mkdir -p
 FILE					=	$(shell ls -lR srcs/ | grep -F .c | wc -l)
 PROJ_CMP				=	1
@@ -49,31 +49,37 @@ RESET	= \033[0m
 
 #SOURCES
 SRCS	= 	main.c \
+				hooks/hook.c \
+				hooks/mouse_press.c \
+				hooks/mouse_move.c \
+				hooks/key_press.c \
+				hooks/move.c \
+				hooks/utils.c \
+				hooks/render/render_images.c \
+				hooks/render/utils.c \
+				exit/utils.c \
 				exit/exit.c \
-				exit/destroy_images.c \
-				init/init.c \
-				init/init_portal.c \
-				init/init_map.c \
-				init/init_images.c \
-				init/init_images_bis.c \
-				settings_file/get_key_from_line.c \
-				settings_file/get_line_from_key.c \
-				settings_file/edit_file.c \
-				settings_file/utils.c \
-				hook/key_hook/hook.c \
-				hook/key_hook/game_hook.c \
-				hook/key_hook/settings_hook.c \
-				hook/mouse_hook/mouse_hook.c \
-				hook/mouse_hook/get_key_images.c \
-				hook/mouse_hook/mouse_click.c \
-				hook/mouse_hook/render_hover_button.c \
-				hook/mouse_hook/render_hover_button_in_keybind_menu.c \
+				parsing/colors.c \
+				parsing/utils.c \
+				parsing/check_closed_map.c \
+				parsing/get_map_data.c \
+				parsing/wall_texture.c \
 				parsing/parsing.c \
-				settings.c \
-				print_map.c \
-				raycasting.c \
-				door.c \
-				plotline.c
+				init/init_settings.c \
+				init/init_game.c \
+				init/utils.c \
+				init/init_image.c \
+				init/preload_textures.c \
+				settings/edit_file.c \
+				settings/utils.c \
+				game/game.c \
+				game/map.c \
+				game/get_texture.c \
+				game/raycasting.c \
+				game/dda_algorithm.c \
+				portal/portal.c \
+				portal/utils.c \
+				portal/init_portal.c \
 
 SRCS_DIR	:=	srcs
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)

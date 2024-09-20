@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/24 15:27:14 by mhervoch         ###   ########.fr       */
+/*   Updated: 2024/09/20 20:11:10 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,69 +16,97 @@
 # include "define.h"
 # include "structs.h"
 
-/* ***************************************** */
-/*				  INIT.C				   */
-/* ***************************************** */
-t_keys_images	*init_keys_images(t_cube *cube);
-t_menu			*init_menu(t_cube *cube);
+/* ************************************ */
+/*                 EXIT                 */
+/* ************************************ */
+void	printf_and_exit(char *str, int fd);
+void	free_destroy_and_exit(t_cube *cube);
+void	exit_and_free_texture_paths(char **tab, char *line, int i, int fd);
+void	free_init_and_exit(t_cube *cube, char *str, int i);
 
-/* ***************************************** */
-/*				  EXIT.C				   */
-/* ***************************************** */
-void			free_and_destroy(t_cube *cube);
-int				free_and_destroy_exit(int i, void *cube_void);
+/* ************************************ */
+/*                PARSING               */
+/* ************************************ */
+int		parsing(t_cube *cube);
+void	parse_wall_textures_and_colors(t_map *map, int fd);
+char	**format_tab(char **tab, t_map *map);
+int		get_width(char **map);
+void	get_map_data(t_map *map, char *map_name);
+int		get_height(char *file);
+void	get_wall_texture_path(char *str, t_map *map);
+void	get_colors(t_map *map, char *str, int fd);
+int		get_line_width(char *str);
+int		get_number_of_spaces(char *str);
+int		is_map_token(char c);
+int		check_closed_map(char **map);
+void	get_player_pos(t_cube *cube);
 
-/* ***************************************** */
-/*			 DESTROY_IMAGES.C			  */
-/* ***************************************** */
-void			destroy_keys_images_end(t_cube *cube, t_keys_images *img);
-void			destroy_keys_images_next(t_cube *cube, t_keys_images *img);
-void			destroy_keys_images(t_cube *cube, t_keys_images *img);
-void			destroy_settings_menu(t_cube *cube);
-void			destroy_menu(t_cube *cube);
+/* ************************************ */
+/*               SETTINGS               */
+/* ************************************ */
+void	check_settings(t_player_settings *settings);
+void	init_player_binds(t_player_settings *settings);
+char	*get_line_from_key(int key, t_key_map *key_map);
+int		get_key_from_line(char *line, t_key_map *key_map);
 
-int         	is_player(char c);
-void			reset_settings_file(void);
-void			check_settings(t_player_settings *settings);
-void			init_player_binds(t_player_settings *settings);
-void			edit_settings_file(t_cube *cube);
-int				get_key_from_line(char *line);
-char			*get_line_from_key(int key);
-char			*get_line_from_key_part_one(int key);
-char			*get_line_from_key_part_two(int key);
-char			*get_line_from_key_part_three(int key);
-char			*get_line_from_key_part_four(int key);
-char			*get_line_from_key_part_five(int key);
-int				get_key_from_line_part_one(char *line);
-int				get_key_from_line_part_two(char *line);
-int				get_key_from_line_part_three(char *line);
-int				get_key_from_line_part_four(char *line);
-int				get_key_from_line_part_five(char *line);
-int				get_height(char *file);
-t_map			*init_map(t_cube *cube, char *map_name);
-void			render_key_images(t_cube *cube);
-void			render_hover_button_in_keybind_menu_part_one(t_cube *cube);
-void			render_hover_button_in_keybind_menu_part_two(t_cube *cube);
-void			render_hover_button_in_keybind_menu_part_three(t_cube *cube);
-void			render_hover_button(t_cube *cube);
-void			handle_game_hook(t_cube *cube, int keycode);
-void			handle_settings_hook(t_cube *cube, int keycode);
-int				key_hook(int keycode, void *cube_void);
-void			init(t_cube *cube, int mlx_bool);
-int				mouse_move(void *cube_void);
-int				mouse_press(int key, void *cube_void);
-int				mouse_release(int keycode, void *cube_void);
-void			open_settings(t_cube *cube);
-void			open_video_settings_menu(t_cube *cube);
-void			open_keybinds_menu(t_cube *cube);
-void			open_music_and_sounds_menu(t_cube *cube);
-void			*get_key_images(t_cube *cube, int key);
-void			render_cube(t_cube *cube);
-void			parsing(t_cube *cube, t_map *map, char *file);
-void			plotline(t_cube *cube, t_point point2, t_point point1);
-void	        do_rays(t_cube *cube, t_ray *ray, int i);
-void	        draw_background(t_cube *cube);
-void			check_and_do_portal(t_cube *cube);
-void			init_portal(t_cube *cube);
+/* ************************************ */
+/*                 INIT                 */
+/* ************************************ */
+void	init_key_map(t_cube *cube);
+void	init_settings_file(void);
+void	init_player_binds(t_player_settings *settings);
+void	init_spawn(t_point *dir, t_point *plane, char c);
+void	init(t_cube *cube);
+void	init_images(void *mlx_ptr, t_menu *menu);
+int		is_player(char c);
+void	fill_wall_sprite(t_cube *cube, int **wall, int i, t_image *img);
+void	preload_textures(t_cube *cube);
+void	draw_background(t_cube *cube);
 
+/* ************************************ */
+/*                 HOOK                 */
+/* ************************************ */
+void	render_buttons(t_cube *cube);
+int		key_press(int key, void *cube_void);
+int		key_release(int key, void *cube_void);
+void	handle_mouse_in_menu(t_cube *cube, t_int_point pos);
+void	handle_mouse_in_keybinds(t_cube *cube, t_int_point pos);
+int		mouse_press(int key, void *cube_void);
+void	put_keys_images(t_cube *cube, void *mlx_ptr, void *mlx_win);
+void	hook(t_cube *cube);
+void	move_forward(t_cube *cube, double movespeed);
+void	move_backward(t_cube *cube, double movespeed);
+void	move_right(t_cube *cube, double movespeed);
+void	move_left(t_cube *cube, double movespeed);
+
+/* ************************************ */
+/*               PRE-GAME               */
+/* ************************************ */
+void	edit_settings_file(t_cube *cube);
+void	open_settings(t_cube *cube);
+void	put_keys_images(t_cube *cube, void *mlx_ptr, void *mlx_win);
+void	*get_key_images(t_cube *cube, int key);
+void	draw_first_background(t_cube *cube);
+
+/* ************************************ */
+/*                 GAME                 */
+/* ************************************ */
+void	get_actual_texture(t_cube *cube, t_ray *ray);
+void	draw_map(t_cube *cube);
+void	start_game(t_cube *cube, void *mlx_ptr, void *win_ptr);
+void	rotate(t_cube *cube, float angle);
+void	fps_counter(void);
+void	render_cube(t_cube *cube);
+void	perform_dda(t_ray *ray, t_map *map, t_player_settings *settings);
+void	do_rays(t_cube *cube, t_ray *ray, int i);
+
+/* ************************************ */
+/*              PORTAL                  */
+/* ************************************ */
+
+void	check_and_do_portal(t_cube *cube);
+void	init_portal(t_cube *cube);
+int		count_portal(t_cube *cube);
+void	set_type(t_cube *cube, int i, int j, t_portal *portal);
+void	find_out_pos(t_cube *cube, int i, int j, t_portal *portal);
 #endif

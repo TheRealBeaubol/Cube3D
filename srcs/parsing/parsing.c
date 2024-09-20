@@ -5,230 +5,111 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/31 16:19:57 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/14 14:05:20 by lboiteux         ###   ########.fr       */
+/*   Created: 2024/06/18 22:44:40 by lboiteux          #+#    #+#             */
+/*   Updated: 2024/09/20 18:40:29 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	print_tab(char **tab)
+void	free_parsing_map_and_exit(t_map *map, char **tab, char **new_tab)
 {
-	int	i;
+	ft_free_tab(tab);
+	ft_free_tab(new_tab);
+	ft_free_tab(map->texture_paths);
+	printf("\033[1;31mError\nUnrecognized token while parsing map\n\033[0m");
+	exit(1);
+}
 
-	i = 0;
-	while (tab[i])
+void	fill_new_tab(char **tab, char **new_tab, t_map *map, int i)
+{
+	int	k;
+	int	j;
+
+	k = 0;
+	j = -1;
+	while (tab[i][++j])
 	{
-		ft_printf("%s\n", tab[i]);
-		i++;
+		if (tab[i][j] == '\n')
+			new_tab[i][k] = '\0';
+		else if (tab[i][j] == '\t')
+		{
+			new_tab[i][k] = '1';
+			new_tab[i][k + 1] = '1';
+			new_tab[i][k + 2] = '1';
+			new_tab[i][k + 3] = '1';
+			k += 3;
+		}
+		else if (ft_iswhitespace(tab[i][j]))
+			new_tab[i][k] = '1';
+		else if (is_map_token(tab[i][j]))
+			new_tab[i][k] = tab[i][j];
+		else
+			free_parsing_map_and_exit(map, tab, new_tab);
+		k++;
 	}
 }
 
-char	**format_tab(char **tab, int height)
+char	**format_tab(char **tab, t_map *map)
 {
 	int		i;
-	int		j;
 	char	**new_tab;
 
-	new_tab = ft_calloc(height + 1, sizeof(char *));
+	new_tab = ft_calloc(map->height + 2, sizeof(char *));
 	i = -1;
 	while (tab[++i])
 	{
-		new_tab[i] = ft_calloc(ft_strlen(tab[i]) + 1, sizeof(char));
-		j = -1;
-		while (tab[i][++j])
-		{
-			if (tab[i][j] == '\n')
-				new_tab[i][j] = '\0';
-			else if (ft_iswhitespace(tab[i][j]))
-				new_tab[i][j] = '1';
-			else
-				new_tab[i][j] = tab[i][j];
-		}
+		new_tab[i] = ft_calloc(get_line_width(tab[i]) + 1, sizeof(char));
+		fill_new_tab(tab, new_tab, map, i);
 	}
 	ft_free_tab(tab);
 	return (new_tab);
 }
 
-int	is_wall_texture(char *str)
+void	parse_wall_textures_and_colors(t_map *map, int fd)
 {
-	int	len;
-
-	len = ft_strlen(str);
-	if (str[len - 2] != 'g' || str[len - 3] != 'n' || str[len - 4] != 'p' || str[len - 5] != '.')
-		return (-1);
-	if (str[0] == 'W' && str[1] == 'E')
-		return (1);
-	if (str[0] == 'N' && str[1] == 'O')
-		return (2);
-	if (str[0] == 'S' && str[1] == 'O')
-		return (3);
-	if (str[0] == 'E' && str[1] == 'A')
-		return (4);
-	return (-1);
-}
-
-void	get_wall_texture(t_cube *cube, t_map *map, int fd)
-{
-	char	*str;
+	char	*line;
 	int		i;
-	char	*texture_path;
 
 	i = 0;
-	str = get_next_line(fd, 0);
-	map->west_texture = NULL;
-	map->north_texture = NULL;
-	map->south_texture = NULL;
-	map->east_texture = NULL;
-	while (i < 4)
+	map->texture_paths = ft_calloc(5, sizeof(char *));
+	while (i < 6)
 	{
-		if (str && ft_strlen(str) > 7 && is_wall_texture(str))
-		{
-			texture_path = ft_strdup(str + 3);
-			texture_path[ft_strlen(texture_path) - 1] = '\0';
-			if (is_wall_texture(str) == 1)
-				map->west_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
-			if (is_wall_texture(str) == 2)
-				map->north_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
-			if (is_wall_texture(str) == 3)
-				map->south_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
-			if (is_wall_texture(str) == 4)
-				map->east_texture = mlx_png_file_to_image(cube->mlx_ptr, texture_path, NULL, NULL);
-		}
+		line = get_next_line(fd, 0);
+		if (!line)
+			exit_and_free_texture_paths(map->texture_paths, line, 1, fd);
+		if (line[0] == 'C' || line[0] == 'F')
+			get_colors(map, line, fd);
+		else if (((line[0] == 'N' || line[0] == 'S') && line[1] == 'O') || \
+	(line[0] == 'W' && line[1] == 'E') || (line[0] == 'E' && line[1] == 'A'))
+			get_wall_texture_path(line, map);
+		else if (line[0] == '\n')
+			i--;
 		else
-		{
-			ft_dprintf(2, "Error\nTexture path is not valid\n");
-			free(str);
-			return ;
-		}
-		free(texture_path);
-		free(str);
+			exit_and_free_texture_paths(map->texture_paths, line, 2, fd);
+		free(line);
 		i++;
-		str = get_next_line(fd, 0);
 	}
-	if (!map->west_texture || !map->north_texture || !map->south_texture || !map->east_texture)
-	{
-		ft_dprintf(2, "Error\nTexture path is not valid or one texture is missing\n");
-		return ;
-	}
+	if (!map->ceiling_color || !map->floor_color || !map->texture_paths[0] || \
+!map->texture_paths[1] || !map->texture_paths[2] || !map->texture_paths[3])
+		exit_and_free_texture_paths(map->texture_paths, NULL, 1, fd);
 }
 
-int	check_colors(char **colors)
+int	parsing(t_cube *cube)
 {
-	int	i;
-	int	j;
+	t_map	map;
 
-	i = -1;
-	while (colors[++i])
+	map.height = get_height(cube->map_name);
+	if (map.height <= 2)
 	{
-		j = -1;
-		while (colors[i][++j])
-		{
-			if (!ft_isdigit(colors[i][j]) || ft_strlen(colors[i]) > 3)
-			{	
-				ft_dprintf(2, "Error\nColor is not valid\n");
-				return (0);
-			}
-		}
+		ft_printf("\033[1;31mError\nThe map is too small or missing\n\033[0m");
+		exit(EXIT_FAILURE);
 	}
-	return (1);
-
-}
-
-unsigned long	convert_rgb_to_hexa(char **colors)
-{
-	int				r;
-	int				g;
-	int				b;
-	unsigned long	color;
-
-	if (!check_colors(colors))
-		return (0);
-	r = ft_atoi(colors[0]);
-	g = ft_atoi(colors[1]);
-	b = ft_atoi(colors[2]);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-	{
-		ft_dprintf(2, "Error\n1Color is not valid\n");
-		ft_free_tab(colors);
-		return (0);
-	}
-	color = 0xFF000000;
-	color += ((r & 0xFF) << 16 | (g & 0xFF) << 8 | (b & 0xFF));
-	ft_free_tab(colors);
-	return (color);
-}
-
-void	get_colors(t_map *map, int fd)
-{
-	char			**colors;
-	char			*str;
-	unsigned long	color;
-
-	str = get_next_line(fd, 0);
-	if (!str || (str[0] != 'C' && str[0] != 'F') || str[1] != ' ')
-	{
-		ft_dprintf(2, "Error\n2Color is not valid\n");
-		free(str);
-	}
-	colors = ft_str_split(str + 2, "\n,");
-	if (!colors || ft_tablen(colors) != 3)
-	{
-		ft_printf("%d\n", ft_tablen(colors));
-		ft_dprintf(2, "Error\n3Color is not valid\n");
-		ft_free_tab(colors);
-		free(str);
-	}
-	color = convert_rgb_to_hexa(colors);
-	if (str[0] == 'C')
-		map->ceiling_color = color;
-	if (str[0] == 'F')
-		map->floor_color = color;
-	free(str);
-}
-
-char	**read_map(t_cube *cube, t_map *map, char *file)
-{
-	int		i;
-	int		fd;
-	char	**tab;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (NULL);
-	}
-	tab = ft_calloc(map->height + 1, sizeof(char *));
-	get_wall_texture(cube, map, fd);
-	get_colors(map, fd);
-	get_colors(map, fd);
-	i = -1;
-	tab[0] = get_next_line(fd, 0);
-	free(tab[0]);
-	i = 0;
-	tab[i] = get_next_line(fd, 0);
-	if (!tab[i])
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (NULL);
-	}
-	while (tab[i])
-	{
-		i++;
-		tab[i] = get_next_line(fd, 0);
-	}
-	return (tab);
-}
-
-void	parsing(t_cube *cube, t_map *map, char *file)
-{
-	char	**tab;
-
-	tab = read_map(cube, map, file);
-	if (!tab)
-		return ;
-	tab = format_tab(tab, map->height);
-	print_tab(tab);
-	map->map = tab;
+	get_map_data(&map, cube->map_name);
+	map.width = get_width(map.map);
+	cube->map = map;
+	get_player_pos(cube);
+	if (check_closed_map(cube->map.map) == -1)
+		free_init_and_exit(cube, NULL, 0);
+	return (0);
 }
