@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:50:45 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/24 18:48:43 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:37:29 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ void	get_colors(t_map *map, char *str, int fd)
 	}
 	color = convert_rgb_to_hexa(colors);
 	if (color == 0)
-		exit_and_free_texture_paths(map->texture_paths, str, "\033[1;31mError\nWrong color format\n\033[0m", fd);
+		exit_and_free_texture_paths(map->texture_paths, str, \
+3, fd);
 	if (str[0] == 'C')
 		map->ceiling_color = color;
 	if (str[0] == 'F')

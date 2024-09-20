@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:47:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/10 17:47:56 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:23:15 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	get_width(char **map)
 int	get_height(char *file)
 {
 	char	*str;
-	int		i;
+	int		height;
 	int		fd;
 
 	fd = open(file, O_RDONLY);
@@ -51,17 +51,16 @@ str[1] == 'A') || str[0] == 'C' || str[0] == 'F' || str[0] == '\n'))
 		free(str);
 		str = get_next_line(fd, 0);
 	}
-	i = 1;
-	while (str && str[0] != '\n')
+	height = 1;
+	while (str && str[0] != '\n' && height++)
 	{
 		free(str);
 		str = get_next_line(fd, 0);
-		i++;
 	}
 	get_next_line(fd, 1);
 	close(fd);
 	free(str);
-	return (i);
+	return (height);
 }
 
 void	init_spawn(t_point *dir, t_point *plane, char c)
@@ -93,27 +92,28 @@ void	init_spawn(t_point *dir, t_point *plane, char c)
 
 void	get_player_pos(t_cube *cube)
 {
-	int	i;
-	int	j;
+	static int	is_found;
+	int			i;
+	int			j;
 
-	i = 0;
-	while (cube->map.map[i])
+	i = -1;
+	while (cube->map.map[++i])
 	{
-		j = 0;
-		while (cube->map.map[i][j])
+		j = -1;
+		while (cube->map.map[i][++j])
 		{
 			if (!is_player(cube->map.map[i][j]))
 			{
-				cube->settings.pos.x = j + 0.5;
-				cube->settings.pos.y = i + 0.5;
-				init_spawn(&cube->settings.dir, &cube->settings.plane, cube->map.map[i][j]);
+				cube->settings.pos = (t_point){j + 0.5, i + 0.5};
+				init_spawn(&cube->settings.dir, \
+&cube->settings.plane, cube->map.map[i][j]);
 				cube->map.map[i][j] = '0';
-				return ;
+				is_found++;
 			}
-			j++;
 		}
-		i++;
 	}
-	ft_dprintf(2, "\033[1;31m	No player spawn found\n\033[0m");
-	free_init_and_exit(cube, NULL, 0);
+	if (is_found > 1)
+		free_init_and_exit(cube, ERROR_MULTIPLE_SPAWN, 0);
+	if (!is_found)
+		free_init_and_exit(cube, ERROR_NO_SPAWN, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:31:35 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/08 22:14:52 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:38:34 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,6 @@ void	init_images(void *mlx_ptr, t_menu *menu)
 	init_keys(mlx_ptr, menu);
 	init_settings_menu_image(mlx_ptr, &menu->keybinds_button, \
 "images/keybinds_button.png", "images/keybinds_button_hover.png");
-	init_settings_menu_image(mlx_ptr, &menu->video_settings_button, \
-"images/video_settings_button.png", "images/video_settings_button_hover.png");
-	init_settings_menu_image(mlx_ptr, &menu->music_and_sounds_button, \
-"images/music_and_sounds_button.png", \
-"images/music_and_sounds_button_hover.png");
 	init_settings_menu_image(mlx_ptr, &menu->keybinds_define_button, \
 "images/keybinds_define_button.png", \
 "images/keybinds_define_button_hover.png");
@@ -78,12 +73,8 @@ void	init_images(void *mlx_ptr, t_menu *menu)
 "images/play_button.png", "images/play_button_hover.png");
 	init_settings_menu_image(mlx_ptr, &menu->settings_button, \
 "images/settings_button.png", "images/settings_button_hover.png");
-	init_menu_images(mlx_ptr, &menu->video_settings_menu, \
-"images/video_settings_menu.png");
 	init_menu_images(mlx_ptr, &menu->keybinds_menu, \
 "images/keybinds_menu.png");
-	init_menu_images(mlx_ptr, &menu->music_and_sounds_menu, \
-"images/music_and_sounds_menu.png");
 	menu->background = mlx_png_file_to_image(mlx_ptr, \
 "./images/background.png", NULL, NULL);
 }

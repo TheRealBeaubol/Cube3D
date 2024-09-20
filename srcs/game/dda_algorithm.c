@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:10 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/10 15:57:22 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:01:25 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,12 @@ void	perform_dda(t_ray *ray, t_map *map, t_player_settings *settings)
 		update_side_distance(ray);
 		if (map->map[ray->map.y][ray->map.x] == '1')
 			ray->hit_wall = 1;
-		if (map->map[ray->map.y][ray->map.x] == 'D' && (fabs(ray->map.x - settings->pos.x) > 2 || fabs(ray->map.y - settings->pos.y) > 2))
+		if (map->map[ray->map.y][ray->map.x] == 'D' && (fabs(ray->map.x - \
+		settings->pos.x) > 2 || fabs(ray->map.y - settings->pos.y) > 2))
 			ray->hit_wall = 2;
-		if (map->map[ray->map.y][ray->map.x] == 'P' || map->map[ray->map.y][ray->map.x] == 'V' || map->map[ray->map.y][ray->map.x] == 'M')
+		if (map->map[ray->map.y][ray->map.x] == 'P' || \
+		map->map[ray->map.y][ray->map.x] == 'V' || \
+		map->map[ray->map.y][ray->map.x] == 'M')
 			ray->hit_wall = 3;
 	}
 	calculate_ray_lenght(ray);

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 00:05:36 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/10 16:54:17 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:30:04 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,6 @@ cube->menu.exit_button.img, (WIDTH - cube->menu.exit_button.width) / \
 2, ((HEIGHT - cube->menu.exit_button.height) / 2) + 200);
 }
 
-void	print_portal(t_cube *cube)
-{
-	int	i;
-
-	i = -1;
-	while (++i < cube->map.cpt_portal)
-	{
-		printf("Portal type %d\n", cube->map.portal[i]->type);
-		printf("Portal %d : x = %f, y = %f\n", i, cube->map.portal[i]->pos.x, cube->map.portal[i]->pos.y);
-		printf("Portal %d : out x = %f, out y = %f\n", i, cube->map.portal[i]->out.x, cube->map.portal[i]->out.y);
-	}
-}
-
 void	init(t_cube *cube)
 {
 	int	i;
@@ -73,7 +60,6 @@ void	init(t_cube *cube)
 	init_images(cube->mlx.ptr, &cube->menu);
 	cube->menu.sounds = ft_calloc(7, sizeof(int));
 	init_portal(cube);
-	print_portal(cube);
 	printf("\033[1;32mStarting game...\033[0m\n");
 	start_game(cube, cube->mlx.ptr, cube->mlx.win);
 }

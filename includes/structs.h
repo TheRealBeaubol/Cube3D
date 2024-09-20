@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/10 17:46:19 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:41:00 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,8 @@ typedef struct s_menu
 	t_settings_menu_images	settings_button;
 	t_settings_menu_images	exit_button;
 	t_settings_menu_images	keybinds_button;
-	t_settings_menu_images	video_settings_button;
-	t_settings_menu_images	music_and_sounds_button;
 	t_settings_menu_images	keybinds_define_button;
-	t_settings_menu_images	video_settings_menu;
 	t_settings_menu_images	keybinds_menu;
-	t_settings_menu_images	music_and_sounds_menu;
 }	t_menu;
 
 typedef struct s_player_settings

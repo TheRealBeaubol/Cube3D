@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:15:35 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/05 20:07:54 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:39:12 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ int	key_press(int key, void *cube_void)
 		{
 			mlx_clear_window(cube->mlx.ptr, cube->mlx.win);
 			cube->menu.keybinds_menu.status = 0;
-			cube->menu.video_settings_menu.status = 0;
-			cube->menu.music_and_sounds_menu.status = 0;
 			start_game(cube, cube->mlx.ptr, cube->mlx.win);
 		}
 		if (cube->menu.waiting_for_key)

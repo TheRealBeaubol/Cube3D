@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 17:58:54 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:25:50 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,9 @@ void	render_cube(t_cube *cube);
 void	perform_dda(t_ray *ray, t_map *map, t_player_settings *settings);
 void	do_rays(t_cube *cube, t_ray *ray, int i);
 
-void	check_args(int ac, char **av);
-
-void	print_map(char **tab);
-
 void	check_and_do_portal(t_cube *cube);
+void	get_map_data(t_map *map, char *map_name);
 void	init_portal(t_cube *cube);
-void	exit_and_free_texture_paths(char **tab, char *line, char *str, int fd);
 void	draw_first_background(t_cube *cube);
 int		is_map_token(char c);
 void	start_game(t_cube *cube, void *mlx_ptr, void *win_ptr);
@@ -102,5 +98,15 @@ void	edit_settings_file(t_cube *cube);
 int		count_portal(t_cube *cube);
 void	set_type(t_cube *cube, int i, int j, t_portal *portal);
 void	find_out_pos(t_cube *cube, int i, int j, t_portal *portal);
+int		key_release(int key, void *cube_void);
+void	fps_counter(void);
+void	exit_and_free_texture_paths(char **tab, char *line, int i, int fd);
+void	rotate(t_cube *cube, float angle);
+int		get_line_width(char *str);
+void	fill_wall_sprite(t_cube *cube, int **wall, int i, t_image *img);
+char	**format_tab(char **tab, t_map *map);
+void	parse_wall_textures_and_colors(t_map *map, int fd);
+void	get_actual_texture(t_cube *cube, t_ray *ray);
+void	draw_map(t_cube *cube);
 void	init_spawn(t_point *dir, t_point *plane, char c);
 #endif

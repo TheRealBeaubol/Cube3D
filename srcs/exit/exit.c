@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 18:00:03 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 18:02:31 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:40:35 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,27 @@ void	free_portal_textures(t_cube *cube)
 		free(cube->map.portal_texture[i]);
 	}
 	free(cube->map.portal_texture);
+}
+
+void	exit_and_free_texture_paths(char **tab, char *line, int err, int fd)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		if (tab[i])
+			free(tab[i]);
+	}
+	free(tab);
+	free(line);
+	get_next_line(fd, 1);
+	if (err == 1)
+		printf_and_exit(ERROR_MISSING_ELEMENT, fd);
+	else if (err == 2)
+		printf_and_exit(ERROR_UNRECOGNIZED_TOKEN, fd);
+	else if (err == 3)
+		printf_and_exit(ERROR_COLOR_FORMAT, fd);
 }
 
 void	free_destroy_and_exit(t_cube *cube)

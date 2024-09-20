@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/09/20 18:01:16 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/09/20 19:25:46 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,12 +49,12 @@ RESET	= \033[0m
 
 #SOURCES
 SRCS	= 	main.c \
-				to_sort.c \
 				hooks/hook.c \
 				hooks/mouse_press.c \
 				hooks/mouse_move.c \
 				hooks/key_press.c \
 				hooks/move.c \
+				hooks/utils.c \
 				hooks/render/render_images.c \
 				hooks/render/utils.c \
 				hooks/render/open_menu.c \
@@ -63,6 +63,7 @@ SRCS	= 	main.c \
 				parsing/colors.c \
 				parsing/utils.c \
 				parsing/check_closed_map.c \
+				parsing/get_map_data.c \
 				parsing/wall_texture.c \
 				parsing/parsing.c \
 				init/init_settings.c \
@@ -73,6 +74,8 @@ SRCS	= 	main.c \
 				settings/edit_file.c \
 				settings/utils.c \
 				game/game.c \
+				game/map.c \
+				game/get_texture.c \
 				game/raycasting.c \
 				game/dda_algorithm.c \
 				door/door.c \

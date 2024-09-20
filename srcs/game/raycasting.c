@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:01:39 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/10 16:12:42 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:06:35 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	init_ray(t_player_settings *settings, t_ray *ray, int i)
 {
-	// printf("settings->pos.x = %f\n", settings->pos.x);
-	// printf("settings->pos.y = %f\n", settings->pos.y);
 	ray->camera_x = 2 * i / (float)WIDTH - 1;
 	ray->ray_dir.x = settings->dir.x + settings->plane.x * ray->camera_x;
 	ray->ray_dir.y = settings->dir.y + settings->plane.y * ray->camera_x;
@@ -58,7 +56,8 @@ void	draw_wall(int i, t_cube *cube, int start, int end)
 	int	tex_y;
 
 	j = start;
-	cube->settings.ray[i]->tex_pos = (start - cube->settings.ray[i]->wall_offset - HEIGHT / 2 + \
+	cube->settings.ray[i]->tex_pos = (start - \
+cube->settings.ray[i]->wall_offset - HEIGHT / 2 + \
 cube->settings.ray[i]->wall_height / 2) * cube->settings.ray[i]->step;
 	while (j < end)
 	{
@@ -88,22 +87,6 @@ void	texture_calculation(t_cube *cube, t_ray *ray)
 	ray->step = 1.0 * cube->map.actual_texture.height / ray->wall_height;
 }
 
-int	*get_portal_texture(t_cube *cube, t_direction direction)
-{
-	static int	time = 0;
-	static int	portal_index = 0;
-
-	if (time >= 500)
-	{
-		portal_index++;
-		time = 0;
-	}
-	if (portal_index > 11)
-		portal_index = 0;
-	time++;
-	return (cube->map.portal_texture[direction][portal_index]);
-}
-
 void	do_rays(t_cube *cube, t_ray *ray, int i)
 {
 	int	start;
@@ -113,20 +96,7 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 	calculate_step_dir_and_init_sidedist(ray);
 	perform_dda(ray, &cube->map, &cube->settings);
 	cube->map.actual_texture.texture = NULL;
-	if (ray->hit_wall == 3 || ray->hit_wall == 2)
-	{
-		cube->map.actual_texture.texture = get_portal_texture(cube, ray->direction);
-		cube->map.actual_texture.width = cube->map.no_texture.width;
-		cube->map.actual_texture.height = cube->map.no_texture.height;
-	}
-	else if (ray->direction == NORTH)
-		cube->map.actual_texture = cube->map.no_texture;
-	else if (ray->direction == SOUTH)
-		cube->map.actual_texture = cube->map.so_texture;
-	else if (ray->direction == EAST)
-		cube->map.actual_texture = cube->map.ea_texture;
-	else if (ray->direction == WEST)
-		cube->map.actual_texture = cube->map.we_texture;
+	get_actual_texture(cube, ray);
 	ray->wall_offset = (int)((-cube->settings.pitch) * HEIGHT);
 	ray->wall_height = (int)(HEIGHT / ray->lenght);
 	start = (int)((HEIGHT - (float)ray->wall_height) / 2 + \

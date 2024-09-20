@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:20:58 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/24 19:21:22 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:54:07 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,17 @@ void	draw_first_background(t_cube *cube)
 		while (++y < HEIGHT)
 		{
 			if (y < HEIGHT / 2)
-				mlx_set_image_pixel(cube->mlx.ptr, cube->mlx.background_img, x, y, cube->map.ceiling_color);
+				mlx_set_image_pixel(cube->mlx.ptr, cube->mlx.background_img, \
+x, y, cube->map.ceiling_color);
 			else
-				mlx_set_image_pixel(cube->mlx.ptr, cube->mlx.background_img, x, y, cube->map.floor_color);
+				mlx_set_image_pixel(cube->mlx.ptr, cube->mlx.background_img, \
+x, y, cube->map.floor_color);
 		}
 	}
 }
 
-void	draw_on_image(t_cube *cube, unsigned long color, float pos_y, int start_y)
+void	draw_on_image(t_cube *cube, unsigned long color, \
+	float pos_y, int start_y)
 {
 	int		pos_x;
 
@@ -41,7 +44,8 @@ void	draw_on_image(t_cube *cube, unsigned long color, float pos_y, int start_y)
 		while (++pos_x < WIDTH)
 		{
 			if (pos_y < HEIGHT && pos_y >= 0 && pos_x < WIDTH && pos_x >= 0)
-				mlx_set_image_pixel(cube->mlx.ptr, cube->mlx.background_img, pos_x, pos_y, color);
+				mlx_set_image_pixel(cube->mlx.ptr, cube->mlx.background_img, \
+pos_x, pos_y, color);
 		}
 	}
 }
@@ -69,6 +73,26 @@ void	draw_background(t_cube *cube)
 	else
 		draw_on_image(cube, cube->map.ceiling_color, pos_y - 1, start_y);
 	prev_pitch_shift = pitch_shift;
+}
+
+void	fill_wall_sprite(t_cube *cube, int **wall, int i, t_image *img)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < img->width)
+	{
+		x = -1;
+		while (++x < img->height)
+		{
+			if (cube->mlx.portal[i].texture[y * img->width + x] != 0)
+				wall[i][y * img->width + x] = \
+cube->mlx.portal[i].texture[y * img->width + x];
+			else
+				wall[i][y * img->width + x] = img->texture[y * img->width + x];
+		}
+	}
 }
 
 int	is_player(char c)

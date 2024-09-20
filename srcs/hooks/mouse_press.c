@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 04:52:12 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/10 16:56:55 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:05:40 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	handle_mouse_press_in_menu(t_cube *cube, int key)
 {
-	if ((cube->menu.play_button.status || cube->menu.settings_button.status || cube->menu.exit_button.status) && key)
+	if ((cube->menu.play_button.status || cube->menu.settings_button.status || \
+cube->menu.exit_button.status) && key)
 	{
 		if (system("paplay ./click.ogg &"))
 			printf("Error playing sound\n");
@@ -37,12 +38,14 @@ void	handle_mouse_press_in_menu(t_cube *cube, int key)
 
 void	handle_mouse_press_in_settings(t_cube *cube, int key)
 {
-	if ((cube->menu.keybinds_button.status || cube->menu.video_settings_button.status || cube->menu.music_and_sounds_button.status || cube->menu.keybinds_define_button.status) && key)
+	if ((cube->menu.keybinds_button.status || \
+cube->menu.video_settings_button.status || \
+cube->menu.music_and_sounds_button.status || \
+cube->menu.keybinds_define_button.status) && key)
 	{
 		if (system("paplay ./click.ogg &"))
 			printf("Error playing sound\n");
 	}
-
 	if (cube->menu.keybinds_button.status && key)
 		open_keybinds_menu(cube);
 	if (cube->menu.video_settings_button.status && key)
