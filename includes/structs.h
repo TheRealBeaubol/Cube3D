@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 19:41:00 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 20:13:28 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef enum e_direction
 
 typedef enum e_portal_type
 {
-	PORTAL,
 	UNI,
 	DOUBLE,
 }	t_portal_type;
@@ -120,7 +119,6 @@ typedef struct s_menu
 	t_settings_menu_images	play_button;
 	t_settings_menu_images	settings_button;
 	t_settings_menu_images	exit_button;
-	t_settings_menu_images	keybinds_button;
 	t_settings_menu_images	keybinds_define_button;
 	t_settings_menu_images	keybinds_menu;
 }	t_menu;

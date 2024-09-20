@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/09/20 19:25:46 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/09/20 20:06:38 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,6 @@ SRCS	= 	main.c \
 				hooks/utils.c \
 				hooks/render/render_images.c \
 				hooks/render/utils.c \
-				hooks/render/open_menu.c \
 				exit/utils.c \
 				exit/exit.c \
 				parsing/colors.c \
@@ -78,9 +77,9 @@ SRCS	= 	main.c \
 				game/get_texture.c \
 				game/raycasting.c \
 				game/dda_algorithm.c \
-				door/door.c \
-				door/utils.c \
-				door/init_portal.c \
+				portal/portal.c \
+				portal/utils.c \
+				portal/init_portal.c \
 
 SRCS_DIR	:=	srcs
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:28:35 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 18:05:02 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 20:03:10 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,13 @@ t_int_point mouse, int *sound)
 		if (*sound == 0)
 		{
 			*sound = 1;
-			if (system("paplay ./hover.ogg &"))
+			if (system("paplay ./sounds/hover.ogg &"))
 				printf("Error playing sound\n");
 		}
 		return (1);
 	}
 	*sound = 0;
 	return (0);
-}
-
-void	handle_mouse_in_settings(t_cube *cube, t_int_point pos)
-{
-	cube->menu.keybinds_button.status = \
-	is_hover((t_int_point){300, 75}, (t_int_point){620, 190}, \
-pos, &cube->menu.keybinds_button.sound);
-	cube->menu.video_settings_button.status = \
-	is_hover((t_int_point){800, 75}, (t_int_point){1120, 190}, \
-pos, &cube->menu.video_settings_button.sound);
-	cube->menu.music_and_sounds_button.status = \
-	is_hover((t_int_point){1300, 75}, (t_int_point){1620, 190}, \
-pos, &cube->menu.music_and_sounds_button.sound);
 }
 
 void	handle_mouse_in_menu(t_cube *cube, t_int_point pos)

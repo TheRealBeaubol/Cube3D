@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:44:49 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 18:07:19 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:55:39 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ int	loop_hook(void *cube_void)
 	mlx_mouse_get_pos(cube->mlx.ptr, &pos.x, &pos.y);
 	if (cube->is_in_menu)
 		handle_mouse_in_menu(cube, pos);
-	if (cube->is_in_settings)
-		handle_mouse_in_settings(cube, pos);
 	if (cube->menu.keybinds_menu.status)
 		handle_mouse_in_keybinds(cube, pos);
 	if (!cube->is_in_game)

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 18:00:03 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 19:40:35 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:54:49 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 void	destroy_menu_images(t_menu *menu, void *mlx_ptr)
 {
-	const t_settings_menu_images	*img[7] = {&menu->play_button,
-		&menu->settings_button, &menu->exit_button, &menu->keybinds_button, \
-		&menu->video_settings_button, &menu->music_and_sounds_button, \
+	const t_settings_menu_images	*img[4] = {&menu->play_button,
+		&menu->settings_button, &menu->exit_button, \
 		&menu->keybinds_define_button};
 	int								i;
 
@@ -24,13 +23,11 @@ void	destroy_menu_images(t_menu *menu, void *mlx_ptr)
 	while (++i < 54)
 		mlx_destroy_image(mlx_ptr, menu->keys[i].img);
 	i = -1;
-	while (++i < 7)
+	while (++i < 4)
 	{
 		mlx_destroy_image(mlx_ptr, img[i]->img);
 		mlx_destroy_image(mlx_ptr, img[i]->img_hover);
 	}
-	mlx_destroy_image(mlx_ptr, menu->video_settings_menu.img);
-	mlx_destroy_image(mlx_ptr, menu->music_and_sounds_menu.img);
 	mlx_destroy_image(mlx_ptr, menu->keybinds_menu.img);
 	mlx_destroy_image(mlx_ptr, menu->background);
 }

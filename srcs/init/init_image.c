@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 21:31:35 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 19:38:34 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:55:02 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ mlx_ptr, (char *)img_hover_path, &image->width_hover, \
 void	init_images(void *mlx_ptr, t_menu *menu)
 {
 	init_keys(mlx_ptr, menu);
-	init_settings_menu_image(mlx_ptr, &menu->keybinds_button, \
-"images/keybinds_button.png", "images/keybinds_button_hover.png");
 	init_settings_menu_image(mlx_ptr, &menu->keybinds_define_button, \
 "images/keybinds_define_button.png", \
 "images/keybinds_define_button_hover.png");
