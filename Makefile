@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/07/02 16:59:04 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/09/20 18:01:16 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS	= 	main.c \
 				hooks/render/utils.c \
 				hooks/render/open_menu.c \
 				exit/utils.c \
+				exit/exit.c \
 				parsing/colors.c \
 				parsing/utils.c \
 				parsing/check_closed_map.c \
@@ -67,14 +68,15 @@ SRCS	= 	main.c \
 				init/init_settings.c \
 				init/init_game.c \
 				init/utils.c \
+				init/init_image.c \
 				init/preload_textures.c \
 				settings/edit_file.c \
 				settings/utils.c \
-				init/init_image.c \
 				game/game.c \
 				game/raycasting.c \
 				game/dda_algorithm.c \
 				door/door.c \
+				door/utils.c \
 				door/init_portal.c \
 
 SRCS_DIR	:=	srcs
