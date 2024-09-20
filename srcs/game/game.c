@@ -6,81 +6,74 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:41:38 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 01:05:52 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:03:51 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	print_global_pixel(t_cube *cube, int x, int y, int color)
+static void	draw_circle(int radius, t_int_point center, \
+	t_cube *cube, unsigned int color)
 {
-	int	dx;
-	int	dy;
+	t_int_point	p;
+	t_int_point	d;
 
-	dx = 0;
-	while (dx < 50)
+	d.y = -radius;
+	while (d.y <= radius)
 	{
-		dy = 0;
-		while (dy < 50)
+		d.x = -radius;
+		while (d.x <= radius)
 		{
-			mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, x + dx, y + dy, color);
-			dy++;
+			if (d.x * d.x + d.y * d.y <= radius * radius)
+			{
+				p.x = center.x + d.x;
+				p.y = center.y + d.y;
+				mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, p.x, p.y, color);
+			}
+			d.x++;
 		}
-		dx++;
+		d.y++;
 	}
 }
 
-void	print_player(t_cube *cube, int color)
+void	print_player(t_cube *cube)
 {
-	int	dx;
-	int	dy;
-	int	px;
-	int	py;
+	int	x;
+	int	y;
 
-	px = WIDTH - (2 * 50);
-	py = (2 * 50);
-	dx = -1;
-	while (++dx < 20)
+	y = 0;
+	while (y < cube->mlx.player.width)
 	{
-		dy = -1;
-		while (++dy < 20)
-			mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, px + \
-dx, py + dy, color);
+		x = 0;
+		while (x < cube->mlx.player.height)
+		{
+			if (cube->mlx.player.texture[(int)(y * \
+cube->mlx.player.width + x)] != 0)
+				mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, WIDTH - \
+3 * 50 + x, 2.5 * 50 + y - 25, cube->mlx.player.texture[(int)(y * \
+cube->mlx.player.width + x)]);
+			x++;
+		}
+		y++;
 	}
 }
 
-void	print_map(t_cube *cube)
+void	draw_crosshair(t_cube *cube)
 {
-	int			i;
-	int			j;
-	int			save_i;
-	int			save_j;
-	t_int_point	point;
+	int	i;
 
-	i = (int)cube->settings.pos.y - 3;
-	j = (int)cube->settings.pos.x - 2;
-	save_i = i + 5;
-	save_j = j + 5;
-	point.y = 0;
-	while (++i < save_i)
+	i = 0;
+	while (i < 10)
 	{
-		point.x = WIDTH - (5 * 50);
-		j = save_j - 6;
-		while (++j < save_j)
-		{
-			if (i < 0 || j < 0 || i >= cube->map.height || j >= cube->map.width)
-				print_global_pixel(cube, point.x, point.y, 0x00000000);
-			else if (cube->map.map[i][j] == '1')
-				print_global_pixel(cube, point.x, point.y, 0xFF0000FF);
-			else if (cube->map.map[i][j] == '0')
-				print_global_pixel(cube, point.x, point.y, 0xFFFFFFFF);
-			else if (cube->map.map[i][j] == 'P')
-				print_global_pixel(cube, point.x, point.y, 0xFF00FF00);
-			else
-				print_global_pixel(cube, point.x, point.y, 0x00000000);
-			point.x += 50;
-		}
-		point.y += 50;
+		mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, WIDTH / \
+2 + i, HEIGHT / 2, 0xFF000000);
+		mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, WIDTH / \
+2 - i, HEIGHT / 2, 0xFF000000);
+		mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, WIDTH / \
+2, HEIGHT / 2 + i, 0xFF000000);
+		mlx_pixel_put(cube->mlx.ptr, cube->mlx.win, WIDTH / \
+2, HEIGHT / 2 - i, 0xFF000000);
+		i++;
 	}
 }
 
@@ -89,6 +82,7 @@ void	render_cube(t_cube *cube)
 	int	i;
 
 	mlx_clear_window(cube->mlx.ptr, cube->mlx.win);
+	draw_background(cube);
 	cube->settings.ray = ft_calloc(WIDTH + 1, sizeof(t_ray *));
 	i = -1;
 	while (++i < WIDTH)
@@ -96,8 +90,16 @@ void	render_cube(t_cube *cube)
 	i = -1;
 	while (++i < WIDTH)
 		do_rays(cube, cube->settings.ray[i], i);
-	print_map(cube);
-	print_player(cube, 0xFF00FF00);
+	if (cube->settings.show_map)
+	{
+		draw_circle(130, (t_int_point){WIDTH - 3 * 50 + \
+25, 2.5 * 50}, cube, 0xFFF69D02);
+		draw_circle(125, (t_int_point){WIDTH - 3 * 50 + \
+25, 2.5 * 50}, cube, 0xFFC1FF44);
+		draw_map(cube);
+		print_player(cube);
+	}
 	mlx_put_image_to_window(cube->mlx.ptr, cube->mlx.win, \
 cube->mlx.background_img, 0, 0);
+	draw_crosshair(cube);
 }

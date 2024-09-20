@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/06/24 15:02:16 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/09/20 20:06:38 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,24 +49,37 @@ RESET	= \033[0m
 
 #SOURCES
 SRCS	= 	main.c \
-				to_sort.c \
 				hooks/hook.c \
 				hooks/mouse_press.c \
-				pre-game/settings_menu.c \
+				hooks/mouse_move.c \
+				hooks/key_press.c \
+				hooks/move.c \
+				hooks/utils.c \
+				hooks/render/render_images.c \
+				hooks/render/utils.c \
 				exit/utils.c \
+				exit/exit.c \
 				parsing/colors.c \
 				parsing/utils.c \
+				parsing/check_closed_map.c \
+				parsing/get_map_data.c \
 				parsing/wall_texture.c \
 				parsing/parsing.c \
 				init/init_settings.c \
 				init/init_game.c \
 				init/utils.c \
+				init/init_image.c \
 				init/preload_textures.c \
 				settings/edit_file.c \
 				settings/utils.c \
-				init/init_image.c \
 				game/game.c \
+				game/map.c \
+				game/get_texture.c \
 				game/raycasting.c \
+				game/dda_algorithm.c \
+				portal/portal.c \
+				portal/utils.c \
+				portal/init_portal.c \
 
 SRCS_DIR	:=	srcs
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)

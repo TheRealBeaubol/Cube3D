@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:01:39 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 01:11:09 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:06:35 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,44 +49,6 @@ void	calculate_step_dir_and_init_sidedist(t_ray *ray)
 	}
 }
 
-void	perform_dda(t_ray *ray, t_map *map)
-{
-	while (ray->hit_wall == 0)
-	{
-		if (ray->side_dist.x < ray->side_dist.y)
-		{
-			ray->side_dist.x += ray->delta_dist.x;
-			ray->map.x += ray->step_dir.x;
-			if (ray->ray_dir.x < 0)
-				ray->direction = EAST;
-			else
-				ray->direction = WEST;
-			ray->side = 0;
-		}
-		else
-		{
-			ray->side_dist.y += ray->delta_dist.y;
-			ray->map.y += ray->step_dir.y;
-			if (ray->ray_dir.y < 0)
-				ray->direction = NORTH;
-			else
-				ray->direction = SOUTH;
-			ray->side = 1;
-		}
-		if (map->map[ray->map.y][ray->map.x] == '1')
-			ray->hit_wall = 1;
-		if (map->map[ray->map.y][ray->map.x] == 'P' && (fabs(ray->map.x - \
-ray->pos.x) > 2 || fabs(ray->map.y - ray->pos.y) > 2))
-			ray->hit_wall = 2;
-	}
-	if (ray->side == 0)
-		ray->lenght = (ray->map.x - ray->pos.x + (1 - \
-ray->step_dir.x) / 2) / ray->ray_dir.x;
-	else
-		ray->lenght = (ray->map.y - ray->pos.y + (1 - \
-ray->step_dir.y) / 2) / ray->ray_dir.y;
-}
-
 void	draw_wall(int i, t_cube *cube, int start, int end)
 {
 	int	j;
@@ -94,7 +56,8 @@ void	draw_wall(int i, t_cube *cube, int start, int end)
 	int	tex_y;
 
 	j = start;
-	cube->settings.ray[i]->tex_pos = (start - HEIGHT / 2 + \
+	cube->settings.ray[i]->tex_pos = (start - \
+cube->settings.ray[i]->wall_offset - HEIGHT / 2 + \
 cube->settings.ray[i]->wall_height / 2) * cube->settings.ray[i]->step;
 	while (j < end)
 	{
@@ -131,20 +94,17 @@ void	do_rays(t_cube *cube, t_ray *ray, int i)
 
 	init_ray(&cube->settings, ray, i);
 	calculate_step_dir_and_init_sidedist(ray);
-	perform_dda(ray, &cube->map);
-	if (ray->direction == NORTH)
-		cube->map.actual_texture = cube->map.no_texture;
-	if (ray->direction == SOUTH)
-		cube->map.actual_texture = cube->map.so_texture;
-	if (ray->direction == EAST)
-		cube->map.actual_texture = cube->map.ea_texture;
-	if (ray->direction == WEST)
-		cube->map.actual_texture = cube->map.we_texture;
+	perform_dda(ray, &cube->map, &cube->settings);
+	cube->map.actual_texture.texture = NULL;
+	get_actual_texture(cube, ray);
+	ray->wall_offset = (int)((-cube->settings.pitch) * HEIGHT);
 	ray->wall_height = (int)(HEIGHT / ray->lenght);
-	start = -ray->wall_height / 2 + HEIGHT / 2;
+	start = (int)((HEIGHT - (float)ray->wall_height) / 2 + \
+ray->wall_offset);
 	if (start < 0)
 		start = 0;
-	end = ray->wall_height / 2 + HEIGHT / 2;
+	end = (int)((float)ray->wall_height / 2 + HEIGHT / 2 + \
+ray->wall_offset);
 	if (end >= HEIGHT)
 		end = HEIGHT - 1;
 	texture_calculation(cube, ray);

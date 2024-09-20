@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:50:45 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 01:01:39 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:37:29 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_colors(char **colors)
 		{
 			if (!ft_isdigit(colors[i][j]) || ft_strlen(colors[i]) > 3)
 			{
-				ft_dprintf(2, "Error\nColor is not valid\n");
+				ft_free_tab(colors);
 				return (0);
 			}
 		}
@@ -47,7 +47,6 @@ unsigned long	convert_rgb_to_hexa(char **colors)
 	b = ft_atoi(colors[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 	{
-		ft_dprintf(2, "Error\n1Color is not valid\n");
 		ft_free_tab(colors);
 		return (0);
 	}
@@ -57,25 +56,37 @@ unsigned long	convert_rgb_to_hexa(char **colors)
 	return (color);
 }
 
-void	get_colors(t_map *map, int fd)
+int	get_number_of_spaces(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ')
+		i++;
+	return (i);
+}
+
+void	get_colors(t_map *map, char *str, int fd)
 {
 	char			**colors;
-	char			*str;
 	unsigned long	color;
 
-	str = get_next_line(fd, 0);
 	if (!str || (str[0] != 'C' && str[0] != 'F') || str[1] != ' ')
+	{
 		free(str);
-	colors = ft_str_split(str + 2, "\n,");
+		return ;
+	}
+	colors = ft_str_split(str + get_number_of_spaces(str + 1) + 1, "\n,");
 	if (!colors || ft_tablen(colors) != 3)
 	{
 		ft_free_tab(colors);
-		free(str);
 	}
 	color = convert_rgb_to_hexa(colors);
+	if (color == 0)
+		exit_and_free_texture_paths(map->texture_paths, str, \
+3, fd);
 	if (str[0] == 'C')
 		map->ceiling_color = color;
 	if (str[0] == 'F')
 		map->floor_color = color;
-	free(str);
 }

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:42 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/06/25 00:54:34 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:22:58 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 # define PI 3.1415926536
 # define WIDTH 1920
 # define HEIGHT 1080
-# define HEIGHT_ERROR "Error\n  \n"
-# define ERROR_PATH "Error\nTexture path is not valid or one texture is missing\n"
+# define ERROR_MISSING_ELEMENT "\033[1;31mError\nColor(s) or/and wall \
+sprite(s) is(are) missing\n\033[0m"
+# define ERROR_UNRECOGNIZED_TOKEN "\033[1;31mError\nUnrecognized token \
+while parsing map\n\033[0m"
+# define ERROR_COLOR_FORMAT "\033[1;31mError\nWrong color format\n\033[0m"
+# define ERROR_NO_SPAWN "\033[1;31mError\nNo player spawn found\n\033[0m"
+# define ERROR_MULTIPLE_SPAWN "\033[1;31mError\nMultiple player spawns \
+found\n\033[0m"
 #endif
