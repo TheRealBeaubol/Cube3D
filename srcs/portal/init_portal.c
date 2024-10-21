@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 17:14:11 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/10/21 19:25:26 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/22 01:44:16 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,4 @@ void	init_portal(t_cube *cube)
 				cpt_portal += create_portal(cube, i, j, ind++);
 		}
 	}
-	// if (cpt_portal != 3)
-	// 	free_init_and_exit(cube, ERROR_PORTAL_TOKEN_V, 2);
 }

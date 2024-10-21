@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:01:39 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/21 19:36:18 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/22 01:45:05 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void	init_ray(t_player_settings *settings, t_ray *ray, int i)
 {
 	ray->camera_x = 2 * i / (float)WIDTH - 1;
-	ray->ray_dir.x = settings->dir.x + (settings->plane.x * ray->camera_x) * 1.4;
-	ray->ray_dir.y = settings->dir.y + (settings->plane.y * ray->camera_x) * 1.4;
+	ray->ray_dir.x = settings->dir.x + (settings->plane.x * \
+ray->camera_x) * 1.4;
+	ray->ray_dir.y = settings->dir.y + (settings->plane.y * \
+ray->camera_x) * 1.4;
 	ray->pos = settings->pos;
 	ray->delta_dist.x = fabs(1 / ray->ray_dir.x);
 	ray->delta_dist.y = fabs(1 / ray->ray_dir.y);

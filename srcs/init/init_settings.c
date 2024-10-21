@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:40:22 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/22 01:22:45 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/22 01:54:29 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*get_key(char *line, t_player_settings *settings, int fd)
 	const char	*settings_text[7] = {"move_forward = ", "move_backward = ", \
 "sprint = ", "move_left = ", "move_right = ", "show_map = ", "shift = "};
 	int			i;
+	char 		*cut_str;
 
 	if (!line)
 		return (NULL);
@@ -24,16 +25,18 @@ char	*get_key(char *line, t_player_settings *settings, int fd)
 	i = -1;
 	while (++i < 7)
 	{
-		if (!ft_strncmp((char *)settings_text[i], line, ft_strlen((char *)settings_text[i])))
+		if (!ft_strncmp((char *)settings_text[i], \
+			line, ft_strlen((char *)settings_text[i])))
 		{
-			settings->keybinds[i] = get_key_from_line(ft_strcut(line, (char *)settings_text[i]), settings->key_map);
-			printf("keybinds[%d] = %d\n", i, settings->keybinds[i]);
+			cut_str = ft_strcut(line, (char *)settings_text[i]);
+			settings->keybinds[i] = get_key_from_line(cut_str, settings->key_map);
+			free(cut_str);
 			break ;
 		}
 	}
 	free(line);
 	line = get_next_line(fd, 0);
-	return line;
+	return (line);
 }
 
 void	init_player_binds(t_player_settings *settings)

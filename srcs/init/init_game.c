@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 00:05:36 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/21 22:48:17 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/22 01:53:07 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,49 @@ cube->menu.exit_button.img, (WIDTH - cube->menu.exit_button.width) / \
 2, ((HEIGHT - cube->menu.exit_button.height) / 2) + 200);
 }
 
+void	check_images_access(t_cube *cube, const char **paths)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 77)
+	{
+		if (access(paths[i], F_OK) == -1)
+		{
+			printf("\033[1;31mError\n%s not found\n\033[0m", paths[i]);
+			free_init_and_exit(cube, NULL, 2);
+		}
+	}
+}
+
+void	check_images_access_init(t_cube *cube)
+{
+	const char	*paths[77] = {"images/1.png", "images/2.png", "images/3.png", \
+"images/4.png", "images/5.png", "images/6.png", "images/7.png", "images/8.png", \
+"images/9.png", "images/0.png", "images/A.png", "images/B.png", "images/C.png", \
+"images/D.png", "images/E.png", "images/F.png", "images/G.png", "images/H.png", \
+"images/I.png", "images/J.png", "images/K.png", "images/L.png", "images/M.png", \
+"images/N.png", "images/O.png", "images/P.png", "images/Q.png", "images/R.png", \
+"images/S.png", "images/T.png", "images/U.png", "images/V.png", "images/W.png", \
+"images/X.png", "images/Y.png", "images/Z.png", "images/NUM0.png", \
+"images/NUM1.png", "images/NUM2.png", "images/NUM3.png", "images/NUM4.png", \
+"images/NUM5.png", "images/NUM6.png", "images/NUM7.png", "images/NUM8.png", \
+"images/NUM9.png", "images/SHIFT.png", "images/CTRL.png", "images/SPACE.png", \
+"images/TAB.png", "images/NUMMULT.png", "images/NUMPLUS.png", \
+"images/NUMMINUS.png", "images/NUMDIVIDE.png", "images/portal_1.png", \
+"images/portal_2.png", "images/portal_3.png", "images/portal_4.png", \
+"images/portal_5.png", "images/portal_6.png", "images/portal_7.png", \
+"images/portal_8.png", "images/portal_9.png", "images/portal_10.png", \
+"images/portal_11.png", "images/background.png", "images/play_button.png", \
+"images/settings_button.png", "images/exit_button.png", \
+"images/keybinds_define_button.png", "images/keybinds_menu.png", \
+"images/keybinds_define_button_hover.png", "images/play_button_hover.png", \
+"images/settings_button_hover.png", "images/exit_button_hover.png", \
+"images/player.png", "images/portal_0.png"};
+
+	check_images_access(cube, paths);
+}
+
 void	init(t_cube *cube)
 {
 	int	i;
@@ -52,6 +95,7 @@ void	init(t_cube *cube)
 	init_settings_file();
 	init_key_map(cube);
 	init_player_binds(&cube->settings);
+	check_images_access_init(cube);
 	i = -1;
 	while (++i < 256)
 		cube->settings.key_tab[i] = 0;
