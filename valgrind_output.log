@@ -1,0 +1,920 @@
+--$ invalid_map_area_000.cub hB---------------------------------------
+Error
+==2725335== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725335==     in use at exit: 0 bytes in 0 blocks
+==2725335==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_map_area_001.cub hB---------------------------------------
+Error
+==2725350== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725350==     in use at exit: 0 bytes in 0 blocks
+==2725350==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_map_area_002.cub hB---------------------------------------
+Error
+==2725366== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725366==     in use at exit: 0 bytes in 0 blocks
+==2725366==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_map_area_003.cub hB---------------------------------------
+Error
+==2725375== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725375==     in use at exit: 0 bytes in 0 blocks
+==2725375==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_map_area_004.cub hB---------------------------------------
+Error
+==2725390== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725390==     in use at exit: 0 bytes in 0 blocks
+==2725390==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_map_area_005.cub hB---------------------------------------
+Error
+==2725405== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725405==     in use at exit: 0 bytes in 0 blocks
+==2725405==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_map_area_006.cub hB---------------------------------------
+Error
+==2725415== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725415==     in use at exit: 0 bytes in 0 blocks
+==2725415==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_map_area_012.cub hB---------------------------------------
+Error
+==2725430== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725430==     in use at exit: 0 bytes in 0 blocks
+==2725430==   total heap usage: 89 allocs, 89 frees, 120,765 bytes allocated
+--$ invalid_map_area_013.cub hB---------------------------------------
+Error
+==2725439== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725439==     in use at exit: 0 bytes in 0 blocks
+==2725439==   total heap usage: 89 allocs, 89 frees, 120,885 bytes allocated
+--$ invalid_map_area_014.cub hB---------------------------------------
+Error
+==2725455== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725455==     in use at exit: 0 bytes in 0 blocks
+==2725455==   total heap usage: 89 allocs, 89 frees, 120,885 bytes allocated
+--$ invalid_map_area_015.cub hB---------------------------------------
+Error
+==2725470== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725470==     in use at exit: 0 bytes in 0 blocks
+==2725470==   total heap usage: 88 allocs, 88 frees, 120,622 bytes allocated
+--$ invalid_map_area_016.cub hB---------------------------------------
+Error
+==2725479== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725479==     in use at exit: 0 bytes in 0 blocks
+==2725479==   total heap usage: 89 allocs, 89 frees, 120,685 bytes allocated
+--$ invalid_map_area_017.cub hB---------------------------------------
+Error
+==2725494== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725494==     in use at exit: 0 bytes in 0 blocks
+==2725494==   total heap usage: 89 allocs, 89 frees, 120,685 bytes allocated
+--$ invalid_map_area_018.cub hB---------------------------------------
+Error
+==2725511== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725511==     in use at exit: 0 bytes in 0 blocks
+==2725511==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_map_area_019.cub hB---------------------------------------
+Error
+==2725561== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725561==     in use at exit: 0 bytes in 0 blocks
+==2725561==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_map_area_020.cub hB---------------------------------------
+Error
+==2725576== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725576==     in use at exit: 0 bytes in 0 blocks
+==2725576==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_map_area_021.cub hB---------------------------------------
+Error
+==2725587== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725587==     in use at exit: 0 bytes in 0 blocks
+==2725587==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_map_area_022.cub hB---------------------------------------
+Error
+==2725655== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725655==     in use at exit: 0 bytes in 0 blocks
+==2725655==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_map_area_023.cub hB---------------------------------------
+Error
+==2725772== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725772==     in use at exit: 0 bytes in 0 blocks
+==2725772==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_map_area_026.cub hB---------------------------------------
+Error
+==2725801== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725801==     in use at exit: 0 bytes in 0 blocks
+==2725801==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_map_area_027.cub hB---------------------------------------
+Error
+==2725926== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725926==     in use at exit: 0 bytes in 0 blocks
+==2725926==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_res_000.cub hB---------------------------------------
+Error
+==2725975== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725975==     in use at exit: 0 bytes in 0 blocks
+==2725975==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_res_001.cub hB---------------------------------------
+Error
+==2725988== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2725988==     in use at exit: 0 bytes in 0 blocks
+==2725988==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_res_002.cub hB---------------------------------------
+Error
+==2726056== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726056==     in use at exit: 0 bytes in 0 blocks
+==2726056==   total heap usage: 89 allocs, 89 frees, 125,317 bytes allocated
+--$ invalid_res_003.cub hB---------------------------------------
+Error
+==2726072== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726072==     in use at exit: 0 bytes in 0 blocks
+==2726072==   total heap usage: 89 allocs, 89 frees, 125,313 bytes allocated
+--$ invalid_res_004.cub hB---------------------------------------
+Error
+==2726082== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726082==     in use at exit: 0 bytes in 0 blocks
+==2726082==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_res_005.cub hB---------------------------------------
+Error
+==2726119== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726119==     in use at exit: 0 bytes in 0 blocks
+==2726119==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_res_006.cub hB---------------------------------------
+Error
+==2726135== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726135==     in use at exit: 0 bytes in 0 blocks
+==2726135==   total heap usage: 89 allocs, 89 frees, 125,317 bytes allocated
+--$ invalid_res_007.cub hB---------------------------------------
+Error
+==2726146== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726146==     in use at exit: 0 bytes in 0 blocks
+==2726146==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_res_008.cub hB---------------------------------------
+Error
+==2726164== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726164==     in use at exit: 0 bytes in 0 blocks
+==2726164==   total heap usage: 89 allocs, 89 frees, 125,329 bytes allocated
+--$ invalid_res_009.cub hB---------------------------------------
+Error
+==2726194== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726194==     in use at exit: 0 bytes in 0 blocks
+==2726194==   total heap usage: 89 allocs, 89 frees, 125,329 bytes allocated
+--$ invalid_res_010.cub hB---------------------------------------
+Error
+==2726204== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726204==     in use at exit: 0 bytes in 0 blocks
+==2726204==   total heap usage: 89 allocs, 89 frees, 125,329 bytes allocated
+--$ invalid_res_011.cub hB---------------------------------------
+Error
+==2726219== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726219==     in use at exit: 0 bytes in 0 blocks
+==2726219==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_res_012.cub hB---------------------------------------
+Error
+==2726234== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726234==     in use at exit: 0 bytes in 0 blocks
+==2726234==   total heap usage: 89 allocs, 89 frees, 125,289 bytes allocated
+--$ invalid_res_013.cub hB---------------------------------------
+Error
+==2726244== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726244==     in use at exit: 0 bytes in 0 blocks
+==2726244==   total heap usage: 117 allocs, 117 frees, 130,851 bytes allocated
+--$ invalid_res_014.cub hB---------------------------------------
+Error
+==2726260== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726260==     in use at exit: 0 bytes in 0 blocks
+==2726260==   total heap usage: 89 allocs, 89 frees, 125,305 bytes allocated
+--$ invalid_res_015.cub hB---------------------------------------
+Error
+==2726275== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726275==     in use at exit: 0 bytes in 0 blocks
+==2726275==   total heap usage: 89 allocs, 89 frees, 125,313 bytes allocated
+--$ invalid_res_016.cub hB---------------------------------------
+Error
+==2726285== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726285==     in use at exit: 0 bytes in 0 blocks
+==2726285==   total heap usage: 118 allocs, 118 frees, 130,906 bytes allocated
+--$ invalid_res_017.cub hB---------------------------------------
+Error
+==2726300== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726300==     in use at exit: 0 bytes in 0 blocks
+==2726300==   total heap usage: 89 allocs, 89 frees, 125,361 bytes allocated
+--$ invalid_res_018.cub hB---------------------------------------
+Error
+==2726315== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726315==     in use at exit: 0 bytes in 0 blocks
+==2726315==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_res_019.cub hB---------------------------------------
+Error
+==2726324== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726324==     in use at exit: 0 bytes in 0 blocks
+==2726324==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_res_020.cub hB---------------------------------------
+Error
+==2726340== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726340==     in use at exit: 0 bytes in 0 blocks
+==2726340==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_res_021.cub hB---------------------------------------
+Error
+==2726355== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726355==     in use at exit: 0 bytes in 0 blocks
+==2726355==   total heap usage: 93 allocs, 93 frees, 126,499 bytes allocated
+--$ invalid_res_022.cub hB---------------------------------------
+Error
+==2726364== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726364==     in use at exit: 0 bytes in 0 blocks
+==2726364==   total heap usage: 93 allocs, 93 frees, 126,595 bytes allocated
+--$ invalid_res_023.cub hB---------------------------------------
+Error
+==2726380== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726380==     in use at exit: 0 bytes in 0 blocks
+==2726380==   total heap usage: 89 allocs, 89 frees, 125,473 bytes allocated
+--$ invalid_res_024.cub hB---------------------------------------
+Error
+==2726389== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726389==     in use at exit: 0 bytes in 0 blocks
+==2726389==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_res_026.cub hB---------------------------------------
+Error
+==2726404== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726404==     in use at exit: 0 bytes in 0 blocks
+==2726404==   total heap usage: 89 allocs, 89 frees, 125,353 bytes allocated
+--$ invalid_res_028.cub hB---------------------------------------
+Error
+==2726419== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726419==     in use at exit: 0 bytes in 0 blocks
+==2726419==   total heap usage: 89 allocs, 89 frees, 125,473 bytes allocated
+--$ invalid_res_029.cub hB---------------------------------------
+Error
+==2726429== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726429==     in use at exit: 0 bytes in 0 blocks
+==2726429==   total heap usage: 89 allocs, 89 frees, 125,365 bytes allocated
+--$ invalid_RGB_000.cub hB---------------------------------------
+Error
+==2726444== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726444==     in use at exit: 0 bytes in 0 blocks
+==2726444==   total heap usage: 89 allocs, 89 frees, 125,277 bytes allocated
+--$ invalid_RGB_001.cub hB---------------------------------------
+Error
+==2726459== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726459==     in use at exit: 0 bytes in 0 blocks
+==2726459==   total heap usage: 89 allocs, 89 frees, 125,109 bytes allocated
+--$ invalid_RGB_002.cub hB---------------------------------------
+Error
+==2726469== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726469==     in use at exit: 0 bytes in 0 blocks
+==2726469==   total heap usage: 89 allocs, 89 frees, 125,133 bytes allocated
+--$ invalid_RGB_003.cub hB---------------------------------------
+Error
+==2726484== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726484==     in use at exit: 0 bytes in 0 blocks
+==2726484==   total heap usage: 85 allocs, 85 frees, 124,195 bytes allocated
+--$ invalid_RGB_004.cub hB---------------------------------------
+Error
+==2726493== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726493==     in use at exit: 0 bytes in 0 blocks
+==2726493==   total heap usage: 81 allocs, 81 frees, 123,297 bytes allocated
+--$ invalid_RGB_005.cub hB---------------------------------------
+Error
+==2726508== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726508==     in use at exit: 0 bytes in 0 blocks
+==2726508==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_RGB_006.cub hB---------------------------------------
+Error
+==2726524== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726524==     in use at exit: 0 bytes in 0 blocks
+==2726524==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_RGB_007.cub hB---------------------------------------
+Error
+==2726533== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726533==     in use at exit: 0 bytes in 0 blocks
+==2726533==   total heap usage: 93 allocs, 93 frees, 126,273 bytes allocated
+--$ invalid_RGB_008.cub hB---------------------------------------
+Error
+==2726548== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726548==     in use at exit: 0 bytes in 0 blocks
+==2726548==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_009.cub hB---------------------------------------
+Error
+==2726564== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726564==     in use at exit: 0 bytes in 0 blocks
+==2726564==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_010.cub hB---------------------------------------
+Error
+==2726573== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726573==     in use at exit: 0 bytes in 0 blocks
+==2726573==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_011.cub hB---------------------------------------
+Error
+==2726588== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726588==     in use at exit: 0 bytes in 0 blocks
+==2726588==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_012.cub hB---------------------------------------
+Error
+==2726607== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726607==     in use at exit: 0 bytes in 0 blocks
+==2726607==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_013.cub hB---------------------------------------
+Error
+==2726617== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726617==     in use at exit: 0 bytes in 0 blocks
+==2726617==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_014.cub hB---------------------------------------
+Error
+==2726632== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726632==     in use at exit: 0 bytes in 0 blocks
+==2726632==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_015.cub hB---------------------------------------
+Error
+==2726647== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726647==     in use at exit: 0 bytes in 0 blocks
+==2726647==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_016.cub hB---------------------------------------
+Error
+==2726662== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726662==     in use at exit: 0 bytes in 0 blocks
+==2726662==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_017.cub hB---------------------------------------
+Error
+==2726678== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726678==     in use at exit: 0 bytes in 0 blocks
+==2726678==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_018.cub hB---------------------------------------
+Error
+==2726693== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726693==     in use at exit: 0 bytes in 0 blocks
+==2726693==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_019.cub hB---------------------------------------
+Error
+==2726705== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726705==     in use at exit: 0 bytes in 0 blocks
+==2726705==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_020.cub hB---------------------------------------
+Error
+==2726724== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726724==     in use at exit: 0 bytes in 0 blocks
+==2726724==   total heap usage: 89 allocs, 89 frees, 125,293 bytes allocated
+--$ invalid_RGB_021.cub hB---------------------------------------
+Error
+==2726738== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726738==     in use at exit: 0 bytes in 0 blocks
+==2726738==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_022.cub hB---------------------------------------
+Error
+==2726756== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726756==     in use at exit: 0 bytes in 0 blocks
+==2726756==   total heap usage: 89 allocs, 89 frees, 125,343 bytes allocated
+--$ invalid_RGB_023.cub hB---------------------------------------
+Error
+==2726772== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726772==     in use at exit: 0 bytes in 0 blocks
+==2726772==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_RGB_024.cub hB---------------------------------------
+Error
+==2726781== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726781==     in use at exit: 0 bytes in 0 blocks
+==2726781==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_RGB_025.cub hB---------------------------------------
+Error
+==2726799== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726799==     in use at exit: 0 bytes in 0 blocks
+==2726799==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_026.cub hB---------------------------------------
+Error
+==2726814== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726814==     in use at exit: 0 bytes in 0 blocks
+==2726814==   total heap usage: 89 allocs, 89 frees, 125,343 bytes allocated
+--$ invalid_RGB_027.cub hB---------------------------------------
+Error
+==2726827== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726827==     in use at exit: 0 bytes in 0 blocks
+==2726827==   total heap usage: 89 allocs, 89 frees, 125,341 bytes allocated
+--$ invalid_RGB_028.cub hB---------------------------------------
+Error
+==2726842== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726842==     in use at exit: 0 bytes in 0 blocks
+==2726842==   total heap usage: 89 allocs, 89 frees, 125,415 bytes allocated
+--$ invalid_RGB_029.cub hB---------------------------------------
+Error
+==2726861== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726861==     in use at exit: 0 bytes in 0 blocks
+==2726861==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_RGB_030.cub hB---------------------------------------
+Error
+==2726874== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726874==     in use at exit: 0 bytes in 0 blocks
+==2726874==   total heap usage: 89 allocs, 89 frees, 125,325 bytes allocated
+--$ invalid_RGB_031.cub hB---------------------------------------
+Error
+==2726892== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726892==     in use at exit: 0 bytes in 0 blocks
+==2726892==   total heap usage: 89 allocs, 89 frees, 125,343 bytes allocated
+--$ invalid_RGB_032.cub hB---------------------------------------
+Error
+==2726910== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726910==     in use at exit: 0 bytes in 0 blocks
+==2726910==   total heap usage: 89 allocs, 89 frees, 125,343 bytes allocated
+--$ invalid_RGB_033.cub hB---------------------------------------
+Error
+==2726924== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726924==     in use at exit: 0 bytes in 0 blocks
+==2726924==   total heap usage: 89 allocs, 89 frees, 125,343 bytes allocated
+--$ invalid_RGB_034.cub hB---------------------------------------
+Error
+==2726941== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726941==     in use at exit: 0 bytes in 0 blocks
+==2726941==   total heap usage: 85 allocs, 85 frees, 124,401 bytes allocated
+--$ invalid_RGB_035.cub hB---------------------------------------
+Error
+==2726959== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726959==     in use at exit: 0 bytes in 0 blocks
+==2726959==   total heap usage: 85 allocs, 85 frees, 124,401 bytes allocated
+--$ invalid_RGB_036.cub hB---------------------------------------
+Error
+==2726972== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726972==     in use at exit: 0 bytes in 0 blocks
+==2726972==   total heap usage: 89 allocs, 89 frees, 125,469 bytes allocated
+--$ invalid_RGB_037.cub hB---------------------------------------
+Error
+==2726987== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2726987==     in use at exit: 0 bytes in 0 blocks
+==2726987==   total heap usage: 81 allocs, 81 frees, 123,073 bytes allocated
+--$ invalid_RGB_038.cub hB---------------------------------------
+Error
+==2727002== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727002==     in use at exit: 0 bytes in 0 blocks
+==2727002==   total heap usage: 93 allocs, 93 frees, 126,501 bytes allocated
+--$ invalid_RGB_039.cub hB---------------------------------------
+Error
+==2727011== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727011==     in use at exit: 0 bytes in 0 blocks
+==2727011==   total heap usage: 93 allocs, 93 frees, 126,501 bytes allocated
+--$ invalid_RGB_040.cub hB---------------------------------------
+Error
+==2727027== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727027==     in use at exit: 0 bytes in 0 blocks
+==2727027==   total heap usage: 89 allocs, 89 frees, 125,229 bytes allocated
+--$ invalid_RGB_041.cub hB---------------------------------------
+Error
+==2727043== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727043==     in use at exit: 0 bytes in 0 blocks
+==2727043==   total heap usage: 85 allocs, 85 frees, 124,177 bytes allocated
+--$ invalid_RGB_042.cub hB---------------------------------------
+Error
+==2727053== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727053==     in use at exit: 0 bytes in 0 blocks
+==2727053==   total heap usage: 85 allocs, 85 frees, 124,177 bytes allocated
+--$ invalid_tex_EA_000.cub hB---------------------------------------
+Error
+==2727072== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727072==     in use at exit: 0 bytes in 0 blocks
+==2727072==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_EA_001.cub hB---------------------------------------
+Error
+==2727087== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727087==     in use at exit: 0 bytes in 0 blocks
+==2727087==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_EA_002.cub hB---------------------------------------
+Error
+==2727102== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727102==     in use at exit: 0 bytes in 0 blocks
+==2727102==   total heap usage: 89 allocs, 89 frees, 125,315 bytes allocated
+--$ invalid_tex_EA_003.cub hB---------------------------------------
+Error
+==2727117== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727117==     in use at exit: 0 bytes in 0 blocks
+==2727117==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_EA_004.cub hB---------------------------------------
+Error
+==2727129== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727129==     in use at exit: 0 bytes in 0 blocks
+==2727129==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_EA_005.cub hB---------------------------------------
+Error
+==2727144== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727144==     in use at exit: 0 bytes in 0 blocks
+==2727144==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_EA_006.cub hB---------------------------------------
+Error
+==2727159== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727159==     in use at exit: 0 bytes in 0 blocks
+==2727159==   total heap usage: 89 allocs, 89 frees, 125,339 bytes allocated
+--$ invalid_tex_EA_007.cub hB---------------------------------------
+Error
+==2727169== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727169==     in use at exit: 0 bytes in 0 blocks
+==2727169==   total heap usage: 89 allocs, 89 frees, 125,339 bytes allocated
+--$ invalid_tex_EA_008.cub hB---------------------------------------
+Error
+==2727184== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727184==     in use at exit: 0 bytes in 0 blocks
+==2727184==   total heap usage: 93 allocs, 93 frees, 126,479 bytes allocated
+--$ invalid_tex_EA_009.cub hB---------------------------------------
+Error
+==2727199== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727199==     in use at exit: 0 bytes in 0 blocks
+==2727199==   total heap usage: 89 allocs, 89 frees, 125,309 bytes allocated
+--$ invalid_tex_EA_010.cub hB---------------------------------------
+Error
+==2727208== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727208==     in use at exit: 0 bytes in 0 blocks
+==2727208==   total heap usage: 55 allocs, 55 frees, 116,994 bytes allocated
+--$ invalid_tex_EA_011.cub hB---------------------------------------
+Error
+==2727224== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727224==     in use at exit: 0 bytes in 0 blocks
+==2727224==   total heap usage: 89 allocs, 89 frees, 125,207 bytes allocated
+--$ invalid_tex_EA_012.cub hB---------------------------------------
+Error
+==2727239== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727239==     in use at exit: 0 bytes in 0 blocks
+==2727239==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_EA_013.cub hB---------------------------------------
+Error
+==2727248== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727248==     in use at exit: 0 bytes in 0 blocks
+==2727248==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_EA_014.cub hB---------------------------------------
+Error
+==2727264== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727264==     in use at exit: 0 bytes in 0 blocks
+==2727264==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_EA_015.cub hB---------------------------------------
+Error
+==2727279== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727279==     in use at exit: 0 bytes in 0 blocks
+==2727279==   total heap usage: 89 allocs, 89 frees, 125,345 bytes allocated
+--$ invalid_tex_EA_016.cub hB---------------------------------------
+Error
+==2727288== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727288==     in use at exit: 0 bytes in 0 blocks
+==2727288==   total heap usage: 85 allocs, 85 frees, 124,495 bytes allocated
+--$ invalid_tex_EA_017.cub hB---------------------------------------
+Error
+==2727303== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727303==     in use at exit: 0 bytes in 0 blocks
+==2727303==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_EA_018.cub hB---------------------------------------
+Error
+==2727313== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727313==     in use at exit: 0 bytes in 0 blocks
+==2727313==   total heap usage: 89 allocs, 89 frees, 125,315 bytes allocated
+--$ invalid_tex_EA_019.cub hB---------------------------------------
+Error
+==2727328== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727328==     in use at exit: 0 bytes in 0 blocks
+==2727328==   total heap usage: 93 allocs, 93 frees, 126,617 bytes allocated
+--$ invalid_tex_EA_020.cub hB---------------------------------------
+Error
+==2727345== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727345==     in use at exit: 0 bytes in 0 blocks
+==2727345==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_EA_021.cub hB---------------------------------------
+Error
+==2727357== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727357==     in use at exit: 0 bytes in 0 blocks
+==2727357==   total heap usage: 93 allocs, 93 frees, 126,623 bytes allocated
+--$ invalid_tex_EA_022.cub hB---------------------------------------
+Error
+==2727372== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727372==     in use at exit: 0 bytes in 0 blocks
+==2727372==   total heap usage: 93 allocs, 93 frees, 126,657 bytes allocated
+--$ invalid_tex_NO_000.cub hB---------------------------------------
+Error
+==2727387== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727387==     in use at exit: 0 bytes in 0 blocks
+==2727387==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_NO_001.cub hB---------------------------------------
+Error
+==2727396== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727396==     in use at exit: 0 bytes in 0 blocks
+==2727396==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_NO_002.cub hB---------------------------------------
+Error
+==2727412== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727412==     in use at exit: 0 bytes in 0 blocks
+==2727412==   total heap usage: 89 allocs, 89 frees, 125,315 bytes allocated
+--$ invalid_tex_NO_003.cub hB---------------------------------------
+Error
+==2727427== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727427==     in use at exit: 0 bytes in 0 blocks
+==2727427==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_NO_004.cub hB---------------------------------------
+Error
+==2727455== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727455==     in use at exit: 0 bytes in 0 blocks
+==2727455==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_NO_005.cub hB---------------------------------------
+Error
+==2727471== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727471==     in use at exit: 0 bytes in 0 blocks
+==2727471==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_NO_006.cub hB---------------------------------------
+Error
+==2727486== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727486==     in use at exit: 0 bytes in 0 blocks
+==2727486==   total heap usage: 89 allocs, 89 frees, 125,339 bytes allocated
+--$ invalid_tex_NO_007.cub hB---------------------------------------
+Error
+==2727495== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727495==     in use at exit: 0 bytes in 0 blocks
+==2727495==   total heap usage: 89 allocs, 89 frees, 125,339 bytes allocated
+--$ invalid_tex_NO_008.cub hB---------------------------------------
+Error
+==2727510== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727510==     in use at exit: 0 bytes in 0 blocks
+==2727510==   total heap usage: 93 allocs, 93 frees, 126,479 bytes allocated
+--$ invalid_tex_NO_009.cub hB---------------------------------------
+Error
+==2727526== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727526==     in use at exit: 0 bytes in 0 blocks
+==2727526==   total heap usage: 89 allocs, 89 frees, 125,309 bytes allocated
+--$ invalid_tex_NO_010.cub hB---------------------------------------
+Error
+==2727535== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727535==     in use at exit: 0 bytes in 0 blocks
+==2727535==   total heap usage: 55 allocs, 55 frees, 116,994 bytes allocated
+--$ invalid_tex_NO_011.cub hB---------------------------------------
+Error
+==2727550== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727550==     in use at exit: 0 bytes in 0 blocks
+==2727550==   total heap usage: 89 allocs, 89 frees, 125,207 bytes allocated
+--$ invalid_tex_NO_012.cub hB---------------------------------------
+Error
+==2727560== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727560==     in use at exit: 0 bytes in 0 blocks
+==2727560==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_NO_013.cub hB---------------------------------------
+Error
+==2727575== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727575==     in use at exit: 0 bytes in 0 blocks
+==2727575==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_NO_014.cub hB---------------------------------------
+Error
+==2727592== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727592==     in use at exit: 0 bytes in 0 blocks
+==2727592==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_NO_015.cub hB---------------------------------------
+Error
+==2727601== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727601==     in use at exit: 0 bytes in 0 blocks
+==2727601==   total heap usage: 89 allocs, 89 frees, 125,345 bytes allocated
+--$ invalid_tex_NO_016.cub hB---------------------------------------
+Error
+==2727617== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727617==     in use at exit: 0 bytes in 0 blocks
+==2727617==   total heap usage: 85 allocs, 85 frees, 124,459 bytes allocated
+--$ invalid_tex_NO_017.cub hB---------------------------------------
+Error
+==2727632== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727632==     in use at exit: 0 bytes in 0 blocks
+==2727632==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_NO_018.cub hB---------------------------------------
+Error
+==2727643== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727643==     in use at exit: 0 bytes in 0 blocks
+==2727643==   total heap usage: 89 allocs, 89 frees, 125,315 bytes allocated
+--$ invalid_tex_NO_019.cub hB---------------------------------------
+Error
+==2727660== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727660==     in use at exit: 0 bytes in 0 blocks
+==2727660==   total heap usage: 93 allocs, 93 frees, 126,617 bytes allocated
+--$ invalid_tex_NO_020.cub hB---------------------------------------
+Error
+==2727675== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727675==     in use at exit: 0 bytes in 0 blocks
+==2727675==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_NO_021.cub hB---------------------------------------
+Error
+==2727684== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727684==     in use at exit: 0 bytes in 0 blocks
+==2727684==   total heap usage: 93 allocs, 93 frees, 126,623 bytes allocated
+--$ invalid_tex_NO_022.cub hB---------------------------------------
+Error
+==2727699== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727699==     in use at exit: 0 bytes in 0 blocks
+==2727699==   total heap usage: 93 allocs, 93 frees, 126,657 bytes allocated
+--$ invalid_tex_SO_000.cub hB---------------------------------------
+Error
+==2727715== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727715==     in use at exit: 0 bytes in 0 blocks
+==2727715==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_SO_001.cub hB---------------------------------------
+Error
+==2727724== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727724==     in use at exit: 0 bytes in 0 blocks
+==2727724==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_SO_002.cub hB---------------------------------------
+Error
+==2727739== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727739==     in use at exit: 0 bytes in 0 blocks
+==2727739==   total heap usage: 89 allocs, 89 frees, 125,315 bytes allocated
+--$ invalid_tex_SO_003.cub hB---------------------------------------
+Error
+==2727755== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727755==     in use at exit: 0 bytes in 0 blocks
+==2727755==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_SO_004.cub hB---------------------------------------
+Error
+==2727764== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727764==     in use at exit: 0 bytes in 0 blocks
+==2727764==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_SO_005.cub hB---------------------------------------
+Error
+==2727779== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727779==     in use at exit: 0 bytes in 0 blocks
+==2727779==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_SO_006.cub hB---------------------------------------
+Error
+==2727788== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727788==     in use at exit: 0 bytes in 0 blocks
+==2727788==   total heap usage: 89 allocs, 89 frees, 125,339 bytes allocated
+--$ invalid_tex_SO_007.cub hB---------------------------------------
+Error
+==2727805== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727805==     in use at exit: 0 bytes in 0 blocks
+==2727805==   total heap usage: 89 allocs, 89 frees, 125,339 bytes allocated
+--$ invalid_tex_SO_008.cub hB---------------------------------------
+Error
+==2727820== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727820==     in use at exit: 0 bytes in 0 blocks
+==2727820==   total heap usage: 93 allocs, 93 frees, 126,479 bytes allocated
+--$ invalid_tex_SO_009.cub hB---------------------------------------
+Error
+==2727829== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727829==     in use at exit: 0 bytes in 0 blocks
+==2727829==   total heap usage: 89 allocs, 89 frees, 125,309 bytes allocated
+--$ invalid_tex_SO_010.cub hB---------------------------------------
+Error
+==2727845== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727845==     in use at exit: 0 bytes in 0 blocks
+==2727845==   total heap usage: 55 allocs, 55 frees, 116,994 bytes allocated
+--$ invalid_tex_SO_011.cub hB---------------------------------------
+Error
+==2727860== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727860==     in use at exit: 0 bytes in 0 blocks
+==2727860==   total heap usage: 89 allocs, 89 frees, 125,207 bytes allocated
+--$ invalid_tex_SO_012.cub hB---------------------------------------
+Error
+==2727869== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727869==     in use at exit: 0 bytes in 0 blocks
+==2727869==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_SO_013.cub hB---------------------------------------
+Error
+==2727884== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727884==     in use at exit: 0 bytes in 0 blocks
+==2727884==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_SO_014.cub hB---------------------------------------
+Error
+==2727900== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727900==     in use at exit: 0 bytes in 0 blocks
+==2727900==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_SO_015.cub hB---------------------------------------
+Error
+==2727909== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727909==     in use at exit: 0 bytes in 0 blocks
+==2727909==   total heap usage: 89 allocs, 89 frees, 125,345 bytes allocated
+--$ invalid_tex_SO_016.cub hB---------------------------------------
+Error
+==2727925== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727925==     in use at exit: 0 bytes in 0 blocks
+==2727925==   total heap usage: 85 allocs, 85 frees, 124,495 bytes allocated
+--$ invalid_tex_SO_017.cub hB---------------------------------------
+Error
+==2727940== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727940==     in use at exit: 0 bytes in 0 blocks
+==2727940==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_SO_018.cub hB---------------------------------------
+Error
+==2727949== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727949==     in use at exit: 0 bytes in 0 blocks
+==2727949==   total heap usage: 89 allocs, 89 frees, 125,315 bytes allocated
+--$ invalid_tex_SO_019.cub hB---------------------------------------
+Error
+==2727964== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727964==     in use at exit: 0 bytes in 0 blocks
+==2727964==   total heap usage: 93 allocs, 93 frees, 126,617 bytes allocated
+--$ invalid_tex_SO_020.cub hB---------------------------------------
+Error
+==2727973== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727973==     in use at exit: 0 bytes in 0 blocks
+==2727973==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_SO_021.cub hB---------------------------------------
+Error
+==2727989== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2727989==     in use at exit: 0 bytes in 0 blocks
+==2727989==   total heap usage: 93 allocs, 93 frees, 126,623 bytes allocated
+--$ invalid_tex_SO_022.cub hB---------------------------------------
+Error
+==2728004== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728004==     in use at exit: 0 bytes in 0 blocks
+==2728004==   total heap usage: 93 allocs, 93 frees, 126,657 bytes allocated
+--$ invalid_tex_WE_000.cub hB---------------------------------------
+Error
+==2728014== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728014==     in use at exit: 0 bytes in 0 blocks
+==2728014==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_WE_001.cub hB---------------------------------------
+Error
+==2728029== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728029==     in use at exit: 0 bytes in 0 blocks
+==2728029==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_WE_002.cub hB---------------------------------------
+Error
+==2728044== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728044==     in use at exit: 0 bytes in 0 blocks
+==2728044==   total heap usage: 89 allocs, 89 frees, 125,315 bytes allocated
+--$ invalid_tex_WE_003.cub hB---------------------------------------
+Error
+==2728054== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728054==     in use at exit: 0 bytes in 0 blocks
+==2728054==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_WE_004.cub hB---------------------------------------
+Error
+==2728069== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728069==     in use at exit: 0 bytes in 0 blocks
+==2728069==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_WE_005.cub hB---------------------------------------
+Error
+==2728085== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728085==     in use at exit: 0 bytes in 0 blocks
+==2728085==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_WE_006.cub hB---------------------------------------
+Error
+==2728094== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728094==     in use at exit: 0 bytes in 0 blocks
+==2728094==   total heap usage: 89 allocs, 89 frees, 125,339 bytes allocated
+--$ invalid_tex_WE_007.cub hB---------------------------------------
+Error
+==2728110== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728110==     in use at exit: 0 bytes in 0 blocks
+==2728110==   total heap usage: 89 allocs, 89 frees, 125,339 bytes allocated
+--$ invalid_tex_WE_008.cub hB---------------------------------------
+Error
+==2728125== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728125==     in use at exit: 0 bytes in 0 blocks
+==2728125==   total heap usage: 93 allocs, 93 frees, 126,479 bytes allocated
+--$ invalid_tex_WE_009.cub hB---------------------------------------
+Error
+==2728134== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728134==     in use at exit: 0 bytes in 0 blocks
+==2728134==   total heap usage: 89 allocs, 89 frees, 125,309 bytes allocated
+--$ invalid_tex_WE_010.cub hB---------------------------------------
+Error
+==2728149== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728149==     in use at exit: 0 bytes in 0 blocks
+==2728149==   total heap usage: 55 allocs, 55 frees, 116,994 bytes allocated
+--$ invalid_tex_WE_011.cub hB---------------------------------------
+Error
+==2728158== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728158==     in use at exit: 0 bytes in 0 blocks
+==2728158==   total heap usage: 89 allocs, 89 frees, 125,207 bytes allocated
+--$ invalid_tex_WE_012.cub hB---------------------------------------
+Error
+==2728176== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728176==     in use at exit: 0 bytes in 0 blocks
+==2728176==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_WE_013.cub hB---------------------------------------
+Error
+==2728191== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728191==     in use at exit: 0 bytes in 0 blocks
+==2728191==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_WE_014.cub hB---------------------------------------
+Error
+==2728201== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728201==     in use at exit: 0 bytes in 0 blocks
+==2728201==   total heap usage: 89 allocs, 89 frees, 125,321 bytes allocated
+--$ invalid_tex_WE_015.cub hB---------------------------------------
+Error
+==2728218== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728218==     in use at exit: 0 bytes in 0 blocks
+==2728218==   total heap usage: 89 allocs, 89 frees, 125,345 bytes allocated
+--$ invalid_tex_WE_016.cub hB---------------------------------------
+Error
+==2728237== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728237==     in use at exit: 0 bytes in 0 blocks
+==2728237==   total heap usage: 85 allocs, 85 frees, 124,459 bytes allocated
+--$ invalid_tex_WE_017.cub hB---------------------------------------
+Error
+==2728246== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728246==     in use at exit: 0 bytes in 0 blocks
+==2728246==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_WE_018.cub hB---------------------------------------
+Error
+==2728262== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728262==     in use at exit: 0 bytes in 0 blocks
+==2728262==   total heap usage: 89 allocs, 89 frees, 125,315 bytes allocated
+--$ invalid_tex_WE_019.cub hB---------------------------------------
+Error
+==2728277== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728277==     in use at exit: 0 bytes in 0 blocks
+==2728277==   total heap usage: 93 allocs, 93 frees, 126,617 bytes allocated
+--$ invalid_tex_WE_020.cub hB---------------------------------------
+Error
+==2728288== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728288==     in use at exit: 0 bytes in 0 blocks
+==2728288==   total heap usage: 89 allocs, 89 frees, 125,327 bytes allocated
+--$ invalid_tex_WE_021.cub hB---------------------------------------
+Error
+==2728304== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728304==     in use at exit: 0 bytes in 0 blocks
+==2728304==   total heap usage: 93 allocs, 93 frees, 126,623 bytes allocated
+--$ invalid_tex_WE_022.cub hB---------------------------------------
+Error
+==2728319== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2728319==     in use at exit: 0 bytes in 0 blocks
+==2728319==   total heap usage: 93 allocs, 93 frees, 126,657 bytes allocated

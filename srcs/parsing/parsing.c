@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:44:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 18:40:29 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/20 11:57:01 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int	parsing(t_cube *cube)
 		exit(EXIT_FAILURE);
 	}
 	get_map_data(&map, cube->map_name);
+	check_images(&map);
 	map.width = get_width(map.map);
 	cube->map = map;
 	get_player_pos(cube);

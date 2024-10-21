@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:40:22 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 19:36:01 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:02:34 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_player_binds(t_player_settings *settings)
 	char	*line;
 	int		i;
 
-	fd = open("/tmp/settings.txt", O_RDWR, 0644);
+	fd = open(".settings/settings.txt", O_RDWR, 0644);
 	if (fd == -1)
 		return ;
 	ft_bzero(settings->keybinds, sizeof(settings->keybinds));
@@ -41,10 +41,10 @@ void	init_settings_file(void)
 {
 	int	fd;
 
-	fd = open("/tmp/settings.txt", O_RDWR, 0644);
+	fd = open(".settings/settings.txt", O_RDWR, 0644);
 	if (fd == -1)
 	{
-		fd = open("/tmp/settings.txt", O_CREAT | O_RDWR, 0644);
+		fd = open(".settings/settings.txt", O_CREAT | O_RDWR, 0644);
 		ft_putstr_fd("move_forward = W\nmove_backward = S\nsprint = CTRL\nmove_left \
 = A\nmove_right = D\nshow_map = M\nshift = SHIFT\n", fd);
 	}

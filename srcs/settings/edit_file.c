@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:18:31 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/05 20:08:07 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:02:34 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	reset_settings_file(void)
 {
 	int	fd;
 
-	fd = open("/tmp/settings.txt", O_RDWR | O_TRUNC, 0644);
+	fd = open(".settings/settings.txt", O_RDWR | O_TRUNC, 0644);
 	if (fd == -1)
 		return ;
 	ft_putstr_fd("move_forward = W\nmove_backward = S\nsprint = CTRL\nmove_left \
@@ -59,7 +59,7 @@ void	edit_settings_file(t_cube *cube)
 	int			fd;
 	int			i;
 
-	fd = open("/tmp/settings.txt", O_RDWR | O_TRUNC, 0644);
+	fd = open(".settings/settings.txt", O_RDWR | O_TRUNC, 0644);
 	if (fd == -1)
 		return ;
 	i = -1;

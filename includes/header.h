@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 20:11:10 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/20 11:51:51 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	printf_and_exit(char *str, int fd);
 void	free_destroy_and_exit(t_cube *cube);
 void	exit_and_free_texture_paths(char **tab, char *line, int i, int fd);
 void	free_init_and_exit(t_cube *cube, char *str, int i);
+void	free_portal_textures(t_cube *cube);
+void	destroy_wall_textures(void *mlx_ptr, t_map *map);
+void	destroy_menu_images(t_menu *menu, void *mlx_ptr);
 
 /* ************************************ */
 /*                PARSING               */
@@ -58,6 +61,7 @@ void	init_player_binds(t_player_settings *settings);
 void	init_spawn(t_point *dir, t_point *plane, char c);
 void	init(t_cube *cube);
 void	init_images(void *mlx_ptr, t_menu *menu);
+void	check_images(t_map *map);
 int		is_player(char c);
 void	fill_wall_sprite(t_cube *cube, int **wall, int i, t_image *img);
 void	preload_textures(t_cube *cube);

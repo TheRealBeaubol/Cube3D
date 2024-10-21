@@ -1,7 +1,7 @@
-NO ./sprites/tex3.png
 SO ./sprites/tex4.png
 EA ./sprites/tex6.png
 WE ./sprites/tex5.png
+NO ./sprites/tex3.png
 
 F 125,158,124
 C 51,235,255

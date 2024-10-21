@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:50:45 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 18:37:29 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/19 17:34:19 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	get_colors(t_map *map, char *str, int fd)
 	if (!colors || ft_tablen(colors) != 3)
 	{
 		ft_free_tab(colors);
+		exit_and_free_texture_paths(map->texture_paths, str, \
+3, fd);
 	}
 	color = convert_rgb_to_hexa(colors);
 	if (color == 0)

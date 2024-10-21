@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 00:05:36 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 18:30:04 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/19 17:46:07 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	init(t_cube *cube)
 {
 	int	i;
 
+	init_portal(cube);
 	init_settings_file();
 	init_key_map(cube);
 	init_player_binds(&cube->settings);
@@ -59,7 +60,6 @@ void	init(t_cube *cube)
 	preload_textures(cube);
 	init_images(cube->mlx.ptr, &cube->menu);
 	cube->menu.sounds = ft_calloc(7, sizeof(int));
-	init_portal(cube);
 	printf("\033[1;32mStarting game...\033[0m\n");
 	start_game(cube, cube->mlx.ptr, cube->mlx.win);
 }
