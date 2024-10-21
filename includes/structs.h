@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 20:13:28 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/21 22:56:30 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct s_menu
 
 typedef struct s_player_settings
 {
-	t_key_map	key_map[64];
+	t_key_map	key_map[54];
 	int			key_tab[256];
 	int			keybinds[8];
 	int			show_map;

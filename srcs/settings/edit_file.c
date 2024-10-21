@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:18:31 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/21 19:40:40 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/22 01:19:41 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	check_settings(t_player_settings *settings)
 	{
 		if (settings->keybinds[i] == -1)
 		{
+			printf("settings->keybinds[%d] == -1\n", i);
 			reset_settings_file();
 			init_player_binds(settings);
 		}

@@ -6,29 +6,48 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:40:22 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/21 19:40:40 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/22 01:22:45 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
+char	*get_key(char *line, t_player_settings *settings, int fd)
+{
+	const char	*settings_text[7] = {"move_forward = ", "move_backward = ", \
+"sprint = ", "move_left = ", "move_right = ", "show_map = ", "shift = "};
+	int			i;
+
+	if (!line)
+		return (NULL);
+	line[ft_strlen(line) - 1] = '\0';
+	i = -1;
+	while (++i < 7)
+	{
+		if (!ft_strncmp((char *)settings_text[i], line, ft_strlen((char *)settings_text[i])))
+		{
+			settings->keybinds[i] = get_key_from_line(ft_strcut(line, (char *)settings_text[i]), settings->key_map);
+			printf("keybinds[%d] = %d\n", i, settings->keybinds[i]);
+			break ;
+		}
+	}
+	free(line);
+	line = get_next_line(fd, 0);
+	return line;
+}
+
 void	init_player_binds(t_player_settings *settings)
 {
 	int		fd;
 	char	*line;
-	int		i;
 
 	fd = open(".settings.txt", O_RDWR, 0644);
 	if (fd == -1)
 		return ;
-	ft_bzero(settings->keybinds, sizeof(settings->keybinds));
-	i = -1;
-	while (++i < 7)
-	{
-		line = get_next_line(fd, 0);
-		settings->keybinds[i] = get_key_from_line(line, settings->key_map);
-		free(line);
-	}
+	ft_memset(&settings->keybinds, -1, 8 * sizeof(int));
+	line = get_next_line(fd, 0);
+	while (line)
+		line = get_key(line, settings, fd);
 	check_settings(settings);
 	close(fd);
 	settings->show_map = 1;

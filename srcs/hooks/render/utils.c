@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 22:49:25 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/05 20:06:37 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/22 00:43:04 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	put_keys_images(t_cube *cube, void *mlx_ptr, void *mlx_win)
 	while (++i < 7)
 	{
 		keys_image = get_key_images(cube, cube->settings.keybinds[i]);
-		mlx_put_image_to_window(mlx_ptr, mlx_win, keys_image, \
-pos[i].x, pos[i].y);
+		if (keys_image)
+			mlx_put_image_to_window(mlx_ptr, mlx_win, keys_image, \
+	pos[i].x, pos[i].y);
 	}
 }
