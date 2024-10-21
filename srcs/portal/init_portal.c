@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 17:14:11 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/10/21 18:55:11 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:25:26 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	create_portal(t_cube *cube, int i, int j, int ind)
 {
 	set_type(cube, i, j, cube->map.portal[ind]);
 	cube->map.portal[ind]->pos = (t_point){i, j};
-	search_exit(cube, i, j, &cube->map.portal[ind++]);
+	search_exit(cube, i, j, &cube->map.portal[ind]);
 	return (1);
 }
 
@@ -101,9 +101,9 @@ void	init_portal(t_cube *cube)
 		while (cube->map.map[j][++i])
 		{
 			if (cube->map.map[j][i] == 'M' || cube->map.map[j][i] == 'V')
-				cpt_portal += create_portal(cube, i, j, ind);
+				cpt_portal += create_portal(cube, i, j, ind++);
 		}
 	}
-	if (cpt_portal != 3)
-		free_init_and_exit(cube, ERROR_PORTAL_TOKEN_V, 2);
+	// if (cpt_portal != 3)
+	// 	free_init_and_exit(cube, ERROR_PORTAL_TOKEN_V, 2);
 }
