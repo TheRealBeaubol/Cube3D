@@ -1,0 +1,12 @@
+NO ./sprites/tex4.png
+SO ./sprites/tex6.png
+EA ./sprites/tex5.png
+WE ./sprites/tex3.png
+
+F 125,158,124
+
+111111
+100101
+101001
+1100N1
+111111

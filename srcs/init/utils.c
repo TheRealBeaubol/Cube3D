@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:20:58 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 18:54:07 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/22 20:21:26 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ void	fill_wall_sprite(t_cube *cube, int **wall, int i, t_image *img)
 		x = -1;
 		while (++x < img->height)
 		{
-			if (cube->mlx.portal[i].texture[y * img->width + x] != 0)
+			if ((cube->mlx.portal[i].height > x && \
+		cube->mlx.portal[i].width > y) && \
+		cube->mlx.portal[i].texture[y * img->width + x] != 0)
 				wall[i][y * img->width + x] = \
 cube->mlx.portal[i].texture[y * img->width + x];
 			else

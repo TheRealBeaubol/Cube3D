@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 00:05:36 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/22 01:53:07 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/22 21:01:13 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	init_mlx(t_cube *cube)
 	cube->mlx.ptr = mlx_init();
 	if (cube->mlx.ptr == NULL)
 		free_init_and_exit (cube, "\033[1;31mError\nmlx pointer initialization \
-failed\n\033[0m", 0);
+failed\n\033[0m", 2);
+	printf("\033[1;32mPreloading textures...\033[0m\n");
+	preload_textures(cube);
 	cube->mlx.win = mlx_new_window(cube->mlx.ptr, WIDTH, HEIGHT, "Cube3D");
 	if (cube->mlx.win == NULL)
 		free_init_and_exit (cube, "\033[1;31mError\nmlx window initialization \
@@ -49,7 +51,7 @@ void	check_images_access(t_cube *cube, const char **paths)
 	int	i;
 
 	i = -1;
-	while (++i < 77)
+	while (++i < 79)
 	{
 		if (access(paths[i], F_OK) == -1)
 		{
@@ -61,7 +63,7 @@ void	check_images_access(t_cube *cube, const char **paths)
 
 void	check_images_access_init(t_cube *cube)
 {
-	const char	*paths[77] = {"images/1.png", "images/2.png", "images/3.png", \
+	const char	*paths[79] = {"images/1.png", "images/2.png", "images/3.png", \
 "images/4.png", "images/5.png", "images/6.png", "images/7.png", "images/8.png", \
 "images/9.png", "images/0.png", "images/A.png", "images/B.png", "images/C.png", \
 "images/D.png", "images/E.png", "images/F.png", "images/G.png", "images/H.png", \
@@ -82,7 +84,8 @@ void	check_images_access_init(t_cube *cube)
 "images/keybinds_define_button.png", "images/keybinds_menu.png", \
 "images/keybinds_define_button_hover.png", "images/play_button_hover.png", \
 "images/settings_button_hover.png", "images/exit_button_hover.png", \
-"images/player.png", "images/portal_0.png"};
+"images/player.png", "images/portal_0.png", "sounds/click.ogg", \
+"sounds/hover.ogg"};
 
 	check_images_access(cube, paths);
 }
@@ -100,8 +103,6 @@ void	init(t_cube *cube)
 	while (++i < 256)
 		cube->settings.key_tab[i] = 0;
 	init_mlx(cube);
-	printf("\033[1;32mPreloading textures...\033[0m\n");
-	preload_textures(cube);
 	init_images(cube->mlx.ptr, &cube->menu);
 	cube->menu.sounds = ft_calloc(7, sizeof(int));
 	printf("\033[1;32mStarting game...\033[0m\n");
