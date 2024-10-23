@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:26:20 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/20 11:51:20 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:21:13 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,13 @@ void	free_portal_textures(t_cube *cube)
 		free(cube->map.portal_texture[i]);
 	}
 	free(cube->map.portal_texture);
+}
+
+void	free_parsing_map_and_exit(t_map *map, char **tab, char **new_tab)
+{
+	ft_free_tab(tab);
+	ft_free_tab(new_tab);
+	ft_free_tab(map->texture_paths);
+	printf("\033[1;31mError\nUnrecognized token while parsing map\n\033[0m");
+	exit(1);
 }

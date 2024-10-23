@@ -38,11 +38,8 @@ for map in "$MAP_DIR"/*; do
     grep -E "Error" "$TEMP_FILE" | sed 's/\x1b\[1;31m//g' >> "$LOG_FILE" 
 
     # Descripteurs de fichiers ouverts
-    grep -E "FILE DESCRIPTORS:" "$TEMP_FILE" >> "$LOG_FILE"
+    grep -E "==[0-9]+==" "$TEMP_FILE" >> "$LOG_FILE"
 
-    # Fuites de mémoire et statistiques de la heap
-    grep -E "in use at exit:" "$TEMP_FILE" >> "$LOG_FILE"
-    grep -E "total heap usage:" "$TEMP_FILE" >> "$LOG_FILE"
     # 
     # Suppression du fichier temporaire
     rm "$TEMP_FILE"

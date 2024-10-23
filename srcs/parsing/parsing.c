@@ -6,20 +6,11 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:44:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/23 02:24:19 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:21:05 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-void	free_parsing_map_and_exit(t_map *map, char **tab, char **new_tab)
-{
-	ft_free_tab(tab);
-	ft_free_tab(new_tab);
-	ft_free_tab(map->texture_paths);
-	printf("\033[1;31mError\nUnrecognized token while parsing map\n\033[0m");
-	exit(1);
-}
 
 void	fill_new_tab(char **tab, char **new_tab, t_map *map, int i)
 {

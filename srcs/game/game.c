@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:41:38 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/23 01:28:40 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:22:19 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	render_cube(t_cube *cube)
 25, 2.5 * 50}, cube, 0xFFF69D02);
 		draw_circle(125, (t_int_point){WIDTH - 3 * 50 + \
 25, 2.5 * 50}, cube, 0xFFC1FF44);
-		draw_map(cube);
+		draw_minimap(cube);
 		print_player(cube);
 	}
 	if (!cube->settings.show_map)

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:42 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/22 20:28:14 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:19:42 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,6 @@ portal\nYou must at least have 2 'M' token, 1 'O' token, \
 and 1 'V' token in your map \033[0m\n"
 # define ERROR_WRONG_IMG_PATH "\033[1;31mError\nAn error occured \
 while initializing wall sprite,\nYou must check your sprite paths !\n\033[0m"
+# define ERROR_PORTAL_ACCESS "\033[1;31mError\nYou can't access to \
+your portal or your portal is at the edge of the map\033[0m\n"
 #endif
