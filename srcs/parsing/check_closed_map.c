@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 12:39:27 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/07/24 19:15:59 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/23 02:12:06 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 static int	is_map_content(char c)
 {
-	return (c == '0' || c == '1' || c == '?' || c == 'P' || c == 'D' || c == \
-'O' || c == 'V' || c == 'M');
+	return (c == '0' || c == '1' || c == '?' || c == 'V' || c == 'O');
 }
 
 static void	check_wall(char **map, int i, int j)
@@ -59,7 +58,7 @@ int	check_closed_map(char **map)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (map[i][j] == '0')
+			if (map[i][j] != '1')
 				check_wall(map, i, j);
 		}
 	}

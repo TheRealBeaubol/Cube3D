@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/10/21 23:16:25 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/10/22 22:56:44 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -127,7 +127,7 @@ runfclean: clean
 	$(RM) $(NAME)
 
 run: runfclean $(NAME)
-		@./$(NAME) map.cub
+		@./$(NAME) maps/map23.cub
 
 run2: runfclean $(NAME)
 		@./$(NAME) map2.cub

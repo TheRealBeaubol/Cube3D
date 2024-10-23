@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/20 11:51:51 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/22 22:21:08 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	draw_first_background(t_cube *cube);
 /* ************************************ */
 void	get_actual_texture(t_cube *cube, t_ray *ray);
 void	draw_map(t_cube *cube);
+void	draw_full_map(t_cube *cube);
 void	start_game(t_cube *cube, void *mlx_ptr, void *win_ptr);
 void	rotate(t_cube *cube, float angle);
 void	fps_counter(void);

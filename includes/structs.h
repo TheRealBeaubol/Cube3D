@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/21 22:56:30 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/22 23:10:23 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,9 @@ typedef struct s_map
 	t_image			so_texture;
 	t_image			we_texture;
 	t_image			ea_texture;
+	t_int_point		player_pos;
+	int				tile_size;
+	t_int_point		map_padding;
 	t_image			actual_texture;
 	int				***portal_texture;
 	t_portal		**portal;

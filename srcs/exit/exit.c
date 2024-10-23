@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 18:00:03 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/22 19:21:06 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/22 21:52:54 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,11 @@ void	free_init_and_exit(t_cube *cube, char *str, int i)
 {
 	ft_free_tab(cube->map.map);
 	ft_free_tab(cube->map.texture_paths);
-	if (i == 1)
-	{
+	if (i == 1 || i == 3)
 		mlx_destroy_display(cube->mlx.ptr);
-		i = 2;
-	}
 	if (i == 3)
-	{
 		destroy_wall_textures(cube->mlx.ptr, &cube->map);
-		mlx_destroy_display(cube->mlx.ptr);
-		i = 2;
-	}
-	if (i == 2)
+	if (i == 1 || i == 2 || i == 3)
 	{
 		i = -1;
 		while (++i < cube->map.cpt_portal)

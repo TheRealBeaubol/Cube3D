@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:41:38 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 19:03:51 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/23 01:28:40 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void	render_cube(t_cube *cube)
 		draw_map(cube);
 		print_player(cube);
 	}
+	if (!cube->settings.show_map)
+		draw_full_map(cube);
 	mlx_put_image_to_window(cube->mlx.ptr, cube->mlx.win, \
 cube->mlx.background_img, 0, 0);
 	draw_crosshair(cube);

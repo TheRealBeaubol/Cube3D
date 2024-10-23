@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 22:44:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/20 11:57:01 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/23 02:24:19 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,18 @@ void	parse_wall_textures_and_colors(t_map *map, int fd)
 		exit_and_free_texture_paths(map->texture_paths, NULL, 1, fd);
 }
 
+int	init_tile_size(t_cube *cube)
+{
+	int	tile_size;
+
+	tile_size = 0;
+	if (cube->map.width > cube->map.height)
+		tile_size = WIDTH / (cube->map.width * 1.2);
+	else
+		tile_size = HEIGHT / (cube->map.height * 1.2);
+	return (tile_size);
+}
+
 int	parsing(t_cube *cube)
 {
 	t_map	map;
@@ -109,6 +121,11 @@ int	parsing(t_cube *cube)
 	check_images(&map);
 	map.width = get_width(map.map);
 	cube->map = map;
+	cube->map.tile_size = init_tile_size(cube);
+	cube->map.map_padding.x = (WIDTH - cube->map.width * \
+cube->map.tile_size) / 2;
+	cube->map.map_padding.y = (HEIGHT - cube->map.height * \
+cube->map.tile_size) / 2;
 	get_player_pos(cube);
 	if (check_closed_map(cube->map.map) == -1)
 		free_init_and_exit(cube, NULL, 0);
