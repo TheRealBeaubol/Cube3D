@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 17:14:11 by mhervoch          #+#    #+#             */
-/*   Updated: 2024/10/22 01:44:16 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:34:52 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	search_uni(t_cube *cube, t_portal *portal)
 			if (cube->map.map[j][i] == 'O')
 			{
 				if (found_exit++ != 0)
-					free_init_and_exit(cube, ERROR_PORTAL_TOKEN_O1, 2);
+					free_init_and_exit(cube, ERROR_PORTAL_TOKEN_O1, 0);
 				find_out_pos(cube, i, j, portal);
 			}
 		}
 	}
 	if (!found_exit)
-		free_init_and_exit(cube, ERROR_PORTAL_TOKEN_O2, 2);
+		free_init_and_exit(cube, ERROR_PORTAL_TOKEN_O2, 0);
 }
 
 void	search_double(t_cube *cube, t_portal *portal)
@@ -54,13 +54,13 @@ void	search_double(t_cube *cube, t_portal *portal)
 portal->pos.y != j))
 			{
 				if (found_exit++ != 0 && found_exit != 1)
-					free_init_and_exit(cube, ERROR_PORTAL_TOKEN_M1, 2);
+					free_init_and_exit(cube, ERROR_PORTAL_TOKEN_M1, 0);
 				find_out_pos(cube, i, j, portal);
 			}
 		}
 	}
 	if (found_exit != 1)
-		free_init_and_exit(cube, ERROR_PORTAL_TOKEN_M2, 2);
+		free_init_and_exit(cube, ERROR_PORTAL_TOKEN_M2, 0);
 }
 
 void	search_exit(t_cube *cube, int i, int j, t_portal **portal)

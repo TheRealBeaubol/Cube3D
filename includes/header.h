@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:55:26 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/23 17:22:29 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:48:55 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,15 @@ void	draw_first_background(t_cube *cube);
 /*                 GAME                 */
 /* ************************************ */
 void	get_actual_texture(t_cube *cube, t_ray *ray);
-void	draw_minimap(t_cube *cube);
-void	draw_full_map(t_cube *cube);
+void	draw_map(t_cube *cube);
 void	start_game(t_cube *cube, void *mlx_ptr, void *win_ptr);
 void	rotate(t_cube *cube, float angle);
 void	fps_counter(void);
 void	render_cube(t_cube *cube);
 void	perform_dda(t_ray *ray, t_map *map, t_player_settings *settings);
 void	do_rays(t_cube *cube, t_ray *ray, int i);
-
+void	draw_circle(int radius, t_int_point center, \
+t_cube *cube, unsigned int color);
 /* ************************************ */
 /*              PORTAL                  */
 /* ************************************ */

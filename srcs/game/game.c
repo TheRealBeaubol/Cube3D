@@ -6,13 +6,13 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:41:38 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/23 17:22:19 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:48:37 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-static void	draw_circle(int radius, t_int_point center, \
+void	draw_circle(int radius, t_int_point center, \
 	t_cube *cube, unsigned int color)
 {
 	t_int_point	p;
@@ -92,16 +92,14 @@ void	render_cube(t_cube *cube)
 		do_rays(cube, cube->settings.ray[i], i);
 	if (cube->settings.show_map)
 	{
-		draw_circle(130, (t_int_point){WIDTH - 3 * 50 + \
-25, 2.5 * 50}, cube, 0xFFF69D02);
-		draw_circle(125, (t_int_point){WIDTH - 3 * 50 + \
-25, 2.5 * 50}, cube, 0xFFC1FF44);
-		draw_minimap(cube);
+		draw_map(cube);
 		print_player(cube);
 	}
-	if (!cube->settings.show_map)
-		draw_full_map(cube);
 	mlx_put_image_to_window(cube->mlx.ptr, cube->mlx.win, \
 cube->mlx.background_img, 0, 0);
 	draw_crosshair(cube);
+	i = -1;
+	while (++i < WIDTH)
+		free(cube->settings.ray[i]);
+	free(cube->settings.ray);
 }

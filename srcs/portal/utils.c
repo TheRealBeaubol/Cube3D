@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:57:41 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/23 17:19:10 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:34:58 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void	find_out_pos(t_cube *cube, int i, int j, t_portal *portal)
 		}
 	}
 	else
-		free_init_and_exit(cube, ERROR_PORTAL_ACCESS, 2);
+		free_init_and_exit(cube, ERROR_PORTAL_ACCESS, 0);
 }

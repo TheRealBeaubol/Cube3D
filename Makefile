@@ -6,7 +6,7 @@
 #    By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 22:20:43 by lboiteux          #+#    #+#              #
-#    Updated: 2024/10/23 17:23:39 by lboiteux         ###   ########.fr        #
+#    Updated: 2024/10/23 23:42:54 by lboiteux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,8 +73,7 @@ SRCS	= 	main.c \
 				settings/edit_file.c \
 				settings/utils.c \
 				game/game.c \
-				game/full_map.c \
-				game/minimap.c \
+				game/map.c \
 				game/get_texture.c \
 				game/raycasting.c \
 				game/dda_algorithm.c \

@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 00:05:36 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/22 21:01:13 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:34:27 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ void	init_mlx(t_cube *cube)
 	cube->mlx.ptr = mlx_init();
 	if (cube->mlx.ptr == NULL)
 		free_init_and_exit (cube, "\033[1;31mError\nmlx pointer initialization \
-failed\n\033[0m", 2);
+failed\n\033[0m", 0);
 	printf("\033[1;32mPreloading textures...\033[0m\n");
-	preload_textures(cube);
 	cube->mlx.win = mlx_new_window(cube->mlx.ptr, WIDTH, HEIGHT, "Cube3D");
 	if (cube->mlx.win == NULL)
 		free_init_and_exit (cube, "\033[1;31mError\nmlx window initialization \
 failed\n\033[0m", 1);
 	cube->mlx.background_img = mlx_new_image(cube->mlx.ptr, WIDTH, HEIGHT);
 	draw_first_background(cube);
+	preload_textures(cube);
 }
 
 void	start_game(t_cube *cube, void *mlx_ptr, void *win_ptr)
@@ -56,7 +56,7 @@ void	check_images_access(t_cube *cube, const char **paths)
 		if (access(paths[i], F_OK) == -1)
 		{
 			printf("\033[1;31mError\n%s not found\n\033[0m", paths[i]);
-			free_init_and_exit(cube, NULL, 2);
+			free_init_and_exit(cube, NULL, 0);
 		}
 	}
 }

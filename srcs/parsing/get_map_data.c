@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 18:18:40 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/09/20 19:32:19 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:54:33 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ char	**read_map(t_map *map, int fd)
 	char	**tab;
 	char	*tmp;
 
+	map->ceiling_color = 0;
+	map->floor_color = 0;
 	parse_wall_textures_and_colors(map, fd);
 	tmp = get_next_line(fd, 0);
 	while (tmp[0] == '\n')

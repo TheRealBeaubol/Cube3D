@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:17:59 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/22 20:25:10 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:02:37 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ cube->map.ea_texture.width != cube->map.ea_texture.height) || (\
 cube->map.no_texture.width != cube->map.so_texture.width) || (\
 cube->map.no_texture.width != cube->map.we_texture.width) || (\
 cube->map.no_texture.width != cube->map.ea_texture.width))
-		free_init_and_exit(cube, "Error\nTextures are not consistent\n", 3);
+		free_init_and_exit(cube, ERROR_TEXTURE_NOT_CONSISTENT, 2);
 	free(cube->map.texture_paths);
 	init_textures(cube, &cube->mlx.player, ft_strdup("./images/player.png"));
 	init_portal_textures(cube);

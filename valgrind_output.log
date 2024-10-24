@@ -1,0 +1,396 @@
+--$ different_size_sprite.cub hB---------------------------------------
+Error
+==2541529== Memcheck, a memory error detector
+==2541529== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541529== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541529== Command: ./cub3D invalid_maps/different_size_sprite.cub
+==2541529== 
+==2541529== 
+==2541529== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541529== 
+==2541529== HEAP SUMMARY:
+==2541529==     in use at exit: 0 bytes in 0 blocks
+==2541529==   total heap usage: 183 allocs, 183 frees, 130,288 bytes allocated
+==2541529== 
+==2541529== All heap blocks were freed -- no leaks are possible
+==2541529== 
+==2541529== For lists of detected and suppressed errors, rerun with: -s
+==2541529== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ invalid_perm_on_sprite.cub hB---------------------------------------
+Error
+==2541542== Memcheck, a memory error detector
+==2541542== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541542== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541542== Command: ./cub3D invalid_maps/invalid_perm_on_sprite.cub
+==2541542== 
+==2541542== 
+==2541542== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541542== 
+==2541542== HEAP SUMMARY:
+==2541542==     in use at exit: 0 bytes in 0 blocks
+==2541542==   total heap usage: 183 allocs, 183 frees, 130,288 bytes allocated
+==2541542== 
+==2541542== All heap blocks were freed -- no leaks are possible
+==2541542== 
+==2541542== For lists of detected and suppressed errors, rerun with: -s
+==2541542== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ M_and_O_portal_missing.cub hB---------------------------------------
+Error
+==2541556== Memcheck, a memory error detector
+==2541556== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541556== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541556== Command: ./cub3D invalid_maps/M_and_O_portal_missing.cub
+==2541556== 
+==2541556== 
+==2541556== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541556== 
+==2541556== HEAP SUMMARY:
+==2541556==     in use at exit: 0 bytes in 0 blocks
+==2541556==   total heap usage: 204 allocs, 204 frees, 136,013 bytes allocated
+==2541556== 
+==2541556== All heap blocks were freed -- no leaks are possible
+==2541556== 
+==2541556== For lists of detected and suppressed errors, rerun with: -s
+==2541556== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ M_and_V_portal_missing.cub hB---------------------------------------
+Error
+==2541571== Memcheck, a memory error detector
+==2541571== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541571== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541571== Command: ./cub3D invalid_maps/M_and_V_portal_missing.cub
+==2541571== 
+==2541571== 
+==2541571== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541571== 
+==2541571== HEAP SUMMARY:
+==2541571==     in use at exit: 0 bytes in 0 blocks
+==2541571==   total heap usage: 203 allocs, 203 frees, 135,969 bytes allocated
+==2541571== 
+==2541571== All heap blocks were freed -- no leaks are possible
+==2541571== 
+==2541571== For lists of detected and suppressed errors, rerun with: -s
+==2541571== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ map_not_close.cub hB---------------------------------------
+Error
+==2541593== Memcheck, a memory error detector
+==2541593== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541593== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541593== Command: ./cub3D invalid_maps/map_not_close.cub
+==2541593== 
+[0m==2541593== 
+==2541593== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541593== 
+==2541593== HEAP SUMMARY:
+==2541593==     in use at exit: 0 bytes in 0 blocks
+==2541593==   total heap usage: 183 allocs, 183 frees, 130,259 bytes allocated
+==2541593== 
+==2541593== All heap blocks were freed -- no leaks are possible
+==2541593== 
+==2541593== For lists of detected and suppressed errors, rerun with: -s
+==2541593== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ missing_ceilling_color.cub hB---------------------------------------
+Error
+==2541608== Memcheck, a memory error detector
+==2541608== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541608== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541608== Command: ./cub3D invalid_maps/missing_ceilling_color.cub
+==2541608== 
+==2541608== 
+==2541608== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541608== 
+==2541608== HEAP SUMMARY:
+==2541608==     in use at exit: 0 bytes in 0 blocks
+==2541608==   total heap usage: 144 allocs, 144 frees, 126,426 bytes allocated
+==2541608== 
+==2541608== All heap blocks were freed -- no leaks are possible
+==2541608== 
+==2541608== For lists of detected and suppressed errors, rerun with: -s
+==2541608== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ missing_ea.cub hB---------------------------------------
+Error
+==2541616== Memcheck, a memory error detector
+==2541616== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541616== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541616== Command: ./cub3D invalid_maps/missing_ea.cub
+==2541616== 
+==2541616== 
+==2541616== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541616== 
+==2541616== HEAP SUMMARY:
+==2541616==     in use at exit: 0 bytes in 0 blocks
+==2541616==   total heap usage: 146 allocs, 146 frees, 126,330 bytes allocated
+==2541616== 
+==2541616== All heap blocks were freed -- no leaks are possible
+==2541616== 
+==2541616== For lists of detected and suppressed errors, rerun with: -s
+==2541616== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ missing_floor_color.cub hB---------------------------------------
+Error
+==2541633== Memcheck, a memory error detector
+==2541633== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541633== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541633== Command: ./cub3D invalid_maps/missing_floor_color.cub
+==2541633== 
+==2541633== 
+==2541633== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541633== 
+==2541633== HEAP SUMMARY:
+==2541633==     in use at exit: 0 bytes in 0 blocks
+==2541633==   total heap usage: 144 allocs, 144 frees, 126,426 bytes allocated
+==2541633== 
+==2541633== All heap blocks were freed -- no leaks are possible
+==2541633== 
+==2541633== For lists of detected and suppressed errors, rerun with: -s
+==2541633== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ missing_no.cub hB---------------------------------------
+Error
+==2541646== Memcheck, a memory error detector
+==2541646== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541646== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541646== Command: ./cub3D invalid_maps/missing_no.cub
+==2541646== 
+==2541646== 
+==2541646== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541646== 
+==2541646== HEAP SUMMARY:
+==2541646==     in use at exit: 0 bytes in 0 blocks
+==2541646==   total heap usage: 146 allocs, 146 frees, 126,330 bytes allocated
+==2541646== 
+==2541646== All heap blocks were freed -- no leaks are possible
+==2541646== 
+==2541646== For lists of detected and suppressed errors, rerun with: -s
+==2541646== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ missing_so.cub hB---------------------------------------
+Error
+==2541659== Memcheck, a memory error detector
+==2541659== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541659== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541659== Command: ./cub3D invalid_maps/missing_so.cub
+==2541659== 
+==2541659== 
+==2541659== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541659== 
+==2541659== HEAP SUMMARY:
+==2541659==     in use at exit: 0 bytes in 0 blocks
+==2541659==   total heap usage: 146 allocs, 146 frees, 126,330 bytes allocated
+==2541659== 
+==2541659== All heap blocks were freed -- no leaks are possible
+==2541659== 
+==2541659== For lists of detected and suppressed errors, rerun with: -s
+==2541659== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ missing_we.cub hB---------------------------------------
+Error
+==2541672== Memcheck, a memory error detector
+==2541672== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541672== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541672== Command: ./cub3D invalid_maps/missing_we.cub
+==2541672== 
+==2541672== 
+==2541672== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541672== 
+==2541672== HEAP SUMMARY:
+==2541672==     in use at exit: 0 bytes in 0 blocks
+==2541672==   total heap usage: 146 allocs, 146 frees, 126,330 bytes allocated
+==2541672== 
+==2541672== All heap blocks were freed -- no leaks are possible
+==2541672== 
+==2541672== For lists of detected and suppressed errors, rerun with: -s
+==2541672== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ M_portal_missing.cub hB---------------------------------------
+Error
+==2541685== Memcheck, a memory error detector
+==2541685== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541685== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541685== Command: ./cub3D invalid_maps/M_portal_missing.cub
+==2541685== 
+==2541685== 
+==2541685== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541685== 
+==2541685== HEAP SUMMARY:
+==2541685==     in use at exit: 0 bytes in 0 blocks
+==2541685==   total heap usage: 204 allocs, 204 frees, 136,013 bytes allocated
+==2541685== 
+==2541685== All heap blocks were freed -- no leaks are possible
+==2541685== 
+==2541685== For lists of detected and suppressed errors, rerun with: -s
+==2541685== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ no_path_after_map.cub hB---------------------------------------
+Error
+==2541692== Memcheck, a memory error detector
+==2541692== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541692== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541692== Command: ./cub3D invalid_maps/no_path_after_map.cub
+==2541692== 
+==2541692== 
+==2541692== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541692== 
+==2541692== HEAP SUMMARY:
+==2541692==     in use at exit: 0 bytes in 0 blocks
+==2541692==   total heap usage: 147 allocs, 147 frees, 127,299 bytes allocated
+==2541692== 
+==2541692== All heap blocks were freed -- no leaks are possible
+==2541692== 
+==2541692== For lists of detected and suppressed errors, rerun with: -s
+==2541692== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ no_spawn_point.cub hB---------------------------------------
+Error
+==2541706== Memcheck, a memory error detector
+==2541706== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541706== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541706== Command: ./cub3D invalid_maps/no_spawn_point.cub
+==2541706== 
+==2541706== 
+==2541706== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541706== 
+==2541706== HEAP SUMMARY:
+==2541706==     in use at exit: 0 bytes in 0 blocks
+==2541706==   total heap usage: 183 allocs, 183 frees, 130,259 bytes allocated
+==2541706== 
+==2541706== All heap blocks were freed -- no leaks are possible
+==2541706== 
+==2541706== For lists of detected and suppressed errors, rerun with: -s
+==2541706== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ no_square_sprite.cub hB---------------------------------------
+Error
+==2541719== Memcheck, a memory error detector
+==2541719== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541719== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541719== Command: ./cub3D invalid_maps/no_square_sprite.cub
+==2541719== 
+==2541719== 
+==2541719== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541719== 
+==2541719== HEAP SUMMARY:
+==2541719==     in use at exit: 0 bytes in 0 blocks
+==2541719==   total heap usage: 183 allocs, 183 frees, 130,360 bytes allocated
+==2541719== 
+==2541719== All heap blocks were freed -- no leaks are possible
+==2541719== 
+==2541719== For lists of detected and suppressed errors, rerun with: -s
+==2541719== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ O_portal_missing.cub hB---------------------------------------
+Error
+==2541726== Memcheck, a memory error detector
+==2541726== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541726== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541726== Command: ./cub3D invalid_maps/O_portal_missing.cub
+==2541726== 
+==2541726== 
+==2541726== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541726== 
+==2541726== HEAP SUMMARY:
+==2541726==     in use at exit: 0 bytes in 0 blocks
+==2541726==   total heap usage: 205 allocs, 205 frees, 136,057 bytes allocated
+==2541726== 
+==2541726== All heap blocks were freed -- no leaks are possible
+==2541726== 
+==2541726== For lists of detected and suppressed errors, rerun with: -s
+==2541726== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ overflow_ceilling_color.cub hB---------------------------------------
+Error
+==2541740== Memcheck, a memory error detector
+==2541740== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541740== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541740== Command: ./cub3D invalid_maps/overflow_ceilling_color.cub
+==2541740== 
+==2541740== 
+==2541740== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541740== 
+==2541740== HEAP SUMMARY:
+==2541740==     in use at exit: 0 bytes in 0 blocks
+==2541740==   total heap usage: 148 allocs, 148 frees, 126,839 bytes allocated
+==2541740== 
+==2541740== All heap blocks were freed -- no leaks are possible
+==2541740== 
+==2541740== For lists of detected and suppressed errors, rerun with: -s
+==2541740== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ overflow_floor_color.cub hB---------------------------------------
+Error
+==2541753== Memcheck, a memory error detector
+==2541753== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541753== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541753== Command: ./cub3D invalid_maps/overflow_floor_color.cub
+==2541753== 
+==2541753== 
+==2541753== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541753== 
+==2541753== HEAP SUMMARY:
+==2541753==     in use at exit: 0 bytes in 0 blocks
+==2541753==   total heap usage: 140 allocs, 140 frees, 126,268 bytes allocated
+==2541753== 
+==2541753== All heap blocks were freed -- no leaks are possible
+==2541753== 
+==2541753== For lists of detected and suppressed errors, rerun with: -s
+==2541753== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ too_much_M_portal.cub hB---------------------------------------
+Error
+==2541761== Memcheck, a memory error detector
+==2541761== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541761== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541761== Command: ./cub3D invalid_maps/too_much_M_portal.cub
+==2541761== 
+==2541761== 
+==2541761== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541761== 
+==2541761== HEAP SUMMARY:
+==2541761==     in use at exit: 0 bytes in 0 blocks
+==2541761==   total heap usage: 206 allocs, 206 frees, 136,101 bytes allocated
+==2541761== 
+==2541761== All heap blocks were freed -- no leaks are possible
+==2541761== 
+==2541761== For lists of detected and suppressed errors, rerun with: -s
+==2541761== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ too_much_spawn_point.cub hB---------------------------------------
+Error
+==2541774== Memcheck, a memory error detector
+==2541774== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541774== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541774== Command: ./cub3D invalid_maps/too_much_spawn_point.cub
+==2541774== 
+==2541774== 
+==2541774== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541774== 
+==2541774== HEAP SUMMARY:
+==2541774==     in use at exit: 0 bytes in 0 blocks
+==2541774==   total heap usage: 183 allocs, 183 frees, 130,259 bytes allocated
+==2541774== 
+==2541774== All heap blocks were freed -- no leaks are possible
+==2541774== 
+==2541774== For lists of detected and suppressed errors, rerun with: -s
+==2541774== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ too_much_sprite.cub hB---------------------------------------
+Error
+==2541788== Memcheck, a memory error detector
+==2541788== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541788== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541788== Command: ./cub3D invalid_maps/too_much_sprite.cub
+==2541788== 
+==2541788== 
+==2541788== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541788== 
+==2541788== HEAP SUMMARY:
+==2541788==     in use at exit: 0 bytes in 0 blocks
+==2541788==   total heap usage: 171 allocs, 171 frees, 135,817 bytes allocated
+==2541788== 
+==2541788== All heap blocks were freed -- no leaks are possible
+==2541788== 
+==2541788== For lists of detected and suppressed errors, rerun with: -s
+==2541788== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--$ wrong_path_sprite.cub hB---------------------------------------
+Error
+==2541795== Memcheck, a memory error detector
+==2541795== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2541795== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2541795== Command: ./cub3D invalid_maps/wrong_path_sprite.cub
+==2541795== 
+==2541795== 
+==2541795== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==2541795== 
+==2541795== HEAP SUMMARY:
+==2541795==     in use at exit: 0 bytes in 0 blocks
+==2541795==   total heap usage: 183 allocs, 183 frees, 130,184 bytes allocated
+==2541795== 
+==2541795== All heap blocks were freed -- no leaks are possible
+==2541795== 
+==2541795== For lists of detected and suppressed errors, rerun with: -s
+==2541795== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

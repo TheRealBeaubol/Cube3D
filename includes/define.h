@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:42 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/23 17:19:42 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:46:12 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,6 @@ and 1 'V' token in your map \033[0m\n"
 while initializing wall sprite,\nYou must check your sprite paths !\n\033[0m"
 # define ERROR_PORTAL_ACCESS "\033[1;31mError\nYou can't access to \
 your portal or your portal is at the edge of the map\033[0m\n"
+# define ERROR_TEXTURE_NOT_CONSISTENT "\033[31;1mError\nTextures are \
+not consistent\n\033[0m"
 #endif
