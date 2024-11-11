@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:17:59 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/10/24 22:02:37 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/11/11 23:57:47 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,9 @@ cube->map.no_texture.width != cube->map.ea_texture.width))
 	i = -1;
 	while (++i < 12)
 	{
+		printf("[%d] = %p | \n", i, cube->mlx.portal[i].image);
 		mlx_destroy_image(cube->mlx.ptr, cube->mlx.portal[i].image);
+		printf("[%d] = %p | \n", i, cube->mlx.portal[i].image);
 		free(cube->mlx.portal[i].texture);
 	}
 	free(cube->mlx.portal);
