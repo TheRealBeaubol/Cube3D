@@ -6,7 +6,7 @@
 /*   By: lboiteux <lboiteux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:03:10 by lboiteux          #+#    #+#             */
-/*   Updated: 2024/11/12 00:35:16 by lboiteux         ###   ########.fr       */
+/*   Updated: 2024/11/12 00:38:34 by lboiteux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ point.x + dx, point.y + dy, color);
 
 float	print_map_pixel(int i, int j, t_cube *cube, t_int_point point)
 {
-	printf("[%d] [%d]\n", j, i);
-	printf("%d %d\n", cube->map.width, cube->map.height);
 	if (i < 0 || j < 0 || j > cube->map.width || i >= cube->map.height - 1)
 		print_global_pixel(cube, point, 0xFFC1FF44);
 	else if (cube->map.map[i][j] == '1')

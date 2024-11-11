@@ -1,0 +1,7 @@
+move_forward = Z
+move_backward = S
+sprint = CTRL
+move_left = Q
+move_right = D
+show_map = M
+shift = SHIFT
